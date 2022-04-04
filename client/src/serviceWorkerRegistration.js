@@ -50,6 +50,9 @@ export function register(config) {
       }
     });
   }
+  else {
+    // console.log('Not in production env, ∴ not registering service-worker.js')
+  }
 }
 
 function registerValidSW(swUrl, config) {

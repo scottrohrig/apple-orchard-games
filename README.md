@@ -20,4 +20,4 @@ Install dependencies
 
 Run the project in development mode
 
-    npm run develop
+    npm start

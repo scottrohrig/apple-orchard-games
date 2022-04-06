@@ -1,23 +1,27 @@
-import logo from './logo.svg';
+import { useState } from 'react';
 import './App.css';
+import StyleReference from './StyleReference'
 
 function App() {
+
+  const [showStyle, setShowStyle] = useState(false)
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+    <div className="">
+      <header className="App">
+        <div>
+          <h1>Apple Orchard Games</h1>
+          <p>subtitle</p>
+        </div>
+        <nav>
+          <button className='btn btn-timer' onClick={()=>(
+            setShowStyle(!showStyle)
+          )}>Style Reference</button>
+        </nav>
       </header>
+      <div style={{margin: '2rem auto' }}>
+        {showStyle && (<StyleReference />)}
+      </div>
     </div>
   );
 }

@@ -21,7 +21,7 @@ export default function Leaderboard() {
       <p>Place Name Score</p>
       <ol>
         {exampleLeaderboardArray.map((leader, index) => (
-          <li>
+          <li key={index}>
             {index + 1} --- {leader.displayName} --- {leader.score}
           </li>
         ))}

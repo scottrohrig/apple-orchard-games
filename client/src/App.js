@@ -7,6 +7,7 @@ import Juicers from "./components/Juicers";
 import Juices from "./components/Juices";
 import Ovens from "./components/Ovens";
 import Pies from "./components/Pies";
+import Leaderboard from "./components/Leaderboard";
 import { useState } from "react";
 import StyleReference from "./StyleReference";
 
@@ -41,6 +42,7 @@ function App() {
             <Orchard />
             <Ovens />
             <Pies />
+            <Leaderboard />
           </div>
         )}
       </div>

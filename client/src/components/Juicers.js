@@ -1,5 +1,5 @@
 import React from "react";
-// need to import Juicer component
+import Juicer from "./Juicer";
 
 const exampleJuicerArray = [
   { juicerId: 0, juicerStatus: "juicing" },
@@ -12,7 +12,7 @@ export default function Juicers() {
       <h1 style={{ color: "blue" }}>juicers</h1>
       {exampleJuicerArray.map((juicer) => (
         <div key={juicer.juicerId}>
-          {/* <Juicer /> */}
+          <Juicer />
           <p>Juicer Image Here</p>
           <p>{juicer.juicerStatus}</p>
         </div>

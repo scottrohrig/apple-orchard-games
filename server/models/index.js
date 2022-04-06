@@ -1,3 +1,3 @@
-// require models
+const User = require('./User');
 
-// modularize models
+module.exports = { User };

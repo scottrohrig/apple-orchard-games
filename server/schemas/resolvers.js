@@ -11,8 +11,6 @@ const resolvers = {
         users: async () => {
             return User.find()
                 .select('-__v -password')
-                .populate('friends')
-                .populate('thoughts');
         },
     },
 

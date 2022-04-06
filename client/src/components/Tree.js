@@ -5,7 +5,7 @@ export default function Tree() {
   return (
     <>
       <h1>tree</h1>
-      <img src={treeImage}></img>
+      <img src={treeImage} alt=""></img>
     </>
   );
 }

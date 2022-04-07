@@ -1,13 +1,17 @@
 const { Schema } = require('mongoose');
+// require Item schema as base
+const Item = require('./Item');
 
-const masherSchema = new Schema({
-  createdAt: {
-    type: Date,
-    default: Date.now,
-  },
-  startedAtTime: {
-    type: Date,
-  },
-});
+// use discriminator to inherit traits from Item
+const masherSchema = Item.discriminator(
+  new Schema({
+    // add unique Masher properties here
+    // no need to add ObjectId, that will be assigned automatically
+    name: {
+      type: String,
+      default: 'Masher'
+    }
+  })
+);
 
 module.exports = masherSchema;

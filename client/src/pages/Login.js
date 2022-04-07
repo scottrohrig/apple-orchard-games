@@ -22,17 +22,22 @@ function Login(props) {
   // return the component JSX
   return (
     <div>
+      <form>
+        <div className='form-label'>Login</div>
       {/*
         form with styling (see stylesheet for class names)
           label
           input
           input
           button
-        link to signup page
+          link to signup page
         error message
       */}
+      </form>
 
     </div>
   )
 
 }
+
+export default Login;

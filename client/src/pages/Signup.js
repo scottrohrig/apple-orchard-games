@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 // import mutation hook
 // import Link for router
 // import adding user mutation
@@ -9,10 +9,10 @@ import React, { useState } from 'react'
 function Signup(props) {
 
   // set the default form state
-  const [ formState, setFormState ] = useState({
+  const [formState, setFormState] = useState({
     email: 'example@email.com',
     password: '********'
-  })
+  });
   // define the login function to handle the LOGIN mutation
 
   // form submit handler function
@@ -22,7 +22,9 @@ function Signup(props) {
   // return the component JSX
   return (
     <div>
-      {/*
+      <form>
+        <div className='form-label'>Signup</div>
+        {/*
         form with styling (see stylesheet for class names)
           label
           input
@@ -32,8 +34,10 @@ function Signup(props) {
         link to login page
         error message
       */}
-
+      </form>
     </div>
-  )
+  );
 
 }
+
+export default Signup;

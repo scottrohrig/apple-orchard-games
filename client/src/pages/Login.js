@@ -1,12 +1,12 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 // import mutation hook
-import React, { useMutation } from '@apollo/client'
+import React, { useMutation } from '@apollo/client';
 // import Link for router
-
+import { Link } from 'react-router-dom';
 // import login mutation
-import { LOGIN_USER } from '../utils/mutations'
+import { LOGIN_USER } from '../utils/mutations';
 // import auth class to handle json web token decoding
-import Auth from '../utils/auth'
+import Auth from '../../../server/utils/auth';
 
 
 // define Login component function
@@ -52,7 +52,8 @@ const Login = (props) => {
 
   // form input change handler function
 
-  // return the component JSX
+
+  // return the component JSX 
   return (
     <main className="login">
       <div className="container">

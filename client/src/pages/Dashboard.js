@@ -3,7 +3,7 @@
 function Dashboard() {
   return (
     <div className='' >
-      <div className='form-label'>Oh I'm a page title</div>
+      <div className='form-label'>Dashboard</div>
       <div className='container'>
         Stats Container
         <div className='left'>

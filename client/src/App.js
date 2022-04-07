@@ -9,6 +9,8 @@ import Signup from './pages/Signup';
 import Dashboard from './pages/Dashboard';
 import Leaderboard from "./pages/Leaderboard";
 import Orchard from './pages/Orchard';
+// components
+import Header from './components/Header';
 // Marketplace
 import NoMatch from './pages/NoMatch';
 
@@ -53,6 +55,8 @@ function App() {
             </ul>
           </nav>
         </header>
+
+        <Header></Header>
 
         <div style={{ margin: "2rem auto" }}>
           <div className='container'>

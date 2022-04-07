@@ -1,32 +1,18 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
+.app {
+  background-color: var(--main-color);
   min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.app-header {
+  padding: .25rem .5rem;
+  min-height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: column;
 }
+
+
 
 @keyframes App-logo-spin {
   from {
@@ -35,4 +21,92 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+nav ul {
+  width: 75vw;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+  row-gap: .25rem;
+}
+
+nav .a {
+  text-decoration: none;
+}
+
+.container {
+  padding: 0 .5rem;
+}
+
+.item {
+  padding: .25rem .5rem;
+  background: #96b766;
+  border-radius: .25rem;
+  margin: .5rem;
+}
+
+.item::after {
+  content: '';
+  width: calc(100% + 1rem);
+  background: #59391D;
+  height: 32px;
+  display: block;
+  margin: -30px -.5rem -.5rem;
+  border-radius: 0 0 .25rem .25rem;
+}
+
+.item-scroll {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  display: flex;
+  overflow: auto;
+}
+.item-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.item-box {
+  margin: 4px;
+  height: 128px;
+}
+
+.item-box img {
+  /* width: 100%; */
+  height: 100%;
+}
+.item-label {
+  font-size: x-large;
+  font-weight: 500;
+  text-align: start;
+  color: var(--form-background);
+}
+
+.relative {
+  position: relative;
+}
+
+.absolute {
+  border: coral 1px solid;
+  position: absolute;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  bottom: 0;
+}
+
+.sz-sm {
+  transform: scale(.5) !important;
+}
+
+@media screen and (min-width: 768px) {
+  .app-header {
+    flex-direction: row;
+  }
+  nav ul {
+    width: 40vw;
+  }
+
 }

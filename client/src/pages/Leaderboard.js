@@ -1,5 +1,4 @@
 import React from "react";
-// import "./Leaderboard.css";
 
 const exampleLeaderboardArray = [
   { displayName: "albert", score: 99 },

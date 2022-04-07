@@ -8,7 +8,7 @@ import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Dashboard from './pages/Dashboard';
 import Leaderboard from "./pages/Leaderboard";
-// Marketplace
+import Marketplace from "./components/Marketplace";
 import NoMatch from './pages/NoMatch';
 
 function App() {
@@ -39,6 +39,9 @@ function App() {
                 <Link className='a' to='/highscore'>Leaderboards</Link>
               </li>
               <li>
+                <Link className='a' to='/testing'>Testing (temporary sandbox for Marketplace component)</Link>
+              </li>
+              <li>
                 <button
                   className="btn btn-timer"
                   onClick={() => setShowStyle(!showStyle)}
@@ -61,7 +64,7 @@ function App() {
               <Route exact path='/signup' component={Signup} />
               <Route exact path='/home' component={Dashboard} />
               <Route exact path='/highscore' component={Leaderboard} />
-              {/* <Route exact path='/shop' component={Shop} /> */}
+              <Route exact path='/testing' component={Marketplace} />
               <Route component={NoMatch} />
             </Switch>
           )}

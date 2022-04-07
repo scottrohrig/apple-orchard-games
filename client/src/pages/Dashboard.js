@@ -55,6 +55,10 @@ function Dashboard() {
         Upgrade Row (Ovens)
       </div>
 
+      <div>
+        <h1>For component testing</h1>
+      </div>
+
     </div>
   );
 }

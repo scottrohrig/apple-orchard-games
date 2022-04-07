@@ -14,6 +14,18 @@ function Dashboard() {
   }
 
   return (
+
+    // ideally we want the dashboard to simply look like this
+    /**
+    <div className='container'>
+      <Header /> // stat bar
+      <OrchardRow />
+      <UpgradeRow type={'mashers'} />
+      <UpgradeRow type={'juicers'} />
+      <UpgradeRow type={'ovens'} />
+    </div>
+     */
+
     <div className='' >
       <div className='form-label'>Oh I'm a page title</div>
       <div className='container'>

@@ -23,7 +23,7 @@ function Signup(props) {
   return (
     <div>
       <form>
-        <div className='form-label'>Signup</div>
+        <div className='form-label'>Register</div>
         {/*
         form with styling (see stylesheet for class names)
           label

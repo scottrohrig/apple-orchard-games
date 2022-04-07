@@ -1,11 +1,14 @@
 // require mongoose schema and model
-const { Schema, model } = require('mongoose');
+const { Schema, Model } = require('mongoose');
+const treeSchema = require('./Tree');
 
 const orchardSchema = new Schema(
     {
-        trees: {
-            type: Number,
-            min: 0
+        trees: [treeSchema]
+    },
+    {
+        toJSON: {
+            getters: true
         }
     }
 );

@@ -1,8 +1,8 @@
 // require mongoose schema and model
 const { Schema, model } = require('mongoose');
 // require inventorySchema
-// const inventorySchema = require('./Inventory');
-// const Orchard = require('./Orchard');
+const inventorySchema = require('./Inventory');
+const Orchard = require('./Orchard');
 // require bcrypt
 const bcrypt = require('bcrypt');
 
@@ -38,8 +38,8 @@ const userSchema = new Schema({
         type: Number,
         min: 0
     },
-    // orchard: [Orchard],
-    // inventory: [inventorySchema]
+    orchard: [Orchard],
+    inventory: [inventorySchema]
 
 })
 

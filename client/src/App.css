@@ -84,6 +84,22 @@ nav .a {
   color: var(--form-background);
 }
 
+.relative {
+  position: relative;
+}
+
+.absolute {
+  border: coral 1px solid;
+  position: absolute;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  bottom: 0;
+}
+
+.sz-sm {
+  transform: scale(.5) !important;
+}
 
 @media screen and (min-width: 768px) {
   .app-header {

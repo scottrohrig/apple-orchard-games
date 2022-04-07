@@ -19,25 +19,25 @@ function Dashboard() {
         <span className='item-label'>Sample Orchard Row Container</span>
         <div className='item-scroll'>
           <div className='item-box'>
-            <img src={require('../assets/images/tree.jpg')} alt="tree1" />
+            <img src={require('../assets/images/tree.png')} alt="tree1" />
           </div>
           <div className='item-box'>
-            <img src={require('../assets/images/tree.jpg')} alt="tree2" />
+            <img src={require('../assets/images/tree.png')} alt="tree2" />
           </div>
           <div className='item-box'>
-            <img src={require('../assets/images/tree.jpg')} alt="tree3" />
+            <img src={require('../assets/images/tree.png')} alt="tree3" />
           </div>
           <div className='item-box'>
-            <img src={require('../assets/images/tree.jpg')} alt="tree3" />
+            <img src={require('../assets/images/tree.png')} alt="tree3" />
           </div>
           <div className='item-box'>
-            <img src={require('../assets/images/tree.jpg')} alt="tree3" />
+            <img src={require('../assets/images/tree.png')} alt="tree3" />
           </div>
           <div className='item-box'>
-            <img src={require('../assets/images/tree.jpg')} alt="tree3" />
+            <img src={require('../assets/images/tree.png')} alt="tree3" />
           </div>
           <div className='item-box'>
-            <img src={require('../assets/images/tree.jpg')} alt="tree3" />
+            <img src={require('../assets/images/tree.png')} alt="tree3" />
           </div>
         </div>
 

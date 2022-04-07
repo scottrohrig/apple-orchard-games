@@ -8,6 +8,7 @@ import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Dashboard from './pages/Dashboard';
 import Leaderboard from "./pages/Leaderboard";
+import Orchard from './pages/Orchard';
 // Marketplace
 import NoMatch from './pages/NoMatch';
 
@@ -31,6 +32,9 @@ function App() {
               </li>
               <li>
                 <Link className='a' to='/signup'>Signup</Link>
+              </li>
+              <li>
+                <Link className='a' to='/orchard/1'>Orchard</Link>
               </li>
               <li>
                 <Link className='a' to='/home'>Dashboard</Link>
@@ -60,6 +64,7 @@ function App() {
               <Route exact path='/login' component={Login} />
               <Route exact path='/signup' component={Signup} />
               <Route exact path='/home' component={Dashboard} />
+              <Route exact path='/orchard/:id' component={Orchard} />
               <Route exact path='/highscore' component={Leaderboard} />
               {/* <Route exact path='/shop' component={Shop} /> */}
               <Route component={NoMatch} />

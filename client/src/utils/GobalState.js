@@ -20,7 +20,7 @@ const GlobalProvider = ({ value = [], ...props }) => {
       sauceMashApplesUsed: 4,
       pieBakeTime: 300,
       pieBakeApplesUsed: 8,
-      juiceSaleRevenue: 4,
+      juiceSaleRevenue: 4, // this is revenue from sale of each juice
       sauceSaleRevenue: 8,
       pieSaleRevenue: 20,
       gemPurchaseCost: 0.99,

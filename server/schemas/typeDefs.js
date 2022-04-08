@@ -11,6 +11,31 @@ const typeDefs = gql `
         money: Int
         appleCount: Int
         gemCount: Int
+        orchards: [Orchard]
+        trees: [Tree]
+        juicers: [Juicer]
+        mashers: [Masher]
+        ovens: [Oven]
+    }
+
+    type Orchard {
+        _id: ID
+    }
+
+    type Tree {
+        _id: ID
+    }
+
+    type Juicer {
+        _id: ID
+    }
+
+    type Masher {
+        _id: ID
+    }
+
+    type Oven {
+        _id: ID
     }
 
     type Auth {

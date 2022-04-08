@@ -1,15 +1,13 @@
 // require mongoose schema and model
 const { Schema, model } = require('mongoose');
+const treeSchema = require('./Tree');
 
 const orchardSchema = new Schema(
     {
-        trees: {
-            type: Number,
-            min: 0
-        }
+        trees: [treeSchema]
     }
 );
 
-const Orchard = new Model('Orchard', orchardSchema);
+const Orchard = model('Orchard', orchardSchema);
 
 module.exports = Orchard;

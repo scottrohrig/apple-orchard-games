@@ -1,6 +1,12 @@
 // Action to update all items (how to separate into rows?)
 export const UPDATE_ITEMS = 'UPDATE_ITEMS'
 
+// update orchards
+// update trees
+// update mashers
+// update juicers
+// update ovens
+
 // add an upgrade to a row in the dashboard?
 export const ADD_TO_ROW = 'ADD_TO_ROW'
 export const UPDATE_ROWS = 'UPDATE_ROWS'

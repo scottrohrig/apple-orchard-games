@@ -1,16 +1,27 @@
-const { Schema } = require('mongoose');
+const { Schema, model } = require('mongoose');
 
-const juicerSchema = new Schema({
-  startedAtTime: {
-    type: Date,
+const juicerSchema = new Schema(
+  {
+    startedAtTime: {
+      type: Date,
+    },
+    duration: {
+      type: Number,
+      min: 0,
+    },
+    isReady: {
+      type: Boolean,
+      default: false
+    },
   },
-  duration: {
-    type: Number,
-    min: 0,
-  },
-  isReady: {
-    type: Boolean,
-  },
-});
+  {
+    toJSON: {
+      getters: true,
+      virtuals: true
+    }
+  }
+);
 
-module.exports = juicerSchema;
+const Juicer = model('Juicer', juicerSchema);
+
+module.exports = Juicer;

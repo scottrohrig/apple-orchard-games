@@ -1,7 +1,8 @@
 // require apollo server
 const { AuthenticationError } = require('apollo-server-express');
 // require necessary models
-const { User } = require('../models');
+const { User, Juicer } = require('../models');
+// const juicerSchema = require('../models/Juicer');
 // require auth
 const { signToken } = require('../utils/auth');
 
@@ -39,6 +40,23 @@ const resolvers = {
             const token = signToken(user);
             return { token, user };
         },
+
+        addJuicer: async (parent, args, context) => {
+            
+            if (context.user) {
+                const juicer = await Juicer.create({ ...args, duration: 30 });
+
+                const user = await User.findByIdAndUpdate(
+                    { _id: context.user._id },
+                    { $push: { juicers: juicer._id } },
+                    { new: true }
+                )
+    
+                return user;
+            }
+
+            throw new AuthenticationError('You need to be logged in!');
+        }
     }
 
 };

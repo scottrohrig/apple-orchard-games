@@ -20,6 +20,7 @@ const typeDefs = gql `
 
     type Orchard {
         _id: ID
+        trees: [Tree]
     }
 
     type Tree {
@@ -28,6 +29,7 @@ const typeDefs = gql `
 
     type Juicer {
         _id: ID
+        duration: Int
     }
 
     type Masher {
@@ -57,18 +59,18 @@ const typeDefs = gql `
     type Mutation {
         login(email: String!, password: String!): Auth
         addUser(username: String!, email: String!, password: String!): Auth
-        addOrchard: User
-        addTree: Orchard
-        addMasher: User
-        addOven: User
-        addJuicer: User
-        updateUser(username: String, email: String, password: String): Auth
-        updateOrchard: Orchard
-        updateTree: User
-        updateMasher: User
-        updateOven: User
-        updateJuicer: User
-        
+        addOrchard(userId: ID!): User
+        addTree(userId: ID!): Orchard
+        addMasher(userId: ID!): User
+        addOven(userId: ID!): User
+        addJuicer(duration: Int!): Juicer
+        updateUser(userId: ID!): User
+        updateOrchard(orchardId: ID!): User
+        updateTree(treeId: ID!): Orchard
+        updateMasher(masherId: ID!): User
+        updateOven(ovenId: ID!): User
+        updateJuicer(juicerId: ID!): User
+        removeUser(userId: ID!): User
     }
 `;
 

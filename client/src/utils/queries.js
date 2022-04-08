@@ -36,35 +36,35 @@ export const QUERY_USER = gql`
   }
 `;
 
-// get orchards
-export const GET_ORCHARDS = gql`
-  query {
+// // get orchards
+// export const GET_ORCHARDS = gql`
+//   query {
 
-  }
-`;
+//   }
+// `;
 
-// get mashers
-export const GET_MASHERS = gql`
-  query {
+// // get mashers
+// export const GET_MASHERS = gql`
+//   query {
 
-  }
-`;
+//   }
+// `;
 
-// get juicers
-export const GET_JUICERS = gql`
-  query {
+// // get juicers
+// export const GET_JUICERS = gql`
+//   query {
 
-  }
-`;
-// get ovens
-export const GET_OVENS = gql`
-  query {
+//   }
+// `;
+// // get ovens
+// export const GET_OVENS = gql`
+//   query {
 
-  }
-`;
-// get trees
-export const GET_TREES = gql`
-  query {
+//   }
+// `;
+// // get trees
+// export const GET_TREES = gql`
+//   query {
 
-  }
-`;
+//   }
+// `;

@@ -12,11 +12,20 @@
   text-align: center;
 */
 
-h1 {
-  position: center;
+.leaderboard ol {
+  background-color: var(--btn-timer-light);
   text-align: center;
+  margin: 0 auto;
+  width: auto;
+  list-style-position: inside;
 }
 
-li {
-  text-align: center;
-};
+.leaderboard h1 {
+background-color: var(--main-darkest);
+text-align: center;
+color: white;
+}
+
+.leaderboard li p {
+display: inline-block;
+}

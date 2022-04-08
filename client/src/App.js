@@ -21,7 +21,7 @@ function App() {
     <Router>
 
       <div className="app">
-
+        <div className="game-background"></div>
         <header className="app-header">
           <div>
             <h1>Apple Orchard Games</h1>
@@ -77,6 +77,12 @@ function App() {
           </div>
         </div>
       </div>
+      {window.addEventListener('selectstart', function(e) {
+        e.preventDefault();
+      })}
+      {/* {window.addEventListener('contextmenu', function(e) {
+        e.preventDefault();
+      })} */}
     </Router>
   );
 }

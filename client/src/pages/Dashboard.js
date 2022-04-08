@@ -1,5 +1,7 @@
 // import
 
+import { ItemRow } from '../components/upgrades';
+
 function Dashboard() {
 
 
@@ -68,8 +70,14 @@ function Dashboard() {
 
       </div>
 
-      <div>
-        Upgrade Row (Mashers)
+      <ItemRow />
+
+      <div className='item'>
+        <div className='item-scroll'>
+          <div className='item-box'>
+            <img src={require('../assets/images/juicer.png')}></img>
+          </div>
+        </div>
       </div>
 
       <div>

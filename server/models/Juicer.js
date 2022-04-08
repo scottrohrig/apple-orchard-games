@@ -8,6 +8,8 @@ const juicerSchema = new Schema({
   startedAtTime: {
     type: Date,
   },
+  // duration
+  // isReady
 });
 
 module.exports = juicerSchema;

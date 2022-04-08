@@ -16,7 +16,7 @@ Navigate into the repository's root directory
 
 Install dependencies
 
-    npm run install
+    npm install && npm run install
 
 Run the project in development mode
 

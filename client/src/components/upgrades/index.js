@@ -1,15 +1,16 @@
-import { useQuery } from '@apollo/client';
+import { useMutation, useQuery } from '@apollo/client';
 import { useEffect } from 'react';
 import { useGlobalContext } from '../../utils/GobalState';
 import { QUERY_ITEMS } from '../../utils/queries';
+import Juicer from '../Juicer';
 
-export function ItemRow() {
+export function JuicersRow() {
 
   const [state, dispatch] = useGlobalContext();
-  console.log(state);
+  // console.log(state);
 
   // destructure the items list from the global state object
-  const { items } = state;
+  const { juicers } = state;
 
   // get items data from db
   // const { loading, data: itemData } = useQuery(QUERY_ITEMS);
@@ -24,40 +25,37 @@ export function ItemRow() {
     // if not loading, get cache and dispatch
   }, ['itemData', 'loading', dispatch]);
 
-  //
-  const trees = items.filter(({type}) => type==='tree')
+  const handlePurchase = (event) => {
 
-  
+  }
+
+  //
+  console.log(juicers)
   // should the responsibility be in the row or the item
   return (
-    <div>
-      {items.map((row, i) => (
+    <div className='item'>
 
-        <div className='item'>ItemRow
-          <div className='flex jc-sb'> _ RowBtnContainer
-            <button onClick={()=>{console.log(i)}}>harvest</button>
+      <span className='item-label'>Juicers</span>
+      <div className='item-scroll'>
+        {/* map juicers here */}
+        {juicers.map((juicer) => (
+          <div className='item-box'>
+            {juicer._id ? (
+              // <img src={require('../../assets/images/juicer.png')}></img>
+              <Juicer />
+              ): (
+                // placeholder
+                // <PlaceHolder />
+              <div style={{width: '100%', height: '100%', background: '#dc3'}}>
+                <button className='btn btn-shop' onClick={()=> {handlePurchase()}}>Purchase</button>
+              </div>
+            )
+            }
           </div>
-          <div className='item-scroll'>_ ItemScroll
-            {row.map((item)=>(
-              <Item item={item}/>
-            ))}
-          </div>
 
-        </div>
-      ))}
-    </div>
-  );
-}
-
-export function Item({item}) {
-  console.log(item)
-
-  return (
-    <div className='item-box'>__ Item square
-      <div >___ Item relative layout container
-          <p className='form-label'>{item.type}</p>
-        <button className='btn btn-timer'>item button</button>
+        ))}
       </div>
     </div>
+
   );
 }

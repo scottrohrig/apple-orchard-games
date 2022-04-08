@@ -1,6 +1,6 @@
 // import
 
-import { ItemRow } from '../components/upgrades';
+import { JuicersRow } from '../components/upgrades';
 
 function Dashboard() {
 
@@ -12,7 +12,6 @@ function Dashboard() {
 
     // upgrade is timer ready? allow start countdown
 
-
   }
 
   return (
@@ -21,10 +20,11 @@ function Dashboard() {
     /**
     <div className='container'>
       <Header /> // stat bar
+      <element for page title>
       <OrchardRow />
-      <UpgradeRow type={'mashers'} />
-      <UpgradeRow type={'juicers'} />
-      <UpgradeRow type={'ovens'} />
+      <MashersRow />
+      <JuicerssRow />
+      <OvensRow />
     </div>
      */
 
@@ -42,9 +42,10 @@ function Dashboard() {
 
       {/* <Scroller kind={'orchard'} /> */}
       <div className='item'>
-        <span className='item-label'>Sample Orchard Row Container</span>
+        <span className='item-label'>Orchard</span>
 
         <div className='item-scroll'>
+          {/* map orchards here */}
           <div className='item-box' onClick={() => {handleUpgradePurchase()}}>
             <img src={require('../assets/images/tree.png')} alt="tree1" />
           </div>
@@ -70,22 +71,33 @@ function Dashboard() {
 
       </div>
 
-      <ItemRow />
+      {/* WIP juicers row */}
+      <JuicersRow />
 
-      <div className='item'>
+      <div>
+        <span className='item-label'>Mashers</span>
         <div className='item-scroll'>
+          {/* map mashers here */}
           <div className='item-box'>
-            <img src={require('../assets/images/juicer.png')}></img>
+            <img src={require('../assets/images/masher.png')}></img>
+          </div>
+          <div className='item-box'>
+            <img src={require('../assets/images/masher.png')} alt="tree3" />
+          </div>
+          <div className='item-box'>
+            <img src={require('../assets/images/masher.png')} alt="tree3" />
+          </div>
+          <div className='item-box'>
+            <img src={require('../assets/images/masher.png')} alt="tree3" />
+          </div>
+          <div className='item-box'>
+            <img src={require('../assets/images/masher.png')} alt="tree3" />
           </div>
         </div>
       </div>
 
       <div>
-        Upgrade Row (Juicers)
-      </div>
-
-      <div>
-        Upgrade Row (Ovens)
+        {'<OvensRow />'}
       </div>
 
     </div>

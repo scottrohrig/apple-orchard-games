@@ -3,7 +3,7 @@ const { Schema } = require('mongoose');
 const Item = require('./Item');
 
 // use discriminator to inherit traits from Item
-const treeSchema = Item.discriminator(
+const Tree = Item.discriminator('Tree',
   new Schema({
     // add unique Tree properties here
     // no need to add ObjectId, that will be assigned automatically
@@ -14,4 +14,4 @@ const treeSchema = Item.discriminator(
   })
 );
 
-module.exports = treeSchema;
+module.exports = Tree;

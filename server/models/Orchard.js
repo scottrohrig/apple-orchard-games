@@ -1,10 +1,15 @@
 // require mongoose schema and model
-const { Schema, Model } = require('mongoose');
-const treeSchema = require('./Tree');
+const { Schema, model } = require('mongoose');
+const { Tree } = require('./Tree').schema;
 
 const orchardSchema = new Schema(
     {
-        trees: [treeSchema]
+        trees: [
+            {
+            type: Schema.Types.ObjectId,
+            ref: 'Tree'
+            }
+        ]
     },
     {
         toJSON: {
@@ -13,6 +18,6 @@ const orchardSchema = new Schema(
     }
 );
 
-const Orchard = new Model('Orchard', orchardSchema);
+const Orchard = model('Orchard', orchardSchema);
 
 module.exports = Orchard;

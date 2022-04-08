@@ -1,9 +1,11 @@
+// const mongoose = require('mongoose');
+// const Schema = mongoose.Schema;
 const { Schema } = require('mongoose');
 // require Item schema as base
 const Item = require('./Item');
 
 // use discriminator to inherit traits from Item
-const ovenSchema = Item.discriminator(
+const Oven = Item.discriminator('Oven',
   new Schema({
     // add unique Oven properties here
     // no need to add ObjectId, that will be assigned automatically
@@ -14,4 +16,4 @@ const ovenSchema = Item.discriminator(
   })
 );
 
-module.exports = ovenSchema;
+module.exports = Oven;

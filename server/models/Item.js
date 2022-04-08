@@ -1,4 +1,5 @@
-const { Schema } = require('mongoose');
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
 // set up discriminator options, can be any names we choose
 const itemOptions = {
@@ -8,7 +9,7 @@ const itemOptions = {
 };
 
 // create Item schema as parent with shared properties for all items to inherit from
-const Item = new Schema({
+const Item = mongoose.model('Item', new mongoose.Schema({
     createdAt: {
         type: Date,
         default: Date.now
@@ -16,6 +17,7 @@ const Item = new Schema({
     startedAtTime: {
         type: Date
     },
-}, itemOptions);
+}, itemOptions));
+
 
 module.exports = Item;

@@ -1,8 +1,11 @@
 // require mongoose schema and model
 const { Schema, model } = require('mongoose');
 // require inventorySchema
-const inventorySchema = require('./Inventory');
-const Orchard = require('./Orchard');
+// const inventorySchema = require('./Inventory');
+// const { Orchard } = require('./Orchard').schema;
+// const { Juicer } = require('./Juicer').schema;
+// const { Masher } = require('./Masher').schema;
+// const { Oven } = require('./Oven').schema;
 // require bcrypt
 const bcrypt = require('bcrypt');
 
@@ -38,9 +41,31 @@ const userSchema = new Schema({
         type: Number,
         min: 0
     },
-    orchard: [Orchard],
-    inventory: [inventorySchema]
-
+    // inventory: [inventorySchema]
+    orchard: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'Orchard'
+        }
+    ],
+    juicers: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'Juicer'
+        }
+    ],
+    ovens: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'Oven'
+        }
+    ],
+    mashers: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'Masher'
+        }
+    ]
 })
 
 // pre-save middleware for password

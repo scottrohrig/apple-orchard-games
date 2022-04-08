@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 // import adding user mutation
 import { ADD_USER } from '../utils/mutations';
 // import auth class to handle json web token decoding
-import Auth from '../../../server/utils/auth';
+import Auth from '../utils/auth';
 
 
 // define Login component function

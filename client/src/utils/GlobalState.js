@@ -7,10 +7,15 @@ const { Provider } = GlobalContext;
 const GlobalProvider = ({ value = [], ...props }) => {
   const [state, dispatch] = useAppReducer({
     user: {
-
+      username: "Happiest Harvester",
+      email: "happy@harvester.com",
+      password: "password",
+      money: 100,
+      appleCount: 500,
+      gemCount: 20,
+      orchard: [{}],
     },
-    
-    
+
     gameVariables: {
       initialAppleInventory: 5,
       applesForNewTree: 3,

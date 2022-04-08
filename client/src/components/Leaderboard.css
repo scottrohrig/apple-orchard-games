@@ -1,0 +1,22 @@
+
+/*
+- leaderboard h1 should be center 
+- UL/OL should be in the center of the page
+*/
+
+/*
+.leader-board-container {
+  .leader-board-container {
+  position: center;
+  justify-content: center;
+  text-align: center;
+*/
+
+h1 {
+  position: center;
+  text-align: center;
+}
+
+li {
+  text-align: center;
+};

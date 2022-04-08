@@ -1,3 +1,4 @@
 const User = require('./User');
+const Juicer = require('./Juicer');
 
-module.exports = { User };
+module.exports = { User, Juicer };

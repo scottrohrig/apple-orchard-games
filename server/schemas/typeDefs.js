@@ -44,12 +44,31 @@ const typeDefs = gql `
     }
 
     type Query {
+        me: User
         users: [User]
+        user(username: String!): User
+        orchards(username: String!): [Orchard]
+        trees(username: String!): User
+        mashers(username: String!): User
+        ovens(username: String!): User
+        juicers(username: String!): User
     }
 
     type Mutation {
         login(email: String!, password: String!): Auth
         addUser(username: String!, email: String!, password: String!): Auth
+        addOrchard: User
+        addTree: Orchard
+        addMasher: User
+        addOven: User
+        addJuicer: User
+        updateUser(username: String, email: String, password: String): Auth
+        updateOrchard: Orchard
+        updateTree: User
+        updateMasher: User
+        updateOven: User
+        updateJuicer: User
+        
     }
 `;
 

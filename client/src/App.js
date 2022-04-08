@@ -6,7 +6,7 @@ import { setContext } from '@apollo/client/link/context';
 import "./App.css";
 import StyleReference from "./StyleReference";
 
-import { GlobalProvider } from './utils/GobalState';
+import { GlobalProvider } from './utils/GlobalState';
 
 // pages
 import Login from './pages/Login';

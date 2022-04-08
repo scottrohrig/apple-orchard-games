@@ -1,5 +1,6 @@
 // Orchard.js
 import Tree from '../components/Tree';
+import PlaceholderTree from '../components/PlaceholderTree';
 
 const rows = [];
 const trees = [];
@@ -34,6 +35,7 @@ export default function Orchard() {
           </div>
         </div>
       )})}
+<PlaceholderTree />
     </div>
   );
 }

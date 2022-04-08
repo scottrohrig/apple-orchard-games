@@ -6,6 +6,11 @@ const { Provider } = GlobalContext;
 
 const GlobalProvider = ({ value = [], ...props }) => {
   const [state, dispatch] = useAppReducer({
+    user: {
+
+    },
+    
+    
     gameVariables: {
       initialAppleInventory: 5,
       applesForNewTree: 3,

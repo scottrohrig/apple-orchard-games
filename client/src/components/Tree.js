@@ -32,7 +32,6 @@ export default function Tree() {
         <img src={treeImage} alt=""></img>
         <div className='absolute'>
             <button className='sz-sm btn btn-harvest' onClick={handleTreeClick}>{secondsLeft}</button>
-            <button className='sz-sm btn btn-timer' >Harvest</button>
         </div>
       </div>
     </>

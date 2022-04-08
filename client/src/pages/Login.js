@@ -23,7 +23,7 @@ function Login(props) {
   return (
     <div>
       <form>
-        <div className='form-label'>Login</div>
+        <div className='form-label'>Log in</div>
       {/*
         form with styling (see stylesheet for class names)
           label

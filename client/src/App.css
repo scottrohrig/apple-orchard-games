@@ -97,6 +97,13 @@ nav .a {
   bottom: 0;
 }
 
+.flex {
+  display: flex;
+}
+
+.jc-sb{
+  justify-content: space-between;
+}
 .sz-sm {
   transform: scale(.5) !important;
 }

@@ -67,7 +67,31 @@
     pointer-events: none;
   }
   
-  
+  header.component-header {
+    display: flex;
+  }
+
+  /* counters */
+  .gem-count {
+  background-color: var(--btn-timer-dark);
+    display: inline-block;
+    padding: 6px 12px 8px;
+    border-radius: 2px;
+    font-size: 20px;
+    font-family: 'Fredoka', cursive;
+    font-weight: 600;
+    color: #FFF;
+}
+  .apple-count {
+    background-color: var(--display-money-light);
+    padding: 6px 12px 8px;
+    border-radius: 2px;
+    font-size: 20px;
+    font-family: 'Fredoka', cursive;
+    font-weight: 600;
+    color: #FFF;
+  }
+
   /* BUTTONS */
   .btn {
     border: none;
@@ -110,6 +134,14 @@
     animation: pulse 2s infinite linear;
   }
   
+/* profile button */
+  .btn-profile {
+    background-color: var(--btn-harvest-main);
+    text-shadow: 1px 1px var(--btn-harvest-dark);
+    box-shadow: inset -2px -2px var(--btn-harvest-dark), inset 2px 2px var(--btn-harvest-light);
+  }
+  
+
   @keyframes harvest-ready {
     0% { transform: scale(1); }
     25% { transform: scale(1.05) rotate(-2deg); }

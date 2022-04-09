@@ -1,6 +1,7 @@
 // require apollo server
 const { AuthenticationError } = require('apollo-server-express');
 const { coerceInputValue } = require('graphql');
+const { Schema } = require('mongoose');
 // require necessary models
 const { User } = require('../models');
 // require auth
@@ -57,7 +58,7 @@ const resolvers = {
 
         const user = await User.findByIdAndUpdate(
           { _id: context.user._id },
-          { $push: { juicers: { _id: args.id, duration: args.duration } } },
+          { $push: { juicers: { duration: args.duration } } },
           { new: true }
         );
 
@@ -115,13 +116,85 @@ const resolvers = {
       throw new AuthenticationError('You need to be logged in!');
     },
 
-    // updateUser
-    // find user by id
-    // update either gemCount, appleCount, money OR user info like username or email
 
     // updateJuicer
     // need user ID and juicer ID
-    // toggle isReady
+    // update startedAtTime
+    // update duration with upgrades
+    updateJuicer: async (parent, args, context) => {
+        if (context.user) {
+
+            const user = await User.findByIdAndUpdate(
+                { _id: context.user._id },
+                { $set: { juicers: { juicerId: args.juicerId, startedAtTime: args.startedAtTime, duration: args.duration } } },
+                { new: true }
+            )
+
+            return user;
+        }
+
+        throw new AuthenticationError('You need to be logged in!');
+    },
+
+    updateMasher: async (parent, args, context) => {
+        if (context.user) {
+
+            const user = await User.findByIdAndUpdate(
+                { _id: context.user._id },
+                { $set: { mashers: { masherId: args.masherId, startedAtTime: args.startedAtTime, duration: args.duration } } },
+                { new: true }
+            )
+
+            return user;
+        }
+
+        throw new AuthenticationError('You need to be logged in!');
+    },
+
+    updateOven: async (parent, args, context) => {
+        if (context.user) {
+
+            const user = await User.findByIdAndUpdate(
+                { _id: context.user._id },
+                { $set: { ovens: { ovenId: args.ovenId, startedAtTime: args.startedAtTime, duration: args.duration } } },
+                { new: true }
+            )
+
+            return user;
+        }
+
+        throw new AuthenticationError('You need to be logged in!');
+    },
+
+    updateTree: async (parent, args, context) => {
+        if (context.user) {
+
+            const user = await User.findByIdAndUpdate(
+                { _id: context.user._id },
+                { $set: { trees: { treeId: args.treeId, startedAtTime: args.startedAtTime, duration: args.duration } } },
+                { new: true }
+            )
+
+            return user;
+        }
+
+        throw new AuthenticationError('You need to be logged in!');
+    },
+
+    updateUser: async (parent, args, context) => {
+        if (context.user) {
+
+            const user = await User.findByIdAndUpdate(
+                { _id: context.user._id },
+                { $set: {} },
+                { new: true }
+            )
+        }
+    }
+
+    // updateUser
+    // find user by id
+    // update either gemCount, appleCount, money OR user info like username or email
   },
 };
 

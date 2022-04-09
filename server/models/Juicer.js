@@ -4,6 +4,7 @@ const juicerSchema = new Schema(
   {
     startedAtTime: {
       type: Date,
+      default: Date.now
     },
     duration: {
       type: Number,

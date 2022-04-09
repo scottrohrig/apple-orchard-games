@@ -184,21 +184,20 @@ const resolvers = {
     // updateUser
     // find user by id
     // update either gemCount, appleCount, money OR user info like username or email
+    updateUser: async (parent, args, context) => {
+        if (context.user) {
 
-    // updateUser: async (parent, args, context) => {
-    //     if (context.user) {
+            const user = await User.findByIdAndUpdate(
+                { _id: context.user._id },
+                { $set: args },
+                { new: true }
+            )
 
-    //         const user = await User.findByIdAndUpdate(
-    //             { _id: context.user._id },
-    //             { $set: {} },
-    //             { new: true }
-    //         )
+            return user;
+        }
 
-    //         return user;
-    //     }
-
-    //     throw new AuthenticationError('You need to be logged in!');
-    // }
+        throw new AuthenticationError('You need to be logged in!');
+    }
   },
 };
 

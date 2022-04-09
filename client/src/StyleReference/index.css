@@ -299,6 +299,10 @@ background-color: var(--btn-timer-dark);
   outline: none;
   border: 1px solid var(--main-darker);
 }
+.form-submit {
+  background-color: var(--display-money-main);
+  text-shadow: 1px 1px var(--display-money-dark);
+}
 
 
 /* ANIMATIONS */

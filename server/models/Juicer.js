@@ -11,17 +11,17 @@ const juicerSchema = new Schema(
     },
     isReady: {
       type: Boolean,
-      default: false
+      default: false,
     },
   },
   {
     toJSON: {
       getters: true,
-      virtuals: true
-    }
+      virtuals: true,
+    },
   }
 );
 
-const Juicer = model('Juicer', juicerSchema);
+// const Juicer = model('Juicer', juicerSchema);
 
-module.exports = Juicer;
+module.exports = juicerSchema;

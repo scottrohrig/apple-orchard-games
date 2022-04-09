@@ -9,67 +9,71 @@ const Juicer = require('./Juicer');
 
 // require bcrypt
 const bcrypt = require('bcrypt');
+const juicerSchema = require('./Juicer');
 
 // define schema
 const userSchema = new Schema({
-    username: {
-        type: String,
-        required: true,
-        unique: true,
-        trim: true
+  username: {
+    type: String,
+    required: true,
+    unique: true,
+    trim: true,
+  },
+  email: {
+    type: String,
+    required: true,
+    unique: true,
+    match: [/.+@.+\..+/, 'Must enter valid email address!'],
+  },
+  password: {
+    type: String,
+    required: true,
+    minlength: 5,
+  },
+  // money will reflect the user score
+  money: {
+    type: Number,
+    min: 0,
+  },
+  appleCount: {
+    type: Number,
+    min: 0,
+  },
+  gemCount: {
+    type: Number,
+    min: 0,
+  },
+  orchard: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Orchard',
     },
-    email: {
-        type: String,
-        required: true,
-        unique: true,
-        match: [/.+@.+\..+/, 'Must enter valid email address!']
-    },
-    password: {
-        type: String,
-        required: true,
-        minlength: 5
-    },
-    // money will reflect the user score
-    money: {
-        type: Number,
-        min: 0
-    },
-    appleCount: {
-        type: Number,
-        min: 0
-    },
-    gemCount: {
-        type: Number,
-        min: 0
-    },
-    orchard: [{
-        type: Schema.Types.ObjectId,
-        ref: 'Orchard'
-    }],
-    // juicers: [juicerSchema],
-    juicers: [{
-        type: Schema.Types.ObjectId,
-        ref: 'Juicer'
-    }],
-    mashers: [masherSchema],
-    ovens: [ovenSchema],
-    trees: [treeSchema]
-})
+  ],
+  // juicers: [juicerSchema],
+  juicers: [juicerSchema],
+  // [{
+  //     type: Schema.Types.ObjectId,
+  //     ref: 'Juicer'
+  // }],
+  mashers: [masherSchema],
+  ovens: [ovenSchema],
+  trees: [treeSchema],
+});
 
 // pre-save middleware for password
-userSchema.pre('save', async function(next) {
-    if (this.isNew || this.isModified('password')) {
-      const saltRounds = 10;
-      this.password = await bcrypt.hash(this.password, saltRounds);
-    }
-  
-    next();
+userSchema.pre('save', async function (next) {
+  if (this.isNew || this.isModified('password')) {
+    const saltRounds = 10;
+    this.password = await bcrypt.hash(this.password, saltRounds);
+  }
+
+  next();
 });
 
 // schema methods
 // compare the incoming password with the hashed password
-userSchema.methods.isCorrectPassword = async function(password) {
-    return bcrypt.compare(password, this.password);
+userSchema.methods.isCorrectPassword = async function (password) {
+  return bcrypt.compare(password, this.password);
 };
 
 // schema virtuals

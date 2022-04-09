@@ -8,6 +8,10 @@ const orchardSchema = new Schema(
     }
 );
 
+orchardSchema.virtual('treeCount').get(function() {
+    return this.trees.length;
+});
+
 const Orchard = model('Orchard', orchardSchema);
 
 module.exports = Orchard;

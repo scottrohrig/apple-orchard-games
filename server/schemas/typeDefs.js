@@ -16,6 +16,10 @@ const typeDefs = gql`
     juicers: [Juicer]
     mashers: [Masher]
     ovens: [Oven]
+    treeCount: Int
+    juicerCount: Int
+    masherCount: Int
+    ovenCount: Int
   }
 
   type Orchard {
@@ -53,10 +57,6 @@ const typeDefs = gql`
     users: [User]
     user(username: String!): User
     orchards(username: String!): [Orchard]
-    trees(username: String!): User
-    mashers(username: String!): User
-    ovens(username: String!): User
-    juicers(username: String!): User
   }
 
   type Mutation {

@@ -52,7 +52,12 @@ const userSchema = new Schema({
   mashers: [masherSchema],
   ovens: [ovenSchema],
   trees: [treeSchema],
-});
+}, {
+  toJSON: {
+    virtuals: true
+  }
+}
+);
 
 // pre-save middleware for password
 userSchema.pre('save', async function (next) {
@@ -71,6 +76,25 @@ userSchema.methods.isCorrectPassword = async function (password) {
 };
 
 // schema virtuals
+userSchema.virtual('juicerCount').get(function() {
+  return this.juicers.length;
+});
+
+userSchema.virtual('masherCount').get(function() {
+  return this.mashers.length;
+});
+
+userSchema.virtual('ovenCount').get(function() {
+  return this.ovens.length;
+});
+
+userSchema.virtual('treeCount').get(function() {
+  return this.trees.length;
+});
+
+userSchema.virtual('orchardCount').get(function() {
+  return this.orchard.length;
+})
 
 // define model
 const User = model('User', userSchema);

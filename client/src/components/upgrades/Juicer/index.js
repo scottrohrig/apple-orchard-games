@@ -18,6 +18,7 @@ const Juicer = (juicer) => {
   const [{ _id, startedAtTime, duration }, setState] = useState(mock) // juicer
 
   const [timeRemaining, setTime] = useState(duration);
+  const isReady = timeRemaining <= 0
 
   // custom Hook to handle intervals across item types
   useInterval(() => {
@@ -45,7 +46,7 @@ const Juicer = (juicer) => {
         <div className='item-btn-wrapper'>
 
           <div className="item-btn-flex">
-            {timeRemaining === 0 ? (
+            {timeRemaining <= 0 ? (
               <button className="btn btn-harvest" onClick={() => { handleUseBtnPressed(); }}>use</button>
             ) : (
               <button className="btn btn-timer" disabled>{timeRemaining}s</button>

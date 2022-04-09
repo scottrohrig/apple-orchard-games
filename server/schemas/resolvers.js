@@ -114,6 +114,14 @@ const resolvers = {
 
       throw new AuthenticationError('You need to be logged in!');
     },
+
+    // updateUser
+    // find user by id
+    // update either gemCount, appleCount, money OR user info like username or email
+
+    // updateJuicer
+    // need user ID and juicer ID
+    // toggle isReady
   },
 };
 

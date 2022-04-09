@@ -1,18 +1,17 @@
 // require mongoose schema and model
-const { Schema, Model } = require('mongoose');
+const { Schema, model } = require('mongoose');
 const treeSchema = require('./Tree');
 
 const orchardSchema = new Schema(
     {
         trees: [treeSchema]
-    },
-    {
-        toJSON: {
-            getters: true
-        }
     }
 );
 
-const Orchard = new Model('Orchard', orchardSchema);
+orchardSchema.virtual('treeCount').get(function() {
+    return this.trees.length;
+});
+
+const Orchard = model('Orchard', orchardSchema);
 
 module.exports = Orchard;

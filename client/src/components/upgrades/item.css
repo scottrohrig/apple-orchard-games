@@ -1,0 +1,37 @@
+.item-container {
+  position: relative;
+  margin: 4px;
+  height: 128px;
+  border: 1px sandybrown solid;
+  border-radius: .5rem;
+  width: 128px;
+}
+
+.item-container img {
+  height: 100%;
+}
+
+.temp-img {
+  position: absolute;
+  border: 1px palevioletred solid;
+  border-radius: .35rem;
+  width: 100px;
+  height: 100px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.item-btn-wrapper {
+  position: relative;
+  width: 100%;
+  padding-top: 120px;
+}
+.item-btn-flex {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  bottom: 0;
+}

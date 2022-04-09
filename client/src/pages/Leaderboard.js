@@ -1,5 +1,5 @@
 import React from "react";
-// import "./Leaderboard.css";
+import "../components/Leaderboard.css";
 
 const exampleLeaderboardArray = [
   { displayName: "albert", score: 99 },
@@ -16,8 +16,8 @@ const exampleLeaderboardArray = [
 
 export default function Leaderboard() {
   return (
-    <>
-      <h1 style={{ color: "blue" }}>Leaderboard</h1>
+    <div class="leaderboard">
+      <p className="display-banner">Leaderboard</p>
       <p>Place Name Score</p>
       <ol>
         {exampleLeaderboardArray.map((leader, index) => (
@@ -26,6 +26,6 @@ export default function Leaderboard() {
           </li>
         ))}
       </ol>
-    </>
+    </div>
   );
 }

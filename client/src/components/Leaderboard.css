@@ -1,0 +1,31 @@
+
+/*
+- leaderboard h1 should be center 
+- UL/OL should be in the center of the page
+*/
+
+/*
+.leader-board-container {
+  .leader-board-container {
+  position: center;
+  justify-content: center;
+  text-align: center;
+*/
+
+.leaderboard ol {
+  background-color: var(--btn-timer-light);
+  text-align: center;
+  margin: 0 auto;
+  width: auto;
+  list-style-position: inside;
+}
+
+.leaderboard h1 {
+background-color: var(--main-darkest);
+text-align: center;
+color: white;
+}
+
+.leaderboard li p {
+display: inline-block;
+}

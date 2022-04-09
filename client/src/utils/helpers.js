@@ -14,6 +14,7 @@ export function formatTime(rawTime) {
 }
 
 // custom interval Hook
+// https://overreacted.io/making-setinterval-declarative-with-react-hooks/
 export function useInterval(callback, delay) {
   const savedCallback = useRef();
   // remember last callback

@@ -1,6 +1,6 @@
 import { useMutation, useQuery } from '@apollo/client';
 import { useEffect } from 'react';
-import { useGlobalContext } from '../../utils/GobalState';
+import { useGlobalContext } from '../../utils/GlobalState';
 import { QUERY_ITEMS } from '../../utils/queries';
 import Juicer from '../Juicer';
 

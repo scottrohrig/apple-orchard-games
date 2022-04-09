@@ -2,7 +2,7 @@ import { useMutation, useQuery } from '@apollo/client';
 import { useEffect } from 'react';
 import { useGlobalContext } from '../../utils/GlobalState';
 import { QUERY_ITEMS } from '../../utils/queries';
-import Juicer from '../Juicer';
+import Juicer from './Juicer';
 
 export function JuicersRow() {
 
@@ -33,13 +33,13 @@ export function JuicersRow() {
   console.log(juicers)
   // should the responsibility be in the row or the item
   return (
-    <div className='item'>
+    <div className='item-row'>
 
       <span className='item-label'>Juicers</span>
       <div className='item-scroll'>
         {/* map juicers here */}
-        {juicers.map((juicer) => (
-          <div className='item-box'>
+        {juicers.map((juicer, i) => (
+          <div key={i} className='item-box'>
             {juicer._id ? (
               // <img src={require('../../assets/images/juicer.png')}></img>
               <Juicer />

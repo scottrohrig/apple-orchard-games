@@ -41,14 +41,14 @@ nav .a {
   padding: 0 .5rem;
 }
 
-.item {
+.item-row {
   padding: .25rem .5rem;
   background: #96b766;
   border-radius: .25rem;
   margin: .5rem;
 }
 
-.item::after {
+.item-row::after {
   content: '';
   width: calc(100% + 1rem);
   background: #59391D;

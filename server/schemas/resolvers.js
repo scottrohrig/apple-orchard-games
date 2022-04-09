@@ -14,8 +14,9 @@ const resolvers = {
     },
     me: async (parent, args, context) => {
       if (context.user) {
-        const userData = await User.findOne({ _id: context.user._id })
-          .select('-__v -password');
+        const userData = await User.findOne({ _id: context.user._id }).select(
+          '-__v -password'
+        );
 
         return userData;
       }
@@ -57,7 +58,7 @@ const resolvers = {
 
         const user = await User.findByIdAndUpdate(
           { _id: context.user._id },
-          { $push: { juicers: { _id: args.id, duration: args.duration } } },
+          { $push: { juicers: { duration: args.duration } } },
           { new: true }
         );
 
@@ -73,7 +74,7 @@ const resolvers = {
 
         const user = await User.findByIdAndUpdate(
           { _id: context.user._id },
-          { $push: { mashers: { _id: args.id, duration: args.duration } } },
+          { $push: { mashers: { duration: args.duration } } },
           { new: true }
         );
 
@@ -89,7 +90,7 @@ const resolvers = {
 
         const user = await User.findByIdAndUpdate(
           { _id: context.user._id },
-          { $push: { ovens: { _id: args.id, duration: args.duration } } },
+          { $push: { ovens: { duration: args.duration } } },
           { new: true }
         );
 
@@ -105,7 +106,7 @@ const resolvers = {
 
         const user = await User.findByIdAndUpdate(
           { _id: context.user._id },
-          { $push: { trees: { _id: args.id, duration: args.duration } } },
+          { $push: { trees: { duration: args.duration } } },
           { new: true }
         );
 
@@ -114,14 +115,6 @@ const resolvers = {
 
       throw new AuthenticationError('You need to be logged in!');
     },
-
-    // updateUser
-    // find user by id
-    // update either gemCount, appleCount, money OR user info like username or email
-
-    // updateJuicer
-    // need user ID and juicer ID
-    // toggle isReady
   },
 };
 

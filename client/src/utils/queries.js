@@ -6,65 +6,52 @@ export const QUERY_ITEMS = gql`
   }
 `;
 
-// me
-
-export const QUERY_USER = gql`
-  query user($username: String!) {
-    user(username: $username) {
+export const QUERY_ME = gql`
+  query Me {
+    me {
       _id
       username
       email
+      password
       money
       appleCount
       gemCount
       orchards {
         _id
+        trees {
+          _id
+          duration
+        }
       }
       trees {
         _id
+        duration
       }
       juicers {
         _id
+        duration
       }
+      ovenCount
+      masherCount
+      juicerCount
+      treeCount
       mashers {
         _id
+        duration
       }
       ovens {
         _id
+        duration
       }
     }
   }
 `;
 
-// // get orchards
-// export const GET_ORCHARDS = gql`
-//   query {
-
-//   }
-// `;
-
-// // get mashers
-// export const GET_MASHERS = gql`
-//   query {
-
-//   }
-// `;
-
-// // get juicers
-// export const GET_JUICERS = gql`
-//   query {
-
-//   }
-// `;
-// // get ovens
-// export const GET_OVENS = gql`
-//   query {
-
-//   }
-// `;
-// // get trees
-// export const GET_TREES = gql`
-//   query {
-
-//   }
-// `;
+export const QUERY_USERS = gql`
+  query Users {
+    users {
+      username
+      money
+    }
+  }
+`;

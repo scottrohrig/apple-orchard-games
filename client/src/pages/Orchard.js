@@ -18,6 +18,9 @@ export default function Orchard() {
   return (
     <div>
       <div className='display-banner text-center'>Orchard Page</div>
+
+{/* placeholder tree is at top temporarily to make it easy to find */}
+<PlaceholderTree />
       {rows.map((_, i) =>{
         disabled = i > 3 ? true : false
         return(
@@ -35,7 +38,6 @@ export default function Orchard() {
           </div>
         </div>
       )})}
-<PlaceholderTree />
     </div>
   );
 }

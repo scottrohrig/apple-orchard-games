@@ -5,7 +5,6 @@ const Orchard = require('./Orchard');
 const treeSchema = require('./Tree');
 const masherSchema = require('./Masher');
 const ovenSchema = require('./Oven');
-const Juicer = require('./Juicer');
 
 // require bcrypt
 const bcrypt = require('bcrypt');
@@ -49,12 +48,7 @@ const userSchema = new Schema({
       ref: 'Orchard',
     },
   ],
-  // juicers: [juicerSchema],
   juicers: [juicerSchema],
-  // [{
-  //     type: Schema.Types.ObjectId,
-  //     ref: 'Juicer'
-  // }],
   mashers: [masherSchema],
   ovens: [ovenSchema],
   trees: [treeSchema],

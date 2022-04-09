@@ -25,6 +25,7 @@ const typeDefs = gql`
 
   type Tree {
     _id: ID
+    duration: Int
   }
 
   type Juicer {
@@ -34,10 +35,12 @@ const typeDefs = gql`
 
   type Masher {
     _id: ID
+    duration: Int
   }
 
   type Oven {
     _id: ID
+    duration: Int
   }
 
   type Auth {
@@ -60,9 +63,9 @@ const typeDefs = gql`
     login(email: String!, password: String!): Auth
     addUser(username: String!, email: String!, password: String!): Auth
     addOrchard(userId: ID!): User
-    addTree(userId: ID!): Orchard
-    addMasher(userId: ID!): User
-    addOven(userId: ID!): User
+    addTree(duration: Int!): User
+    addMasher(duration: Int!): User
+    addOven(duration: Int!): User
     addJuicer(duration: Int!): User
     updateUser(userId: ID!): User
     updateOrchard(orchardId: ID!): User

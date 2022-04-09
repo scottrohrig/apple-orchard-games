@@ -1,4 +1,4 @@
-const { Schema, model } = require('mongoose');
+const { Schema } = require('mongoose');
 
 const juicerSchema = new Schema(
   {
@@ -21,7 +21,5 @@ const juicerSchema = new Schema(
     },
   }
 );
-
-// const Juicer = model('Juicer', juicerSchema);
 
 module.exports = juicerSchema;

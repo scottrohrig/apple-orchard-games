@@ -2,8 +2,7 @@
 const { AuthenticationError } = require('apollo-server-express');
 const { coerceInputValue } = require('graphql');
 // require necessary models
-const { User, Juicer } = require('../models');
-// const juicerSchema = require('../models/Juicer');
+const { User } = require('../models');
 // require auth
 const { signToken } = require('../utils/auth');
 
@@ -60,6 +59,54 @@ const resolvers = {
         const user = await User.findByIdAndUpdate(
           { _id: context.user._id },
           { $push: { juicers: { _id: args.id, duration: args.duration } } },
+          { new: true }
+        );
+
+        return user;
+      }
+
+      throw new AuthenticationError('You need to be logged in!');
+    },
+
+    addMasher: async (parent, args, context) => {
+      if (context.user) {
+        console.log(args);
+
+        const user = await User.findByIdAndUpdate(
+          { _id: context.user._id },
+          { $push: { mashers: { _id: args.id, duration: args.duration } } },
+          { new: true }
+        );
+
+        return user;
+      }
+
+      throw new AuthenticationError('You need to be logged in!');
+    },
+
+    addOven: async (parent, args, context) => {
+      if (context.user) {
+        console.log(args);
+
+        const user = await User.findByIdAndUpdate(
+          { _id: context.user._id },
+          { $push: { ovens: { _id: args.id, duration: args.duration } } },
+          { new: true }
+        );
+
+        return user;
+      }
+
+      throw new AuthenticationError('You need to be logged in!');
+    },
+
+    addTree: async (parent, args, context) => {
+      if (context.user) {
+        console.log(args);
+
+        const user = await User.findByIdAndUpdate(
+          { _id: context.user._id },
+          { $push: { trees: { _id: args.id, duration: args.duration } } },
           { new: true }
         );
 

@@ -40,65 +40,8 @@ function Dashboard() {
         </div>
       </div>
 
-      {/* <Scroller kind={'orchard'} /> */}
-      <div className='item'>
-        <span className='item-label'>Orchard</span>
-
-        <div className='item-scroll'>
-          {/* map orchards here */}
-          <div className='item-box' onClick={() => {handleUpgradePurchase()}}>
-            <img src={require('../assets/images/tree.png')} alt="tree1" />
-          </div>
-          <div className='item-box'>
-            <img src={require('../assets/images/tree.png')} alt="tree2" />
-          </div>
-          <div className='item-box'>
-            <img src={require('../assets/images/tree.png')} alt="tree3" />
-          </div>
-          <div className='item-box'>
-            <img src={require('../assets/images/tree.png')} alt="tree3" />
-          </div>
-          <div className='item-box'>
-            <img src={require('../assets/images/tree.png')} alt="tree3" />
-          </div>
-          <div className='item-box'>
-            <img src={require('../assets/images/tree.png')} alt="tree3" />
-          </div>
-          <div className='item-box'>
-            <img src={require('../assets/images/tree.png')} alt="tree3" />
-          </div>
-        </div>
-
-      </div>
-
       {/* WIP juicers row */}
       <JuicersRow />
-
-      <div>
-        <span className='item-label'>Mashers</span>
-        <div className='item-scroll'>
-          {/* map mashers here */}
-          <div className='item-box'>
-            <img src={require('../assets/images/masher.png')}></img>
-          </div>
-          <div className='item-box'>
-            <img src={require('../assets/images/masher.png')} alt="tree3" />
-          </div>
-          <div className='item-box'>
-            <img src={require('../assets/images/masher.png')} alt="tree3" />
-          </div>
-          <div className='item-box'>
-            <img src={require('../assets/images/masher.png')} alt="tree3" />
-          </div>
-          <div className='item-box'>
-            <img src={require('../assets/images/masher.png')} alt="tree3" />
-          </div>
-        </div>
-      </div>
-
-      <div>
-        {'<OvensRow />'}
-      </div>
 
     </div>
   );

@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 // import mutation hook
-import React, { useMutation } from '@apollo/client';
+
+import  { useMutation } from '@apollo/client';
 // import Link for router
 import { Link } from 'react-router-dom';
 // import login mutation
 import { LOGIN_USER } from '../utils/mutations';
 // import auth class to handle json web token decoding
-import Auth from '../../../server/utils/auth';
+import Auth from '../utils/auth';
 
 
 // define Login component function

@@ -1,5 +1,6 @@
 // Orchard.js
 import Tree from '../components/Tree';
+import PlaceholderTree from '../components/PlaceholderTree';
 
 const rows = [];
 const trees = [];
@@ -17,6 +18,9 @@ export default function Orchard() {
   return (
     <div>
       <div className='display-banner text-center'>Orchard Page</div>
+
+{/* placeholder tree is at top temporarily to make it easy to find */}
+<PlaceholderTree />
       {rows.map((_, i) =>{
         disabled = i > 3 ? true : false
         return(

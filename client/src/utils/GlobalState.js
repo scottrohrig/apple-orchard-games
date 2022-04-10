@@ -34,7 +34,28 @@ const GlobalProvider = ({ value = [], ...props }) => {
       gemsFromPurchase: 5,
     },
     mashers: [{}, {}, {}, {}, {}],
-    juicers: [{ _id: 1 }, {_id: 2}, {}, {}, {}],
+    juicers: [
+      {
+      _id: 1,
+      startedAtTime: new Date(),
+      duration: 5,
+     },
+     {
+      _id: 2,
+      startedAtTime: new Date(new Date().getTime() - 25 * 100),
+      duration: 10,
+     },
+     {
+       _id: 3,
+       startedAtTime: new Date(new Date().getTime() - 25 * 100),
+       duration: 30,
+      },
+      {
+       _id: 4,
+       startedAtTime: new Date(new Date().getTime() - 25 * 100),
+       duration: 60,
+      },
+     {}],
     ovens: [{}, {}, {}, {}, {}],
     trees: [{}, {}, {}, {}, {}],
     orchards: [

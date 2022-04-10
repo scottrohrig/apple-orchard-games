@@ -7,6 +7,7 @@ export const PURCHASE_A_TREE = "PURCHASE_A_TREE";
 // update trees
 // update mashers
 // update juicers
+export const UPDATE_JUICERS = "UPDATE_JUICERS";
 // update ovens
 
 // add an upgrade to a row in the dashboard?

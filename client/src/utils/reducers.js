@@ -1,5 +1,5 @@
 import { useReducer } from "react";
-import { UPDATE_TIMERS, PURCHASE_A_TREE } from "./actions";
+import { UPDATE_TIMERS, UPDATE_JUICERS, PURCHASE_A_TREE } from "./actions";
 
 export const reducer = (state=[], action) => {
   switch (action.type) {
@@ -7,6 +7,12 @@ export const reducer = (state=[], action) => {
     // case update trees
     // case update mashers
     // case update juicers
+    case UPDATE_JUICERS:
+      console.log('UPDATE_JUICERS reducer running...', action)
+      let updatedJuicers = state.juicers.map(juicer => juicer._id === action.payload._id ? {...juicer, startedAtTime: action.payload.startedAtTime} : juicer)
+      return {
+        ...state, juicers: updatedJuicers
+      };
     // case update ovens
     // case update user
     case PURCHASE_A_TREE:
@@ -17,7 +23,7 @@ export const reducer = (state=[], action) => {
       return {
         ...state
         ,
-        
+
         appleCount: state.appleCount - state.gameVariables.applesForNewTree,
         trees: newTreeArray,
       };

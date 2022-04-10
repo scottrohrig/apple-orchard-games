@@ -1,6 +1,8 @@
 // import
 
-import { JuicersRow } from '../components/upgrades';
+import JuicersRow from '../components/upgrades/JuicerRow';
+import MashersRow from '../components/upgrades/MasherRow';
+import OvensRow from '../components/upgrades/OvenRow';
 
 function Dashboard() {
 
@@ -42,6 +44,8 @@ function Dashboard() {
 
       {/* WIP juicers row */}
       <JuicersRow />
+      <MashersRow />
+      <OvensRow />
 
     </div>
   );

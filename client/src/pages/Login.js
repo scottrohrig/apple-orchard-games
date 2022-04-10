@@ -15,8 +15,8 @@ const Login = (props) => {
 
   // set the default form state
   const [formState, setFormState] = useState({
-    email: 'example@email.com',
-    password: '********'
+    email: '',
+    password: ''
   });
 
   const [login, { error }] = useMutation(LOGIN_USER);
@@ -54,7 +54,7 @@ const Login = (props) => {
   // form input change handler function
 
 
-  // return the component JSX 
+  // return the component JSX
   return (
     <main className="login">
       <div className="container">

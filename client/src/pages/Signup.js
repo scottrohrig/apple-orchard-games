@@ -14,9 +14,9 @@ const Signup = (props) => {
 
   // set the default form state
   const [formState, setFormState] = useState({
-    username: 'apple',
-    email: 'example@email.com',
-    password: '********'
+    username: '',
+    email: '',
+    password: ''
   });
   const [addUser, { error }] = useMutation(ADD_USER);
   // define the login function to handle the LOGIN mutation

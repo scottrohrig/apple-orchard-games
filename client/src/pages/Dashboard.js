@@ -2,8 +2,8 @@
 
 import { JuicersRow } from '../components/upgrades';
 
-function Dashboard() {
-
+function Dashboard(props) {
+console.log("visibility prop passed to Dashboard is " + props.dashVis)
 
   // consider moving 👇 to 'Upgrade' component script
   // need event handler for upgrades
@@ -28,7 +28,7 @@ function Dashboard() {
     </div>
      */
 
-    <div className='' >
+    <div className={props.dashVis ? "dashboard-display-block" : "dashboard-display-none"}>
       <div className='form-label'>Dashboard</div>
       <div className='container'>
         Stats Container

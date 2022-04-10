@@ -117,3 +117,18 @@ nav .a {
   }
 
 }
+
+.dashboard-display-none {
+  display: none;
+}
+  
+  .orchard-display-none{
+    display: none;
+
+  }.dashboard-display-block {
+    display: block;
+    }
+    
+    .orchard-display-block{
+      display: block;
+    }

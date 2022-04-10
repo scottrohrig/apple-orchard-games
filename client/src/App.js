@@ -41,6 +41,21 @@ const client = new ApolloClient({
 function App() {
   const [showStyle, setShowStyle] = useState(false);
 
+  const [dashboardVis, setDashboardVis] = useState(true);
+  const [orchardVis, setOrchardVis] = useState(true);
+
+function handleToggleDashboard(evt) {
+  evt.preventDefault();
+  setDashboardVis(!dashboardVis);
+  console.log("dashboardVis changed to " + dashboardVis);
+}
+
+function handleToggleOrchard(evt) {
+  evt.preventDefault();
+  setOrchardVis(!orchardVis);
+  console.log("orchardVis changed to " + orchardVis);
+}
+
   return (
     <ApolloProvider client={client} >
       <Router>
@@ -52,7 +67,7 @@ function App() {
                 <h1>Apple Orchard Games</h1>
               </div>
 
-              <nav>
+              {/* <nav>
                 <ul>
                   <li>
                     <Link className='a' to='/login'>Login</Link>
@@ -78,11 +93,15 @@ function App() {
                     </button>
                   </li>
                 </ul>
-              </nav>
+              </nav> */}
             </header>
 
             <div style={{ margin: "2rem auto" }}>
-              <div className='container'>
+            <button onClick={handleToggleDashboard}>toggle dashboard</button>
+            <button onClick={handleToggleOrchard}>toggle orchard</button>
+              <Dashboard dashVis={dashboardVis}/>
+              <Orchard orchVis={orchardVis}/>
+              {/* <div className='container'>
 
                 {showStyle ? (
                   <StyleReference />
@@ -93,11 +112,10 @@ function App() {
                     <Route exact path='/home' component={Dashboard} />
                     <Route exact path='/orchard/:id' component={Orchard} />
                     <Route exact path='/highscore' component={Leaderboard} />
-                    {/* <Route exact path='/shop' component={Shop} /> */}
                     <Route component={NoMatch} />
                   </Switch>
                 )}
-              </div>
+              </div> */}
             </div>
           </div>
         </GlobalProvider>

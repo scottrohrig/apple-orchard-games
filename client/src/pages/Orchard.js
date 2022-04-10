@@ -11,12 +11,12 @@ for (let i = 0; i < 10; i++) {
   }
 }
 
-export default function Orchard() {
+export default function Orchard(props) {
 
   let disabled = true
 
   return (
-    <div>
+    <div className={props.orchVis ? "orchard-display-block" : "orchard-display-none"}>
       <div className='display-banner text-center'>Orchard Page</div>
 
 {/* placeholder tree is at top temporarily to make it easy to find */}

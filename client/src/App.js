@@ -45,9 +45,8 @@ function App() {
     <ApolloProvider client={client} >
       <Router>
         <GlobalProvider>
-          <div className="app">
-            <div className="game-background"></div>
-
+          <Header />
+          <div className="app app-content">
             <header className="app-header">
               <div>
                 <h1>Apple Orchard Games</h1>

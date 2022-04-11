@@ -16,8 +16,8 @@ const exampleLeaderboardArray = [
 
 export default function Leaderboard() {
   return (
-    <div class="leaderboard">
-      <p className="display-banner">Leaderboard</p>
+    <div className="leaderboard">
+      <h2 className='page-title'><p className="display-banner">Leaderboard</p></h2>
       <p>Place Name Score</p>
       <ol>
         {exampleLeaderboardArray.map((leader, index) => (

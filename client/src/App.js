@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom';
-import { ApolloClient, ApolloProvider, createHttpLink, InMemoryCache, } from '@apollo/client';
+import { ApolloProvider, ApolloClient, InMemoryCache, createHttpLink } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 
 import "./App.css";

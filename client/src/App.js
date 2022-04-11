@@ -40,6 +40,7 @@ const client = new ApolloClient({
 
 function App() {
   const [showStyle, setShowStyle] = useState(false);
+  const [showLeaderboard, setShowLeaderboard] = useState(false);
 
   return (
     <ApolloProvider client={client} >
@@ -67,7 +68,10 @@ function App() {
                     <Link className='a' to='/home'>Dashboard</Link>
                   </li>
                   <li>
-                    <Link className='a' to='/highscore'>Leaderboards</Link>
+                    {/* <Link className='a' to='/highscore'>Leaderboards</Link> */}
+                    <button className="btn btn-timer"
+                      onClick={() => setShowLeaderboard(!showLeaderboard)}
+                      >Leaderboard</button>
                   </li>
                   <li>
                     <button
@@ -84,6 +88,9 @@ function App() {
             <div style={{ margin: "2rem auto" }}>
               <div className='container'>
 
+                {/* Modals */}
+                <Leaderboard showLeaderboard={showLeaderboard} setShowLeaderboard={setShowLeaderboard} />
+
                 {showStyle ? (
                   <StyleReference />
                 ) : (
@@ -92,7 +99,7 @@ function App() {
                     <Route exact path='/signup' component={Signup} />
                     <Route exact path='/home' component={Dashboard} />
                     <Route exact path='/orchard/:id' component={Orchard} />
-                    <Route exact path='/highscore' component={Leaderboard} />
+                    {/* <Route exact path='/highscore' component={Leaderboard} /> */}
                     {/* <Route exact path='/shop' component={Shop} /> */}
                     <Route component={NoMatch} />
                   </Switch>

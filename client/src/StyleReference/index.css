@@ -572,6 +572,43 @@ background-color: var(--btn-timer-dark);
 }
 
 
+/* Modal */
+.modal {
+  width: 800px; max-width: calc(100% - 40px);
+  margin: 0 auto;
+  border-radius: 20px;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.6);
+  position: fixed;
+  left: 0; right: 0;
+  z-index: 99;
+  transform: scale(0);
+  transition: all .5s ease-in-out;
+}
+.modal-active {
+  transform: scale(1);
+}
+.modal-background {
+  position: fixed;
+  z-index: 99;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  background-color: rgba(0,0,0,0.6);
+}
+.btn-modal {
+  background-color: transparent;
+  padding: 0;
+  position: absolute;
+  right: 20px;
+  transform: scale(1.5);
+  text-shadow: 1px 1px rgba(0,0,0,0.5);
+  mix-blend-mode: overlay;
+}
+.btn-modal:hover {
+  transform: scale(1.5) rotate(180deg);
+}
+
+
 /* Scrollbar */
 ::-webkit-scrollbar {
   width: 10px;

@@ -1,5 +1,5 @@
 import React from "react";
-import Tree from "./Tree";
+import Tree from "../Tree";
 
 const exampleTreeArray = [
   { treeId: 0, treeStatus: "growing" },

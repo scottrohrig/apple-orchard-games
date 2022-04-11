@@ -45,7 +45,7 @@ const Juicer = ({ props }) => {
     );
     dispatch({
       type: JUICE_SOLD
-    });
+    })
 
 
     dispatch({

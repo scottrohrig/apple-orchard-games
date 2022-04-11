@@ -105,13 +105,9 @@ const resolvers = {
           { _id: args.orchardId },
           { $push: { trees: { duration: args.duration } } },
           { new: true },
-          function (error, success) {
-            if (error) {
-                console.log(error);
-            } else {
-                console.log(success);
-            }
-        });
+        );
+
+        console.log(orchard);
 
         return orchard;
       }
@@ -124,17 +120,13 @@ const resolvers = {
             // create a new orchard
             const orchard = new Orchard();
             // add the new orchard to the User's orchards array
-            await User.findByIdAndUpdate(
+            const user = await User.findByIdAndUpdate(
                 context.user._id, 
                 { $push: { orchards: orchard } }, 
                 { new: true },
-                function (error, success) {
-                    if (error) {
-                        console.log(error);
-                    } else {
-                        console.log(success);
-                    }
-                });
+                );
+
+                console.log(user);
             // return the new orchard
             return orchard;
         }

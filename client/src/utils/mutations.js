@@ -38,7 +38,7 @@ export const ADD_ORCHARD = gql`
   }
 `;
 
-// add tree
+// add tree (// update orchard => adding new tree)
 export const ADD_TREE = gql`
   mutation addTree($duration: Int!) {
     addTree(duration: $duration) {
@@ -83,8 +83,18 @@ export const ADD_OVEN = gql`
 `;
 
 // update user
-
-// update orchard => adding new tree
+export const UPDATE_USER = gql `
+  mutation updateUser($username: String, $email: String, $password: String, $gemCount: Int, $appleCount: Int, $money: Int) {
+    updateUser(username: $username, email: $email, password: $password, gemCount: $gemCount, appleCount: $appleCount, money: $money) {
+      _id
+      username
+      email
+      gemCount
+      appleCount
+      money
+    }
+  }
+`;
 
 // update tree
 export const SET_TREE = gql`
@@ -131,11 +141,6 @@ mutation updateJuicer($juicerId: ID!, $startedAtTime: Date!, $duration: Int) {
   }
 }
 `;
-
-
-
-
-
 
 // update oven
 export const SET_OVEN = gql`

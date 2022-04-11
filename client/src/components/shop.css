@@ -1,0 +1,7 @@
+.card {
+  width: 128px;
+  height: 90%;
+  border: 1px solid var(--btn-harvest-main);
+  border-radius: .5rem;
+  border-bottom: 12px var(--wood-dark) solid;
+}

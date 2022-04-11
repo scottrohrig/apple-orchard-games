@@ -1,3 +1,4 @@
+import { useQuery } from '@apollo/client';
 import React from "react";
 import "./Leaderboard.css";
 
@@ -14,12 +15,18 @@ const exampleLeaderboardArray = [
   { displayName: "joy", score: 90 },
 ];
 
-export default function Leaderboard({ showLeaderboard, setShowLeaderboard }) {
+export default function Leaderboard({
+  showLeaderboard, setShowLeaderboard,
+  showMarketplace, setShowMarketplace,
+}) {
+
+  // const [getScores] = useQuery(GET_SCORES)
+
   return (
     <div>
       <div className={`modal-background ${showLeaderboard && 'modal-background-active'}`}
-        onClick={() => setShowLeaderboard(!showLeaderboard)}></div>
-        
+        onClick={() =>setShowLeaderboard(!showLeaderboard)}></div>
+
       <div className={`leaderboard modal ${showLeaderboard && 'modal-active'}`}>
 
         <button
@@ -43,7 +50,7 @@ export default function Leaderboard({ showLeaderboard, setShowLeaderboard }) {
               <div className="lb-grid-item">{leader.score}</div>
             </div>
           ))}
-          
+
       </div>
     </div>
   );

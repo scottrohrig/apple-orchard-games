@@ -113,9 +113,9 @@ const resolvers = {
     addOrchard: async (parent, args, context) => {
       if (context.user) {
         // create a new orchard
-        const orchard = new Orchard();
+        const orchard = new Orchard({ username: context.user.username });
         // add the new orchard to the User's orchards array
-        const user = await User.findByIdAndUpdate(
+        const user = Promise.all User.findByIdAndUpdate(
           { _id: context.user._id },
           { $push: { orchards: orchard._id } },
           { new: true }

@@ -11,7 +11,7 @@ const { signToken } = require('../utils/auth');
 const resolvers = {
   Query: {
     users: async () => {
-      return User.find().select('-__v -password').populate('orchards');
+      return (await User.find().select('-__v -password').populate('orchards').execPopulate()).
     },
     me: async (parent, args, context) => {
       if (context.user) {
@@ -113,11 +113,12 @@ const resolvers = {
     addOrchard: async (parent, args, context) => {
       if (context.user) {
         // create a new orchard
-        const orchard = new Orchard();
+        const orchard = new Orchard({ username: context.user.username });
+        console.log(orchard);
         // add the new orchard to the User's orchards array
         const user = await User.findByIdAndUpdate(
           { _id: context.user._id },
-          { $push: { orchards: orchard._id } },
+          { $push: { orchards: orchard } },
           { new: true }
         );
 

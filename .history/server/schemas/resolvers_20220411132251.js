@@ -116,8 +116,8 @@ const resolvers = {
         const orchard = new Orchard();
         // add the new orchard to the User's orchards array
         const user = await User.findByIdAndUpdate(
-          { _id: context.user._id },
-          { $push: { orchards: orchard._id } },
+          context.user._id,
+          { $push: { orchards: args.orchard } },
           { new: true }
         );
 

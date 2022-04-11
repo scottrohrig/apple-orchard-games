@@ -69,8 +69,9 @@ export const reducer = (state = [], action) => {
       console.log(boughtJuicers);
       return { ...state, 
         juicers: boughtJuicers,
-        money: state.money - 10 
-        // money: state.money - state.defaultGameVariables.juicerCost 
+        // money: state.money - 10 
+        money: state.money - state.gameVariables.juicerCost, 
+        appleCount: state.appleCount - state.gameVariables.makeJuiceApplesUsed
       }
 
     case JUICE_SOLD:

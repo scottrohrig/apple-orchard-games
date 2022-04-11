@@ -24,3 +24,4 @@ export const UPDATE_CATEGORIES = "UPDATE_CATEGORIES";
 export const UPDATE_TIMERS = "UPDATE_TIMERS";
 
 export const BUY_JUICER = "BUY_JUICER";
+export const JUICE_SOLD = "JUICE_SOLD";

@@ -56,4 +56,6 @@ display: inline-block;
 
 .leaderboard {
   background-color: var(--sky-dark);
+  outline: 2px dashed var(--sky-main);
+  outline-offset: -8px;
 }

@@ -17,11 +17,9 @@ const exampleLeaderboardArray = [
 export default function Leaderboard({ showLeaderboard, setShowLeaderboard }) {
   return (
     <div>
-      {showLeaderboard &&
-        <div className="modal-background"
-          onClick={() => setShowLeaderboard(!showLeaderboard)}>
-        </div>
-      }
+      <div className={`modal-background ${showLeaderboard && 'modal-background-active'}`}
+        onClick={() => setShowLeaderboard(!showLeaderboard)}></div>
+        
       <div className={`leaderboard modal ${showLeaderboard && 'modal-active'}`}>
 
         <button

@@ -59,7 +59,6 @@ export const reducer = (state = [], action) => {
     case BUY_JUICER:
       const boughtJuicers = state.juicers
 
-
       // insert juicer to placeholder space
       boughtJuicers.splice(boughtJuicers.length - 2, 0, action.payload)
 
@@ -68,7 +67,11 @@ export const reducer = (state = [], action) => {
         return { ...state, juicers: boughtJuicers }
       }
       console.log(boughtJuicers);
-      return { ...state, juicers: boughtJuicers }
+      return { ...state, 
+        juicers: boughtJuicers,
+        money: state.money - 10 
+        // money: state.money - state.defaultGameVariables.juicerCost 
+      }
 
     case JUICE_SOLD:
       console.log("in juice sold");

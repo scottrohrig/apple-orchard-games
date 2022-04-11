@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { useGlobalContext } from '../../utils/GlobalState';
 import { QUERY_ITEMS } from '../../utils/queries';
 import { ADD_JUICER } from '../../utils/mutations';
-import { BUY_JUICER, UPDATE_JUICERS, APPLES_FOR_JUICE } from '../../utils/actions'
+import { BUY_JUICER, APPLES_FOR_JUICE } from '../../utils/actions'
 import Juicer from './Juicer';
 import BuyJuicer from './PlaceholderJuice';
 
@@ -29,14 +29,37 @@ export default function JuicersRow() {
     // if not loading, get cache and dispatch
   }, ['itemData', 'loading', dispatch]);
 
-  dispatch({
-    type: BUY_JUICER
-  });
-  dispatch({
-    type: APPLES_FOR_JUICE
-  });
 
-  
+  const handlePurchase = async (event) => {
+    console.log('purchased upgrade');
+
+    // validate enough money
+
+    // dispatch ADD_JUICER
+
+      console.log('dispatching to GameState')
+      try {
+        const payload = {_id: juicers.length + 1, startedAtTime: new Date(), duration: state.gameVariables.makeJuiceTime }
+        dispatch({
+          type: BUY_JUICER,
+          payload
+        })
+      } catch (error) {
+        console.log('error');
+      }
+
+      // update user money && apples
+      try {
+        // const payload = {money: state.money + state.gameVariables.juiceSaleRevenue }
+        dispatch({type: APPLES_FOR_JUICE})
+        // dispatch({type: })
+      } catch (error) {
+
+      }
+
+    // add data to idbPromise('')
+
+  };
 
   return (
     <div className='item-row'>
@@ -45,21 +68,21 @@ export default function JuicersRow() {
       <div className='item-scroll'>
 
         { // map thru juicer objects from GlobalState to add to row
-          juicers.map((juicer, i) => {
-            return (
-              <div key={i} className='item-box'>
+        juicers.map((juicer, i) => {
+          return (
+            <div key={i} className='item-box'>
 
-                {// if object in map does not have `_id` show placeholder.
-                  juicer._id
-                    ? <Juicer props={{ juicer, dispatch }} />
-                    // Placeholder
-                    : <BuyJuicer handlePurchase={handlePurchase} />
-                }
+              {// if object in map does not have `_id` show placeholder.
+                juicer._id
+                  ? <Juicer props={{ juicer, dispatch }} />
+                  // Placeholder
+                  : <BuyJuicer handlePurchase={handlePurchase} />
+              }
 
-              </div>
+            </div>
 
-            );
-          })}
+          );
+        })}
       </div>
     </div>
 

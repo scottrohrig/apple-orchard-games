@@ -1,6 +1,10 @@
 // import
 import { useGlobalContext } from '../utils/GlobalState';
 
+import  { useMutation } from '@apollo/client';
+import { LOGIN_USER } from '../utils/mutations';
+
+
 import JuicersRow from '../components/upgrades/JuicerRow';
 import MashersRow from '../components/upgrades/MasherRow';
 import OvensRow from '../components/upgrades/OvenRow';
@@ -8,6 +12,16 @@ import OvensRow from '../components/upgrades/OvenRow';
 function Dashboard() {
 
   const [state] = useGlobalContext();
+
+  function handleDBUpdateButton(evt) {
+    evt.preventDefault();
+    
+    const {money, appleCount, gemCount, trees, juicers, mashers, ovens} = state;
+    console.log(money+" "+appleCount+" "+gemCount+" "+trees+" "+juicers+" "+mashers+" "+ovens);
+    
+    // dispatch({type:PURCHASE_A_TREE});
+                
+  }
 
   // consider moving 👇 to 'Upgrade' component script
   // need event handler for upgrades
@@ -42,6 +56,7 @@ function Dashboard() {
       <div>
         gemCount: {state.gemCount}
       </div>
+      <button onClick={handleDBUpdateButton}>click here to send globalstate gameplay variables to server</button>
 
       <div className='form-label'>Dashboard</div>
       <div className='container'>

@@ -1,6 +1,7 @@
 {
   "name": "client",
   "version": "0.1.0",
+  "proxy": "http://localhost:3001",
   "private": true,
   "dependencies": {
     "@apollo/client": "^3.5.10",

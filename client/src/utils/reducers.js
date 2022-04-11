@@ -8,6 +8,9 @@ import {
   JUICE_SOLD,
   BUY_JUICER,
   APPLES_FOR_JUICE,
+  SAUCE_SOLD,
+  BUY_MASHER,
+  APPLES_FOR_SAUCE,
 } from "./actions";
 
 export const reducer = (state = [], action) => {
@@ -59,7 +62,6 @@ export const reducer = (state = [], action) => {
     case BUY_JUICER:
       const boughtJuicers = state.juicers
 
-
       // insert juicer to placeholder space
       boughtJuicers.splice(boughtJuicers.length - 2, 0, action.payload)
 
@@ -68,7 +70,13 @@ export const reducer = (state = [], action) => {
         return { ...state, juicers: boughtJuicers }
       }
       console.log(boughtJuicers);
-      return { ...state, juicers: boughtJuicers }
+      return {
+        ...state,
+        juicers: boughtJuicers,
+        // money: state.money - 10 
+        money: state.money - state.gameVariables.juicerCost,
+        appleCount: state.appleCount - state.gameVariables.makeJuiceApplesUsed
+      }
 
     case JUICE_SOLD:
       console.log("in juice sold");
@@ -95,6 +103,52 @@ export const reducer = (state = [], action) => {
         // appleCount: state.appleCount - state.makeJuiceApplesUsed,
         // appleCount: 22,
       };
+
+    // buy mashers
+    case BUY_MASHER:
+      const boughtMashers = state.mashers
+
+      // insert MASHER to placeholder space
+      boughtMashers.splice(boughtMashers.length - 2, 0, action.payload)
+
+      if (boughtMashers.length > 5) {
+        boughtMashers.pop()
+        return { ...state, mashers: boughtMashers }
+      }
+      console.log(boughtMashers);
+      return {
+        ...state,
+        mashers: boughtMashers,
+        // money: state.money - 14 
+        money: state.money - state.gameVariables.masherCost,
+        appleCount: state.appleCount - state.gameVariables.makeSauceApplesUsed
+      }
+
+
+    case SAUCE_SOLD:
+      console.log("in sauce sold");
+      console.log("money is " + state.money);
+
+
+      return {
+        ...state,
+        money: state.money + state.gameVariables.sauceSaleRevenue,
+      };
+
+    case APPLES_FOR_SAUCE:
+      console.log("apples for sauce");
+      console.log("apples is " + state.appleCount);
+      console.log("apples used" + state.gameVariables.makeSauceApplesUsed);
+      console.log("apples used" + (state.appleCount - state.gameVariables.makeSauceApplesUsed));
+
+
+      return {
+        ...state,
+        appleCount: state.appleCount - state.gameVariables.makeSauceApplesUsed,
+
+        // appleCount: 150,
+      };
+
 
     case UPDATE_TIMERS:
       return state.map((timer) => {

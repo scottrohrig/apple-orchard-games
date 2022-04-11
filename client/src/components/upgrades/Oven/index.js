@@ -13,7 +13,7 @@ const Oven = ({ props }) => {
   // deconstruct the oven props passed in from parent
   // const [{ _id, startedAtTime, duration }, setState] = useState(mock) // oven
 
-  const { _id, startedAtTime, duration } = oven
+  const { _id, startedAtTime, duration } = oven;
 
   const [timeRemaining, setTime] = useState(duration);
   const isReady = timeRemaining <= 0
@@ -53,26 +53,37 @@ const Oven = ({ props }) => {
   };
 
   return (
-    <>
-      <div className='item-container'>
-        <div className='temp-img'>
-          {isReady ? (
-            <img src={pieImg} alt="oven" />
-          ) : (
-            <img src={icon} alt="oven" />
-          )}
-        </div>
-        <div className='item-btn-wrapper'>
+    <>{isReady ?
+      (
+        <div className='item-container'>
+          <div className='temp-img'>
+            <img src={pieImg} alt="juicer" />
+          </div>
+          <div className='item-btn-wrapper'>
 
-          <div className="item-btn-flex">
-            {isReady ? (
+            <div className="item-btn-flex">
+
               <button className="btn btn-harvest" onClick={() => { handleUseBtnPressed(); }}>sell</button>
-            ) : (
-              <button className="btn btn-timer" disabled>{timeRemaining}s</button>
-            )}
+
+            </div>
           </div>
         </div>
-      </div>
+      )
+      : (
+        <div className='item-container'>
+          <div className='temp-img'>
+            <img src={icon} alt="juicer" />
+          </div>
+          <div className='item-btn-wrapper'>
+
+            <div className="item-btn-flex">
+
+              <button className="btn btn-timer" disabled>{timeRemaining}s</button>
+
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 };

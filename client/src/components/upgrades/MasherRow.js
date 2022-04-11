@@ -1,19 +1,20 @@
 import { useMutation, useQuery } from "@apollo/client";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useGlobalContext } from "../../utils/GlobalState";
 import { QUERY_ITEMS } from "../../utils/queries";
-import { ADD_JUICER } from "../../utils/mutations";
-import { BUY_JUICER, APPLES_FOR_JUICE } from "../../utils/actions";
-import Juicer from "./Juicer";
-import BuyJuicer from "./PlaceholderJuice";
+import { ADD_MASHER } from "../../utils/mutations";
+import { BUY_MASHER, APPLES_FOR_SAUCE } from "../../utils/actions";
+import Masher from "./Masher";
+import BuyMasher from "./PlaceholderMasher";
 
-export default function JuicersRow() {
+export default function MashersRow() {
   const [state, dispatch] = useGlobalContext();
-  const [addJuicer] = useMutation(ADD_JUICER);
+  const [addMasher] = useMutation(ADD_MASHER);
   // console.log(state);
 
   // destructure the items list from the global state object
-  const { juicers } = state;
+  const { mashers } = state;
+  // console.log('state', state, 'mashers', mashers);
 
   // get items data from db
   // const { loading, data: itemData } = useQuery(QUERY_ITEMS);
@@ -30,50 +31,42 @@ export default function JuicersRow() {
 
     // validate enough money
 
-    // dispatch ADD_JUICER
+    // dispatch ADD_MASHER
 
     console.log("dispatching to GameState");
     try {
       const payload = {
-        _id: juicers.length + 1,
+        _id: mashers.length + 1,
         startedAtTime: new Date(),
-        duration: state.gameVariables.makeJuiceTime,
+        duration: state.gameVariables.makeSauceTime,
       };
       dispatch({
-        type: BUY_JUICER,
+        type: BUY_MASHER,
         payload,
       });
     } catch (error) {
       console.log("error");
     }
-
-    // update user money && apples
-    // try {
-    //   const payload = {
-    //     money: state.money + state.gameVariables.juiceSaleRevenue,
-    //     appleCount: state.appleCount - state.gameVariables.makeJuiceApplesUsed,
-    //   };
-    // } catch (error) {}
-
-    // add data to idbPromise('')
   };
 
+  //
+  // should the responsibility be in the row or the item
   return (
     <div className="item-row">
-      <span className="item-label">Juice!</span>
+      <span className="item-label">Applesauce!</span>
       <div className="item-scroll">
         {
           // map thru juicer objects from GlobalState to add to row
-          juicers.map((juicer, i) => {
+          mashers.map((masher, i) => {
             return (
               <div key={i} className="item-box">
                 {
                   // if object in map does not have `_id` show placeholder.
-                  juicer._id ? (
-                    <Juicer props={{ juicer, dispatch }} />
+                  masher._id ? (
+                    <Masher props={{ masher, dispatch }} />
                   ) : (
                     // Placeholder
-                    <BuyJuicer handlePurchase={handlePurchase} />
+                    <BuyMasher handlePurchase={handlePurchase} />
                   )
                 }
               </div>

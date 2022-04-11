@@ -83,7 +83,8 @@ export const ADD_OVEN = gql`
 `;
 
 // update user
-export const UPDATE_USER = gql `
+// note that all parameters are optional
+export const UPDATE_USER = gql`
   mutation updateUser($username: String, $email: String, $password: String, $gemCount: Int, $appleCount: Int, $money: Int) {
     updateUser(username: $username, email: $email, password: $password, gemCount: $gemCount, appleCount: $appleCount, money: $money) {
       _id

@@ -11,6 +11,9 @@ import {
   SAUCE_SOLD,
   BUY_MASHER,
   APPLES_FOR_SAUCE,
+  PIE_SOLD,
+  BUY_OVEN,
+  APPLES_FOR_PIE,
 } from "./actions";
 
 export const reducer = (state = [], action) => {
@@ -149,6 +152,41 @@ export const reducer = (state = [], action) => {
         // appleCount: 150,
       };
 
+       // buy ovens
+    case BUY_OVEN:
+      const boughtOvens = state.ovens
+
+      // insert OVEN to placeholder space
+      boughtOvens.splice(boughtOvens.length - 2, 0, action.payload)
+
+      if (boughtOvens.length > 5) {
+        boughtOvens.pop()
+        return { ...state, ovens: boughtOvens }
+      }
+      console.log(boughtOvens);
+      return {
+        ...state,
+        ovens: boughtOvens,
+        // money: state.money - 40 
+        money: state.money - state.gameVariables.ovenCost,
+        appleCount: state.appleCount - state.gameVariables.makePieApplesUsed
+      }
+
+      case PIE_SOLD:
+      console.log("in pie sold");
+      console.log("money is " + state.money);
+
+
+      return {
+        ...state,
+        money: state.money + state.gameVariables.pieSaleRevenue,
+      };
+
+      case APPLES_FOR_PIE:
+        return {
+          ...state,
+          appleCount: state.appleCount - state.gameVariables.makePieApplesUsed,
+        };
 
     case UPDATE_TIMERS:
       return state.map((timer) => {

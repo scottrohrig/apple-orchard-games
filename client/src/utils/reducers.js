@@ -1,5 +1,6 @@
 import { useReducer } from "react";
 import {
+  UPDATE_USER,
   UPDATE_TIMERS,
   UPDATE_JUICERS,
   PURCHASE_A_TREE,
@@ -45,6 +46,7 @@ export const reducer = (state = [], action) => {
         ovens: updatedOvens,
       };
     // case update user
+
     case PURCHASE_A_TREE:
       console.log("in purchase a tree");
       let newTreeArray = state.trees;

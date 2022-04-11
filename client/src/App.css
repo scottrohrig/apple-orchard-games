@@ -1,6 +1,5 @@
 .app {
-  background-color: var(--main-color);
-  min-height: 100vh;
+  min-height: calc(100vh - 50px);
 }
 
 .app-header {
@@ -43,7 +42,9 @@ nav .a {
 
 .item-row {
   padding: .25rem .5rem;
-  background: #96b766;
+  background-color: var(--sky-main);
+  background-image: linear-gradient(to bottom,
+  var(--sky-dark), var(--sky-main), var(--sky-light));
   border-radius: .25rem;
   margin: .5rem;
 }

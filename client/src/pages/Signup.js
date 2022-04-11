@@ -51,11 +51,11 @@ const Signup = (props) => {
     <main className="sign-up">
       <div className="container">
         <div className="card">
-          <h4 className="card-header">Sign Up</h4>
+          <h4 className="card-header form-label">Sign Up</h4>
           <div className="card-body">
             <form onSubmit={handleFormSubmit}>
               <input
-                className="form-input"
+                className="form-control"
                 placeholder="Your username"
                 name="username"
                 type="username"
@@ -64,7 +64,7 @@ const Signup = (props) => {
                 onChange={handleChange}
               />
               <input
-                className="form-input"
+                className="form-control"
                 placeholder="Your email"
                 name="email"
                 type="email"
@@ -73,7 +73,7 @@ const Signup = (props) => {
                 onChange={handleChange}
               />
               <input
-                className="form-input"
+                className="form-control"
                 placeholder="******"
                 name="password"
                 type="password"
@@ -81,7 +81,7 @@ const Signup = (props) => {
                 value={formState.password}
                 onChange={handleChange}
               />
-              <button className="btn d-block w-100" type="submit">
+              <button className="btn d-block w-100 form-submit" type="submit">
                 Submit
               </button>
             </form>

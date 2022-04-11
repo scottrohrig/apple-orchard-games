@@ -58,6 +58,10 @@ function StyleReference() {
           </div>
 
         </div>
+
+          <div className='example-box-shine'>
+            <div class='shine'><div id='shine'></div></div>
+          </div>
       </div>
       {window.addEventListener('selectstart', function(e) {
         e.preventDefault();

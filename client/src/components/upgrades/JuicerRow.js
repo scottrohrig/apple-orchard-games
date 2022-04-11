@@ -1,18 +1,20 @@
 import { useMutation, useQuery } from '@apollo/client';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useGlobalContext } from '../../utils/GlobalState';
 import { QUERY_ITEMS } from '../../utils/queries';
+import { ADD_JUICER } from '../../utils/mutations';
+import { BUY_JUICER } from '../../utils/actions'
 import Juicer from './Juicer';
+import BuyJuicer from './PlaceholderJuice';
 
 export default function JuicersRow() {
 
   const [state, dispatch] = useGlobalContext();
+  const [addJuicer] = useMutation(ADD_JUICER);
   // console.log(state);
 
   // destructure the items list from the global state object
   const { juicers } = state;
-  
-  // console.log('state', state, 'juicers', juicers);
 
   // get items data from db
   // const { loading, data: itemData } = useQuery(QUERY_ITEMS);
@@ -27,35 +29,58 @@ export default function JuicersRow() {
     // if not loading, get cache and dispatch
   }, ['itemData', 'loading', dispatch]);
 
-  const handlePurchase = (event) => {
 
-  }
+  const handlePurchase = async (event) => {
+    console.log('purchased upgrade');
 
-  //
-  // should the responsibility be in the row or the item
+    // validate enough money
+
+    // dispatch ADD_JUICER
+
+      console.log('dispatching to GameState')
+      try {
+        const payload = {_id: juicers.length + 1, startedAtTime: new Date(), duration: state.gameVariables.makeJuiceTime }
+        dispatch({
+          type: BUY_JUICER,
+          payload
+        })
+      } catch (error) {
+        console.log('error');
+      }
+
+      // update user money && apples
+      try {
+        const payload = {money: state.money + state.gameVariables.juiceSaleRevenue }
+      } catch (error) {
+
+      }
+
+    // add data to idbPromise('')
+
+  };
+
   return (
     <div className='item-row'>
 
       <span className='item-label'>Juice!</span>
       <div className='item-scroll'>
-        {/* map juicers here */}
-        {juicers.map((juicer, i) => {
-          return (
-          <div key={i} className='item-box'>
-            {juicer._id ? (
-              // <img src={require('../../assets/images/juicer.png')}></img>
-              <Juicer props={{juicer, dispatch}} />
-              ): (
-                // placeholder
-                // <PlaceHolder />
-              <div style={{width: '100%', height: '100%', background: '#dc3'}}>
-                <button className='btn btn-shop' onClick={()=> {handlePurchase()}}>Purchase</button>
-              </div>
-            )
-            }
-          </div>
 
-        )})}
+        { // map thru juicer objects from GlobalState to add to row
+        juicers.map((juicer, i) => {
+          return (
+            <div key={i} className='item-box'>
+
+              {// if object in map does not have `_id` show placeholder.
+                juicer._id
+                  ? <Juicer props={{ juicer, dispatch }} />
+                  // Placeholder
+                  : <BuyJuicer handlePurchase={handlePurchase} />
+              }
+
+            </div>
+
+          );
+        })}
       </div>
     </div>
 

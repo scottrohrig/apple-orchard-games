@@ -28,6 +28,9 @@ const Juicer = ({ props }) => {
   }, 1000);
 
   const handleUseBtnPressed = (event) => {
+
+    // validate user appleCount > juicerAppleCost
+
     // dispatch update juicer with a new startedAtTime
     // setState({_id, startedAtTime: new Date(), duration})
     const now = new Date();

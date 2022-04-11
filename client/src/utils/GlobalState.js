@@ -58,21 +58,21 @@ const GlobalProvider = ({ value = [], ...props }) => {
         startedAtTime: new Date(),
         duration: defaultGameVariables.makeJuiceTime,
       },
-      {
-        _id: 2,
-        startedAtTime: new Date(defaultStartTime.getTime() - 12 * 1000),
-        duration: defaultGameVariables.makeJuiceTime,
-      },
-      {
-        _id: 3,
-        startedAtTime: new Date(defaultStartTime.getTime() - 55 * 1000),
-        duration: defaultGameVariables.makeJuiceTime,
-      },
-      {
-        _id: 4,
-        startedAtTime: defaultStartTime,
-        duration: defaultGameVariables.makeJuiceTime,
-      },
+      // {
+      //   _id: 2,
+      //   startedAtTime: new Date(defaultStartTime.getTime() - 12 * 1000),
+      //   duration: defaultGameVariables.makeJuiceTime,
+      // },
+      // {
+      //   _id: 3,
+      //   startedAtTime: new Date(defaultStartTime.getTime() - 55 * 1000),
+      //   duration: defaultGameVariables.makeJuiceTime,
+      // },
+      // {
+      //   _id: 4,
+      //   startedAtTime: defaultStartTime,
+      //   duration: defaultGameVariables.makeJuiceTime,
+      // },
       {}],
       ovens: [
         {

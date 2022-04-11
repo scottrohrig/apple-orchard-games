@@ -6,7 +6,8 @@ import {
   UPDATE_MASHERS,
   UPDATE_OVENS,
   JUICE_SOLD,
-  BUY_JUICER
+  BUY_JUICER,
+  APPLES_FOR_JUICE,
 } from "./actions";
 
 export const reducer = (state = [], action) => {
@@ -58,24 +59,42 @@ export const reducer = (state = [], action) => {
     case BUY_JUICER:
       const boughtJuicers = state.juicers
 
-      // insert juicer to placeholder space
-      boughtJuicers.splice(boughtJuicers.length - 2,0,  action.payload)
 
-      if (boughtJuicers.length > 5 ) {
+      // insert juicer to placeholder space
+      boughtJuicers.splice(boughtJuicers.length - 2, 0, action.payload)
+
+      if (boughtJuicers.length > 5) {
         boughtJuicers.pop()
-        return {...state, juicers: boughtJuicers}
+        return { ...state, juicers: boughtJuicers }
       }
       console.log(boughtJuicers);
-      return {...state, juicers: boughtJuicers}
+      return { ...state, juicers: boughtJuicers }
 
-      case JUICE_SOLD:
-        console.log("in juice sold");
-        console.log("money is " + state.money);
+    case JUICE_SOLD:
+      console.log("in juice sold");
+      console.log("money is " + state.money);
 
-        return {
-          ...state,
-          money: state.money + state.gameVariables.juiceSaleRevenue,
-        };
+
+      return {
+        ...state,
+        money: state.money + state.gameVariables.juiceSaleRevenue,
+      };
+
+    case APPLES_FOR_JUICE:
+      console.log("apples for juice");
+      console.log("apples is " + state.appleCount);
+      console.log("apples used" + state.gameVariables.makeJuiceApplesUsed);
+      console.log("apples used" + (state.appleCount - state.gameVariables.makeJuiceApplesUsed));
+
+
+      return {
+        ...state,
+        appleCount: state.appleCount - state.gameVariables.makeJuiceApplesUsed,
+
+
+        // appleCount: state.appleCount - state.makeJuiceApplesUsed,
+        // appleCount: 22,
+      };
 
     case UPDATE_TIMERS:
       return state.map((timer) => {

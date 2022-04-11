@@ -4,6 +4,7 @@ export const UPDATE_ITEMS = "UPDATE_ITEMS";
 export const PURCHASE_A_TREE = "PURCHASE_A_TREE";
 
 // update orchards
+
 // update trees
 // update mashers
 // update juicers
@@ -25,3 +26,4 @@ export const UPDATE_TIMERS = "UPDATE_TIMERS";
 
 export const BUY_JUICER = "BUY_JUICER";
 export const JUICE_SOLD = "JUICE_SOLD";
+export const APPLES_FOR_JUICE = "APPLES_FOR_JUICE";

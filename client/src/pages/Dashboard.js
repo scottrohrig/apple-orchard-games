@@ -34,6 +34,15 @@ function Dashboard() {
 
     <div className='' >
       <div>money: {state.money}</div>
+
+      <div>
+        appleCount: {state.appleCount}
+      </div>
+
+      <div>
+        gemCount: {state.gemCount}
+      </div>
+
       <div className='form-label'>Dashboard</div>
       <div className='container'>
         Stats Container

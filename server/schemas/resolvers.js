@@ -101,10 +101,10 @@ const resolvers = {
     addTree: async (parent, args, context) => {
       if (context.user) {
 
-        const orchard = await Orchard.findByIdAndUpdate(
-          { _id: args.orchardId },
+        const orchard = await Orchard.findOneAndUpdate(
+            args.orchardId,
           { $push: { trees: { duration: args.duration } } },
-          { new: true },
+          { new: true, runValidators: true },
         );
 
         console.log(orchard);

@@ -22,6 +22,8 @@ const typeDefs = gql`
     ovenCount: Int
   }
 
+  scalar Date
+
   type Orchard {
     _id: ID
     trees: [Tree]
@@ -34,6 +36,7 @@ const typeDefs = gql`
 
   type Juicer {
     _id: ID
+    startedAtTime: String
     duration: Int
   }
 
@@ -67,12 +70,12 @@ const typeDefs = gql`
     addMasher(duration: Int!): User
     addOven(duration: Int!): User
     addJuicer(duration: Int!): User
-    updateUser(userId: ID!): User
+    updateUser(username: String, email: String, password: String, gemCount: Int, appleCount: Int, money: Int): User
     updateOrchard(orchardId: ID!): User
-    updateTree(treeId: ID!): Orchard
-    updateMasher(masherId: ID!): User
-    updateOven(ovenId: ID!): User
-    updateJuicer(juicerId: ID!): User
+    updateTree(treeId: ID!, startedAtTime: Date!, duration: Int): User
+    updateMasher(masherId: ID!, startedAtTime: Date!, duration: Int): User
+    updateOven(ovenId: ID!, startedAtTime: Date!, duration: Int): User
+    updateJuicer(juicerId: ID!, startedAtTime: Date!, duration: Int): User
     removeUser(userId: ID!): User
   }
 `;

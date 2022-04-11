@@ -54,7 +54,7 @@ const Login = (props) => {
   // form input change handler function
 
 
-  // return the component JSX 
+  // return the component JSX
   return (
     <main className="login">
       <div className="container">

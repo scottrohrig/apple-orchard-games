@@ -1,9 +1,13 @@
 // import
+import { useGlobalContext } from '../utils/GlobalState';
 
-import { JuicersRow } from '../components/upgrades';
+import JuicersRow from '../components/upgrades/JuicerRow';
+import MashersRow from '../components/upgrades/MasherRow';
+import OvensRow from '../components/upgrades/OvenRow';
 
 function Dashboard() {
 
+  const [state] = useGlobalContext();
 
   // consider moving 👇 to 'Upgrade' component script
   // need event handler for upgrades
@@ -29,6 +33,7 @@ function Dashboard() {
      */
 
     <div className='' >
+      <div>money: {state.money}</div>
       <div className='form-label'>Dashboard</div>
       <div className='container'>
         Stats Container
@@ -42,6 +47,8 @@ function Dashboard() {
 
       {/* WIP juicers row */}
       <JuicersRow />
+      <MashersRow />
+      <OvensRow />
 
     </div>
   );

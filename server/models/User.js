@@ -32,14 +32,17 @@ const userSchema = new Schema({
   // money will reflect the user score
   money: {
     type: Number,
+    default: 0,
     min: 0,
   },
   appleCount: {
     type: Number,
+    default: 0,
     min: 0,
   },
   gemCount: {
     type: Number,
+    default: 0,
     min: 0,
   },
   orchard: [

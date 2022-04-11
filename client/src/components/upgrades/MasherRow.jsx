@@ -2,15 +2,16 @@ import { useMutation, useQuery } from '@apollo/client';
 import { useEffect } from 'react';
 import { useGlobalContext } from '../../utils/GlobalState';
 import { QUERY_ITEMS } from '../../utils/queries';
-import Juicer from './Juicer';
+import Masher from './Masher';
 
-export function JuicersRow() {
+export default function MashersRow() {
 
   const [state, dispatch] = useGlobalContext();
   // console.log(state);
 
   // destructure the items list from the global state object
-  const { juicers } = state;
+  const { mashers } = state;
+  // console.log('state', state, 'mashers', mashers);
 
   // get items data from db
   // const { loading, data: itemData } = useQuery(QUERY_ITEMS);
@@ -30,19 +31,19 @@ export function JuicersRow() {
   }
 
   //
-  console.log(juicers)
   // should the responsibility be in the row or the item
   return (
     <div className='item-row'>
 
-      <span className='item-label'>Juicers</span>
+      <span className='item-label'>Apple Sauce!</span>
       <div className='item-scroll'>
-        {/* map juicers here */}
-        {juicers.map((juicer, i) => (
+        {/* map mashers here */}
+        {mashers.map((masher, i) => {
+          return (
           <div key={i} className='item-box'>
-            {juicer._id ? (
-              // <img src={require('../../assets/images/juicer.png')}></img>
-              <Juicer />
+            {masher._id ? (
+              // <img src={require('../../assets/images/masher.png')}></img>
+              <Masher props={{masher, dispatch}} />
               ): (
                 // placeholder
                 // <PlaceHolder />
@@ -53,7 +54,7 @@ export function JuicersRow() {
             }
           </div>
 
-        ))}
+        )})}
       </div>
     </div>
 

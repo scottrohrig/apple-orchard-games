@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { useGlobalContext } from '../../utils/GlobalState';
 import { QUERY_ITEMS } from '../../utils/queries';
 import { ADD_JUICER } from '../../utils/mutations';
-import { BUY_JUICER } from '../../utils/actions'
+import { BUY_JUICER, UPDATE_JUICERS, APPLES_FOR_JUICE } from '../../utils/actions'
 import Juicer from './Juicer';
 import BuyJuicer from './PlaceholderJuice';
 
@@ -33,27 +33,44 @@ export default function JuicersRow() {
   const handlePurchase = async (event) => {
     console.log('purchased upgrade');
 
+    const now = new Date();
+    console.log('in handlePurchase of new juicer, new time', now);
+    dispatch({
+      type: UPDATE_JUICERS,
+      payload:
+        { ...juicer, startedAtTime: now, duration }
+    }
+    );
+    dispatch({
+      type: BUY_JUICER
+    });
+    dispatch({
+      type: APPLES_FOR_JUICE
+    });
+    console.log('dispatching startedAtTime', startedAtTime);
+    setTime(duration);
+
     // validate enough money
 
     // dispatch ADD_JUICER
 
-      console.log('dispatching to GameState')
-      try {
-        const payload = {_id: juicers.length + 1, startedAtTime: new Date(), duration: state.gameVariables.makeJuiceTime }
-        dispatch({
-          type: BUY_JUICER,
-          payload
-        })
-      } catch (error) {
-        console.log('error');
-      }
+    // console.log('dispatching to GameState')
+    // try {
+    //   const payload = {_id: juicers.length + 1, startedAtTime: new Date(), duration: state.gameVariables.makeJuiceTime }
+    //   dispatch({
+    //     type: BUY_JUICER,
+    //     payload
+    //   })
+    // } catch (error) {
+    //   console.log('error');
+    // }
 
-      // update user money && apples
-      try {
-        const payload = {money: state.money + state.gameVariables.juiceSaleRevenue }
-      } catch (error) {
+    // // update user money && apples
+    // try {
+    //   const payload = {money: state.money + state.gameVariables.juiceSaleRevenue }
+    // } catch (error) {
 
-      }
+    // }
 
     // add data to idbPromise('')
 
@@ -66,21 +83,21 @@ export default function JuicersRow() {
       <div className='item-scroll'>
 
         { // map thru juicer objects from GlobalState to add to row
-        juicers.map((juicer, i) => {
-          return (
-            <div key={i} className='item-box'>
+          juicers.map((juicer, i) => {
+            return (
+              <div key={i} className='item-box'>
 
-              {// if object in map does not have `_id` show placeholder.
-                juicer._id
-                  ? <Juicer props={{ juicer, dispatch }} />
-                  // Placeholder
-                  : <BuyJuicer handlePurchase={handlePurchase} />
-              }
+                {// if object in map does not have `_id` show placeholder.
+                  juicer._id
+                    ? <Juicer props={{ juicer, dispatch }} />
+                    // Placeholder
+                    : <BuyJuicer handlePurchase={handlePurchase} />
+                }
 
-            </div>
+              </div>
 
-          );
-        })}
+            );
+          })}
       </div>
     </div>
 

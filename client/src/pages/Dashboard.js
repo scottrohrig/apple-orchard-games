@@ -2,7 +2,9 @@
 import { useGlobalContext } from '../utils/GlobalState';
 
 import  { useMutation } from '@apollo/client';
-import { LOGIN_USER } from '../utils/mutations';
+import { UPDATE_USER } from '../utils/mutations';
+
+import Auth from '../utils/auth';
 
 
 import JuicersRow from '../components/upgrades/JuicerRow';
@@ -12,15 +14,25 @@ import OvensRow from '../components/upgrades/OvenRow';
 function Dashboard() {
 
   const [state] = useGlobalContext();
+  const [updateDB, { error }] = useMutation(UPDATE_USER);
 
-  function handleDBUpdateButton(evt) {
+
+  const handleDBUpdateButton = async (evt)=> {
     evt.preventDefault();
     
     const {money, appleCount, gemCount, trees, juicers, mashers, ovens} = state;
     console.log(money+" "+appleCount+" "+gemCount+" "+trees+" "+juicers+" "+mashers+" "+ovens);
+
+    try {
+      const { data } = await updateDB({
+        variables: { money: money },
+      });
+
+      // Auth.login(data.login.token);
+    } catch (e) {
+      console.error(e);
+    }
     
-    // dispatch({type:PURCHASE_A_TREE});
-                
   }
 
   // consider moving 👇 to 'Upgrade' component script

@@ -7,6 +7,7 @@ const treeSchema = new Schema({
   duration: {
     type: Number,
     min: 0,
+    default: 30
   },
   isReady: {
     type: Boolean,

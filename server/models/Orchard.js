@@ -5,11 +5,16 @@ const treeSchema = require('./Tree');
 const orchardSchema = new Schema(
     {
         trees: [treeSchema]
+    },
+    {
+        toJSON: {
+            virtuals: true
+        }
     }
 );
 
 orchardSchema.virtual('treeCount').get(function() {
-    return this.trees.length;
+        return this.trees.length;
 });
 
 const Orchard = model('Orchard', orchardSchema);

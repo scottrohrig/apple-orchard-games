@@ -3,7 +3,7 @@ const { AuthenticationError } = require('apollo-server-express');
 const { coerceInputValue } = require('graphql');
 const { Schema } = require('mongoose');
 // require necessary models
-const { User } = require('../models');
+const { User, Orchard } = require('../models');
 // require auth
 const { signToken } = require('../utils/auth');
 
@@ -11,13 +11,14 @@ const { signToken } = require('../utils/auth');
 const resolvers = {
   Query: {
     users: async () => {
-      return User.find().select('-__v -password');
+      return User.find().select('-__v -password')
+        .populate('orchards');
     },
     me: async (parent, args, context) => {
       if (context.user) {
-        const userData = await User.findOne({ _id: context.user._id }).select(
-          '-__v -password'
-        );
+        const userData = await User.findOne({ _id: context.user._id })
+            .select('-__v -password')
+            .populate('orchards');
 
         return userData;
       }
@@ -54,8 +55,6 @@ const resolvers = {
 
     addJuicer: async (parent, args, context) => {
       if (context.user) {
-        console.log(args);
-        // const juicer = await Juicer.create({ duration: args.duration});
 
         const user = await User.findByIdAndUpdate(
           { _id: context.user._id },
@@ -71,7 +70,6 @@ const resolvers = {
 
     addMasher: async (parent, args, context) => {
       if (context.user) {
-        console.log(args);
 
         const user = await User.findByIdAndUpdate(
           { _id: context.user._id },
@@ -87,7 +85,6 @@ const resolvers = {
 
     addOven: async (parent, args, context) => {
       if (context.user) {
-        console.log(args);
 
         const user = await User.findByIdAndUpdate(
           { _id: context.user._id },
@@ -103,18 +100,46 @@ const resolvers = {
 
     addTree: async (parent, args, context) => {
       if (context.user) {
-        console.log(args);
 
-        const user = await User.findByIdAndUpdate(
-          { _id: context.user._id },
+        const orchard = await Orchard.findByIdAndUpdate(
+          { _id: args.orchardId },
           { $push: { trees: { duration: args.duration } } },
-          { new: true }
-        );
+          { new: true },
+          function (error, success) {
+            if (error) {
+                console.log(error);
+            } else {
+                console.log(success);
+            }
+        });
 
-        return user;
+        return orchard;
       }
 
       throw new AuthenticationError('You need to be logged in!');
+    },
+
+    addOrchard: async (parent, args, context) => {
+        if (context.user) {
+            // create a new orchard
+            const orchard = new Orchard();
+            // add the new orchard to the User's orchards array
+            await User.findByIdAndUpdate(
+                context.user._id, 
+                { $push: { orchards: orchard } }, 
+                { new: true },
+                function (error, success) {
+                    if (error) {
+                        console.log(error);
+                    } else {
+                        console.log(success);
+                    }
+                });
+            // return the new orchard
+            return orchard;
+        }
+
+        throw new AuthenticationError('You need to be logged in!');
     },
 
 
@@ -170,13 +195,13 @@ const resolvers = {
     updateTree: async (parent, args, context) => {
         if (context.user) {
 
-            const user = await User.findByIdAndUpdate(
-                { _id: context.user._id },
+            const orchard = await Orchard.findOneAndUpdate(
+                { _id: args.orchardId },
                 { $set: { trees: { treeId: args.treeId, startedAtTime: args.startedAtTime, duration: args.duration } } },
                 { new: true }
             )
 
-            return user;
+            return orchard;
         }
 
         throw new AuthenticationError('You need to be logged in!');
@@ -198,7 +223,11 @@ const resolvers = {
         }
 
         throw new AuthenticationError('You need to be logged in!');
-    }
+    },
+
+    // removeUser
+    // find by userId and remove
+    // log user out after removing
   },
 };
 

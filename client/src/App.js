@@ -5,6 +5,7 @@ import { setContext } from '@apollo/client/link/context';
 
 import "./App.css";
 import StyleReference from "./StyleReference";
+import './dev.css';
 
 import { GlobalProvider } from './utils/GlobalState';
 
@@ -42,13 +43,19 @@ function App() {
   const [showStyle, setShowStyle] = useState(false);
   const [showLeaderboard, setShowLeaderboard] = useState(false);
 
+  // Dev Stuff - Remove for Production
+  const [showDevNav, setShowDevNav] = useState(false);
+
   return (
     <ApolloProvider client={client} >
       <Router>
         <GlobalProvider>
           <Header />
           <div className="app app-content">
-            <header className="app-header">
+
+            {/* Dev Stuff */}
+            <button className="btn dev-btn" onClick={() => setShowDevNav(!showDevNav)}>Toggle Dev Navigation</button>
+            <header  className={`app-header dev-nav modal ${showDevNav && 'modal-active'}`}>
               <div>
                 <h1>Apple Orchard Games</h1>
               </div>
@@ -85,6 +92,7 @@ function App() {
               </nav>
             </header>
 
+            {/* App Stuff */}
             <div style={{ margin: "2rem auto" }}>
               <div className='container'>
 

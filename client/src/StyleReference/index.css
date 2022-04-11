@@ -42,28 +42,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-.test {
-  padding: 40px;
-}
-.test button, .test p {
-  margin-right: 10px;
-}
-.test form {
-  background-color: var(--main-color);
-  padding: 10px 20px;
-}
-.test .sprite-example {
-  display: flex;
-}
-
-.documentation {
-  font-weight: normal;
-  margin: 0 0 3px;
-}
-.docu:not(:first-of-type) {
-  margin-top: 20px;
-}
-
 /* ACTUAL CLASSES, HEY */
 h1, h2, h3, h4, h5, h6, div, p, span, code, a, button {
   cursor: default;

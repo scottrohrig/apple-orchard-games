@@ -1,11 +1,5 @@
 import { gql } from '@apollo/client';
 
-export const QUERY_ITEMS = gql`
-  {
-    items
-  }
-`;
-
 export const QUERY_ME = gql`
   query Me {
     me {
@@ -16,25 +10,11 @@ export const QUERY_ME = gql`
       money
       appleCount
       gemCount
-      orchards {
-        _id
-        trees {
-          _id
-          duration
-        }
-      }
-      trees {
-        _id
-        duration
-      }
+      orchardId
       juicers {
         _id
         duration
       }
-      ovenCount
-      masherCount
-      juicerCount
-      treeCount
       mashers {
         _id
         duration
@@ -43,6 +23,9 @@ export const QUERY_ME = gql`
         _id
         duration
       }
+      ovenCount
+      masherCount
+      juicerCount
     }
   }
 `;
@@ -52,6 +35,20 @@ export const QUERY_USERS = gql`
     users {
       username
       money
+    }
+  }
+`;
+
+export const QUERY_ORCHARD = gql`
+  query orchard ($id: ID!) {
+    orchard(_id: $id) {
+      _id
+      orchard_name
+      treeCount
+      trees {
+        _id
+        duration
+      }
     }
   }
 `;

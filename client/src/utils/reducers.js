@@ -126,7 +126,7 @@ export const reducer = (state = [], action) => {
         mashers: boughtMashers,
         // money: state.money - 14 
         money: state.money - state.gameVariables.masherCost,
-        appleCount: state.appleCount - state.gameVariables.makeSauceApplesUsed
+        appleCount: state.appleCount - state.gameVariables.sauceMashApplesUsed
       }
 
 
@@ -154,7 +154,7 @@ export const reducer = (state = [], action) => {
         // appleCount: 150,
       };
 
-       // buy ovens
+    // buy ovens
     case BUY_OVEN:
       const boughtOvens = state.ovens
 
@@ -165,16 +165,17 @@ export const reducer = (state = [], action) => {
         boughtOvens.pop()
         return { ...state, ovens: boughtOvens }
       }
-      console.log(boughtOvens);
+      console.log("in buy ovens" + boughtOvens);
       return {
         ...state,
         ovens: boughtOvens,
-        // money: state.money - 40 
+
         money: state.money - state.gameVariables.ovenCost,
-        appleCount: state.appleCount - state.gameVariables.makePieApplesUsed
+        //appleCount: state.appleCount - 40
+        appleCount: state.appleCount - state.gameVariables.pieBakeApplesUsed
       }
 
-      case PIE_SOLD:
+    case PIE_SOLD:
       console.log("in pie sold");
       console.log("money is " + state.money);
 
@@ -184,11 +185,11 @@ export const reducer = (state = [], action) => {
         money: state.money + state.gameVariables.pieSaleRevenue,
       };
 
-      case APPLES_FOR_PIE:
-        return {
-          ...state,
-          appleCount: state.appleCount - state.gameVariables.makePieApplesUsed,
-        };
+    case APPLES_FOR_PIE:
+      return {
+        ...state,
+        appleCount: state.appleCount - state.gameVariables.makePieApplesUsed,
+      };
 
     case UPDATE_TIMERS:
       return state.map((timer) => {

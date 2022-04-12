@@ -27,23 +27,29 @@ export const ADD_USER = gql`
 
 // add orchard
 export const ADD_ORCHARD = gql`
-  mutation addOrchard($userId: ID!) {
-    addOrchard(userId: $userId) {
-
-      user {
+  mutation addOrchard {
+    addOrchard {
+      _id
+      orchard_name
+      trees {
         _id
-        orchardCount
+        duration
       }
+      treeCount
     }
   }
 `;
 
 // add tree
 export const ADD_TREE = gql`
-  mutation addTree($duration: Int!) {
-    addTree(duration: $duration) {
-      user{
+  mutation addTree($orchardId: ID!) {
+    addTree(orchardId: $orchardId) {
+      _id
+      orchard_name
+      treeCount
+      trees {
         _id
+        duration
       }
     }
   }
@@ -51,8 +57,8 @@ export const ADD_TREE = gql`
 
 // add masher
 export const ADD_MASHER = gql`
-  mutation addMasher($duration: Int!) {
-    addMasher(duration: $duration) {
+  mutation addMasher {
+    addMasher {
       user{
         _id
       }
@@ -62,8 +68,8 @@ export const ADD_MASHER = gql`
 
 // add juicer
 export const ADD_JUICER = gql`
-  mutation addJuicer($duration: Int!) {
-    addJuicer(duration: $duration) {
+  mutation addJuicer {
+    addJuicer {
       user{
         _id
       }
@@ -73,8 +79,8 @@ export const ADD_JUICER = gql`
 
 // add oven
 export const ADD_OVEN = gql`
-  mutation addOven($duration: Int!) {
-    addOven(duration: $duration) {
+  mutation addOven {
+    addOven {
       user {
         _id
       }

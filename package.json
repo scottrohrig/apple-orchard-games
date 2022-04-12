@@ -8,7 +8,8 @@
     "develop": "concurrently \"cd server && npm run watch\" \"cd client && npm start\"",
     "install": "cd server && npm i && cd ../client && npm i",
     "test": "cd client && npm run test && cd ../",
-    "seed": "cd server && npm run seed && cd ../"
+    "seed": "cd server && npm run seed && cd ../",
+    "build": "cd client && npm run build"
   },
   "keywords": [],
   "author": "",

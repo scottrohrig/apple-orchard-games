@@ -2,6 +2,7 @@ import { useReducer } from "react";
 import {
   UPDATE_USER,
   UPDATE_TIMERS,
+  UPDATE_JUICER,
   UPDATE_JUICERS,
   PURCHASE_A_TREE,
   UPDATE_MASHERS,
@@ -28,6 +29,11 @@ export const reducer = (state = [], action) => {
 
     // case update juicers
     case UPDATE_JUICERS:
+
+      let placeholder = (action.payload.length < 5) ? {} : null
+      return {...state, juicers: [...action.payload, placeholder]}
+
+    case UPDATE_JUICER:
       let updatedJuicers = state.juicers.map((juicer) =>
         juicer._id === action.payload._id ? action.payload : juicer
       );
@@ -163,7 +169,7 @@ export const reducer = (state = [], action) => {
         appleCount: state.appleCount - state.gameVariables.makePieApplesUsed,
       };
 
-    case APPLES_FOR_MONEY: 
+    case APPLES_FOR_MONEY:
       const newBalance = state.money + (action.payload * state.gameVariables.appleSaleRevenue)
       const remainingApples = Math.max(state.appleCount - action.payload, 0)
       return {

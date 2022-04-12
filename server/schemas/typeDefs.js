@@ -72,7 +72,7 @@ const typeDefs = gql`
     addTree(orchardId: ID!): Orchard
     addMasher: User
     addOven: User
-    addJuicer: User
+    addJuicer(duration: Int): User
     updateUser(username: String, email: String, password: String, gemCount: Int, appleCount: Int, money: Int): User
     updateTree(orchardId: ID!, treeId: ID!, startedAtTime: Date!, duration: Int): Orchard
     updateMasher(masherId: ID!, startedAtTime: Date!, duration: Int): User

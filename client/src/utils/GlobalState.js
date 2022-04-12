@@ -29,9 +29,6 @@ const defaultStartTime = new Date()
 
 const GlobalProvider = ({ value = [], ...props }) => {
   const [state, dispatch] = useAppReducer({
-    username: "Happiest Harvester",
-    email: "happy@harvester.com",
-    password: "password",
     money: 100,
     appleCount: 500,
     gemCount: 20,

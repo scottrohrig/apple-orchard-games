@@ -72,6 +72,8 @@ export const ADD_JUICER = gql`
     addJuicer {
       juicers {
         _id
+        startedAtTime
+        duration
       }
     }
   }

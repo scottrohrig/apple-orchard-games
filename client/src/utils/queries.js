@@ -13,6 +13,7 @@ export const QUERY_ME = gql`
       orchardId
       juicers {
         _id
+        startedAtTime
         duration
       }
       mashers {

@@ -1,7 +1,7 @@
 // require mongoose schema and model
 const { Schema, model } = require('mongoose');
 
-const Orchard = require('./Orchard');
+// const Orchard = require('./Orchard');
 const treeSchema = require('./Tree');
 const masherSchema = require('./Masher');
 const ovenSchema = require('./Oven');
@@ -45,13 +45,9 @@ const userSchema = new Schema({
     default: 0,
     min: 0,
   },
-  // orchards: [
-  //   {
-  //     type: Schema.Types.ObjectId,
-  //     ref: 'Orchard'
-  //   },
-  // ],
-  orchards: [Orchard.schema],
+  // orchards: [treeSchema],
+  orchards: [treeSchema],
+  // orchards: [Orchard.schema],
   juicers: [juicerSchema],
   mashers: [masherSchema],
   ovens: [ovenSchema],
@@ -91,7 +87,7 @@ userSchema.virtual('ovenCount').get(function() {
   return this.ovens.length;
 });
 
-userSchema.virtual('orchardCount').get(function() {
+userSchema.virtual('treeCount').get(function() {
   return this.orchards.length;
 })
 

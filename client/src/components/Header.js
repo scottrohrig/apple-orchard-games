@@ -1,30 +1,69 @@
 import React from "react";
+import gem from "../assets/images/gem.svg";
+import basket from "../assets/images/basket.svg";
+import { useGlobalContext } from '../utils/GlobalState';
+import {Link} from 'react-router-dom'
 
-function Header() {
+function Header(props) {
+
+  const {
+    showLeaderboard,
+    setShowLeaderboard,
+    showMarketplace,
+    setShowMarketplace
+  }=props
+
+  const [state, dispatch] = useGlobalContext()
+  // const money = state.money
+  const {money, gemCount, appleCount} = state
+  // const gemCount = state.gemCount
+  // const appleCount = state.appleCount
+
   return (
-    <header className="component-header">
-      <div>
-        <div className="count-boxes">
-          <div className="gem-count">
-            <i class="fa-solid fa-gem"></i>10
-          </div>
-          <div className="apple-count">
-            <i class="fa-solid fa-apple-whole"></i>100
-          </div>
-        </div>
+    <div className="page-links">
+      <header className="component-header">
+        <div className="info-boxes">
 
-        <div className="">
-          <button className="btn btn-shop">Shop!</button>
-          <p className="display-money">100</p>
-        </div>
-      </div>
+            <div className="disp-currency disp-currency-img">
+              <img src={gem} alt="gem" />
+              <span>{gemCount}</span>
+            </div>
 
-      <div>
-        <button className="btn btn-profile">
-          <i class="fa-solid fa-user"></i>
-        </button>
+            <div className="disp-currency disp-currency-img">
+              <img src={basket} alt="basket of apples" />
+              <span>{appleCount}</span>
+            </div>
+
+
+            <div className="disp-currency disp-currency-money">
+              <p className="display-money">{money}</p>
+            </div>
+
+            <div className="disp-user">
+              <button className="btn btn-profile"
+                      onClick={() => {
+                        setShowLeaderboard(!showLeaderboard)
+                        setShowMarketplace(false)
+                      }}>
+                <i className="fa-solid fa-circle-user"></i>
+              </button>
+            </div>
+
+        </div>
+      </header>
+
+      <div className="nav-buttons">
+        <Link to='/home' className="btn btn-nav">
+          <i className="fa-solid fa-house-chimney-window"></i>
+        </Link >
+        <button className="btn btn-nav"
+                      onClick={() => {setShowMarketplace(!showMarketplace)
+                        setShowLeaderboard(false)
+                      }}>
+          <i className="fa-solid fa-cart-shopping"></i>
+        </button >
       </div>
-    </header>
+    </div>
   );
 }
 

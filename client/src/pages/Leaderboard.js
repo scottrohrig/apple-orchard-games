@@ -1,5 +1,6 @@
+import { useQuery } from '@apollo/client';
 import React from "react";
-import "../components/Leaderboard.css";
+import "./Leaderboard.css";
 
 const exampleLeaderboardArray = [
   { displayName: "albert", score: 99 },
@@ -14,18 +15,43 @@ const exampleLeaderboardArray = [
   { displayName: "joy", score: 90 },
 ];
 
-export default function Leaderboard() {
+export default function Leaderboard({
+  showLeaderboard, setShowLeaderboard,
+  showMarketplace, setShowMarketplace,
+}) {
+
+  // const [getScores] = useQuery(GET_SCORES)
+
   return (
-    <div class="leaderboard">
-      <p className="display-banner">Leaderboard</p>
-      <p>Place Name Score</p>
-      <ol>
-        {exampleLeaderboardArray.map((leader, index) => (
-          <li key={index}>
-            {index + 1} --- {leader.displayName} --- {leader.score}
-          </li>
-        ))}
-      </ol>
+    <div>
+      <div className={`modal-background ${showLeaderboard && 'modal-background-active'}`}
+        onClick={() =>setShowLeaderboard(!showLeaderboard)}></div>
+
+      <div className={`leaderboard modal ${showLeaderboard && 'modal-active'}`}>
+
+        <button
+          className="btn btn-modal"
+          onClick={() => setShowLeaderboard(!showLeaderboard)}>
+            <i className="fa-solid fa-xmark"></i>
+        </button>
+
+        <h2 className='page-title'><p className="display-banner">Leaderboard</p></h2>
+
+        <div className="lb-grid">
+          <div className="lb-grid-item lb-title">Place</div>
+          <div className="lb-grid-item lb-title">Name</div>
+          <div className="lb-grid-item lb-title">Score</div>
+        </div>
+
+          {exampleLeaderboardArray.map((leader, index) => (
+            <div className="lb-grid" key={index}>
+              <div className="lb-grid-item">{index + 1}</div>
+              <div className="lb-grid-item">{leader.displayName}</div>
+              <div className="lb-grid-item">{leader.score}</div>
+            </div>
+          ))}
+
+      </div>
     </div>
   );
 }

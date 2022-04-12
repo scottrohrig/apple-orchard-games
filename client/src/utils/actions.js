@@ -3,6 +3,9 @@ export const UPDATE_ITEMS = "UPDATE_ITEMS";
 
 export const PURCHASE_A_TREE = "PURCHASE_A_TREE";
 
+// optional parameters include username, email, password, gemCount, appleCount, and/or money
+export const UPDATE_USER = "UPDATE_USER";
+
 // update orchards
 
 // update trees

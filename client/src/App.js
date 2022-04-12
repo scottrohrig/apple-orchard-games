@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom';
-import { ApolloClient, ApolloProvider, createHttpLink, InMemoryCache, } from '@apollo/client';
+import { ApolloProvider, ApolloClient, InMemoryCache, createHttpLink } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 
 import "./App.css";
@@ -17,6 +17,7 @@ import Orchard from './pages/Orchard';
 // components
 import Header from './components/Header';
 // Marketplace
+import Marketplace from './components/Marketplace';
 import NoMatch from './pages/NoMatch';
 
 const httpLink = createHttpLink({
@@ -40,13 +41,18 @@ const client = new ApolloClient({
 
 function App() {
   const [showStyle, setShowStyle] = useState(false);
+  const [showLeaderboard, setShowLeaderboard] = useState(false);
+  const [showMarketplace, setShowMarketplace] = useState(false);
 
   return (
     <ApolloProvider client={client} >
       <Router>
         <GlobalProvider>
-          <div className="app">
-
+          <Header
+            showLeaderboard={showLeaderboard} setShowLeaderboard={setShowLeaderboard}
+            showMarketplace={showMarketplace} setShowMarketplace={setShowMarketplace}
+          />
+          <div className="app app-content">
             <header className="app-header">
               <div>
                 <h1>Apple Orchard Games</h1>
@@ -67,7 +73,10 @@ function App() {
                     <Link className='a' to='/home'>Dashboard</Link>
                   </li>
                   <li>
-                    <Link className='a' to='/highscore'>Leaderboards</Link>
+                    {/* <Link className='a' to='/highscore'>Leaderboards</Link> */}
+                    <button className="btn btn-timer"
+                      onClick={() => setShowLeaderboard(!showLeaderboard)}
+                    >Leaderboard</button>
                   </li>
                   <li>
                     <button
@@ -84,6 +93,10 @@ function App() {
             <div style={{ margin: "2rem auto" }}>
               <div className='container'>
 
+                {/* Modals */}
+                <Leaderboard showLeaderboard={showLeaderboard} setShowLeaderboard={setShowLeaderboard} />
+                <Marketplace showMarketplace={showMarketplace} setShowMarketplace={setShowMarketplace} />
+
                 {showStyle ? (
                   <StyleReference />
                 ) : (
@@ -92,7 +105,7 @@ function App() {
                     <Route exact path='/signup' component={Signup} />
                     <Route exact path='/home' component={Dashboard} />
                     <Route exact path='/orchard/:id' component={Orchard} />
-                    <Route exact path='/highscore' component={Leaderboard} />
+                    {/* <Route exact path='/highscore' component={Leaderboard} /> */}
                     {/* <Route exact path='/shop' component={Shop} /> */}
                     <Route component={NoMatch} />
                   </Switch>
@@ -102,6 +115,13 @@ function App() {
           </div>
         </GlobalProvider>
       </Router>
+
+      {window.addEventListener('selectstart', function (e) {
+        e.preventDefault();
+      })}
+      {/* {window.addEventListener('contextmenu', function(e) {
+        e.preventDefault();
+      })} */}
 
     </ApolloProvider>
   );

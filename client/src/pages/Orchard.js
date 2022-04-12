@@ -17,7 +17,7 @@ export default function Orchard() {
 
   return (
     <div>
-      <div className='display-banner text-center'>Orchard Page</div>
+      <h2 className='page-title'><div className='display-banner text-center'>Orchard Page</div></h2>
 
 {/* placeholder tree is at top temporarily to make it easy to find */}
 <PlaceholderTree />

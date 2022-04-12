@@ -9,7 +9,7 @@ import BuyJuicer from "./PlaceholderJuice";
 
 export default function JuicersRow() {
   const [state, dispatch] = useGlobalContext();
-  const [addJuicer] = useMutation(ADD_JUICER);
+  const [addJuicer, { error }] = useMutation(ADD_JUICER);
   // console.log(state);
 
   // destructure the items list from the global state object

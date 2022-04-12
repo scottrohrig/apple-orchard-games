@@ -111,7 +111,7 @@ const resolvers = {
 
       throw new AuthenticationError('You need to be logged in!');
     },
-
+git 
     // addOrchard: async (parent, args, context) => {
     //   if (context.user) {
     //     // create a new orchard

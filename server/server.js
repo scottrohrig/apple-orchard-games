@@ -36,9 +36,9 @@ app.use(express.json());
 // send 404.html files
 
 // serve up static assets\
-// if ( process.env.NODE_ENV === 'production' ) {
-//   app.use( express.static( path.joing( __dirname, '../client/build' ) ) );
-// }
+if ( process.env.NODE_ENV === 'production' ) {
+  app.use( express.static( path.joing( __dirname, '../client/build' ) ) );
+}
 
 db.once('open', () => {
 

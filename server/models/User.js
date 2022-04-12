@@ -45,16 +45,12 @@ const userSchema = new Schema({
     default: 0,
     min: 0,
   },
-  orchard: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: 'Orchard',
-    },
-  ],
+  orchardId: [{
+    type: String
+  }],
   juicers: [juicerSchema],
   mashers: [masherSchema],
   ovens: [ovenSchema],
-  trees: [treeSchema],
 }, {
   toJSON: {
     virtuals: true
@@ -90,14 +86,6 @@ userSchema.virtual('masherCount').get(function() {
 userSchema.virtual('ovenCount').get(function() {
   return this.ovens.length;
 });
-
-userSchema.virtual('treeCount').get(function() {
-  return this.trees.length;
-});
-
-userSchema.virtual('orchardCount').get(function() {
-  return this.orchard.length;
-})
 
 // define model
 const User = model('User', userSchema);

@@ -3,7 +3,7 @@ const { AuthenticationError } = require('apollo-server-express');
 const { coerceInputValue } = require('graphql');
 const { Schema } = require('mongoose');
 // require necessary models
-const { User } = require('../models');
+const { User, Orchard } = require('../models');
 // require auth
 const { signToken } = require('../utils/auth');
 
@@ -11,19 +11,24 @@ const { signToken } = require('../utils/auth');
 const resolvers = {
   Query: {
     users: async () => {
-      return User.find().select('-__v -password');
+      return User.find().select('-__v -password').populate('orchards');
     },
     me: async (parent, args, context) => {
       if (context.user) {
-        const userData = await User.findOne({ _id: context.user._id }).select(
-          '-__v -password'
-        );
+        const userData = await User.findOne({ _id: context.user._id })
+            .select('-__v -password');
 
-        return userData;
+          return userData;
       }
 
       throw new AuthenticationError('Not logged in');
     },
+    orchard: async (parent, { _id }) => {
+      const orchard = await Orchard.findOne({ _id })
+        .select('-__v -password');
+
+      return orchard;
+    }
   },
 
   Mutation: {
@@ -54,12 +59,9 @@ const resolvers = {
 
     addJuicer: async (parent, args, context) => {
       if (context.user) {
-        console.log(args);
-        // const juicer = await Juicer.create({ duration: args.duration});
-
         const user = await User.findByIdAndUpdate(
           { _id: context.user._id },
-          { $push: { juicers: { duration: args.duration } } },
+          { $push: { juicers: args } },
           { new: true }
         );
 
@@ -71,11 +73,9 @@ const resolvers = {
 
     addMasher: async (parent, args, context) => {
       if (context.user) {
-        console.log(args);
-
         const user = await User.findByIdAndUpdate(
           { _id: context.user._id },
-          { $push: { mashers: { duration: args.duration } } },
+          { $push: { mashers: args } },
           { new: true }
         );
 
@@ -87,11 +87,9 @@ const resolvers = {
 
     addOven: async (parent, args, context) => {
       if (context.user) {
-        console.log(args);
-
         const user = await User.findByIdAndUpdate(
           { _id: context.user._id },
-          { $push: { ovens: { duration: args.duration } } },
+          { $push: { ovens: args } },
           { new: true }
         );
 
@@ -103,11 +101,52 @@ const resolvers = {
 
     addTree: async (parent, args, context) => {
       if (context.user) {
-        console.log(args);
+        const orchard = await Orchard.findOneAndUpdate(
+          {_id: args.orchardId },
+          { $push: { trees: args } },
+          { new: true, runValidators: true }
+        );
 
+        return orchard;
+      }
+
+      throw new AuthenticationError('You need to be logged in!');
+    },
+
+    addOrchard: async (parent, args, context) => {
+        if (context.user) {
+            // create a new orchard
+            const orchard = await Orchard.create({ orchard_name: args.orchard_name })
+            // add the new orchard to the User's orchardId array
+            await User.findOneAndUpdate(
+              { _id: context.user._id },
+              { $push: { orchardId: orchard._id } },
+              { new: true }
+            );
+            // return the new orchard
+            return orchard;
+        }
+
+      throw new AuthenticationError('You need to be logged in!');
+    },
+
+    // updateJuicer
+    // need user ID and juicer ID
+    // update startedAtTime
+    // update duration with upgrades
+    updateJuicer: async (parent, args, context) => {
+      if (context.user) {
         const user = await User.findByIdAndUpdate(
           { _id: context.user._id },
-          { $push: { trees: { duration: args.duration } } },
+          {
+            $set: {
+              juicers: {
+                juicerId: args.juicerId,
+                startedAtTime: args.startedAtTime,
+                duration: args.duration,
+              },
+            },
+          },
           { new: true }
         );
 
@@ -117,88 +156,92 @@ const resolvers = {
       throw new AuthenticationError('You need to be logged in!');
     },
 
-
-    // updateJuicer
-    // need user ID and juicer ID
-    // update startedAtTime
-    // update duration with upgrades
-    updateJuicer: async (parent, args, context) => {
-        if (context.user) {
-
-            const user = await User.findByIdAndUpdate(
-                { _id: context.user._id },
-                { $set: { juicers: { juicerId: args.juicerId, startedAtTime: args.startedAtTime, duration: args.duration } } },
-                { new: true }
-            )
-
-            return user;
-        }
-
-        throw new AuthenticationError('You need to be logged in!');
-    },
-
     updateMasher: async (parent, args, context) => {
-        if (context.user) {
+      if (context.user) {
+        const user = await User.findByIdAndUpdate(
+          { _id: context.user._id },
+          {
+            $set: {
+              mashers: {
+                masherId: args.masherId,
+                startedAtTime: args.startedAtTime,
+                duration: args.duration,
+              },
+            },
+          },
+          { new: true }
+        );
 
-            const user = await User.findByIdAndUpdate(
-                { _id: context.user._id },
-                { $set: { mashers: { masherId: args.masherId, startedAtTime: args.startedAtTime, duration: args.duration } } },
-                { new: true }
-            )
+        return user;
+      }
 
-            return user;
-        }
-
-        throw new AuthenticationError('You need to be logged in!');
+      throw new AuthenticationError('You need to be logged in!');
     },
 
     updateOven: async (parent, args, context) => {
-        if (context.user) {
+      if (context.user) {
+        const user = await User.findByIdAndUpdate(
+          { _id: context.user._id },
+          {
+            $set: {
+              ovens: {
+                ovenId: args.ovenId,
+                startedAtTime: args.startedAtTime,
+                duration: args.duration,
+              },
+            },
+          },
+          { new: true }
+        );
 
-            const user = await User.findByIdAndUpdate(
-                { _id: context.user._id },
-                { $set: { ovens: { ovenId: args.ovenId, startedAtTime: args.startedAtTime, duration: args.duration } } },
-                { new: true }
-            )
+        return user;
+      }
 
-            return user;
-        }
-
-        throw new AuthenticationError('You need to be logged in!');
+      throw new AuthenticationError('You need to be logged in!');
     },
 
     updateTree: async (parent, args, context) => {
-        if (context.user) {
+      if (context.user) {
+        const orchard = await Orchard.findOneAndUpdate(
+          { _id: args.orchardId },
+          {
+            $set: {
+              trees: {
+                treeId: args.treeId,
+                startedAtTime: args.startedAtTime,
+                duration: args.duration,
+              },
+            },
+          },
+          { new: true }
+        );
 
-            const user = await User.findByIdAndUpdate(
-                { _id: context.user._id },
-                { $set: { trees: { treeId: args.treeId, startedAtTime: args.startedAtTime, duration: args.duration } } },
-                { new: true }
-            )
+        return orchard;
+      }
 
-            return user;
-        }
-
-        throw new AuthenticationError('You need to be logged in!');
+      throw new AuthenticationError('You need to be logged in!');
     },
 
     // updateUser
     // find user by id
     // update either gemCount, appleCount, money OR user info like username or email
     updateUser: async (parent, args, context) => {
-        if (context.user) {
+      if (context.user) {
+        const user = await User.findByIdAndUpdate(
+          { _id: context.user._id },
+          { $set: args },
+          { new: true }
+        );
 
-            const user = await User.findByIdAndUpdate(
-                { _id: context.user._id },
-                { $set: args },
-                { new: true }
-            )
+        return user;
+      }
 
-            return user;
-        }
+      throw new AuthenticationError('You need to be logged in!');
+    },
 
-        throw new AuthenticationError('You need to be logged in!');
-    }
+    // removeUser
+    // find by userId and remove
+    // log user out after removing
   },
 };
 

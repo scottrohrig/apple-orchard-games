@@ -33,7 +33,7 @@ const GlobalProvider = ({ value = [], ...props }) => {
     email: "happy@harvester.com",
     password: "password",
     money: 100,
-    appleCount: 15,
+    appleCount: 500,
     gemCount: 20,
 
     gameVariables: defaultGameVariables,

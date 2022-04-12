@@ -15,9 +15,9 @@ const defaultGameVariables = {
   makeJuiceTime: 60,
   makeJuiceApplesUsed: 2,
   makeSauceTime: 120,
-  sauceMashApplesUsed: 4,
+  makeSauceApplesUsed: 4,
   makePieTime: 300,
-  pieBakeApplesUsed: 8,
+  makePieApplesUsed: 8,
   juiceSaleRevenue: 4, // this is revenue from sale of each juice
   sauceSaleRevenue: 8,
   pieSaleRevenue: 20,
@@ -37,50 +37,9 @@ const GlobalProvider = ({ value = [], ...props }) => {
     gemCount: 20,
 
     gameVariables: defaultGameVariables,
-    mashers: [
-      {
-        _id: 1,
-        startedAtTime: defaultStartTime,
-        duration: defaultGameVariables.makeSauceTime,
-      },
-      {
-        _id: 2,
-        startedAtTime: new Date(defaultStartTime.getTime() - 25 * 1000),
-        duration: defaultGameVariables.makeSauceTime,
-      },
-      {},
-
-    ],
-    juicers: [
-      {
-        _id: 1,
-        startedAtTime: new Date(),
-        duration: defaultGameVariables.makeJuiceTime,
-      },
-      // {
-      //   _id: 2,
-      //   startedAtTime: new Date(defaultStartTime.getTime() - 12 * 1000),
-      //   duration: defaultGameVariables.makeJuiceTime,
-      // },
-      // {
-      //   _id: 3,
-      //   startedAtTime: new Date(defaultStartTime.getTime() - 55 * 1000),
-      //   duration: defaultGameVariables.makeJuiceTime,
-      // },
-      // {
-      //   _id: 4,
-      //   startedAtTime: defaultStartTime,
-      //   duration: defaultGameVariables.makeJuiceTime,
-      // },
-      {}],
-    ovens: [
-      {
-        _id: 1,
-        startedAtTime: new Date(defaultStartTime.getTime() - 230 * 1000),
-        duration: defaultGameVariables.makePieTime,
-      }, {}
-
-    ],
+    mashers: [{},],
+    juicers: [{}],
+    ovens: [{}],
     trees: [{}, {}, {}, {}, {}],
     orchards: [
       {

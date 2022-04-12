@@ -15,20 +15,20 @@ const resolvers = {
     },
     me: async (parent, args, context) => {
       if (context.user) {
-        const userData = await User.findOne({ _id: context.user._id })
-            .select('-__v -password');
+        const userData = await User.findOne({ _id: context.user._id }).select(
+          '-__v -password'
+        );
 
-          return userData;
+        return userData;
       }
 
       throw new AuthenticationError('Not logged in');
     },
     orchard: async (parent, { _id }) => {
-      const orchard = await Orchard.findOne({ _id })
-        .select('-__v -password');
+      const orchard = await Orchard.findOne({ _id }).select('-__v -password');
 
       return orchard;
-    }
+    },
   },
 
   Mutation: {
@@ -102,7 +102,7 @@ const resolvers = {
     addTree: async (parent, args, context) => {
       if (context.user) {
         const orchard = await Orchard.findOneAndUpdate(
-          {_id: args.orchardId },
+          { _id: args.orchardId },
           { $push: { trees: args } },
           { new: true, runValidators: true }
         );
@@ -114,18 +114,20 @@ const resolvers = {
     },
 
     addOrchard: async (parent, args, context) => {
-        if (context.user) {
-            // create a new orchard
-            const orchard = await Orchard.create({ orchard_name: args.orchard_name })
-            // add the new orchard to the User's orchardId array
-            await User.findOneAndUpdate(
-              { _id: context.user._id },
-              { $push: { orchardId: orchard._id } },
-              { new: true }
-            );
-            // return the new orchard
-            return orchard;
-        }
+      if (context.user) {
+        // create a new orchard
+        const orchard = await Orchard.create({
+          orchard_name: args.orchard_name,
+        });
+        // add the new orchard to the User's orchardId array
+        await User.findOneAndUpdate(
+          { _id: context.user._id },
+          { $push: { orchardId: orchard._id } },
+          { new: true }
+        );
+        // return the new orchard
+        return orchard;
+      }
 
       throw new AuthenticationError('You need to be logged in!');
     },

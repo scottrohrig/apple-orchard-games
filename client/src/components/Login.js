@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 // import mutation hook
 
-import  { useMutation } from '@apollo/client';
+import { useMutation } from '@apollo/client';
 // import Link for router
 import { Link } from 'react-router-dom';
 // import login mutation
@@ -9,14 +9,12 @@ import { LOGIN_USER } from '../utils/mutations';
 // import auth class to handle json web token decoding
 import Auth from '../utils/auth';
 
-
 // define Login component function
 const Login = (props) => {
-
   // set the default form state
   const [formState, setFormState] = useState({
     email: '',
-    password: ''
+    password: '',
   });
 
   const [login, { error }] = useMutation(LOGIN_USER);
@@ -39,6 +37,8 @@ const Login = (props) => {
         variables: { ...formState },
       });
 
+      console.log('success login');
+
       Auth.login(data.login.token);
     } catch (e) {
       console.error(e);
@@ -52,7 +52,6 @@ const Login = (props) => {
   };
 
   // form input change handler function
-
 
   // return the component JSX
   return (

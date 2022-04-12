@@ -16,21 +16,14 @@ const resolvers = {
     me: async (parent, args, context) => {
       if (context.user) {
         const userData = await User.findOne({ _id: context.user._id })
-            .select('-__v -password')
-            .populate({path: 'orchards', populate: {path: 'trees'}})
+          .select('-__v -password')
+          .populate('orchards');
 
-          return userData;
+        return userData;
       }
 
       throw new AuthenticationError('Not logged in');
     },
-    orchard: async () => {
-      const orchard = await Orchard.findOne({_id: '6254cbfca674664b1831a06a' })
-        .select('-__v -password')
-        .populate({path: 'trees'})
-
-      return orchard
-    }
   },
 
   Mutation: {
@@ -118,14 +111,20 @@ const resolvers = {
     },
 
     addOrchard: async (parent, args, context) => {
-        if (context.user) {
-            // create a new orchard
-            const orchard = await Orchard.create({trees: []})
-            // const orchard = new Orchard();
-            // add the new orchard to the User's orchards array
-            // return the new orchard
-            return orchard;
-        }
+      if (context.user) {
+        // create a new orchard
+        const orchard = new Orchard();
+        // add the new orchard to the User's orchards array
+        const user = await User.findByIdAndUpdate(
+          { _id: context.user._id },
+          { $push: { orchards: [orchard] } },
+          { new: true }
+        );
+
+        console.log(user);
+        // return the new orchard
+        return orchard;
+      }
 
       throw new AuthenticationError('You need to be logged in!');
     },

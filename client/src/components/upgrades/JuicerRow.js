@@ -1,11 +1,10 @@
-import { useMutation, useQuery } from "@apollo/client";
-import { useEffect, useState } from "react";
-import { useGlobalContext } from "../../utils/GlobalState";
-import { QUERY_ITEMS } from "../../utils/queries";
-import { ADD_JUICER } from "../../utils/mutations";
-import { BUY_JUICER, APPLES_FOR_JUICE } from "../../utils/actions";
-import Juicer from "./Juicer";
-import BuyJuicer from "./PlaceholderJuice";
+import { useMutation, useQuery } from '@apollo/client';
+import { useEffect, useState } from 'react';
+import { useGlobalContext } from '../../utils/GlobalState';
+import { ADD_JUICER } from '../../utils/mutations';
+import { BUY_JUICER, APPLES_FOR_JUICE } from '../../utils/actions';
+import Juicer from './Juicer';
+import BuyJuicer from './PlaceholderJuice';
 
 export default function JuicersRow() {
   const [state, dispatch] = useGlobalContext();
@@ -23,16 +22,23 @@ export default function JuicersRow() {
     // dispatch item data if it exists with UPDATE_ITEMS action
     // put item data in indexedDB cache
     // if not loading, get cache and dispatch
-  }, ["itemData", "loading", dispatch]);
+  }, ['itemData', 'loading', dispatch]);
 
   const handlePurchase = async (event) => {
-    console.log("purchased upgrade");
+    event.preventDefault();
+
+    console.log('purchased upgrade');
 
     // validate enough money
 
     // dispatch ADD_JUICER
+    try {
+      addJuicer();
+    } catch (e) {
+      console.error(e);
+    }
 
-    console.log("dispatching to GameState");
+    console.log('dispatching to GameState');
     try {
       const payload = {
         _id: juicers.length + 1,
@@ -44,7 +50,7 @@ export default function JuicersRow() {
         payload,
       });
     } catch (error) {
-      console.log("error");
+      console.log('error');
     }
 
     // update user money && apples

@@ -1,11 +1,10 @@
-import { useMutation, useQuery } from "@apollo/client";
-import { useEffect } from "react";
-import { useGlobalContext } from "../../utils/GlobalState";
-import { QUERY_ITEMS } from "../../utils/queries";
-import { ADD_OVEN } from "../../utils/mutations";
-import { BUY_OVEN, APPLES_FOR_PIE } from "../../utils/actions";
-import Oven from "./Oven";
-import BuyOven from "./PlaceholderPie";
+import { useMutation, useQuery } from '@apollo/client';
+import { useEffect } from 'react';
+import { useGlobalContext } from '../../utils/GlobalState';
+import { ADD_OVEN } from '../../utils/mutations';
+import { BUY_OVEN, APPLES_FOR_PIE } from '../../utils/actions';
+import Oven from './Oven';
+import BuyOven from './PlaceholderPie';
 
 export default function OvensRow() {
   const [state, dispatch] = useGlobalContext();
@@ -24,11 +23,18 @@ export default function OvensRow() {
     // dispatch item data if it exists with UPDATE_ITEMS action
     // put item data in indexedDB cache
     // if not loading, get cache and dispatch
-  }, ["itemData", "loading", dispatch]);
+  }, ['itemData', 'loading', dispatch]);
 
   const handlePurchase = async (event) => {
-    console.log("purchased upgrade");
-    console.log("dispatching to GameState");
+    console.log('purchased upgrade');
+
+    try {
+      addOven();
+    } catch (e) {
+      console.error(e);
+    }
+
+    console.log('dispatching to GameState');
 
     try {
       const payload = {
@@ -41,7 +47,7 @@ export default function OvensRow() {
         payload,
       });
     } catch (error) {
-      console.log("error");
+      console.log('error');
     }
   };
 

@@ -46,13 +46,13 @@ const userSchema = new Schema(
       default: 0,
       min: 0,
     },
-    // orchards: [
-    //   {
-    //     type: Schema.Types.ObjectId,
-    //     ref: 'Orchard'
-    //   },
-    // ],
-    orchards: [Orchard.schema],
+    orchards: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'Orchard',
+      },
+    ],
+    // orchards: [Orchard.schema],
     juicers: [juicerSchema],
     mashers: [masherSchema],
     ovens: [ovenSchema],

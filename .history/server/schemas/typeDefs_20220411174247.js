@@ -11,7 +11,7 @@ const typeDefs = gql`
     money: Int
     appleCount: Int
     gemCount: Int
-    orchards: [Orchard]
+    orchards: [Tree]
     juicers: [Juicer]
     mashers: [Masher]
     ovens: [Oven]
@@ -33,6 +33,7 @@ const typeDefs = gql`
   type Tree {
     _id: ID
     duration: Int
+    date:
   }
 
   type Juicer {
@@ -66,8 +67,7 @@ const typeDefs = gql`
   type Mutation {
     login(email: String!, password: String!): Auth
     addUser(username: String!, email: String!, password: String!): Auth
-    addOrchard: Orchard
-    addTree(orchardId: ID!, duration: Int!): Orchard
+    addTree: User
     addMasher(duration: Int!): User
     addOven(duration: Int!): User
     addJuicer(duration: Int!): User

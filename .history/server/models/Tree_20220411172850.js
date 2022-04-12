@@ -7,11 +7,12 @@ const treeSchema = new Schema({
   duration: {
     type: Number,
     min: 0,
-    default: 30,
+    default: 30
   },
   isReady: {
     type: Boolean,
   },
 });
+const Orchard = model('Orchard', orchardSchema);
 
 module.exports = treeSchema;

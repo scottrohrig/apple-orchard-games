@@ -11,7 +11,7 @@ const typeDefs = gql`
     money: Int
     appleCount: Int
     gemCount: Int
-    orchards: [Orchard]
+    orchards: [Tree]
     juicers: [Juicer]
     mashers: [Masher]
     ovens: [Oven]
@@ -19,10 +19,8 @@ const typeDefs = gql`
     juicerCount: Int
     masherCount: Int
     ovenCount: Int
-    orchardCount: Int
   }
 
-  scalar Date
 
   type Orchard {
     _id: ID
@@ -33,6 +31,7 @@ const typeDefs = gql`
   type Tree {
     _id: ID
     duration: Int
+    date: String
   }
 
   type Juicer {
@@ -60,22 +59,33 @@ const typeDefs = gql`
     me: User
     users: [User]
     user(username: String!): User
-    orchards(username: String!): [Orchard]
+    orchards(username: String!): User
   }
 
   type Mutation {
     login(email: String!, password: String!): Auth
     addUser(username: String!, email: String!, password: String!): Auth
-    addOrchard: Orchard
-    addTree(orchardId: ID!, duration: Int!): Orchard
+    addTree(duration: Int! ): User
     addMasher(duration: Int!): User
     addOven(duration: Int!): User
     addJuicer(duration: Int!): User
-    updateUser(username: String, email: String, password: String, gemCount: Int, appleCount: Int, money: Int): User
-    updateTree(orchardId: ID!, treeId: ID!, startedAtTime: Date!, duration: Int): Orchard
-    updateMasher(masherId: ID!, startedAtTime: Date!, duration: Int): User
-    updateOven(ovenId: ID!, startedAtTime: Date!, duration: Int): User
-    updateJuicer(juicerId: ID!, startedAtTime: Date!, duration: Int): User
+    updateUser(
+      username: String
+      email: String
+      password: String
+      gemCount: Int
+      appleCount: Int
+      money: Int
+    ): User
+    updateTree(
+      orchardId: ID!
+      treeId: ID!
+      startedAtTime: Date!
+      duration: Int
+    ): Orchard
+    // updateMasher(masherId: ID!, startedAtTime: Date!, duration: Int): User
+    // updateOven(ovenId: ID!, startedAtTime: Date!, duration: Int): User
+    // updateJuicer(juicerId: ID!, startedAtTime: Date!, duration: Int): User
     removeUser: User
   }
 `;

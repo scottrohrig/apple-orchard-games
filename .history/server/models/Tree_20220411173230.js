@@ -1,8 +1,9 @@
-const { Schema } = require('mongoose');
+const { Schema, model } = require('mongoose');
 
 const treeSchema = new Schema({
   startedAtTime: {
     type: Date,
+    default: Date.now()
   },
   duration: {
     type: Number,
@@ -13,5 +14,6 @@ const treeSchema = new Schema({
     type: Boolean,
   },
 });
+const Tree = model('Tree', treeSchema);
 
-module.exports = treeSchema;
+module.exports = Tree;

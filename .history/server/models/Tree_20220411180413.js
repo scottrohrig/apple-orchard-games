@@ -1,8 +1,9 @@
-const { Schema } = require('mongoose');
+const { Schema, model } = require('mongoose');
 
 const treeSchema = new Schema({
   startedAtTime: {
     type: Date,
+    default: Date.now,
   },
   duration: {
     type: Number,
@@ -11,6 +12,7 @@ const treeSchema = new Schema({
   },
   isReady: {
     type: Boolean,
+    default: false,
   },
 });
 

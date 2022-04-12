@@ -1,0 +1,117 @@
+.splash-animation {
+    overflow: hidden;
+    background-color: var(--sky-main);
+    background-image: linear-gradient(to bottom,
+    var(--sky-dark), var(--sky-main), var(--sky-main), var(--sky-light), var(--sky-light));
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    padding: 50px;
+    left: 0; top: 0;
+    z-index: 1;
+}
+.splash-animation::before {
+    width: 100%;
+    height: 100%;
+    background-color: var(--main-color);
+    background-image: linear-gradient(to bottom, var(--main-color), var(--main-darkest));
+    content: '';
+    position: absolute;
+    margin: 380px -50px;
+}
+.splash-animation img#cloud {
+    width: 360px;
+    position: absolute;
+    left: 100%;
+    top: 80px;
+}
+.splash-animation img.barn {
+    width: 240px;
+    position: absolute;
+    right: 50px;
+    top: 210px;
+}
+.splash-animation img.barn-shadow {
+    right: 52px;
+    top: 198px;
+}
+.splash-animation img.tree {
+    width: 420px;
+    position: absolute;
+    left: 20px;
+    top: 100px;
+}
+.splash-animation img.shadow {
+    transform-origin: bottom center;
+    transform: rotate(180deg) scaleX(-1) scale(1, .3) skew(-20deg);
+    filter: brightness(0%);
+    mix-blend-mode: overlay;
+    opacity: .25;
+}
+.splash-animation img.apple {
+    position: absolute;
+    width: 33px;
+    left: 278px;
+    top: 240px;
+}
+.splash-animation img.apple-shadow {
+    top: 658px;
+    transform: scale(1, .3);
+    filter: brightness(0%);
+    mix-blend-mode: overlay;
+    animation: animation-shadow 12s infinite linear;
+}
+.animation-fall {
+    animation: animation-fall 12s infinite linear;
+}
+.animation-cloud {
+    position: absolute;
+    animation: animation-cloud 40s infinite linear;
+}
+@keyframes animation-fall {
+    0% { transform: rotate(0deg); top: 240px; transform-origin: top center; }
+    22% { transform: rotate(0deg); }
+    23% { transform: rotate(-6deg); }
+    24% { transform: rotate(6deg); }
+    25% { transform: rotate(0deg); }
+    47% { transform: rotate(0deg); }
+    48% { transform: rotate(6deg); }
+    49% { transform: rotate(-6deg); }
+    50% { transform: rotate(0deg); top: 240px; transform-origin: top center; }
+    52% { transform: rotate(0deg); transform-origin: center; }
+    54.5% { transform: rotate(-20deg); }
+    55% { top: 640px; transform: scale(1) rotate(0deg); }
+    55.5% { top: 636px;transform: rotate(4deg); }
+    56% { top: 640px; transform: rotate(0deg); }
+    91% { transform: scale(1); }
+    92% { transform: scale(.8); }
+    93% { transform: scale(1); }
+    94% { transform: scale(0); }
+    95% { top: 640px; }
+    96% { top: 240px; }
+    97% { transform: scale(0); }
+    98% { transform: scale(.8); }
+    99% { transform: scale(.2); }
+    100% { transform: scale(1); }
+}
+@keyframes animation-shadow {
+    0% { opacity: 0; }
+    54% { opacity: 0; }
+    56% { opacity: .25; }
+    92% { opacity: .25; }
+    94% { opacity: 0; }
+    100% { opacity: 0; }
+}
+@keyframes animation-cloud {
+    0% { left: 100%; }
+    95% { left: -100%; opacity: 1; }
+    96% { left: -100%; opacity: 0; }
+    97% { left: 100%;}
+    98% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+.login, .sign-up {
+    position: relative;
+    z-index: 10;
+}

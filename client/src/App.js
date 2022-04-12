@@ -10,8 +10,9 @@ import './dev.css';
 import { GlobalProvider } from './utils/GlobalState';
 
 // pages
-import Login from './pages/Login';
-import Signup from './pages/Signup';
+// import Login from './components/Login';
+// import Signup from './pages/Signup';
+import Splash from "./pages/Splash";
 import Dashboard from './pages/Dashboard';
 import Leaderboard from "./pages/Leaderboard";
 import Orchard from './pages/Orchard';
@@ -67,11 +68,14 @@ function App() {
 
               <nav>
                 <ul>
-                  <li>
+                  {/* <li>
                     <Link className='a' to='/login'>Login</Link>
                   </li>
                   <li>
                     <Link className='a' to='/signup'>Signup</Link>
+                  </li> */}
+                  <li>
+                    <Link className='a' to='/login'>Login/Register</Link>
                   </li>
                   <li>
                     <Link className='a' to='/orchard/1'>Orchard</Link>
@@ -109,8 +113,9 @@ function App() {
                   <StyleReference />
                 ) : (
                   <Switch >
-                    <Route exact path='/login' component={Login} />
-                    <Route exact path='/signup' component={Signup} />
+                    <Route exact path='/login' component={Splash} />
+                    {/* <Route exact path='/login' component={Login} />
+                    <Route exact path='/signup' component={Signup} /> */}
                     <Route exact path='/home' component={Dashboard} />
                     <Route exact path='/orchard/:id' component={Orchard} />
                     {/* <Route exact path='/highscore' component={Leaderboard} /> */}

@@ -57,37 +57,33 @@ const Login = (props) => {
   // return the component JSX
   return (
     <main className="login">
-      <div className="container">
-        <div className="card">
-          <h4 className="card-header form-label">Login</h4>
-          <div className="card-body">
-            <form onSubmit={handleFormSubmit}>
-              <input
-                className="form-control"
-                placeholder="Your email"
-                name="email"
-                type="email"
-                id="email"
-                value={formState.email}
-                onChange={handleChange}
-              />
-              <input
-                className="form-control"
-                placeholder="******"
-                name="password"
-                type="password"
-                id="password"
-                value={formState.password}
-                onChange={handleChange}
-              />
-              <button className="btn form-submit" type="submit">
-                Submit
-              </button>
-            </form>
+      <h4 className="card-header form-label">Login</h4>
+      <div className="card-body">
+        <form onSubmit={handleFormSubmit}>
+          <input
+            className="form-control"
+            placeholder="Your email"
+            name="email"
+            type="email"
+            id="login-email"
+            value={formState.email}
+            onChange={handleChange}
+          />
+          <input
+            className="form-control"
+            placeholder="******"
+            name="password"
+            type="password"
+            id="login-password"
+            value={formState.password}
+            onChange={handleChange}
+          />
+          <button className="btn form-submit" type="submit">
+            Submit
+          </button>
+        </form>
 
-            {error && <div>Login failed</div>}
-          </div>
-        </div>
+        {error && <div>Login failed</div>}
       </div>
     </main>
   );

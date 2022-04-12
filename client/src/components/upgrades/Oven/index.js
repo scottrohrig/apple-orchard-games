@@ -3,7 +3,7 @@ import icon from '../../../assets/images/oven.png';
 import pieImg from '../../../assets/images/pie.png';
 import { useState } from 'react';
 import { formatTime, getTimeRemaining, useInterval } from '../../../utils/helpers';
-import { UPDATE_OVENS, PIE_SOLD, APPLES_FOR_PIE } from '../../../utils/actions';
+import { UPDATE_OVENS, SELL_PIE, APPLES_FOR_PIE } from '../../../utils/actions';
 
 
 // pass in oven props from parent page / component
@@ -39,7 +39,7 @@ const Oven = ({ props }) => {
     );
 
     dispatch({
-      type: PIE_SOLD
+      type: SELL_PIE
     })
 
 

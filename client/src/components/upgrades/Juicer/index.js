@@ -3,7 +3,7 @@ import icon from '../../../assets/images/juicer.png';
 import juiceImg from '../../../assets/images/juice.png';
 import { useState } from 'react';
 import { formatTime, getTimeRemaining, useInterval } from '../../../utils/helpers';
-import { UPDATE_JUICERS, JUICE_SOLD, APPLES_FOR_JUICE } from '../../../utils/actions';
+import { UPDATE_JUICERS, SELL_JUICE, APPLES_FOR_JUICE } from '../../../utils/actions';
 
 
 // pass in juicer props from parent page / component
@@ -44,7 +44,7 @@ const Juicer = ({ props }) => {
 
     );
     dispatch({
-      type: JUICE_SOLD
+      type: SELL_JUICE
     })
 
 

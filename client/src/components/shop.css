@@ -1,7 +1,49 @@
+.sell-apples {
+  margin: 1rem auto;
+  text-align: center;
+}
+
 .card {
+  padding: .3rem;
   width: 128px;
   height: 90%;
-  border: 1px solid var(--btn-harvest-main);
   border-radius: .5rem;
-  border-bottom: 12px var(--wood-dark) solid;
+  background-color: var(--display-money-main);
+  box-shadow: inset -2px -2px var(--display-money-dark), inset 2px 2px var(--display-money-light);
+}
+
+.usd {
+  background-color: var(--btn-harvest-main);
+  box-shadow: inset -2px -2px var(--btn-harvest-dark), inset 2px 2px var(--btn-harvest-light);
+
+}
+
+.card-label {
+  font-size: x-large;
+  color: var(--btn-shop-main);
+  text-shadow:
+  -1px -1px var(--form-background),
+    1px -1px var(--form-background),
+    -1px 2px var(--form-background),
+    2px 2px var(--form-background);
+  }
+
+  .usd-label {
+  color: var(--display-money-main);
+}
+
+.card-body {
+  padding: .25rem;
+  background-color: var(--form-background);
+  border-radius: .3rem;
+  color: var(--display-banner-main)
+}
+
+.btn-buy {
+  background-color: var(--display-money-main);
+  text-shadow: 1px 1px var(--display-money-dark);
+  box-shadow: inset -2px -2px var(--display-money-dark), inset 2px 2px var(--display-money-light);
+}
+.btn-buy:hover {
+  animation: pulse 2s infinite linear;
 }

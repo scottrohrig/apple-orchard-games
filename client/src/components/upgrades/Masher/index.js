@@ -3,7 +3,7 @@ import icon from '../../../assets/images/masher.png';
 import sauceImg from '../../../assets/images/sauce.png';
 import { useState } from 'react';
 import { formatTime, getTimeRemaining, useInterval } from '../../../utils/helpers';
-import { UPDATE_MASHERS, SAUCE_SOLD, APPLES_FOR_SAUCE } from '../../../utils/actions';
+import { UPDATE_MASHERS, SELL_SAUCE, APPLES_FOR_SAUCE } from '../../../utils/actions';
 
 
 // pass in masher props from parent page / component
@@ -39,7 +39,7 @@ const Masher = ({ props }) => {
     );
 
     dispatch({
-      type: SAUCE_SOLD
+      type: SELL_SAUCE
     })
 
 

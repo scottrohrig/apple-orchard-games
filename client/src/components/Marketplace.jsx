@@ -1,100 +1,44 @@
 import { useState } from 'react';
+import { APPLES_FOR_MONEY } from '../utils/actions';
 import { useGlobalContext } from '../utils/GlobalState';
-import './shop.css'
+import './shop.css';
 
 export default function Marketplace({ showMarketplace, setShowMarketplace }) {
 
   const [state, dispatch] = useGlobalContext();
-  const { gameVariables } = state;
+  const { appleCount, gameVariables } = state;
+
 
   // for input field in apples to sell form
-  const [applesToSell, setApplesToSell] = useState('');
+  const [applesToSell, setApplesToSell] = useState(0);
 
   // sell apples
   function handleSellApples(evt) {
-    evt.preventDefault();
 
-    // consider using buttons instead of input field for selling apples (buttons could relate to how many apples are in basket).  If we use an input field, we'll need to error-check and reject bad inputs which isn't fun for the user
+
+
+    let success = false
     console.log(
       "Error check, then remove " +
       applesToSell +
-      " apples from inventory, increase gameDollars by $" +
+      " apples from inventory, \nincrease gameDollars by $" +
       applesToSell * gameVariables.appleSaleRevenue +
-      ", and deactivate this button if there are no apples left."
+      ", \nand deactivate this button if there are no apples left."
     );
+
+    const payload = Math.max(applesToSell,0)
+    console.log('payload',payload);
+    dispatch({
+      type: APPLES_FOR_MONEY,
+      payload
+    })
+
+    if (success) {
+      applesToSell = Math.max(appleCount, 0)
+    }
+
   }
 
-  // sell juice
-  function handleSellJuice(evt) {
-    evt.preventDefault();
-
-    console.log(
-      "remove " +
-      state.juices +
-      " juices from inventory, increase gameDollars by $" +
-      state.juices * gameVariables.juiceSaleRevenue +
-      ", and deactivate this button."
-    );
-  }
-
-  //sell sauce
-  function handleSellSauce(evt) {
-    evt.preventDefault();
-
-    console.log(
-      "remove " +
-      state.sauces +
-      " juices from inventory, increase gameDollars by $" +
-      state.sauces * gameVariables.sauceSaleRevenue +
-      ", and deactivate this button."
-    );
-  }
-
-  // sell pies
-  function handleSellPies(evt) {
-    evt.preventDefault();
-
-    console.log(
-      "remove " +
-      state.pies +
-      "  pies from inventory, increase gameDollars by $" +
-      state.pies * gameVariables.pieSaleRevenue +
-      ", and deactivate this button."
-    );
-  }
-
-  // buy juicer
-  function handleBuyJuicer(evt) {
-    evt.preventDefault();
-
-    console.log(
-      "add 1 juicer to inventory, reduce gameDollars by $" +
-      gameVariables.juicerCost +
-      "."
-    );
-  }
-
-  //buy masher
-  function handleBuyMasher(evt) {
-    evt.preventDefault();
-
-    console.log(
-      "add 1 masher to inventory, reduce gameDollars by $" +
-      gameVariables.masherCost +
-      "."
-    );
-  }
-
-  // buy oven
-  function handleBuyOven(evt) {
-    evt.preventDefault();
-
-    console.log(
-      "add 1 oven to inventory, reduce gameDollars by $" +
-      gameVariables.ovenCost +
-      "."
-    );
-  }
 
   // buy gems
   function handleBuyGems(evt) {
@@ -112,7 +56,7 @@ export default function Marketplace({ showMarketplace, setShowMarketplace }) {
   return (
     <div >
       <div className={`modal-background ${showMarketplace && 'modal-background-active'}`}
-        onClick={() => setShowMarketplace(!showMarketplace)}
+      // onClick={() => setShowMarketplace(!showMarketplace)}
       >
         <div className={`leaderboard modal ${showMarketplace && 'modal-active'}`}>
 
@@ -123,17 +67,86 @@ export default function Marketplace({ showMarketplace, setShowMarketplace }) {
           </button>
 
           <h2 className='page-title'><p className="display-banner">Farmers Marketplace</p></h2>
-          <h3 classname='sub-title'
+          <h3 className='sub-title'
             style={{ textAlign: 'center', marginTop: '1rem' }}
           >Buy Upgrades & Gems</h3>
 
           <div style={{ marginTop: '2rem' }}>
+
+            {/* SELL APPLES FOR CURRENCY */}
+            <div className='sell-apples'>
+              <div className="item-label">Sell Apples</div>
+              <div className="card-label">Apples to Sell:</div>
+              <div className='gem-count'>
+                <span><i className="fa-solid fa-angles-left"
+                  onClick={() => setApplesToSell(Math.max(applesToSell - 25, 0))}
+                ></i></span> {' '}
+                <span><i className="fa-solid fa-caret-left"
+                  onClick={() => setApplesToSell(Math.max(applesToSell - 5, 0))}
+                ></i></span>{' '}
+                <span className='apple-count'>{applesToSell}</span>{' '}
+                <span><i className="fa-solid fa-caret-right"
+                  onClick={() => setApplesToSell(Math.min(applesToSell + 5, appleCount))}
+                ></i></span>{' '}
+                <span><i className="fa-solid fa-angles-right"
+                  onClick={() => setApplesToSell(Math.min(applesToSell + 25, appleCount))}
+                ></i></span>
+              </div>
+
+              <p>
+                <button className="btn btn-shop"
+                onClick={()=> {handleSellApples()}}
+                >Sell</button>
+              </p>
+
+            </div>
+
+            {/* $USD PURCHASES FOR GEMS */}
             <div className='item-row'>
               <div className="item-label">Buy Gems</div>
               <div className="item-scroll">
                 <div className="item-box">
-                  <div className="card">
+                  <div className="card usd" style={{ width: '250px' }}>
+                    <div className='card-label usd-label'>5 gem deal</div>
+                    <div className='card-body'>
+                      <p>buy 5 gems for $5</p>
+                      <button className='btn btn-buy' onClick={() => { handleBuyGems(); }}>Buy</button>
+                    </div>
+                  </div>
+                </div>
+                <div className="item-box">
+                  <div className="card usd" style={{ width: '250px' }}>
+                    <div className='card-label usd-label'>textLabel</div>
+                    <div className='card-body'>
+                      <p>body</p>
+                      <button className='btn btn-buy'>Buy</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
 
+            </div>
+
+            <div className='item-row'>
+              <div className="item-label">Purchase Upgrades!</div>
+              <div className="item-scroll">
+                <div className="item-box">
+                  <div className="card" style={{ width: '250px' }}>
+                    <div className='card-label'>textLabel</div>
+                    <div className='card-body'>
+                      <p>body</p>
+                      <button className='btn btn-shop'>Buy</button>
+                    </div>
+                  </div>
+                </div>
+                <div className="item-box">
+                  <div className="card" style={{ width: '250px' }}>
+                    <div className='card-label'>textLabel</div>
+                    <div className='card-body'>
+                      <p>body</p>
+
+                      <button className='btn btn-shop'>Buy</button>
+                    </div>
                   </div>
                 </div>
               </div>

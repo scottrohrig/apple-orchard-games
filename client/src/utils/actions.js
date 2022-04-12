@@ -31,11 +31,12 @@ export const BUY_JUICER = "BUY_JUICER";
 export const BUY_OVEN = "BUY_OVEN";
 export const BUY_MASHER = "BUY_MASHER";
 
-export const JUICE_SOLD = "JUICE_SOLD";
+export const SELL_JUICE = "SELL_JUICE";
 export const APPLES_FOR_JUICE = "APPLES_FOR_JUICE";
 
-export const PIE_SOLD = "PIE_SOLD";
+export const SELL_PIE = "SELL_PIE";
 export const APPLES_FOR_PIE = "APPLES_FOR_PIE";
 
-export const SAUCE_SOLD = "SAUCE_SOLD";
+export const SELL_SAUCE = "SELL_SAUCE";
 export const APPLES_FOR_SAUCE = "APPLES_FOR_SAUCE";
+export const APPLES_FOR_MONEY = "APPLES_FOR_MONEY";

@@ -14,9 +14,9 @@ const defaultGameVariables = {
   ovenCost: 30,
   makeJuiceTime: 60,
   makeJuiceApplesUsed: 2,
-  sauceMashTime: 120,
+  makeSauceTime: 120,
   sauceMashApplesUsed: 4,
-  pieBakeTime: 300,
+  makePieTime: 300,
   pieBakeApplesUsed: 8,
   juiceSaleRevenue: 4, // this is revenue from sale of each juice
   sauceSaleRevenue: 8,
@@ -41,16 +41,15 @@ const GlobalProvider = ({ value = [], ...props }) => {
       {
         _id: 1,
         startedAtTime: defaultStartTime,
-        duration: defaultGameVariables.sauceMashTime,
+        duration: defaultGameVariables.makeSauceTime,
       },
       {
         _id: 2,
         startedAtTime: new Date(defaultStartTime.getTime() - 25 * 1000),
-        duration: defaultGameVariables.sauceMashTime,
+        duration: defaultGameVariables.makeSauceTime,
       },
       {},
-      {},
-      {},
+
     ],
     juicers: [
       {
@@ -74,14 +73,14 @@ const GlobalProvider = ({ value = [], ...props }) => {
       //   duration: defaultGameVariables.makeJuiceTime,
       // },
       {}],
-      ovens: [
-        {
-          _id: 1,
-          startedAtTime: new Date(defaultStartTime.getTime() - 230 * 1000),
-          duration: defaultGameVariables.pieBakeTime,
-        },
+    ovens: [
+      {
+        _id: 1,
+        startedAtTime: new Date(defaultStartTime.getTime() - 230 * 1000),
+        duration: defaultGameVariables.makePieTime,
+      }, {}
 
-      ],
+    ],
     trees: [{}, {}, {}, {}, {}],
     orchards: [
       {

@@ -4,7 +4,14 @@ import basket from "../assets/images/basket.svg";
 import { useGlobalContext } from '../utils/GlobalState';
 import {Link} from 'react-router-dom'
 
-function Header() {
+function Header(props) {
+
+  const {
+    showLeaderboard,
+    setShowLeaderboard,
+    showMarketplace,
+    setShowMarketplace
+  }=props
 
   const [state, dispatch] = useGlobalContext()
   // const money = state.money
@@ -33,7 +40,11 @@ function Header() {
             </div>
 
             <div className="disp-user">
-              <button className="btn btn-profile">
+              <button className="btn btn-profile"
+                      onClick={() => {
+                        setShowLeaderboard(!showLeaderboard)
+                        setShowMarketplace(false)
+                      }}>
                 <i className="fa-solid fa-circle-user"></i>
               </button>
             </div>
@@ -45,9 +56,12 @@ function Header() {
         <Link to='/home' className="btn btn-nav">
           <i className="fa-solid fa-house-chimney-window"></i>
         </Link >
-        <Link to='/marketplace' className="btn btn-nav">
+        <button className="btn btn-nav"
+                      onClick={() => {setShowMarketplace(!showMarketplace)
+                        setShowLeaderboard(false)
+                      }}>
           <i className="fa-solid fa-cart-shopping"></i>
-        </Link >
+        </button >
       </div>
     </div>
   );

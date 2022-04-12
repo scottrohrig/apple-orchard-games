@@ -1,6 +1,6 @@
-import buyIcon from "../../assets/images/empty_juice.png";
+import buyIcon from "../../assets/images/empty_sauce.png";
 
-export default function BuyJuicer({ handlePurchase }) {
+export default function BuyMasher({ handlePurchase }) {
   return (
     <div className="item-container">
       <div className="temp-img">

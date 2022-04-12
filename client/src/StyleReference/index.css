@@ -25,7 +25,7 @@
     --wood-dark: #482A11;
     --wood-medium: #59391D;
   }
-  
+
 * {
   margin: 0;
   padding: 0;
@@ -561,7 +561,7 @@ background-color: var(--btn-timer-dark);
   padding: 20px;
   box-shadow: 0 0 10px rgba(0,0,0,0.4);
   position: fixed;
-  left: 0; right: 0;
+  left: 0; right: 0; top: 70px;
   z-index: 99;
   transform: scale(0);
 }

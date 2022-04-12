@@ -18,6 +18,7 @@ import Orchard from './pages/Orchard';
 // components
 import Header from './components/Header';
 // Marketplace
+import Marketplace from './components/Marketplace';
 import NoMatch from './pages/NoMatch';
 
 const httpLink = createHttpLink({
@@ -42,6 +43,7 @@ const client = new ApolloClient({
 function App() {
   const [showStyle, setShowStyle] = useState(false);
   const [showLeaderboard, setShowLeaderboard] = useState(false);
+  const [showMarketplace, setShowMarketplace] = useState(false);
 
   // Dev Stuff - Remove for Production
   const [showDevNav, setShowDevNav] = useState(false);
@@ -50,7 +52,10 @@ function App() {
     <ApolloProvider client={client} >
       <Router>
         <GlobalProvider>
-          <Header />
+          <Header
+            showLeaderboard={showLeaderboard} setShowLeaderboard={setShowLeaderboard}
+            showMarketplace={showMarketplace} setShowMarketplace={setShowMarketplace}
+          />
           <div className="app app-content">
 
             {/* Dev Stuff */}
@@ -78,7 +83,7 @@ function App() {
                     {/* <Link className='a' to='/highscore'>Leaderboards</Link> */}
                     <button className="btn btn-timer"
                       onClick={() => setShowLeaderboard(!showLeaderboard)}
-                      >Leaderboard</button>
+                    >Leaderboard</button>
                   </li>
                   <li>
                     <button
@@ -98,6 +103,7 @@ function App() {
 
                 {/* Modals */}
                 <Leaderboard showLeaderboard={showLeaderboard} setShowLeaderboard={setShowLeaderboard} />
+                <Marketplace showMarketplace={showMarketplace} setShowMarketplace={setShowMarketplace} />
 
                 {showStyle ? (
                   <StyleReference />
@@ -117,8 +123,8 @@ function App() {
           </div>
         </GlobalProvider>
       </Router>
-      
-      {window.addEventListener('selectstart', function(e) {
+
+      {window.addEventListener('selectstart', function (e) {
         e.preventDefault();
       })}
       {/* {window.addEventListener('contextmenu', function(e) {

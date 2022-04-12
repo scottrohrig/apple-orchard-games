@@ -16,20 +16,18 @@ const resolvers = {
     me: async (parent, args, context) => {
       if (context.user) {
         const userData = await User.findOne({ _id: context.user._id })
-            .select('-__v -password')
-            .populate({path: 'orchards', populate: {path: 'trees'}})
+            .select('-__v -password');
 
           return userData;
       }
 
       throw new AuthenticationError('Not logged in');
     },
-    orchard: async () => {
-      const orchard = await Orchard.findOne({_id: '6254cbfca674664b1831a06a' })
-        .select('-__v -password')
-        .populate({path: 'trees'})
+    orchard: async (parent, { _id }) => {
+      const orchard = await Orchard.findOne({ _id })
+        .select('-__v -password');
 
-      return orchard
+      return orchard;
     }
   },
 
@@ -63,7 +61,7 @@ const resolvers = {
       if (context.user) {
         const user = await User.findByIdAndUpdate(
           { _id: context.user._id },
-          { $push: { juicers: { duration: args.duration } } },
+          { $push: { juicers: args } },
           { new: true }
         );
 
@@ -77,7 +75,7 @@ const resolvers = {
       if (context.user) {
         const user = await User.findByIdAndUpdate(
           { _id: context.user._id },
-          { $push: { mashers: { duration: args.duration } } },
+          { $push: { mashers: args } },
           { new: true }
         );
 
@@ -91,7 +89,7 @@ const resolvers = {
       if (context.user) {
         const user = await User.findByIdAndUpdate(
           { _id: context.user._id },
-          { $push: { ovens: { duration: args.duration } } },
+          { $push: { ovens: args } },
           { new: true }
         );
 
@@ -104,12 +102,10 @@ const resolvers = {
     addTree: async (parent, args, context) => {
       if (context.user) {
         const orchard = await Orchard.findOneAndUpdate(
-          args.orchardId,
-          { $push: { trees: { duration: args.duration } } },
+          {_id: args.orchardId },
+          { $push: { trees: args } },
           { new: true, runValidators: true }
         );
-
-        console.log(orchard);
 
         return orchard;
       }
@@ -120,9 +116,13 @@ const resolvers = {
     addOrchard: async (parent, args, context) => {
         if (context.user) {
             // create a new orchard
-            const orchard = await Orchard.create({trees: []})
-            // const orchard = new Orchard();
-            // add the new orchard to the User's orchards array
+            const orchard = await Orchard.create({ orchard_name: args.orchard_name })
+            // add the new orchard to the User's orchardId array
+            await User.findOneAndUpdate(
+              { _id: context.user._id },
+              { $push: { orchardId: orchard._id } },
+              { new: true }
+            );
             // return the new orchard
             return orchard;
         }

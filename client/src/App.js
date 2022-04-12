@@ -59,7 +59,7 @@ function App() {
           <div className="app app-content">
 
             {/* Dev Stuff */}
-            <button className="btn dev-btn" onClick={() => setShowDevNav(!showDevNav)}>Toggle Dev Navigation</button>
+            <button className="btn dev-btn" onClick={() => setShowDevNav(!showDevNav)}>Dev Navigation</button>
             <header  className={`app-header dev-nav modal ${showDevNav && 'modal-active'}`}>
               <div>
                 <h1>Apple Orchard Games</h1>

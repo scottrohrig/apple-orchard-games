@@ -40,11 +40,14 @@ function Header(props) {
             </div>
 
             <div className="disp-user">
-              <button className="btn btn-profile"
-                      onClick={() => {
-                        setShowLeaderboard(!showLeaderboard)
-                        setShowMarketplace(false)
-                      }}>
+              <button className="btn btn-leaderboard"
+                onClick={() => {
+                  setShowLeaderboard(!showLeaderboard)
+                  setShowMarketplace(false)
+                }}>
+                <i className="fa-solid fa-trophy"></i>
+              </button>
+              <button className="btn btn-profile">
                 <i className="fa-solid fa-circle-user"></i>
               </button>
             </div>
@@ -55,12 +58,14 @@ function Header(props) {
       <div className="nav-buttons">
         <Link to='/home' className="btn btn-nav">
           <i className="fa-solid fa-house-chimney-window"></i>
+          <span>Dashboard</span>
         </Link >
         <button className="btn btn-nav"
-                      onClick={() => {setShowMarketplace(!showMarketplace)
-                        setShowLeaderboard(false)
-                      }}>
+          onClick={() => {setShowMarketplace(!showMarketplace)
+            setShowLeaderboard(false)
+          }}>
           <i className="fa-solid fa-cart-shopping"></i>
+          <span>Shop</span>
         </button >
       </div>
     </div>

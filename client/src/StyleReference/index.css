@@ -16,6 +16,7 @@
     --display-money-dark: #09371C;
     --display-banner-main: #C29964;
     --display-banner-dark: #AA7F48;
+    --gold: #FFD814;
     --form-background: #F7F7F3;
     --form-border: #DEDED6;
     --form-text: #838382;
@@ -37,7 +38,7 @@
 body {
   background-color: var(--main-color);
   margin: 0;
-  font-family: 'Lilita One', cursive;
+  font-family: 'Yeseva One', cursive;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -52,7 +53,8 @@ h2.page-title {
   font-weight: 400;
 }
 
-.btn, .btn:hover, p, p:hover { transition: all .5s ease-in-out; }
+div, div:hover, a, a:hover, .btn, .btn:hover, p, p:hover { transition: all .5s ease-in-out; }
+a { text-decoration: none; }
 
 img {
   pointer-events: none;
@@ -71,6 +73,7 @@ img {
   position: fixed;
   top: 0;
   font-size: 24px;
+  justify-content: center;
 }
 
 header.component-header {
@@ -79,7 +82,7 @@ header.component-header {
 .info-boxes {
   flex: 1;
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   justify-content: space-between;
   align-content: center;
 }
@@ -110,31 +113,9 @@ header.component-header {
   font-family: 'Fredoka', cursive;
   font-weight: 600;
   line-height: 1;
-  font-size: 1.2em;
 }
 .profile-link {
   align-self: center;
-}
-
-/* counters */
-.gem-count {
-background-color: var(--btn-timer-dark);
-  display: inline-block;
-  padding: 6px 12px 8px;
-  border-radius: 2px;
-  font-size: 20px;
-  font-family: 'Fredoka', cursive;
-  font-weight: 600;
-  color: #FFF;
-}
-.apple-count {
-  background-color: var(--display-money-light);
-  padding: 6px 12px 8px;
-  border-radius: 2px;
-  font-size: 20px;
-  font-family: 'Fredoka', cursive;
-  font-weight: 600;
-  color: #FFF;
 }
 
 /* BUTTONS */
@@ -147,7 +128,7 @@ background-color: var(--btn-timer-dark);
   font-weight: 600;
   color: #FFF;
 }
-.btn:hover {
+.btn:hover, .btn i:hover, .btn span:hover {
   cursor: pointer;
   filter: brightness(120%);
 }
@@ -157,7 +138,7 @@ background-color: var(--btn-timer-dark);
   text-shadow: 1px 1px var(--btn-shop-dark);
   box-shadow: inset -2px -2px var(--btn-shop-dark), inset 2px 2px var(--btn-shop-light);
 }
-.btn-shop:hover {
+.btn-shop:hover, .btn-nav:hover, .btn-leaderboard:hover {
   animation: pulse 2s infinite linear;
 }
 .btn-timer {
@@ -184,25 +165,45 @@ background-color: var(--btn-timer-dark);
   background-color: transparent;
   color: var(--form-background);
   transform: scale(1.3);
-  margin: 5px 5px 5px 10px;
+  margin: 5px 10px 5px 5px;
   padding: 0;
 }
 .btn-profile:hover {
   transform: scale(1.4);
+}
+.btn-leaderboard {
+  background-color: var(--gold);
+  color: var(--wood-dark);
+  padding: 5px;
+  margin: 0 5px;
+}
+.btn-leaderboard:hover {
+  filter: brightness(100%);
 }
 
 .nav-buttons {
   display: flex;
   flex-wrap: nowrap;
   justify-content: center;
+  margin: 5px 0;
 }
 .btn-nav {
-  padding: 0 5px;
-  background-color: transparent;
-  transform: scale(1.1);
+  padding: 6px 8px;
+  background-color: var(--btn-shop-main);
+  align-self: center;
+  display: flex;
+  align-items: center;
 }
-.btn-nav:hover {
-  transform: scale(1.2);
+.btn-nav:not(:first-child) {
+  margin-left: 5px;
+}
+.btn-nav i {
+  font-size: .9em;
+}
+.btn-nav span {
+  margin: 0 0 0 5px;
+  font-size: .8em;
+  text-transform: uppercase;
 }
 
 
@@ -271,10 +272,6 @@ background-color: var(--btn-timer-dark);
 .display-banner::before, .display-banner::after {
   position: absolute;
   content: '';
-  /* padding: 0 15px;
-  background-color: var(--display-banner-main);
-  z-index: -1;
-  margin: 22px 0 0; */
   background: url(../assets/images/banner.svg) no-repeat;
   background-size: 56px;
   padding: 28px;
@@ -283,22 +280,10 @@ background-color: var(--btn-timer-dark);
 }
 .display-banner::before {
   left: -30px;
-  /* left: -20px;
-  border-radius: 0 0 5px 0;
-  border-top: 12px solid var(--display-banner-main);
-  border-bottom: 12px solid var(--display-banner-main);
-  border-left: 12px solid transparent;
-  background-clip: padding-box; */
 }
 .display-banner::after {
   transform: scaleX(-1);
   right: -30px;
-  /* right: -20px;
-  border-radius: 0 0 0 5px;
-  border-top: 12px solid var(--display-banner-main);
-  border-bottom: 12px solid var(--display-banner-main);
-  border-right: 12px solid transparent;
-  background-clip: padding-box; */
 }
 
 
@@ -645,5 +630,8 @@ background-color: var(--btn-timer-dark);
     background-color: var(--wood-dark);
     transform: scale(1.3);
     margin: 0 10px;
+  }
+  .btn-nav span {
+    display: none;
   }
 }

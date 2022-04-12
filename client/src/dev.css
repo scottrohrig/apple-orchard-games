@@ -23,9 +23,9 @@
 
   .dev-btn {
       position: fixed;
-      bottom: 20px; left: 20px;
+      top: 60px; right: 10px;
       z-index: 1000;
-      font-size: 24px;
+      font-size: 20px;
       color: var(--main-darkest);
   }
   .dev-nav {

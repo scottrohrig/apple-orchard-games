@@ -123,7 +123,7 @@ export default function Marketplace({ showMarketplace, setShowMarketplace }) {
           </button>
 
           <h2 className='page-title'><p className="display-banner">Farmers Marketplace</p></h2>
-          <h3 classname='sub-title'
+          <h3 className='sub-title'
             style={{ textAlign: 'center', marginTop: '1rem' }}
           >Buy Upgrades & Gems</h3>
 

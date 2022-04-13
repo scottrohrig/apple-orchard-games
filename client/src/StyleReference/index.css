@@ -38,7 +38,8 @@
 body {
   background-color: var(--main-color);
   margin: 0;
-  font-family: 'Yeseva One', cursive;
+  overflow-x: hidden;
+  font-family: 'Fredoka', cursive;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -58,6 +59,10 @@ a { text-decoration: none; }
 
 img {
   pointer-events: none;
+}
+
+.text-center {
+  text-align: center;
 }
 
 .app-content {
@@ -128,7 +133,7 @@ header.component-header {
   font-weight: 600;
   color: #FFF;
 }
-.btn:hover, .btn i:hover, .btn span:hover {
+.btn:hover, .btn i:hover, .btn span:hover, button:hover {
   cursor: pointer;
   filter: brightness(120%);
 }
@@ -325,10 +330,6 @@ header.component-header {
 .form-control:focus {
   outline: none;
   border: 1px solid var(--main-darker);
-}
-.form-submit {
-  background-color: var(--display-money-main);
-  text-shadow: 1px 1px var(--display-money-dark);
 }
 
 

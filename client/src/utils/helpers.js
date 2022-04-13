@@ -1,8 +1,10 @@
 import { useEffect, useRef, useState } from 'react';
 
+
 export function getTimeRemaining(startedAtTime, duration) {
   const now = new Date()
-  return duration - Math.floor((now - startedAtTime) / 1000)
+  const tr = Math.max(duration - Math.floor((now - startedAtTime) / 1000),0)
+  return tr
 }
 
 export function formatTime(rawTime) {

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Link, Route, Routes } from 'react-router-dom';
 import { ApolloProvider, ApolloClient, InMemoryCache, createHttpLink } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 
@@ -8,6 +8,7 @@ import StyleReference from "./StyleReference";
 import './dev.css';
 
 import { GlobalProvider } from './utils/GlobalState';
+import Auth from './utils/auth';
 
 // pages
 // import Login from './components/Login';
@@ -53,10 +54,10 @@ function App() {
     <ApolloProvider client={client} >
       <Router>
         <GlobalProvider>
-          <Header
+          {Auth.loggedIn() && <Header
             showLeaderboard={showLeaderboard} setShowLeaderboard={setShowLeaderboard}
             showMarketplace={showMarketplace} setShowMarketplace={setShowMarketplace}
-          />
+          />}
           <div className="app app-content">
 
             {/* Dev Stuff */}
@@ -112,16 +113,16 @@ function App() {
                 {showStyle ? (
                   <StyleReference />
                 ) : (
-                  <Switch >
-                    <Route exact path='/login' component={Splash} />
+                  <Routes >
+                    <Route path='/login' element={<Splash />} />
                     {/* <Route exact path='/login' component={Login} />
                     <Route exact path='/signup' component={Signup} /> */}
-                    <Route exact path='/home' component={Dashboard} />
-                    <Route exact path='/orchard/:id' component={Orchard} />
+                    <Route path='/home' element={<Dashboard />} />
+                    <Route path='/orchard/:id' element={<Orchard />} />
                     {/* <Route exact path='/highscore' component={Leaderboard} /> */}
                     {/* <Route exact path='/shop' component={Shop} /> */}
-                    <Route component={NoMatch} />
-                  </Switch>
+                    <Route element={<NoMatch />} />
+                  </Routes>
                 )}
               </div>
             </div>

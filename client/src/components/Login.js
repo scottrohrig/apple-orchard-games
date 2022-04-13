@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 // import mutation hook
 import { useMutation } from '@apollo/client';
 // import Redirect, Link for router
-import { Redirect, Link } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 // import login mutation
 import { LOGIN_USER } from '../utils/mutations';
 // import auth class to handle json web token decoding
@@ -20,7 +20,7 @@ const Login = ({ showLogin, setShowLogin, setShowSignup, setShowStartButton }) =
 
   // redirect the user to /home if user is logged in
   if (Auth.loggedIn()) {
-    return <Redirect to="/home" />;
+    return <Navigate to="/home" replace={true} />;
   };
 
   // define the login function to handle the LOGIN mutation

@@ -42,18 +42,16 @@ export const ADD_ORCHARD = gql`
 
 // add tree (// update orchard => adding new tree)
 export const ADD_TREE = gql`
-  mutation addTree($orchardId: ID!) {
-    addTree(orchardId: $orchardId) {
+mutation addTree {
+  addTree {
+    _id
+    trees {
       _id
-      orchard_name
-      treeCount
-      trees {
-        _id
-        duration
-      }
     }
   }
+}
 `;
+
 
 // add masher
 export const ADD_MASHER = gql`

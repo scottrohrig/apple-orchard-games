@@ -3,7 +3,7 @@ const { AuthenticationError } = require('apollo-server-express');
 const { coerceInputValue } = require('graphql');
 const { Schema } = require('mongoose');
 // require necessary models
-const { User, Orchard } = require('../models');
+const { User } = require('../models');
 // require auth
 const { signToken } = require('../utils/auth');
 
@@ -24,11 +24,7 @@ const resolvers = {
 
       throw new AuthenticationError('Not logged in');
     },
-    orchard: async (parent, { _id }) => {
-      const orchard = await Orchard.findOne({ _id }).select('-__v -password');
-
-      return orchard;
-    },
+    
   },
 
   Mutation: {
@@ -101,36 +97,20 @@ const resolvers = {
 
     addTree: async (parent, args, context) => {
       if (context.user) {
-        const orchard = await Orchard.findOneAndUpdate(
-          { _id: args.orchardId },
-          { $push: { trees: args } },
-          { new: true, runValidators: true }
-        );
-
-        return orchard;
-      }
-
-      throw new AuthenticationError('You need to be logged in!');
-    },
-
-    addOrchard: async (parent, args, context) => {
-      if (context.user) {
-        // create a new orchard
-        const orchard = await Orchard.create({
-          orchard_name: args.orchard_name,
-        });
-        // add the new orchard to the User's orchardId array
-        await User.findOneAndUpdate(
+        const user = await User.findByIdAndUpdate(
           { _id: context.user._id },
-          { $push: { orchardId: orchard._id } },
+          { $push: { trees: args } },
           { new: true }
         );
-        // return the new orchard
-        return orchard;
+
+        return user;
       }
 
       throw new AuthenticationError('You need to be logged in!');
     },
+
+
+    
 
     // updateJuicer
     // need user ID and juicer ID
@@ -202,27 +182,27 @@ const resolvers = {
       throw new AuthenticationError('You need to be logged in!');
     },
 
-    updateTree: async (parent, args, context) => {
-      if (context.user) {
-        const orchard = await Orchard.findOneAndUpdate(
-          { _id: args.orchardId },
-          {
-            $set: {
-              trees: {
-                treeId: args.treeId,
-                startedAtTime: args.startedAtTime,
-                duration: args.duration,
-              },
-            },
-          },
-          { new: true }
-        );
+    // updateTree: async (parent, args, context) => {
+    //   if (context.user) {
+    //     const orchard = await Orchard.findOneAndUpdate(
+    //       { _id: args.orchardId },
+    //       {
+    //         $set: {
+    //           trees: {
+    //             treeId: args.treeId,
+    //             startedAtTime: args.startedAtTime,
+    //             duration: args.duration,
+    //           },
+    //         },
+    //       },
+    //       { new: true }
+    //     );
 
-        return orchard;
-      }
+    //     return orchard;
+    //   }
 
-      throw new AuthenticationError('You need to be logged in!');
-    },
+    //   throw new AuthenticationError('You need to be logged in!');
+    // },
 
     // updateUser
     // find user by id

@@ -42,8 +42,8 @@ export const ADD_ORCHARD = gql`
 
 // add tree (// update orchard => adding new tree)
 export const ADD_TREE = gql`
-mutation addTree {
-  addTree {
+mutation addTree($duration: Int) {
+  addTree(duration: $duration) {
     _id
     trees {
       _id
@@ -55,7 +55,7 @@ mutation addTree {
 
 // add masher
 export const ADD_MASHER = gql`
-  mutation addMasher {
+  mutation addMasher($duration: Int) {
     addMasher {
       mashers {
         _id
@@ -66,7 +66,7 @@ export const ADD_MASHER = gql`
 
 // add juicer
 export const ADD_JUICER = gql`
-  mutation addJuicer {
+  mutation addJuicer($duration: Int) {
     addJuicer {
       juicers {
         _id
@@ -77,7 +77,7 @@ export const ADD_JUICER = gql`
 
 // add oven
 export const ADD_OVEN = gql`
-  mutation addOven {
+  mutation addOven($duration: Int) {
     addOven {
       ovens {
         _id
@@ -175,7 +175,7 @@ export const SET_JUICER = gql`
 
 // update oven
 export const SET_OVEN = gql`
-  mutation updateOven($juicerId: ID!, $startedAtTime: Date!, $duration: Int) {
+  mutation updateOven($ovenId: ID!, $startedAtTime: Date!, $duration: Int) {
     updateOven(
       ovenId: $ovenId
       startedAtTime: $startedAtTime

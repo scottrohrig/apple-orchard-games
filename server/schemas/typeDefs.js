@@ -62,10 +62,10 @@ const typeDefs = gql`
   type Mutation {
     login(email: String!, password: String!): Auth
     addUser(username: String!, email: String!, password: String!): Auth
-    addTree: User
-    addMasher: User
-    addOven: User
-    addJuicer: User
+    addTree(duration: Int): User
+    addMasher(duration: Int): User
+    addOven(duration: Int): User
+    addJuicer(duration: Int): User
     updateUser(username: String, email: String, password: String, gemCount: Int, appleCount: Int, money: Int): User
     updateTree(treeId: ID!, startedAtTime: Date!, duration: Int): User
     updateMasher(masherId: ID!, startedAtTime: Date!, duration: Int): User

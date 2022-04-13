@@ -30,10 +30,8 @@ export const reducer = (state = [], action) => {
     // case update juicers
     case UPDATE_JUICERS:
 
-      let placeholder = (action.payload.length < 5) ? {} : null
-
       return {
-        ...state, juicers: [...action.payload, placeholder]
+        ...state, juicers: [...action.payload]
       }
 
     case UPDATE_JUICER:
@@ -77,15 +75,8 @@ export const reducer = (state = [], action) => {
       };
 
     case BUY_JUICER:
-      const boughtJuicers = state.juicers;
+      const boughtJuicers = [...state.juicers, action.payload]
 
-      // insert juicer to placeholder space
-      boughtJuicers.splice(boughtJuicers.length - 2, 0, action.payload);
-
-      if (boughtJuicers.length > 5) {
-        boughtJuicers.pop();
-        return { ...state, juicers: boughtJuicers };
-      }
       return {
         ...state,
         juicers: boughtJuicers,

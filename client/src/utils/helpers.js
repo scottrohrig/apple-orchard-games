@@ -3,7 +3,8 @@ import { useEffect, useRef, useState } from 'react';
 
 export function getTimeRemaining(startedAtTime, duration) {
   const now = new Date()
-  const tr = Math.max(duration - Math.floor((now - startedAtTime) / 1000),0)
+  const then = new Date(startedAtTime)
+  const tr = Math.max(duration - Math.floor((now - then) / 1000),0)
   return tr
 }
 

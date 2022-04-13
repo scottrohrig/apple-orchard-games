@@ -36,7 +36,6 @@ export default function Marketplace({ showMarketplace, setShowMarketplace }) {
 
   useEffect( () => {
     // SERVER-SIDE update the user's money and appleCount
-    //
      updateUser({variables: {money: state.money, appleCount}})
   })
 

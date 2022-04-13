@@ -1,5 +1,6 @@
 // import
 import { useGlobalContext } from "../utils/GlobalState";
+import { Redirect } from 'react-router-dom';
 
 import { useMutation } from "@apollo/client";
 import { UPDATE_USER } from "../utils/mutations";
@@ -11,8 +12,14 @@ import MashersRow from "../components/upgrades/MasherRow";
 import OvensRow from "../components/upgrades/OvenRow";
 
 function Dashboard() {
+
   const [state] = useGlobalContext();
   const [updateDB, { error }] = useMutation(UPDATE_USER);
+
+  // redirect user to /login page if not logged in
+  if (!Auth.loggedIn()) {
+    return <Redirect to="/login" />;
+  };
 
   const handleDBUpdateButton = async (evt) => {
     evt.preventDefault();

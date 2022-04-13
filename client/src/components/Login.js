@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 // import mutation hook
-
 import { useMutation } from '@apollo/client';
-// import Link for router
-import { Link } from 'react-router-dom';
+// import Redirect, Link for router
+import { Redirect, Link } from 'react-router-dom';
 // import login mutation
 import { LOGIN_USER } from '../utils/mutations';
 // import auth class to handle json web token decoding
@@ -11,6 +10,7 @@ import Auth from '../utils/auth';
 
 // define Login component function
 const Login = (props) => {
+
   // set the default form state
   const [formState, setFormState] = useState({
     email: '',
@@ -18,6 +18,11 @@ const Login = (props) => {
   });
 
   const [login, { error }] = useMutation(LOGIN_USER);
+
+  // redirect the user to /home if user is logged in
+  if (Auth.loggedIn()) {
+    return <Redirect to="/home" />;
+  };
 
   // define the login function to handle the LOGIN mutation
   const handleChange = (event) => {

@@ -1,56 +1,50 @@
-import { useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { APPLES_FOR_MONEY } from '../utils/actions';
 import { useGlobalContext } from '../utils/GlobalState';
 import './shop.css';
+
+import { useQuery, useMutation } from '@apollo/client';
+import { UPDATE_USER } from '../utils/mutations';
+import { QUERY_ME } from '../utils/queries';
 
 export default function Marketplace({ showMarketplace, setShowMarketplace }) {
 
   const [state, dispatch] = useGlobalContext();
   const { appleCount, gameVariables } = state;
 
+  const {loading, data } = useQuery(QUERY_ME)
+  const [updateUser, {error}] = useMutation(UPDATE_USER)
 
   // for input field in apples to sell form
   const [applesToSell, setApplesToSell] = useState(0);
 
   // sell apples
-  function handleSellApples(evt) {
-
-
-
-    let success = false
-    console.log(
-      "Error check, then remove " +
-      applesToSell +
-      " apples from inventory, \nincrease gameDollars by $" +
-      applesToSell * gameVariables.appleSaleRevenue +
-      ", \nand deactivate this button if there are no apples left."
-    );
+  function handleSellApples(event) {
 
     const payload = Math.max(applesToSell,0)
-    console.log('payload',payload);
-    dispatch({
-      type: APPLES_FOR_MONEY,
-      payload
-    })
-
-    if (success) {
-      applesToSell = Math.max(appleCount, 0)
+    try {
+      console.log('Update AppleCount Payload:',payload);
+      dispatch({
+        type: APPLES_FOR_MONEY,
+        payload
+      })
+    } catch (error) {
+      console.error(error);
     }
 
   }
 
+  useEffect( () => {
+    // SERVER-SIDE update the user's money and appleCount
+    //
+     updateUser({variables: {money: state.money, appleCount}})
+  })
 
   // buy gems
-  function handleBuyGems(evt) {
-    evt.preventDefault();
+  function handleBuyGems(event) {
+    console.log('TODO: handleBuyingGems');
 
-    console.log(
-      "go to stripe, charge $" +
-      gameVariables.gemPurchaseCost +
-      ". If sale is confirmed, add " +
-      gameVariables.gemsFromPurchase +
-      " gems to the inventory."
-    );
+
   }
 
   return (

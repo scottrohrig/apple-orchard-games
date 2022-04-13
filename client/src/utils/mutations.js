@@ -68,8 +68,8 @@ export const ADD_MASHER = gql`
 
 // add juicer
 export const ADD_JUICER = gql`
-  mutation addJuicer {
-    addJuicer {
+  mutation addJuicer($duration: Int) {
+    addJuicer(duration: $duration) {
       juicers {
         _id
         startedAtTime
@@ -160,26 +160,31 @@ export const SET_MASHER = gql`
 // update juicer (started at time and duration variables)
 
 export const SET_JUICER = gql`
-  mutation updateJuicer($juicerId: ID!, $startedAtTime: Date!, $duration: Int) {
-    updateJuicer(
-      juicerId: $juicerId
-      startedAtTime: $startedAtTime
-      duration: $duration
+mutation updateJuicer(
+  $juicerId: ID!,
+  $startedAtTime: Date!,
+  $duration: Int
+  ){
+  updateJuicer(
+    juicerId: $juicerId,
+    startedAtTime: $startedAtTime,
+    duration: $duration
     ) {
+    _id
+    username
+    juicerCount
+    juicers {
       _id
-      username
-      juicers {
-        _id
-        startedAtTime
-        duration
-      }
+      startedAtTime
+      duration
     }
   }
+}
 `;
 
 // update oven
 export const SET_OVEN = gql`
-  mutation updateOven($juicerId: ID!, $startedAtTime: Date!, $duration: Int) {
+  mutation updateOven($ovenId: ID!, $startedAtTime: Date!, $duration: Int) {
     updateOven(
       ovenId: $ovenId
       startedAtTime: $startedAtTime

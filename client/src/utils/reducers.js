@@ -32,10 +32,9 @@ export const reducer = (state = [], action) => {
 
       let placeholder = (action.payload.length < 5) ? {} : null
 
-      // #HACK to set null duration to 60
-      const juicers = action.payload.map(juicer=>{return {...juicer, duration: 60}})
-
-      return {...state, juicers: [...juicers, placeholder]}
+      return {
+        ...state, juicers: [...action.payload, placeholder]
+      }
 
     case UPDATE_JUICER:
       let updatedJuicers = state.juicers.map((juicer) =>
@@ -181,18 +180,6 @@ export const reducer = (state = [], action) => {
         appleCount: remainingApples,
         money: newBalance
       }
-
-    case UPDATE_TIMERS:
-      return state.map((timer) => {
-        if (timer.isRunning) {
-          timer = {
-            ...timer,
-            startedAtTime: (timer.startedAtTime += action.payload.deltaTime),
-          };
-        }
-
-        return timer;
-      });
   }
 };
 

@@ -29,7 +29,7 @@ const defaultStartTime = new Date()
 
 const GlobalProvider = ({ value = [], ...props }) => {
   const [state, dispatch] = useAppReducer({
-    money: 100,
+    money: 3,
     appleCount: 500,
     gemCount: 20,
 

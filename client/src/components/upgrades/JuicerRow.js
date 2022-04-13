@@ -14,11 +14,9 @@ export default function JuicersRow() {
 
   // destructure the items list from the global state object
   const { juicers } = state;
-  console.log('GSTATE_JUICERS...', juicers);
 
   useEffect(() => {
     if (itemData) {
-      console.log('SERVER_JUICERS...', itemData.me.juicers);
 
       const serverJuicers = itemData.me.juicers;
 
@@ -31,16 +29,22 @@ export default function JuicersRow() {
     } else if (!loading) {
 
       console.log('loading');
+      dispatch({
+        type: UPDATE_JUICERS,
+        payload: juicers
+      })
     }
   }, [itemData, loading, dispatch]);
 
 
   const handlePurchase = async (event) => {
-    event.preventDefault();
-
-    console.log('purchased upgrade');
 
     // validate enough money
+    const money = state.money
+    const juicerCost = state.gameVariables.juicerCost
+    if (money < juicerCost ) {
+      return
+    }
 
     let newJuicer;
     // dispatch ADD_JUICER
@@ -55,9 +59,8 @@ export default function JuicersRow() {
     } catch (e) {
       console.error(e);
     }
+    
     if (newJuicer) {
-
-      console.log('dispatching to GameState');
       try {
         const payload = {
           ...newJuicer,

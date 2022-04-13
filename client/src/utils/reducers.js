@@ -31,7 +31,11 @@ export const reducer = (state = [], action) => {
     case UPDATE_JUICERS:
 
       let placeholder = (action.payload.length < 5) ? {} : null
-      return {...state, juicers: [...action.payload, placeholder]}
+
+      // #HACK to set null duration to 60
+      const juicers = action.payload.map(juicer=>{return {...juicer, duration: 60}})
+
+      return {...state, juicers: [...juicers, placeholder]}
 
     case UPDATE_JUICER:
       let updatedJuicers = state.juicers.map((juicer) =>

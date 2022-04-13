@@ -1,6 +1,7 @@
 // import
 import { useGlobalContext } from "../utils/GlobalState";
 import { Redirect } from 'react-router-dom';
+import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom';
 
 import { useMutation } from "@apollo/client";
 import { UPDATE_USER } from "../utils/mutations";
@@ -10,6 +11,8 @@ import Auth from "../utils/auth";
 import JuicersRow from "../components/upgrades/JuicerRow";
 import MashersRow from "../components/upgrades/MasherRow";
 import OvensRow from "../components/upgrades/OvenRow";
+
+const woodSign = '../assets/images/wood_sign.png';
 
 function Dashboard() {
 
@@ -79,6 +82,17 @@ function Dashboard() {
       </button>
 
       <div className="form-label">Dashboard</div>
+      
+      {/* It would be great to use a background image for this link -- there is a wood sign image available, and code below that doesn't seem to do the trick. */}
+
+      <Link style={{fontSize: 20, color: "red"}} to='/orchard/1'>Click Here To Go To Orchard</Link>
+
+      {/* <Link style={{backgroundImage:`url$({woodSign}))`, backgroundRepeat:"no-repeat",backgroundSize:"contain", height: "100px"}} to='/orchard/1'>To Orchard</Link>
+        */}
+      
+      
+
+      
       <div className="container">
         Stats Container
         <div className="left"></div>

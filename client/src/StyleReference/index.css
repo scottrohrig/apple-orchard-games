@@ -621,6 +621,7 @@ header.component-header {
   .nav-buttons {
     position: fixed;
     bottom: 0;
+    margin: 0 auto;
     width: 100%;
     padding: 10px 0 20px 0;
     background-image: linear-gradient(to bottom, rgba(95,131,33,0), rgba(95,131,33,1));

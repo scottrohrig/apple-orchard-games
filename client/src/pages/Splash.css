@@ -121,7 +121,7 @@
     background-image: linear-gradient(to bottom, var(--main-color), var(--main-darkest));
     content: '';
     position: absolute;
-    margin: 380px -50px;
+    margin: 385px -50px 0;
 }
 .splash-animation img#cloud {
     width: 360px;
@@ -133,11 +133,11 @@
     width: 240px;
     position: absolute;
     right: 50px;
-    top: 210px;
+    top: 215px;
 }
 .splash-animation img.barn-shadow {
     right: 52px;
-    top: 196px;
+    top: 201px;
 }
 .splash-animation img.tree {
     width: 420px;
@@ -213,4 +213,115 @@
     97% { left: 100%;}
     98% { opacity: 0; }
     100% { opacity: 1; }
+}
+
+
+/* Min: 1440 */
+@media screen and (min-width: 1440px) {
+    .splash-animation {
+        width: 80vw;
+        transform: scale(1.25);
+        top: 12.5vh; left: 10vw;
+    }
+    .splash-animation img.barn {
+        right: 200px;
+    }
+    .splash-animation img.barn-shadow {
+        right: 202px;
+    }
+    .splash-animation img.tree {
+        left: 100px;
+    }
+    .splash-animation img.apple {
+        left: 363px;
+    }
+    .animation-cloud {
+        position: absolute;
+        animation: animation-cloud 60s infinite linear;
+    }
+}
+
+/* Min: 2000 */
+@media screen and (min-width: 2000px) {
+    .splash-animation {
+        width: 60vw;
+        transform: scale(1.75);
+        top: 35vh; left: 20vw;
+    }
+    .splash-animation img.barn {
+        right: 200px;
+    }
+    .splash-animation img.barn-shadow {
+        right: 202px;
+    }
+    .splash-animation img.tree {
+        left: 100px;
+    }
+    .splash-animation img.apple {
+        left: 363px;
+    }
+    .animation-cloud {
+        position: absolute;
+        animation: animation-cloud 80s infinite linear;
+    }
+}
+
+/* Max: 700 */
+@media screen and (max-width: 700px) {
+    .splash-animation img.barn {
+        right: -20px;
+    }
+    .splash-animation img.barn-shadow {
+        right: -18px;
+    }
+    .splash-animation img.tree {
+        left: -20px;
+    }
+    .splash-animation img.apple {
+        left: 243px;
+    }
+    .animation-cloud {
+        position: absolute;
+        animation: animation-cloud 30s infinite linear;
+    }
+}
+
+/* Max: 550 */
+@media screen and (max-width: 550px) {
+    .splash-animation img.barn {
+        right: -80px;
+    }
+    .splash-animation img.barn-shadow {
+        right: -78px;
+    }
+    .splash-animation img.tree {
+        left: -100px;
+    }
+    .splash-animation img.apple {
+        left: 163px;
+    }
+    .animation-cloud {
+        position: absolute;
+        animation: animation-cloud 20s infinite linear;
+    }
+}
+
+/* Max: 400 */
+@media screen and (max-width: 400px) {
+    .splash-animation img.barn {
+        right: -90px;
+    }
+    .splash-animation img.barn-shadow {
+        right: -88px;
+    }
+    .splash-animation img.tree {
+        left: -160px;
+    }
+    .splash-animation img.apple {
+        left: 103px;
+    }
+    .animation-cloud {
+        position: absolute;
+        animation: animation-cloud 15s infinite linear;
+    }
 }

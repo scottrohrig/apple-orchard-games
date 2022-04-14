@@ -11,7 +11,7 @@ module.exports = {
     signToken: function({ username, email, _id }) {
         const payload = { username, email, _id };
 
-        return jwt.sign({ data: payload }, secret, { expiresIn: expiration });
+        return jwt.sign({ data: payload }, secret);
     },
 
     // set up authMiddleware function
@@ -32,10 +32,10 @@ module.exports = {
         try {
             // destructure data, store in req object
             // check that secret matches jwt.sign() token
-            const { data } = jwt.verify(token, secret, { maxAge: expiration });
+            const { data } = jwt.verify(token, secret);
             req.user = data;
         } catch {
-            console.log('Invalid token');
+            console.log('Invalid token...see auth.js');
         }
 
         // return updated req object

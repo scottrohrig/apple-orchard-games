@@ -5,7 +5,8 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "watch": "nodemon"
+    "watch": "nodemon",
+    "seed": "node seeders/seed.js"
   },
   "keywords": [],
   "author": "",
@@ -19,6 +20,7 @@
     "mongoose": "^6.2.9"
   },
   "devDependencies": {
+    "faker": "^4.1.0",
     "nodemon": "^2.0.15"
   }
 }

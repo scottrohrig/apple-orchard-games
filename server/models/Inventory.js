@@ -1,10 +1,13 @@
 const { Schema } = require('mongoose');
+const juicerSchema = require('./Juicer');
+const masherSchema = require('./Masher');
+const ovenSchema = require('./Oven');
 
 const inventorySchema = new Schema(
     {
-        juicers: [Juicer],
-        ovens: [Oven],
-        mashers: [Masher]
+        juicers: [juicerSchema],
+        ovens: [ovenSchema],
+        mashers: [masherSchema]
     },
     {
         toJSON: {

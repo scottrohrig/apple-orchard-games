@@ -1,79 +1,103 @@
-import "./App.css";
-import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom';
-import { useState } from "react";
-import StyleReference from "./StyleReference";
+import { useState } from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import {
+  ApolloProvider,
+  ApolloClient,
+  InMemoryCache,
+  createHttpLink,
+} from '@apollo/client';
+import { setContext } from '@apollo/client/link/context';
 
-// pages
-import Login from './pages/Login';
-import Signup from './pages/Signup';
+import './App.css';
+import './StyleReference';
+
+import { GlobalProvider } from './utils/GlobalState';
+import Auth from './utils/auth';
+
+import Splash from './pages/Splash';
 import Dashboard from './pages/Dashboard';
-import Leaderboard from "./pages/Leaderboard";
+import Leaderboard from './pages/Leaderboard';
+import Profile from './pages/Profile';
 import Orchard from './pages/Orchard';
-// Marketplace
+import Header from './components/Header';
+import Marketplace from './components/Marketplace';
 import NoMatch from './pages/NoMatch';
 
+const httpLink = createHttpLink({
+  uri: '/graphql',
+});
+
+const authLink = setContext((_, { headers }) => {
+  const token = localStorage.getItem('id_token');
+  return {
+    headers: {
+      ...headers,
+      authorization: token ? `Bearer ${token}` : '',
+    },
+  };
+});
+
+const client = new ApolloClient({
+  link: authLink.concat(httpLink),
+  cache: new InMemoryCache(),
+});
+
 function App() {
-  const [showStyle, setShowStyle] = useState(false);
+  const [showLeaderboard, setShowLeaderboard] = useState(false);
+  const [showProfile, setShowProfile] = useState(false);
+  const [showMarketplace, setShowMarketplace] = useState(false);
 
   return (
-    <Router>
-
-      <div className="app">
-
-        <header className="app-header">
-          <div>
-            <h1>Apple Orchard Games</h1>
-          </div>
-
-          <nav>
-            <ul>
-              <li>
-                <Link className='a' to='/login'>Login</Link>
-              </li>
-              <li>
-                <Link className='a' to='/signup'>Signup</Link>
-              </li>
-              <li>
-                <Link className='a' to='/orchard/1'>Orchard</Link>
-              </li>
-              <li>
-                <Link className='a' to='/home'>Dashboard</Link>
-              </li>
-              <li>
-                <Link className='a' to='/highscore'>Leaderboards</Link>
-              </li>
-              <li>
-                <button
-                  className="btn btn-timer"
-                  onClick={() => setShowStyle(!showStyle)}
-                >
-                  Style Ref
-                </button>
-              </li>
-            </ul>
-          </nav>
-        </header>
-
-        <div style={{ margin: "2rem auto" }}>
-          <div className='container'>
-
-          {showStyle ? (
-            <StyleReference />
-            ) : (
-              <Switch >
-              <Route exact path='/login' component={Login} />
-              <Route exact path='/signup' component={Signup} />
-              <Route exact path='/home' component={Dashboard} />
-              <Route exact path='/orchard/:id' component={Orchard} />
-              <Route exact path='/highscore' component={Leaderboard} />
-              {/* <Route exact path='/shop' component={Shop} /> */}
-              <Route component={NoMatch} />
-            </Switch>
+    <ApolloProvider client={client}>
+      <GlobalProvider>
+        <Router>
+          {Auth.loggedIn() && (
+            <Header
+              showLeaderboard={showLeaderboard}
+              setShowLeaderboard={setShowLeaderboard}
+              showProfile={showProfile}
+              setShowProfile={setShowProfile}
+              showMarketplace={showMarketplace}
+              setShowMarketplace={setShowMarketplace}
+            />
           )}
+          <div className="app app-content">
+            {/* App Stuff */}
+            <div style={{ margin: '2rem auto' }}>
+              <div className="container">
+                {/* Modals */}
+                <Leaderboard
+                  showLeaderboard={showLeaderboard}
+                  setShowLeaderboard={setShowLeaderboard}
+                />
+                <Profile
+                  showProfile={showProfile}
+                  setShowProfile={setShowProfile}
+                />
+                <Marketplace
+                  showMarketplace={showMarketplace}
+                  setShowMarketplace={setShowMarketplace}
+                />
+
+                <Routes>
+                  <Route path="/login" element={<Splash />} />
+                  <Route path="/home" element={<Dashboard />} />
+                  <Route path="/orchard/:id" element={<Orchard />} />
+                  <Route element={<NoMatch />} />
+                </Routes>
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
-    </Router>
+        </Router>
+      </GlobalProvider>
+
+      {window.addEventListener('selectstart', function (e) {
+        e.preventDefault();
+      })}
+      {/* {window.addEventListener('contextmenu', function(e) {
+        e.preventDefault();
+      })} */}
+    </ApolloProvider>
   );
 }
 

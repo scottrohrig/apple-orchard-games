@@ -1,12 +1,18 @@
 const { Schema } = require('mongoose');
+// require Item schema as base
+const Item = require('./Item');
 
 const treeSchema = new Schema({
-  createdAt: {
-    type: Date,
-    default: Date.now,
-  },
   startedAtTime: {
     type: Date,
+  },
+  duration: {
+    type: Number,
+    min: 0,
+    default: 30
+  },
+  isReady: {
+    type: Boolean,
   },
 });
 

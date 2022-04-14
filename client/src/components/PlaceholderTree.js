@@ -50,7 +50,7 @@ export default function PlaceholderTree() {
             className="sz-sm btn btn-harvest"
             onClick={handlePurchaseTreeClick}
           >
-            Purchase Tree
+            Grow Tree
           </button>
         </div>
       </div>

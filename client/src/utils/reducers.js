@@ -2,6 +2,7 @@ import { useReducer } from "react";
 import {
   UPDATE_USER,
   UPDATE_TIMERS,
+  UPDATE_JUICER,
   UPDATE_JUICERS,
   PURCHASE_A_TREE,
   UPDATE_MASHERS,
@@ -29,6 +30,12 @@ export const reducer = (state = [], action) => {
 
     // case update juicers
     case UPDATE_JUICERS:
+
+      return {
+        ...state, juicers: [...action.payload]
+      }
+
+    case UPDATE_JUICER:
       let updatedJuicers = state.juicers.map((juicer) =>
         juicer._id === action.payload._id ? action.payload : juicer
       );
@@ -71,15 +78,8 @@ export const reducer = (state = [], action) => {
       };
 
     case BUY_JUICER:
-      const boughtJuicers = state.juicers;
+      const boughtJuicers = [...state.juicers, action.payload]
 
-      // insert juicer to placeholder space
-      boughtJuicers.splice(boughtJuicers.length - 2, 0, action.payload);
-
-      if (boughtJuicers.length > 5) {
-        boughtJuicers.pop();
-        return { ...state, juicers: boughtJuicers };
-      }
       return {
         ...state,
         juicers: boughtJuicers,
@@ -89,12 +89,14 @@ export const reducer = (state = [], action) => {
       };
 
     case SELL_JUICE:
+      // state.juicers.map(j=>console.log('sell', j._id))
       return {
         ...state,
         money: state.money + state.gameVariables.juiceSaleRevenue,
       };
 
     case APPLES_FOR_JUICE:
+      // state.juicers.map(j=>console.log('apples', j._id))
       return {
         ...state,
         appleCount: state.appleCount - state.gameVariables.makeJuiceApplesUsed,
@@ -173,7 +175,7 @@ export const reducer = (state = [], action) => {
         appleCount: state.appleCount - state.gameVariables.makePieApplesUsed,
       };
 
-    case APPLES_FOR_MONEY: 
+    case APPLES_FOR_MONEY:
       const newBalance = state.money + (action.payload * state.gameVariables.appleSaleRevenue)
       const remainingApples = Math.max(state.appleCount - action.payload, 0)
       return {
@@ -181,18 +183,6 @@ export const reducer = (state = [], action) => {
         appleCount: remainingApples,
         money: newBalance
       }
-
-    case UPDATE_TIMERS:
-      return state.map((timer) => {
-        if (timer.isRunning) {
-          timer = {
-            ...timer,
-            startedAtTime: (timer.startedAtTime += action.payload.deltaTime),
-          };
-        }
-
-        return timer;
-      });
   }
 };
 

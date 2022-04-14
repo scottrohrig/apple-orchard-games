@@ -26,9 +26,11 @@ export default function MashersRow() {
   }, ['itemData', 'loading', dispatch]);
 
   const handlePurchase = async (event) => {
-    console.log('purchased upgrade');
 
     // validate enough money
+    if (state.money < state.gameVariables.masherCost){
+      return
+    }
 
     // dispatch ADD_MASHER
     try {

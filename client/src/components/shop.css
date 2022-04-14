@@ -47,3 +47,29 @@
 .btn-buy:hover {
   animation: pulse 2s infinite linear;
 }
+
+.apple-increment {
+  font-size: 1.5em;
+  margin: 10px 0;
+  display: flex;
+  justify-content: center;
+  line-height: 1;
+}
+.increment-btn {
+  padding: 5px;
+  display: flex;
+  align-items: flex-start;
+}
+.increment-btn:hover, .increment-btn i:hover {
+  cursor: pointer;
+}
+.increment {
+  color: var(--display-money-main);
+}
+.decrement {
+  color: var(--btn-shop-light);
+}
+.apple-count img {
+  width: 30px;
+  margin: 0 5px;
+}

@@ -11,6 +11,7 @@ export const UPDATE_USER = "UPDATE_USER";
 // update trees
 // update mashers
 // update juicers
+export const UPDATE_JUICER = "UPDATE_JUICER";
 export const UPDATE_JUICERS = "UPDATE_JUICERS";
 export const UPDATE_MASHERS = "UPDATE_MASHERS";
 export const UPDATE_OVENS = "UPDATE_OVENS";

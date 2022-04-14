@@ -1,56 +1,61 @@
-import { useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { APPLES_FOR_MONEY } from '../utils/actions';
 import { useGlobalContext } from '../utils/GlobalState';
 import './shop.css';
 
+import apple from '../assets/images/apple.svg';
+import { useQuery, useMutation } from '@apollo/client';
+import { UPDATE_USER } from '../utils/mutations';
+import { QUERY_ME } from '../utils/queries';
+
+import { useIsMount } from '../utils/helpers';
+
 export default function Marketplace({ showMarketplace, setShowMarketplace }) {
 
+  const isMount = useIsMount()
   const [state, dispatch] = useGlobalContext();
   const { appleCount, gameVariables } = state;
 
+  const [updateUser, {error}] = useMutation(UPDATE_USER)
 
   // for input field in apples to sell form
   const [applesToSell, setApplesToSell] = useState(0);
+  const [success, setSuccess] = useState(false)
 
   // sell apples
-  function handleSellApples(evt) {
-
-
-
-    let success = false
-    console.log(
-      "Error check, then remove " +
-      applesToSell +
-      " apples from inventory, \nincrease gameDollars by $" +
-      applesToSell * gameVariables.appleSaleRevenue +
-      ", \nand deactivate this button if there are no apples left."
-    );
+  function handleSellApples(event) {
 
     const payload = Math.max(applesToSell,0)
-    console.log('payload',payload);
-    dispatch({
-      type: APPLES_FOR_MONEY,
-      payload
-    })
-
-    if (success) {
-      applesToSell = Math.max(appleCount, 0)
+    try {
+      console.log('Update AppleCount Payload:',payload);
+      dispatch({
+        type: APPLES_FOR_MONEY,
+        payload
+      })
+      setSuccess(!success)
+    } catch (error) {
+      console.error(error);
     }
 
   }
 
+  useEffect( async () => {
+    if (!isMount) {
+
+      // doesn't occur on page load
+      // if (!loading) {
+        // SERVER-SIDE update the user's money and appleCount
+        const {data} = await updateUser({variables: {money: state.money, appleCount}})
+        console.log('SERVER updateUser called:', data.updateUser);
+        // }
+    }
+  }, [success])
 
   // buy gems
-  function handleBuyGems(evt) {
-    evt.preventDefault();
+  function handleBuyGems(event) {
+    console.log('TODO: handleBuyingGems');
 
-    console.log(
-      "go to stripe, charge $" +
-      gameVariables.gemPurchaseCost +
-      ". If sale is confirmed, add " +
-      gameVariables.gemsFromPurchase +
-      " gems to the inventory."
-    );
+
   }
 
   return (
@@ -77,26 +82,30 @@ export default function Marketplace({ showMarketplace, setShowMarketplace }) {
             <div className='sell-apples'>
               <div className="item-label">Sell Apples</div>
               <div className="card-label">Apples to Sell:</div>
-              <div className='gem-count'>
-                <span><i className="fa-solid fa-angles-left"
-                  onClick={() => setApplesToSell(Math.max(applesToSell - 25, 0))}
-                ></i></span> {' '}
-                <span><i className="fa-solid fa-caret-left"
-                  onClick={() => setApplesToSell(Math.max(applesToSell - 5, 0))}
-                ></i></span>{' '}
-                <span className='apple-count'>{applesToSell}</span>{' '}
-                <span><i className="fa-solid fa-caret-right"
-                  onClick={() => setApplesToSell(Math.min(applesToSell + 5, appleCount))}
-                ></i></span>{' '}
-                <span><i className="fa-solid fa-angles-right"
-                  onClick={() => setApplesToSell(Math.min(applesToSell + 25, appleCount))}
-                ></i></span>
+              <div className='apple-increment'>
+                <span className='increment-btn by-25 decrement'
+                    onClick={() => setApplesToSell(Math.max(applesToSell - 25, 0))}>
+                    <i className="fa-solid fa-angles-left"></i>
+                </span>
+                <span className='increment-btn by-5 decrement'
+                    onClick={() => setApplesToSell(Math.max(applesToSell - 5, 0))}>
+                  <i className="fa-solid fa-minus"></i>
+                </span>
+                <span className='apple-count'><img src={apple} alt='apple' /></span>
+                <span className='increment-btn by-5 increment'
+                    onClick={() => setApplesToSell(Math.min(applesToSell + 5, appleCount))}>
+                  <i className="fa-solid fa-plus"></i>
+                </span>
+                <span className='increment-btn by-25 increment'
+                    onClick={() => setApplesToSell(Math.min(applesToSell + 25, appleCount))}>
+                    <i className="fa-solid fa-angles-right"></i>
+                </span>
               </div>
 
               <p>
-                <button className="btn btn-shop"
+                <button className="btn btn-timer"
                 onClick={()=> {handleSellApples()}}
-                >Sell</button>
+                >Sell {applesToSell} Apples!</button>
               </p>
 
             </div>

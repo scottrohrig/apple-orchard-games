@@ -94,10 +94,12 @@ export default function JuicersRow() {
 
   };
 
+  console.log(juicers);
+  
   return (
     <div className="item-row">
       <span className="item-label">Juice!</span>
-        <div className="item-scroll">
+        {!loading && <div className="item-scroll">
           {
             // map thru juicer objects from GlobalState to add to row
             juicers.map((juicer, i) => {
@@ -108,10 +110,10 @@ export default function JuicersRow() {
               );
             })
           }
-          {(juicers?.length && juicers.length < 5) &&
+          {(juicers.length < 5) &&
             <BuyJuicer handleUpgradePurchased={handleUpgradePurchased} />
           }
-        </div>
+        </div>}
     </div>
   );
 }

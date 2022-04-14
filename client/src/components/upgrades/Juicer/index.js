@@ -54,6 +54,7 @@ const Juicer = ({ props }) => {
             duration
           }
     });
+    console.log('jData', jData);
     // console.log('UPDATED_USERS_JUICERS', jData.updateJuicer.juicers[0]._id, '\nJUICER_ID', juicerId);
 
     setTime(duration);
@@ -62,7 +63,7 @@ const Juicer = ({ props }) => {
   return (
     <>
       <div className='item-container'>
-        {/* {juicerId.slice(juicerId.length - 5)} */}
+        {juicerId.slice(juicerId.length - 5)}
         <div className='temp-img'>
           {isReady
             ? <img src={juiceImg} alt="juicer" />

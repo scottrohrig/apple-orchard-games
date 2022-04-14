@@ -139,14 +139,11 @@ const resolvers = {
     updateJuicer: async (parent, args, context) => {
       if (context.user) {
         const user = await User.findByIdAndUpdate(
-          { _id: context.user._id },
+          { _id: context.user._id, juicers: {$elemMatch: {juicerId: args.juicerId}} },
           {
             $set: {
-              juicers: {
-                juicerId: args.juicerId,
-                startedAtTime: args.startedAtTime,
-                duration: args.duration,
-              },
+                'juicers.$[].startedAtTime': args.startedAtTime,
+                'juicers.$[].duration': args.duration,
             },
           },
           { new: true }

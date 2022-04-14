@@ -8,8 +8,20 @@ import Juicer from './Juicer';
 import BuyJuicer from './PlaceholderJuice';
 
 export default function JuicersRow() {
+
   const { loading, data: itemData } = useQuery(QUERY_ME);
-  const [addJuicer, { error }] = useMutation(ADD_JUICER);
+  const [addJuicer, { addJuicerError }] = useMutation(ADD_JUICER);
+  const [updateJuicer, {
+    data: updateData,
+    loading: updateLoading,
+    error: updateJuicerError
+  }] = useMutation(SET_JUICER, {
+    refetchQueries: [
+      QUERY_ME,
+      'Me'
+    ]
+  });
+
   const [state, dispatch] = useGlobalContext();
 
   // destructure the items list from the global state object

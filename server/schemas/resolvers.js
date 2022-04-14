@@ -24,7 +24,7 @@ const resolvers = {
 
       throw new AuthenticationError('Not logged in');
     },
-    
+
   },
 
   Mutation: {
@@ -57,7 +57,7 @@ const resolvers = {
       if (context.user) {
         const user = await User.findByIdAndUpdate(
           { _id: context.user._id },
-          { $push: { juicers:  args }  },
+          { $push: { juicers: args } },
           { new: true }
         );
 
@@ -110,7 +110,7 @@ const resolvers = {
     },
 
 
-    
+
 
     // updateJuicer
     // need user ID and juicer ID
@@ -119,11 +119,11 @@ const resolvers = {
     updateJuicer: async (parent, args, context) => {
       if (context.user) {
         const user = await User.findByIdAndUpdate(
-          { _id: context.user._id, juicers: {$elemMatch: {juicerId: args.juicerId}} },
+          { _id: context.user._id, juicers: { $elemMatch: { juicerId: args.juicerId } } },
           {
             $set: {
-                'juicers.$[].startedAtTime': args.startedAtTime,
-                'juicers.$[].duration': args.duration,
+              'juicers.$[].startedAtTime': args.startedAtTime,
+              'juicers.$[].duration': args.duration,
             },
           },
           { new: true }
@@ -138,14 +138,11 @@ const resolvers = {
     updateMasher: async (parent, args, context) => {
       if (context.user) {
         const user = await User.findByIdAndUpdate(
-          { _id: context.user._id },
+          { _id: context.user._id, mashers: { $elemMatch: { masherId: args.masherId } } },
           {
             $set: {
-              mashers: {
-                masherId: args.masherId,
-                startedAtTime: args.startedAtTime,
-                duration: args.duration,
-              },
+              'mashers.$[].startedAtTime': args.startedAtTime,
+              'mashers.$[].duration': args.duration,
             },
           },
           { new: true }
@@ -160,14 +157,11 @@ const resolvers = {
     updateOven: async (parent, args, context) => {
       if (context.user) {
         const user = await User.findByIdAndUpdate(
-          { _id: context.user._id },
+          { _id: context.user._id, ovens: { $elemMatch: { ovenId: args.ovenId } } },
           {
             $set: {
-              ovens: {
-                ovenId: args.ovenId,
-                startedAtTime: args.startedAtTime,
-                duration: args.duration,
-              },
+              'ovens.$[].startedAtTime': args.startedAtTime,
+              'ovens.$[].duration': args.duration,
             },
           },
           { new: true }

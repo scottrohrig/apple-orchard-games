@@ -31,7 +31,7 @@ const Juicer = ({ props }) => {
     // dispatch update juicer with a new startedAtTime
     const now = new Date();
 
-    console.log('sellJuiceBtn press', juicerId);
+    // console.log('sellJuiceBtn press', juicerId);
 
     dispatch({
       type: UPDATE_JUICER,
@@ -54,7 +54,7 @@ const Juicer = ({ props }) => {
             duration
           }
     });
-    console.log('jData', jData);
+    // console.log('jData', jData);
     // console.log('UPDATED_USERS_JUICERS', jData.updateJuicer.juicers[0]._id, '\nJUICER_ID', juicerId);
 
     setTime(duration);
@@ -63,7 +63,6 @@ const Juicer = ({ props }) => {
   return (
     <>
       <div className='item-container'>
-        {juicerId.slice(juicerId.length - 5)}
         <div className='temp-img'>
           {isReady
             ? <img src={juiceImg} alt="juicer" />

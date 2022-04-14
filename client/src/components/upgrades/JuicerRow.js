@@ -94,8 +94,8 @@ export default function JuicersRow() {
 
   };
 
-  console.log(juicers);
-  
+  // console.log(juicers);
+
   return (
     <div className="item-row">
       <span className="item-label">Juice!</span>

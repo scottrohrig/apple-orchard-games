@@ -2,15 +2,14 @@ import React, { useState } from 'react';
 // import mutation hook
 import { useMutation } from '@apollo/client';
 // import Redirect, Link for router
-import { Redirect, Link } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 // import login mutation
 import { LOGIN_USER } from '../utils/mutations';
 // import auth class to handle json web token decoding
 import Auth from '../utils/auth';
 
 // define Login component function
-const Login = (props) => {
-
+const Login = ({ showLogin, setShowLogin, setShowSignup, setShowStartButton }) => {
   // set the default form state
   const [formState, setFormState] = useState({
     email: '',
@@ -21,7 +20,7 @@ const Login = (props) => {
 
   // redirect the user to /home if user is logged in
   if (Auth.loggedIn()) {
-    return <Redirect to="/home" />;
+    return <Navigate to="/home" replace={true} />;
   };
 
   // define the login function to handle the LOGIN mutation
@@ -60,35 +59,47 @@ const Login = (props) => {
 
   // return the component JSX
   return (
-    <main className="login">
-      <h4 className="card-header form-label">Login</h4>
-      <div className="card-body">
-        <form onSubmit={handleFormSubmit}>
-          <input
-            className="form-control"
-            placeholder="Your email"
-            name="email"
-            type="email"
-            id="login-email"
-            value={formState.email}
-            onChange={handleChange}
-          />
-          <input
-            className="form-control"
-            placeholder="******"
-            name="password"
-            type="password"
-            id="login-password"
-            value={formState.password}
-            onChange={handleChange}
-          />
+    <main className={`splash-form login ${!showLogin && 'form-deactive'}`}>
+    <button className='splash-back' onClick={() => {
+      setShowLogin(!showLogin);
+      setShowStartButton(true);
+    }}>
+      <i className="fa-solid fa-caret-left"></i>
+    </button>
+    <h2 className='page-title splash-title'><p className="display-banner">Login</p></h2>
+      <form onSubmit={handleFormSubmit}>
+        <input
+          className="form-control"
+          placeholder="Your email"
+          name="email"
+          type="email"
+          id="login-email"
+          value={formState.email}
+          onChange={handleChange}
+        />
+        <input
+          className="form-control"
+          placeholder="******"
+          name="password"
+          type="password"
+          id="login-password"
+          value={formState.password}
+          onChange={handleChange}
+        />
+
+        <div className='text-center'>
           <button className="btn form-submit" type="submit">
             Submit
           </button>
-        </form>
+        </div>
+      </form>
 
-        {error && <div>Login failed</div>}
-      </div>
+      <button className="btn toggle-login" onClick={() => {
+        setShowLogin(false);
+        setShowSignup(true);
+      }}>Don't have an account? Sign up!</button>
+
+      {error && <div className="login-failed">Login failed</div>}
     </main>
   );
 };

@@ -1,7 +1,6 @@
 // import
 import { useGlobalContext } from "../utils/GlobalState";
-import { Redirect } from 'react-router-dom';
-import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 
 import { useMutation } from "@apollo/client";
 import { UPDATE_USER } from "../utils/mutations";
@@ -21,7 +20,7 @@ function Dashboard() {
 
   // redirect user to /login page if not logged in
   if (!Auth.loggedIn()) {
-    return <Redirect to="/login" />;
+    return <Navigate to="/login" replace={true} />;
   };
 
   const handleDBUpdateButton = async (evt) => {

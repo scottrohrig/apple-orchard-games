@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 // import mutation hook
 import { useMutation } from '@apollo/client';
 // import Link for router
-import { Redirect, Link } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 // import adding user mutation
 import { ADD_USER } from '../utils/mutations';
 // import auth class to handle json web token decoding
@@ -10,7 +10,7 @@ import Auth from '../utils/auth';
 
 
 // define Login component function
-const Signup = (props) => {
+const Signup = ({ showSignup, setShowSignup, setShowLogin, setShowStartButton }) => {
 
   // set the default form state
   const [formState, setFormState] = useState({
@@ -31,7 +31,7 @@ const Signup = (props) => {
 
   // redirect the user to /home if user is logged in
   if (Auth.loggedIn()) {
-    return <Redirect to="/home" />;
+    return <Navigate to="/home" replace={true} />;
   };
 
   // form submit handler function
@@ -53,44 +53,56 @@ const Signup = (props) => {
 
   // return the component JSX
   return (
-    <main className="sign-up">
-      <h4 className="card-header form-label">Sign Up</h4>
-      <div className="card-body">
-        <form onSubmit={handleFormSubmit}>
-          <input
-            className="form-control"
-            placeholder="Your username"
-            name="username"
-            type="text"
-            id="signup-username"
-            value={formState.username}
-            onChange={handleChange}
-          />
-          <input
-            className="form-control"
-            placeholder="Your email"
-            name="email"
-            type="email"
-            id="signup-email"
-            value={formState.email}
-            onChange={handleChange}
-          />
-          <input
-            className="form-control"
-            placeholder="******"
-            name="password"
-            type="password"
-            id="signup-password"
-            value={formState.password}
-            onChange={handleChange}
-          />
+    <main className={`splash-form sign-up ${!showSignup && 'form-deactive'}`}>
+      <button className='splash-back' onClick={() => {
+        setShowSignup(!showSignup);
+        setShowStartButton(true);
+      }}>
+        <i className="fa-solid fa-caret-left"></i>
+      </button>
+      <h2 className='page-title splash-title'><p className="display-banner">Sign Up</p></h2>
+      <form onSubmit={handleFormSubmit}>
+        <input
+          className="form-control"
+          placeholder="Your username"
+          name="username"
+          type="text"
+          id="signup-username"
+          value={formState.username}
+          onChange={handleChange}
+        />
+        <input
+          className="form-control"
+          placeholder="Your email"
+          name="email"
+          type="email"
+          id="signup-email"
+          value={formState.email}
+          onChange={handleChange}
+        />
+        <input
+          className="form-control"
+          placeholder="******"
+          name="password"
+          type="password"
+          id="signup-password"
+          value={formState.password}
+          onChange={handleChange}
+        />
+
+        <div className='text-center'>
           <button className="btn d-block w-100 form-submit" type="submit">
             Submit
           </button>
-        </form>
+        </div>
+      </form>
+      
+      <button className="btn toggle-login" onClick={() => {
+        setShowSignup(false);
+        setShowLogin(true);
+      }}>Already have an account? Login!</button>
 
-        {error && <div>Signup failed</div>}
-      </div>
+      {error && <div className="login-failed">Signup failed</div>}
     </main>
   );
 };

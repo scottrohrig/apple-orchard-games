@@ -5,6 +5,8 @@ import { useGlobalContext } from "../utils/GlobalState";
 import { PURCHASE_A_TREE } from "../utils/actions";
 import { ADD_TREE } from "../utils/mutations";
 
+import emptyPlot from '../assets/images/empty-plot-with-leaf.svg';
+
 // import { ADD_TREE } from '../utils/mutations'
 
 export default function PlaceholderTree() {
@@ -44,7 +46,7 @@ export default function PlaceholderTree() {
   return (
     <>
       <div className="item-box relative tree-item">
-        <img src={placeholderTreeImage} alt=""></img>
+        <img src={emptyPlot} className="empty-plot" alt=""></img>
         <div className="">
           <button
             className="btn btn-harvest"

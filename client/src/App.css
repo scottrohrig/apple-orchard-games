@@ -46,7 +46,7 @@ nav .a {
   background-image: linear-gradient(to bottom,
   var(--sky-dark), var(--sky-main), var(--sky-light));
   border-radius: .25rem;
-  margin: .5rem;
+  margin: 0 5px 15px;
 }
 
 .item-row::after {

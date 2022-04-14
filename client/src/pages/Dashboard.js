@@ -11,6 +11,10 @@ import JuicersRow from "../components/upgrades/JuicerRow";
 import MashersRow from "../components/upgrades/MasherRow";
 import OvensRow from "../components/upgrades/OvenRow";
 
+import treeBare from "../assets/images/tree-short.svg";
+import treeApples from "../assets/images/tree-with-apples-short.svg";
+import barn from "../assets/images/barn.png";
+
 const woodSign = '../assets/images/wood_sign.png';
 
 function Dashboard() {
@@ -76,15 +80,23 @@ function Dashboard() {
      */
 
     <div className="">
-      <button onClick={handleDBUpdateButton}>
+      {/* <button onClick={handleDBUpdateButton}>
         click here to send globalstate gameplay variables to server
-      </button>
+      </button> */}
 
-      <div className="form-label">Dashboard</div>
+      {/* <div className="form-label">Dashboard</div> */}
       
       {/* It would be great to use a background image for this link -- there is a wood sign image available, and code below that doesn't seem to do the trick. */}
 
-      <Link style={{fontSize: 20, color: "red"}} to='/orchard/1'>Click Here To Go To Orchard</Link>
+      <Link to='/orchard/1'>
+        <div className='dash-orchard'>
+          <img src={treeBare} alt='' className='dash-tree tree-left' />
+          <img src={treeBare} alt='' className='dash-tree tree-right' />
+          <img src={treeApples} alt='' className='dash-tree tree-middle' />
+          <h2 className='page-title'><p className='display-banner'>Go To My Orchard</p></h2>
+          <img src={barn} alt='' className='dash-barn' />
+        </div>
+      </Link>
 
       {/* <Link style={{backgroundImage:`url$({woodSign}))`, backgroundRepeat:"no-repeat",backgroundSize:"contain", height: "100px"}} to='/orchard/1'>To Orchard</Link>
         */}
@@ -92,11 +104,11 @@ function Dashboard() {
       
 
       
-      <div className="container">
+      {/* <div className="container">
         Stats Container
         <div className="left"></div>
         <div className="right"></div>
-      </div>
+      </div> */}
 
       {/* WIP juicers row */}
       <JuicersRow />

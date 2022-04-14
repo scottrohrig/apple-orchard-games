@@ -4,8 +4,8 @@ import { useGlobalContext } from "../utils/GlobalState";
 import { HARVEST_TREE } from "../utils/actions";
 import { UPDATE_USER } from "../utils/mutations";
 
-import treeBare from "../assets/images/tree.svg";
-import treeApples from "../assets/images/tree-with-apples.svg";
+import treeBare from "../assets/images/tree-short.svg";
+import treeApples from "../assets/images/tree-with-apples-short.svg";
 
 export default function Tree() {
   const [state, dispatch] = useGlobalContext();

@@ -52,10 +52,10 @@ export default function JuicersRow() {
   const handlePurchase = async (event) => {
 
     // validate enough money
-    const money = state.money
-    const juicerCost = state.gameVariables.juicerCost
-    if (money < juicerCost ) {
-      return
+    const money = state.money;
+    const juicerCost = state.gameVariables.juicerCost;
+    if (money < juicerCost) {
+      return;
     }
 
     let newJuicer;

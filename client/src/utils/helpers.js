@@ -16,6 +16,14 @@ export function formatTime(rawTime) {
   return strTime
 }
 
+export const useIsMount = () => {
+  const isMountRef = useRef(true);
+  useEffect(() => {
+    isMountRef.current = false;
+  }, []);
+  return isMountRef.current;
+};
+
 // custom interval Hook
 // https://overreacted.io/making-setinterval-declarative-with-react-hooks/
 export function useInterval(callback, delay) {

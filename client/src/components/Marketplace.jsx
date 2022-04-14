@@ -7,16 +7,19 @@ import { useQuery, useMutation } from '@apollo/client';
 import { UPDATE_USER } from '../utils/mutations';
 import { QUERY_ME } from '../utils/queries';
 
+import { useIsMount } from '../utils/helpers';
+
 export default function Marketplace({ showMarketplace, setShowMarketplace }) {
 
+  const isMount = useIsMount()
   const [state, dispatch] = useGlobalContext();
   const { appleCount, gameVariables } = state;
 
-  const {loading, data } = useQuery(QUERY_ME)
   const [updateUser, {error}] = useMutation(UPDATE_USER)
 
   // for input field in apples to sell form
   const [applesToSell, setApplesToSell] = useState(0);
+  const [success, setSuccess] = useState(false)
 
   // sell apples
   function handleSellApples(event) {
@@ -28,16 +31,24 @@ export default function Marketplace({ showMarketplace, setShowMarketplace }) {
         type: APPLES_FOR_MONEY,
         payload
       })
+      setSuccess(!success)
     } catch (error) {
       console.error(error);
     }
 
   }
 
-  useEffect( () => {
-    // SERVER-SIDE update the user's money and appleCount
-     updateUser({variables: {money: state.money, appleCount}})
-  })
+  useEffect( async () => {
+    if (!isMount) {
+
+      // doesn't occur on page load
+      // if (!loading) {
+        // SERVER-SIDE update the user's money and appleCount
+        const {data} = await updateUser({variables: {money: state.money, appleCount}})
+        console.log('SERVER updateUser called:', data.updateUser);
+        // }
+    }
+  }, [success])
 
   // buy gems
   function handleBuyGems(event) {

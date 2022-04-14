@@ -1,8 +1,11 @@
 import { useEffect, useRef, useState } from 'react';
 
+
 export function getTimeRemaining(startedAtTime, duration) {
   const now = new Date()
-  return duration - Math.floor((now - startedAtTime) / 1000)
+  const then = new Date(startedAtTime)
+  const tr = Math.max(duration - Math.floor((now - then) / 1000),0)
+  return tr
 }
 
 export function formatTime(rawTime) {
@@ -12,6 +15,14 @@ export function formatTime(rawTime) {
 
   return strTime
 }
+
+export const useIsMount = () => {
+  const isMountRef = useRef(true);
+  useEffect(() => {
+    isMountRef.current = false;
+  }, []);
+  return isMountRef.current;
+};
 
 // custom interval Hook
 // https://overreacted.io/making-setinterval-declarative-with-react-hooks/

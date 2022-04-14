@@ -32,10 +32,10 @@ module.exports = {
         try {
             // destructure data, store in req object
             // check that secret matches jwt.sign() token
-            const { data } = jwt.verify(token, secret, { maxAge: expiration });
+            const { data } = jwt.verify(token, secret);
             req.user = data;
         } catch {
-            console.log('Invalid token');
+            console.log('Invalid token...see auth.js');
         }
 
         // return updated req object

@@ -26,7 +26,11 @@ export default function OvensRow() {
   }, ['itemData', 'loading', dispatch]);
 
   const handlePurchase = async (event) => {
-    console.log('purchased upgrade');
+
+    // validate money
+    if (state.money < state.gameVariables.ovenCost) {
+      return
+    }
 
     try {
       addOven();

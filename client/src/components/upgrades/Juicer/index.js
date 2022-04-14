@@ -2,18 +2,16 @@ import '../item.css';
 import icon from '../../../assets/images/juicer.png';
 import juiceImg from '../../../assets/images/juice.png';
 import { useState } from 'react';
-import { formatTime, getTimeRemaining, useInterval } from '../../../utils/helpers';
+import { getTimeRemaining, useInterval } from '../../../utils/helpers';
 import { UPDATE_JUICER, SELL_JUICE, APPLES_FOR_JUICE } from '../../../utils/actions';
-
 
 // pass in juicer props from parent page / component
 const Juicer = ({ props }) => {
 
-  const { juicer, dispatch } = props;
-  // deconstruct the juicer props passed in from parent
-  // const [{ _id, startedAtTime, duration }, setState] = useState(mock) // juicer
+  const { juicer, dispatch, updateJuicer } = props;
 
-  const { _id, startedAtTime, duration } = juicer;
+  // deconstruct the juicer props passed in from parent
+  const { _id: juicerId, startedAtTime, duration } = juicer;
 
   // only thing I don't like is this duration displays on mount
   const [timeRemaining, setTime] = useState(duration);
@@ -27,68 +25,64 @@ const Juicer = ({ props }) => {
     setTime(getTimeRemaining(startedAtTime, duration));
   }, 1000);
 
-  const handleUseBtnPressed = (event) => {
+  const handleUseBtnPressed = async (event) => {
 
     // validate user appleCount > juicerAppleCost
-
     // dispatch update juicer with a new startedAtTime
-    // setState({_id, startedAtTime: new Date(), duration})
     const now = new Date();
-    console.log('new time', now);
+
+    console.log('sellJuiceBtn press', juicerId);
+
     dispatch({
       type: UPDATE_JUICER,
       payload:
-        { ...juicer, startedAtTime: now, duration }
-    }
+        { _id: juicerId, startedAtTime: now, duration }
+    });
 
-
-    );
     dispatch({
       type: SELL_JUICE
-    })
-
+    });
 
     dispatch({
       type: APPLES_FOR_JUICE
     });
 
-    console.log('dispatching startedAtTime', startedAtTime);
+    const { data: jData } = await updateJuicer({
+      variables: {
+            juicerId: juicerId,
+            startedAtTime: now,
+            duration
+          }
+    });
+    // console.log('UPDATED_USERS_JUICERS', jData.updateJuicer.juicers[0]._id, '\nJUICER_ID', juicerId);
 
     setTime(duration);
   };
 
   return (
-    <>{isReady ?
-      (
-        <div className='item-container'>
-          <div className='temp-img'>
-            <img src={juiceImg} alt="juicer" />
-          </div>
-          <div className='item-btn-wrapper'>
+    <>
+      <div className='item-container'>
+        {/* {juicerId.slice(juicerId.length - 5)} */}
+        <div className='temp-img'>
+          {isReady
+            ? <img src={juiceImg} alt="juicer" />
+            : <img src={icon} alt="juicer" />}
+        </div>
 
-            <div className="item-btn-flex">
-
-              <button className="btn btn-harvest" onClick={() => { handleUseBtnPressed(); }}>sell</button>
-
-            </div>
+        <div className='item-btn-wrapper'>
+          <div className="item-btn-flex">
+            {isReady
+              ? <button
+                className="btn btn-harvest"
+                onClick={() => {
+                  handleUseBtnPressed();
+                }}>
+                sell
+              </button>
+              : <button className="btn btn-timer" disabled>{timeRemaining}s</button>}
           </div>
         </div>
-      )
-      : (
-        <div className='item-container'>
-          <div className='temp-img'>
-            <img src={icon} alt="juicer" />
-          </div>
-          <div className='item-btn-wrapper'>
-
-            <div className="item-btn-flex">
-
-              <button className="btn btn-timer" disabled>{timeRemaining}s</button>
-
-            </div>
-          </div>
-        </div>
-      )}
+      </div>
     </>
   );
 };

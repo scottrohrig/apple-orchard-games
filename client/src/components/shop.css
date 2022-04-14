@@ -1,48 +1,61 @@
+.sub-title {
+  text-align: center;
+  margin: 0.5rem;
+  text-transform: uppercase;
+  font-size: 0.9em;
+  color: var(--btn-shop-main);
+}
+
 .sell-apples {
   margin: 1rem auto;
   text-align: center;
 }
 
 .card {
-  padding: .3rem;
+  padding: 0.3rem;
   width: 128px;
   height: 90%;
-  border-radius: .5rem;
+  border-radius: 0.5rem;
   background-color: var(--display-money-main);
-  box-shadow: inset -2px -2px var(--display-money-dark), inset 2px 2px var(--display-money-light);
+  box-shadow: inset -2px -2px var(--display-money-dark),
+    inset 2px 2px var(--display-money-light);
 }
 
 .usd {
   background-color: var(--btn-harvest-main);
-  box-shadow: inset -2px -2px var(--btn-harvest-dark), inset 2px 2px var(--btn-harvest-light);
-
+  box-shadow: inset -2px -2px var(--btn-harvest-dark),
+    inset 2px 2px var(--btn-harvest-light);
 }
 
 .card-label {
   font-size: x-large;
   color: var(--btn-shop-main);
+  font-weight: 600;
+  font-size: 1.8em;
   text-shadow:
-  -1px -1px var(--form-background),
-    1px -1px var(--form-background),
-    -1px 2px var(--form-background),
-    2px 2px var(--form-background);
-  }
+    -1px -1px var(--form-background),
+     1px -1px var(--form-background),
+    -1px 1px var(--form-background),
+     1px 1px var(--form-background);
+}
 
-  .usd-label {
+.usd-label {
   color: var(--display-money-main);
 }
 
 .card-body {
-  padding: .25rem;
+  padding: 0.25rem;
   background-color: var(--form-background);
-  border-radius: .3rem;
-  color: var(--display-banner-main)
+  border-radius: 0.3rem;
+  color: var(--display-banner-main);
 }
 
 .btn-buy {
   background-color: var(--display-money-main);
   text-shadow: 1px 1px var(--display-money-dark);
-  box-shadow: inset -2px -2px var(--display-money-dark), inset 2px 2px var(--display-money-light);
+  box-shadow:
+    inset -2px -2px var(--display-money-dark),
+    inset 2px 2px var(--display-money-light);
 }
 .btn-buy:hover {
   animation: pulse 2s infinite linear;
@@ -60,7 +73,8 @@
   display: flex;
   align-items: flex-start;
 }
-.increment-btn:hover, .increment-btn i:hover {
+.increment-btn:hover,
+.increment-btn i:hover {
   cursor: pointer;
 }
 .increment {

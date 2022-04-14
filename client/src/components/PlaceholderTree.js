@@ -13,7 +13,7 @@ export default function PlaceholderTree() {
   const [state, dispatch] = useGlobalContext();
   // define [addTree, { error }] = useMutation(ADD_TREE)
   const [addTree, { error }] = useMutation(ADD_TREE);
-  const { trees }=state;
+  const { trees } = state;
 
 
   const handlePurchaseTreeClick = async (evt) => {
@@ -43,14 +43,14 @@ export default function PlaceholderTree() {
 
   return (
     <>
-      <div className="item-box relative">
+      <div className="item-box relative tree-item">
         <img src={placeholderTreeImage} alt=""></img>
-        <div className="absolute">
+        <div className="">
           <button
-            className="sz-sm btn btn-harvest"
+            className="btn btn-harvest"
             onClick={handlePurchaseTreeClick}
           >
-            Purchase Tree
+            Plant
           </button>
         </div>
       </div>

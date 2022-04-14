@@ -19,6 +19,7 @@ export default function Profile({
   const [updateDB, { error }] = useMutation(UPDATE_USER);
 
   const user = data?.me || data?.user || {};
+  console.log(user);
 
   return (
     <div>
@@ -29,7 +30,7 @@ export default function Profile({
         onClick={() => setShowProfile(!showProfile)}
       ></div>
 
-      <div className={`leaderboard modal ${showProfile && 'modal-active'}`}>
+      <div className={`leaderboard profile modal ${showProfile && 'modal-active'}`}>
         <button
           className="btn btn-modal"
           onClick={() => setShowProfile(!showProfile)}
@@ -38,28 +39,30 @@ export default function Profile({
         </button>
 
         <h2 className="page-title">
-          <p className="display-banner">Profile</p>
+          <p className="display-banner">{user.username}'s Profile</p>
         </h2>
 
-        <form className="">
-          <div>
-            <label>username:</label>
-            <input type="text" id="username" defaultValue={user.username} />
-          </div>
-          <div>
-            <label>email:</label>
-            <input type="text" id="email" defaultValue={user.email} />
-          </div>
-          <div>
-            <label>password:</label>
-            <input type="password" id="password" />
-          </div>
-          <div>
-            <button type="logout" onClick={logout}>
-              Logout
-            </button>
-          </div>
+        <form className="update-profile">
+          <h3>Update Profile</h3>
+          <label className='form-label'>Username:</label>
+          <input type="text" id="username" className='form-control' defaultValue={user.username} />
+          <label className='form-label'>Email:</label>
+          <input type="text" id="email" className='form-control' defaultValue={user.email} />
+          <label className='form-label'>Password:</label>
+          <input type="password" className='form-control' id="password" />
+          <button className='btn btn-update' type="submit" disabled>
+            Update
+          </button>
         </form>
+        <div className='stats'>
+          <h3>Stats</h3>
+          <p>User stats are coming soon!</p>
+        </div>
+        <div className='logout'>
+          <button className='btn btn-logout' type="logout" onClick={logout}>
+            Logout
+          </button>
+        </div>
       </div>
     </div>
   );

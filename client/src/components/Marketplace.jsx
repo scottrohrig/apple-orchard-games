@@ -12,7 +12,7 @@ import { useIsMount } from '../utils/helpers';
 
 export default function Marketplace({ showMarketplace, setShowMarketplace }) {
 
-  const isMount = useIsMount()
+  const isMount = useIsMount() // custom Hook => boolean when the compent has mounted
   const [state, dispatch] = useGlobalContext();
   const { appleCount, gameVariables } = state;
 

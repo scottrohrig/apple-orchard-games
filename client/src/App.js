@@ -1,25 +1,19 @@
 import { useState } from "react";
-import { BrowserRouter as Router, Link, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { ApolloProvider, ApolloClient, InMemoryCache, createHttpLink } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 
 import "./App.css";
-import StyleReference from "./StyleReference";
-import './dev.css';
+import "./StyleReference";
 
 import { GlobalProvider } from './utils/GlobalState';
 import Auth from './utils/auth';
 
-// pages
-// import Login from './components/Login';
-// import Signup from './pages/Signup';
 import Splash from "./pages/Splash";
 import Dashboard from './pages/Dashboard';
 import Leaderboard from "./pages/Leaderboard";
 import Orchard from './pages/Orchard';
-// components
 import Header from './components/Header';
-// Marketplace
 import Marketplace from './components/Marketplace';
 import NoMatch from './pages/NoMatch';
 
@@ -43,64 +37,18 @@ const client = new ApolloClient({
 });
 
 function App() {
-  const [showStyle, setShowStyle] = useState(false);
   const [showLeaderboard, setShowLeaderboard] = useState(false);
   const [showMarketplace, setShowMarketplace] = useState(false);
 
-  // Dev Stuff - Remove for Production
-  const [showDevNav, setShowDevNav] = useState(false);
-
   return (
     <ApolloProvider client={client} >
-      <Router>
-        <GlobalProvider>
+      <GlobalProvider>
+        <Router>
           {Auth.loggedIn() && <Header
             showLeaderboard={showLeaderboard} setShowLeaderboard={setShowLeaderboard}
             showMarketplace={showMarketplace} setShowMarketplace={setShowMarketplace}
           />}
           <div className="app app-content">
-
-            {/* Dev Stuff */}
-            <button className="btn dev-btn" onClick={() => setShowDevNav(!showDevNav)}>Dev Navigation</button>
-            <header  className={`app-header dev-nav modal ${showDevNav && 'modal-active'}`}>
-              <div>
-                <h1>Apple Orchard Games</h1>
-              </div>
-
-              <nav>
-                <ul>
-                  {/* <li>
-                    <Link className='a' to='/login'>Login</Link>
-                  </li>
-                  <li>
-                    <Link className='a' to='/signup'>Signup</Link>
-                  </li> */}
-                  <li>
-                    <Link className='a' to='/login'>Login/Register</Link>
-                  </li>
-                  <li>
-                    <Link className='a' to='/orchard/1'>Orchard</Link>
-                  </li>
-                  <li>
-                    <Link className='a' to='/home'>Dashboard</Link>
-                  </li>
-                  <li>
-                    {/* <Link className='a' to='/highscore'>Leaderboards</Link> */}
-                    <button className="btn btn-timer"
-                      onClick={() => setShowLeaderboard(!showLeaderboard)}
-                    >Leaderboard</button>
-                  </li>
-                  <li>
-                    <button
-                      className="btn btn-timer"
-                      onClick={() => setShowStyle(!showStyle)}
-                    >
-                      Style Ref
-                    </button>
-                  </li>
-                </ul>
-              </nav>
-            </header>
 
             {/* App Stuff */}
             <div style={{ margin: "2rem auto" }}>
@@ -110,25 +58,17 @@ function App() {
                 <Leaderboard showLeaderboard={showLeaderboard} setShowLeaderboard={setShowLeaderboard} />
                 <Marketplace showMarketplace={showMarketplace} setShowMarketplace={setShowMarketplace} />
 
-                {showStyle ? (
-                  <StyleReference />
-                ) : (
-                  <Routes >
-                    <Route path='/login' element={<Splash />} />
-                    {/* <Route exact path='/login' component={Login} />
-                    <Route exact path='/signup' component={Signup} /> */}
-                    <Route path='/home' element={<Dashboard />} />
-                    <Route path='/orchard/:id' element={<Orchard />} />
-                    {/* <Route exact path='/highscore' component={Leaderboard} /> */}
-                    {/* <Route exact path='/shop' component={Shop} /> */}
-                    <Route element={<NoMatch />} />
-                  </Routes>
-                )}
+                <Routes >
+                  <Route path='/login' element={<Splash />} />
+                  <Route path='/home' element={<Dashboard />} />
+                  <Route path='/orchard/:id' element={<Orchard />} />
+                  <Route element={<NoMatch />} />
+                </Routes>
               </div>
             </div>
           </div>
-        </GlobalProvider>
-      </Router>
+        </Router>
+      </GlobalProvider>
 
       {window.addEventListener('selectstart', function (e) {
         e.preventDefault();

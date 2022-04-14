@@ -6,7 +6,7 @@ const juicerSchema = new Schema(
   {
     startedAtTime: {
       type: Date,
-      default: Date.now
+      default: new Date()
     },
     duration: {
       type: Number,

@@ -16,6 +16,7 @@ export const QUERY_ME = gql`
       }
       juicers {
         _id
+        startedAtTime
         duration
       }
       mashers {

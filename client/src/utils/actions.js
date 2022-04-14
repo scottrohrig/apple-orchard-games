@@ -32,6 +32,8 @@ export const BUY_JUICER = "BUY_JUICER";
 export const BUY_OVEN = "BUY_OVEN";
 export const BUY_MASHER = "BUY_MASHER";
 
+export const HARVEST_TREE = 'HARVEST_TREE';
+
 export const SELL_JUICE = "SELL_JUICE";
 export const APPLES_FOR_JUICE = "APPLES_FOR_JUICE";
 

@@ -10,6 +10,7 @@ import {
   SELL_JUICE,
   BUY_JUICER,
   APPLES_FOR_JUICE,
+  HARVEST_TREE,
   SELL_SAUCE,
   BUY_MASHER,
   APPLES_FOR_SAUCE,
@@ -120,6 +121,13 @@ export const reducer = (state = [], action) => {
         money: state.money - state.gameVariables.masherCost,
         appleCount: state.appleCount - state.gameVariables.makeSauceApplesUsed
       };
+
+      case HARVEST_TREE:
+        return {
+          ...state,
+          appleCount: state.appleCount + state.gameVariables.applesGrown
+
+        };
 
 
     case SELL_SAUCE:

@@ -1,22 +1,39 @@
 import React, { useEffect, useState } from "react";
 import treeImage from "../assets/images/tree.png";
+import { useGlobalContext } from '../utils/GlobalState';
+import { HARVEST_TREE } from '../utils/actions';
+import { UPDATE_USER } from '../utils/mutations';
 
 export default function Tree() {
-  // number of seconds to grow apples; should reference a global game tuning variable?
-  const [secondsLeft, setSecondsLeft] = useState(30);
+  const [state, dispatch] = useGlobalContext();
+  const {trees, money, appleCount, gameVariables} = state;
+  const resetTreeTimerSeconds = gameVariables.appleGrowTime;
+
+
+  const [secondsLeft, setSecondsLeft] = useState(resetTreeTimerSeconds);
+  let isReady = secondsLeft <= 0;
 
   // reset countdown when button clicked
   function handleTreeClick(evt) {
     evt.preventDefault();
-    setSecondsLeft(30);
+    setSecondsLeft(resetTreeTimerSeconds);
+
+    let startedAtTime = new Date();
+    console.log('new time', startedAtTime);
+  
+    dispatch({
+      type: HARVEST_TREE
+    })
+
+// TODO: Need to update database: apples and start time have changed; need to acquire and pass tree's _id
+    // dispatch({
+    //   type: UPDATE_USER
+    // });
+
   }
 
-  //countdown timer
-  // TODO - [ ] make update action for timer function
-  // https://makeschool.org/mediabook/oa/tutorials/react-redux-passwords-app-tutorial-oh4/react-redux-timers-keeping-time/
-
   useEffect(() => {
-    if (secondsLeft <= 0) {
+    if (isReady) {
       return;
     }
     const updateSecondsLeft = setTimeout(() => {
@@ -25,15 +42,28 @@ export default function Tree() {
     return () => clearTimeout(updateSecondsLeft);
   }, [secondsLeft]);
 
+
+
   return (
-    <>
-      {/* <h1>tree</h1> */}
-      <div className='item-box relative'>
+    <>{isReady ?
+      (
+
+        <div className='item-box relative'>
         <img src={treeImage} alt=""></img>
         <div className='absolute'>
-            <button className='sz-sm btn btn-harvest' onClick={handleTreeClick}>{secondsLeft}</button>
+            <button className=' btn btn-harvest' onClick={handleTreeClick}>Harvest</button>
         </div>
       </div>
+        ):
+        ( 
+          <div className='item-box relative'>
+          <img src={treeImage} alt=""></img>
+          <div className='absolute'>
+              <button className='btn btn-timer' disabled>{secondsLeft}s</button>
+          </div>
+        </div>
+        )
+      }
     </>
   );
 }

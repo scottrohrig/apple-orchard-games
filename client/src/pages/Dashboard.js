@@ -1,6 +1,6 @@
 // import
 import { useGlobalContext } from "../utils/GlobalState";
-import { Navigate } from 'react-router-dom';
+import { Navigate, Link } from 'react-router-dom';
 
 import { useMutation } from "@apollo/client";
 import { UPDATE_USER } from "../utils/mutations";

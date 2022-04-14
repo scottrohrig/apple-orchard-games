@@ -9,6 +9,7 @@ const defaultGameVariables = {
   // for Tree
   applesForNewTree: 3,
   appleGrowTime: 30,
+  applesGrown: 5,
   appleSaleRevenue: 1,
   // for Juncer
   juicerCost: 10,

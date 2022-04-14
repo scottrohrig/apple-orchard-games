@@ -10,7 +10,10 @@ export const QUERY_ME = gql`
       money
       appleCount
       gemCount
-      orchardId
+      trees {
+        _id
+        duration
+      }
       juicers {
         _id
         startedAtTime

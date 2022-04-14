@@ -42,22 +42,20 @@ export const ADD_ORCHARD = gql`
 
 // add tree (// update orchard => adding new tree)
 export const ADD_TREE = gql`
-  mutation addTree($orchardId: ID!) {
-    addTree(orchardId: $orchardId) {
+mutation addTree($duration: Int) {
+  addTree(duration: $duration) {
+    _id
+    trees {
       _id
-      orchard_name
-      treeCount
-      trees {
-        _id
-        duration
-      }
     }
   }
+}
 `;
+
 
 // add masher
 export const ADD_MASHER = gql`
-  mutation addMasher {
+  mutation addMasher($duration: Int) {
     addMasher {
       mashers {
         _id
@@ -81,7 +79,7 @@ export const ADD_JUICER = gql`
 
 // add oven
 export const ADD_OVEN = gql`
-  mutation addOven {
+  mutation addOven($duration: Int) {
     addOven {
       ovens {
         _id

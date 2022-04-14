@@ -65,8 +65,10 @@ export const reducer = (state = [], action) => {
 
     case PURCHASE_A_TREE:
       console.log("PURCHASE_A_TREE reducer running...");
+
       let newTreeArray = state.trees;
-      newTreeArray.push({});
+      let newId = state.trees.length;
+      newTreeArray.push({_id:newId});
 
       return {
         ...state,

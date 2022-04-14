@@ -54,7 +54,7 @@ h2.page-title {
   font-weight: 400;
 }
 
-div, div:hover, a, a:hover, .btn, .btn:hover, p, p:hover { transition: all .5s ease-in-out; }
+div, div:hover, a, a:hover, button, button:hover, p, p:hover, i, i:hover { transition: all .5s ease-in-out; }
 a { text-decoration: none; }
 
 img {

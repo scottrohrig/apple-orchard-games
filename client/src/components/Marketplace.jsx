@@ -62,7 +62,7 @@ export default function Marketplace({ showMarketplace, setShowMarketplace }) {
         }`}
         onClick={() => setShowMarketplace(!showMarketplace)}
       ></div>
-      <div className={`leaderboard modal ${showMarketplace && "modal-active"}`}>
+      <div className={`leaderboard shop modal ${showMarketplace && "modal-active"}`}>
         <button
           className="btn btn-modal"
           onClick={() => setShowMarketplace(!showMarketplace)}
@@ -75,10 +75,10 @@ export default function Marketplace({ showMarketplace, setShowMarketplace }) {
         </h2>
         <h3 className="sub-title">Buy Upgrades & Gems</h3>
 
-        <div style={{ marginTop: "2rem" }}>
+        <div>
           {/* SELL APPLES FOR CURRENCY */}
-          <div className="sell-apples item-row">
-            <div className="item-label">Sell Apples</div>
+          <div className="item-label">Sell Apples</div>
+          <div className="sell-apples">
             <div className="card-label">Apples to Sell:</div>
             <div className="apple-increment">
               <span
@@ -121,7 +121,7 @@ export default function Marketplace({ showMarketplace, setShowMarketplace }) {
                   handleSellApples();
                 }}
               >
-                Sell {applesToSell} Apples!
+                Sell <span className="apple-amount">{applesToSell}</span> Apples!
               </button>
             </p>
           </div>

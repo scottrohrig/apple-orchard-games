@@ -1,14 +1,21 @@
 .sub-title {
   text-align: center;
-  margin: 0.5rem;
+  margin: 5px .5rem 0.5rem;
   text-transform: uppercase;
-  font-size: 0.9em;
+  font-size: .95em;
   color: var(--btn-shop-main);
 }
 
 .sell-apples {
-  margin: 1rem auto;
+  margin: 0 auto;
   text-align: center;
+  background-color: var(--sky-main);
+  padding: 12px;
+  border-radius: 10px;
+}
+.sell-apples .btn-timer:hover {
+  cursor: pointer;
+  filter: brightness(110%);
 }
 
 .card {
@@ -61,6 +68,9 @@
   animation: pulse 2s infinite linear;
 }
 
+.marketplace .item-label {
+}
+
 .apple-increment {
   font-size: 1.5em;
   margin: 10px 0;
@@ -76,6 +86,7 @@
 .increment-btn:hover,
 .increment-btn i:hover {
   cursor: pointer;
+  text-shadow: 0 0 3px #FFF;
 }
 .increment {
   color: var(--display-money-main);
@@ -86,4 +97,7 @@
 .apple-count img {
   width: 30px;
   margin: 0 5px;
+}
+.apple-amount {
+  font-size: 1.1em;
 }

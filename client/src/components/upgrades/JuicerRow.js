@@ -97,26 +97,21 @@ export default function JuicersRow() {
   return (
     <div className="item-row">
       <span className="item-label">Juice!</span>
-      <div className="item-scroll">
-        {
-          // map thru juicer objects from GlobalState to add to row
-          juicers.map((juicer, i) => {
-            return (
-              <div key={i} className="item-box">
-                {
-                  // if object in map does not have `_id` show placeholder.
-                  juicer._id ? (
-                    <Juicer props={{ juicer, dispatch }} />
-                  ) : (
-                    // Placeholder
-                    <BuyJuicer handlePurchase={handlePurchase} />
-                  )
-                }
-              </div>
-            );
-          })
-        }
-      </div>
+        <div className="item-scroll">
+          {
+            // map thru juicer objects from GlobalState to add to row
+            juicers.map((juicer, i) => {
+              return (
+                <div key={i} className="item-box">
+                  <Juicer props={{ juicer, dispatch, updateJuicer }} />
+                </div>
+              );
+            })
+          }
+          {(juicers?.length && juicers.length < 5) &&
+            <BuyJuicer handleUpgradePurchased={handleUpgradePurchased} />
+          }
+        </div>
     </div>
   );
 }

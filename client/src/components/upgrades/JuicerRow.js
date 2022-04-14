@@ -61,23 +61,26 @@ export default function JuicersRow() {
     let newJuicer;
     // dispatch ADD_JUICER
     try {
-      const dur = state.gameVariables.makeJuiceTime
       // store returned data aliased as 'userData' from addJuicer mutation to server
-      const { data: userData } = await addJuicer();
+      const { data: userData } = await addJuicer({
+        variables: {
+          duration: state.gameVariables.makeJuiceTime
+        }
+      });
       const juicersArr = userData.addJuicer.juicers;
-      newJuicer = juicersArr[juicers.length - 1];
-
-      console.log('YOU JUST MADE A JUICER ON THE SERVER',newJuicer, newJuicer?.duration);
+      // get id or newly created juicer obj from the server to store in the BUY_JUICER payload
+      newJuicer = juicersArr[juicersArr.length - 1];
     } catch (e) {
       console.error(e);
+      console.error(addJuicerError);
     }
-    
+
     if (newJuicer) {
       try {
         const payload = {
-          ...newJuicer,
-          startedAtTime: new Date(),
-          duration: 60
+          _id: newJuicer._id,
+          startedAtTime: newJuicer.startedAtTime,
+          duration: newJuicer.duration
         };
         console.log('PAYLOAD...', payload);
         dispatch({

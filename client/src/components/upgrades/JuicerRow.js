@@ -29,28 +29,28 @@ export default function JuicersRow() {
 
   useEffect(() => {
     if (itemData) {
-
-      const serverJuicers = itemData.me.juicers;
-
+      // itemData.me.juicers.map(j => console.log('SERVER _Id', j?._id));
       dispatch({
         type: UPDATE_JUICERS,
-        payload: serverJuicers
+        payload: itemData.me.juicers
       });
 
+      // juicers.map(j => console.log('STATE _Id', j?._id));
 
     } else if (!loading) {
 
-      console.log('loading');
+      console.log('loading.');
       dispatch({
         type: UPDATE_JUICERS,
         payload: juicers
-      })
+      });
     }
   }, [itemData, loading, dispatch]);
 
 
-  const handlePurchase = async (event) => {
+  const handleUpgradePurchased = async (event) => {
 
+    // console.log('data: updateData', updateData);
     // validate enough money
     const money = state.money;
     const juicerCost = state.gameVariables.juicerCost;

@@ -12,7 +12,7 @@ const defaultGameVariables = {
   juicerCost: 10,
   masherCost: 14,
   ovenCost: 30,
-  makeJuiceTime: 60,
+  makeJuiceTime: 3,
   makeJuiceApplesUsed: 2,
   makeSauceTime: 120,
   makeSauceApplesUsed: 4,
@@ -29,13 +29,13 @@ const defaultStartTime = new Date()
 
 const GlobalProvider = ({ value = [], ...props }) => {
   const [state, dispatch] = useAppReducer({
-    money: 3,
+    money: 300,
     appleCount: 500,
     gemCount: 20,
 
     gameVariables: defaultGameVariables,
     mashers: [{},],
-    juicers: [{}],
+    juicers: [],
     ovens: [{}],
     trees: [{}, {}, {}, {}, {}],
     orchards: [

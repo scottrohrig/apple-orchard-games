@@ -86,12 +86,14 @@ export const reducer = (state = [], action) => {
       };
 
     case SELL_JUICE:
+      // state.juicers.map(j=>console.log('sell', j._id))
       return {
         ...state,
         money: state.money + state.gameVariables.juiceSaleRevenue,
       };
 
     case APPLES_FOR_JUICE:
+      // state.juicers.map(j=>console.log('apples', j._id))
       return {
         ...state,
         appleCount: state.appleCount - state.gameVariables.makeJuiceApplesUsed,

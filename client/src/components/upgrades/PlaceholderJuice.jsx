@@ -1,6 +1,6 @@
 import buyIcon from "../../assets/images/empty_juice.png";
 
-export default function BuyJuicer({ handlePurchase }) {
+export default function BuyJuicer({ handleUpgradePurchased }) {
   return (
     <div className="item-container">
       <div className="temp-img">
@@ -8,7 +8,7 @@ export default function BuyJuicer({ handlePurchase }) {
       </div>
       <div className="item-btn-wrapper">
         <div className="item-btn-flex">
-          <button className="btn btn-shop" onClick={handlePurchase}>
+          <button className="btn btn-shop" onClick={handleUpgradePurchased}>
             buy
           </button>
         </div>

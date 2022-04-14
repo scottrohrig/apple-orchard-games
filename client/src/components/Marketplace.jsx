@@ -3,6 +3,8 @@ import { APPLES_FOR_MONEY } from '../utils/actions';
 import { useGlobalContext } from '../utils/GlobalState';
 import './shop.css';
 
+import apple from '../assets/images/apple.svg';
+
 export default function Marketplace({ showMarketplace, setShowMarketplace }) {
 
   const [state, dispatch] = useGlobalContext();
@@ -34,7 +36,7 @@ export default function Marketplace({ showMarketplace, setShowMarketplace }) {
     })
 
     if (success) {
-      applesToSell = Math.max(appleCount, 0)
+      setApplesToSell(Math.max(appleCount, 0));
     }
 
   }
@@ -77,26 +79,30 @@ export default function Marketplace({ showMarketplace, setShowMarketplace }) {
             <div className='sell-apples'>
               <div className="item-label">Sell Apples</div>
               <div className="card-label">Apples to Sell:</div>
-              <div className='gem-count'>
-                <span><i className="fa-solid fa-angles-left"
-                  onClick={() => setApplesToSell(Math.max(applesToSell - 25, 0))}
-                ></i></span> {' '}
-                <span><i className="fa-solid fa-caret-left"
-                  onClick={() => setApplesToSell(Math.max(applesToSell - 5, 0))}
-                ></i></span>{' '}
-                <span className='apple-count'>{applesToSell}</span>{' '}
-                <span><i className="fa-solid fa-caret-right"
-                  onClick={() => setApplesToSell(Math.min(applesToSell + 5, appleCount))}
-                ></i></span>{' '}
-                <span><i className="fa-solid fa-angles-right"
-                  onClick={() => setApplesToSell(Math.min(applesToSell + 25, appleCount))}
-                ></i></span>
+              <div className='apple-increment'>
+                <span className='increment-btn by-25 decrement'
+                    onClick={() => setApplesToSell(Math.max(applesToSell - 25, 0))}>
+                    <i className="fa-solid fa-angles-left"></i>
+                </span>
+                <span className='increment-btn by-5 decrement'
+                    onClick={() => setApplesToSell(Math.max(applesToSell - 5, 0))}>
+                  <i className="fa-solid fa-minus"></i>
+                </span>
+                <span className='apple-count'><img src={apple} alt='apple' /></span>
+                <span className='increment-btn by-5 increment'
+                    onClick={() => setApplesToSell(Math.min(applesToSell + 5, appleCount))}>
+                  <i className="fa-solid fa-plus"></i>
+                </span>
+                <span className='increment-btn by-25 increment'
+                    onClick={() => setApplesToSell(Math.min(applesToSell + 25, appleCount))}>
+                    <i className="fa-solid fa-angles-right"></i>
+                </span>
               </div>
 
               <p>
-                <button className="btn btn-shop"
+                <button className="btn btn-timer"
                 onClick={()=> {handleSellApples()}}
-                >Sell</button>
+                >Sell {applesToSell} Apples!</button>
               </p>
 
             </div>

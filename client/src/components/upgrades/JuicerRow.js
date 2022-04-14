@@ -97,8 +97,8 @@ export default function JuicersRow() {
   // console.log(juicers);
 
   return (
+    <div>
     <div className="item-row">
-      <span className="item-label">Juice!</span>
         {!loading && <div className="item-scroll">
           {
             // map thru juicer objects from GlobalState to add to row
@@ -114,6 +114,14 @@ export default function JuicersRow() {
             <BuyJuicer handleUpgradePurchased={handleUpgradePurchased} />
           }
         </div>}
+    </div>
+    <div className='dash-label'>
+      <span className="item-label">Juice</span>
+      <div className='item-price'>
+        <p className='item-price-buy'>Buy New: <span className='item-amount'>10</span></p>
+        <p className='item-price-apples'>Uses: <span className='item-amount'>2</span></p>
+      </div>
+    </div>
     </div>
   );
 }

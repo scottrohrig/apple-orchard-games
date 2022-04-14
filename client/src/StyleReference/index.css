@@ -613,7 +613,7 @@ header.component-header {
   background-color: var(--sky-main);
   background-image: linear-gradient(to bottom, var(--sky-dark), var(--sky-main), var(--sky-light));
   border-radius: 0.25rem;
-  margin: 65px 5px 15px;
+  margin: 65px 5px 5px;
   text-align: right;
 }
 .dash-orchard h2 {
@@ -664,6 +664,44 @@ header.component-header {
   width: 20vw;
   right: 30px;
   top: 4px;
+}
+
+.dash-label {
+  display: flex;
+  margin: 0 5px 12px;
+  color: var(--wood-medium);
+}
+.dash-label .item-label {
+  font-size: 1.1em;
+  flex: 1;
+  font-weight: 600;
+  text-transform: uppercase;
+  text-shadow: 1px 1px var(--main-darker);
+}
+.item-price {
+  display: flex;
+}
+.item-price-buy .item-amount {
+  margin: 0 15px 0 0;
+  font-weight: 600;
+  color: var(--display-money-dark);
+}
+.item-price-buy .item-amount::before {
+  content: '$';
+}
+.item-price-apples .item-amount {
+  font-weight: 600;
+  color: var(--btn-shop-dark);
+}
+.item-price-apples .item-amount::before {
+  content: '';
+  background-image: url('../assets/images/apple.svg');
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 14px; height: 14px;
+  display: inline-block;
+  margin: 0 2px 0 0;
 }
 
 

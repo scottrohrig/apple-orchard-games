@@ -58,27 +58,35 @@ export default function MashersRow() {
   //
   // should the responsibility be in the row or the item
   return (
-    <div className="item-row">
-      <span className="item-label">Applesauce!</span>
-      <div className="item-scroll">
-        {
-          // map thru juicer objects from GlobalState to add to row
-          mashers.map((masher, i) => {
-            return (
-              <div key={i} className="item-box">
-                {
-                  // if object in map does not have `_id` show placeholder.
-                  masher._id ? (
-                    <Masher props={{ masher, dispatch }} />
-                  ) : (
-                    // Placeholder
-                    <BuyMasher handlePurchase={handlePurchase} />
-                  )
-                }
-              </div>
-            );
-          })
-        }
+    <div>
+      <div className="item-row">
+        <div className="item-scroll">
+          {
+            // map thru juicer objects from GlobalState to add to row
+            mashers.map((masher, i) => {
+              return (
+                <div key={i} className="item-box">
+                  {
+                    // if object in map does not have `_id` show placeholder.
+                    masher._id ? (
+                      <Masher props={{ masher, dispatch }} />
+                    ) : (
+                      // Placeholder
+                      <BuyMasher handlePurchase={handlePurchase} />
+                    )
+                  }
+                </div>
+              );
+            })
+          }
+        </div>
+      </div>
+      <div className='dash-label'>
+        <span className="item-label">Applesauce</span>
+        <div className='item-price'>
+          <p className='item-price-buy'>Buy New: <span className='item-amount'>14</span></p>
+          <p className='item-price-apples'>Uses: <span className='item-amount'>4</span></p>
+        </div>
       </div>
     </div>
   );

@@ -97,6 +97,12 @@ function Dashboard() {
           <img src={barn} alt='' className='dash-barn' />
         </div>
       </Link>
+      <div className='dash-label'>
+        <span className="item-label">Apples</span>
+        <div className='item-price'>
+          <p className='item-price-apples'>New Tree Cost: <span className='item-amount'>3</span></p>
+        </div>
+      </div>
 
       {/* <Link style={{backgroundImage:`url$({woodSign}))`, backgroundRepeat:"no-repeat",backgroundSize:"contain", height: "100px"}} to='/orchard/1'>To Orchard</Link>
         */}

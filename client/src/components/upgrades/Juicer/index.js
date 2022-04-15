@@ -28,7 +28,7 @@ const Juicer = ({ props }) => {
   const handleUseBtnPressed = async (event) => {
 
     // validate user appleCount > juicerAppleCost
-    if (appleCount > makeJuiceApplesUsed) {
+    if (appleCount < makeJuiceApplesUsed) {
       return
     }
     // dispatch update juicer with a new startedAtTime

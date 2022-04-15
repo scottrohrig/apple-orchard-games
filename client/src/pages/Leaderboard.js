@@ -1,5 +1,6 @@
-import { useQuery } from '@apollo/client';
-import React from "react";
+import { gql, useQuery } from '@apollo/client';
+import React, { useEffect } from "react";
+import { useGlobalContext } from '../utils/GlobalState';
 import "./Leaderboard.css";
 
 const exampleLeaderboardArray = [
@@ -15,24 +16,45 @@ const exampleLeaderboardArray = [
   { displayName: "joy", score: 90 },
 ];
 
+const GET_SCORES = gql`
+query Users {
+  users {
+    username
+    money
+  }
+}
+`;
+
 export default function Leaderboard({
   showLeaderboard, setShowLeaderboard,
   showMarketplace, setShowMarketplace,
 }) {
-
   // const [getScores] = useQuery(GET_SCORES)
+  const { loading, data: highscoreData } = useQuery(GET_SCORES);
+
+  useEffect(() => {
+    if (highscoreData) {
+
+      // console.log(highscoreData.users);
+      highscoreData.users.map(u=> console.log(u.username, u.money))
+    } else if (!loading) {
+      highscoreData = exampleLeaderboardArray
+    }
+  }, [loading, highscoreData]);
+
+  if (loading) return <div><h2>Loading...</h2></div>
 
   return (
     <div>
       <div className={`modal-background ${showLeaderboard && 'modal-background-active'}`}
-        onClick={() =>setShowLeaderboard(!showLeaderboard)}></div>
+        onClick={() => setShowLeaderboard(!showLeaderboard)}></div>
 
       <div className={`leaderboard modal ${showLeaderboard && 'modal-active'}`}>
 
         <button
           className="btn btn-modal"
           onClick={() => setShowLeaderboard(!showLeaderboard)}>
-            <i className="fa-solid fa-xmark"></i>
+          <i className="fa-solid fa-xmark"></i>
         </button>
 
         <h2 className='page-title'><p className="display-banner">Leaderboard</p></h2>
@@ -42,15 +64,13 @@ export default function Leaderboard({
           <div className="lb-grid-item lb-title">Name</div>
           <div className="lb-grid-item lb-title">Score</div>
         </div>
-
-          {exampleLeaderboardArray.map((leader, index) => (
-            <div className="lb-grid" key={index}>
-              <div className="lb-grid-item">{index + 1}</div>
-              <div className="lb-grid-item">{leader.displayName}</div>
-              <div className="lb-grid-item">{leader.score}</div>
-            </div>
-          ))}
-
+        {!loading && highscoreData.users.map((user, index) => (
+          <div className="lb-grid" key={index}>
+            <div className="lb-grid-item">{index + 1}</div>
+            <div className="lb-grid-item">{user.username}</div>
+            <div className="lb-grid-item">{user.money}</div>
+          </div>
+        ))}
       </div>
     </div>
   );

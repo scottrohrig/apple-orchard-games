@@ -1,7 +1,7 @@
 import { useReducer } from "react";
 import {
   UPDATE_USER,
-  UPDATE_TIMERS,
+  UPDATE_TREE_TIMER,
   UPDATE_JUICER,
   UPDATE_JUICERS,
   PURCHASE_A_TREE,
@@ -27,6 +27,15 @@ export const reducer = (state = [], action) => {
     // case update orchards
 
     // case update trees
+    case UPDATE_TREE_TIMER:
+      let updatedTrees = state.trees.map((tree) =>
+        tree._id === action.payload._id ? action.payload : tree
+      );
+      console.log(updatedTrees);
+      return {
+        ...state,
+        trees: updatedTrees,
+      };
 
     // case update juicers
     case UPDATE_JUICERS:
@@ -65,11 +74,8 @@ export const reducer = (state = [], action) => {
       };
 
     case PURCHASE_A_TREE:
-      console.log("PURCHASE_A_TREE reducer running...");
-
-      let newTreeArray = state.trees;
+      let newTreeArray = [...state.trees, {...action.payload}];
       let newId = state.trees.length;
-      newTreeArray.push({_id:newId});
 
       return {
         ...state,

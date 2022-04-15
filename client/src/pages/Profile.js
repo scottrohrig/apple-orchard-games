@@ -19,7 +19,6 @@ export default function Profile({
   const [updateDB, { error }] = useMutation(UPDATE_USER);
 
   const user = data?.me || data?.user || {};
-  console.log(user);
 
   return (
     <div>

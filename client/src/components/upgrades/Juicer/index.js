@@ -15,7 +15,7 @@ const Juicer = ({ props }) => {
 
   // only thing I don't like is this duration displays on mount
   const [timeRemaining, setTime] = useState(duration);
-  const isReady = timeRemaining <= 0;
+  let isReady = timeRemaining <= 0;
 
   // custom Hook to handle intervals across item types
   useInterval(() => {

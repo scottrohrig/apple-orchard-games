@@ -80,8 +80,8 @@ function App() {
                 />
 
                 <Routes>
-                  <Route path="/login" element={<Splash />} />
                   <Route path="/" element={<Dashboard />} />
+                  <Route path="/login" element={<Splash />} />
                   <Route path="/orchard/:id" element={<Orchard />} />
                   <Route element={<NoMatch />} />
                 </Routes>

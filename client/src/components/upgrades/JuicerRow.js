@@ -30,6 +30,7 @@ export default function JuicersRow() {
   useEffect(() => {
     if (itemData) {
       // itemData.me.juicers.map(j => console.log('SERVER _Id', j?._id));
+      console.log(itemData);
       dispatch({
         type: UPDATE_JUICERS,
         payload: itemData.me.juicers

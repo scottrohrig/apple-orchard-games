@@ -593,6 +593,8 @@ header.component-header {
   flex-direction: column;
   align-items: center;
   margin: 0 auto;
+  max-width: 125px;
+  max-height: 125px;
 }
 .orchard-barn {
   position: absolute;
@@ -851,9 +853,21 @@ header.component-header {
     margin-bottom: 70px;
     justify-content: space-evenly;
   }
-  .item-box {
-    height: 100px;
+  .item-row {
+    padding-top: 0;
   }
+  .item-scroll {
+    height: 125px;
+  }
+  .item-box {
+    height: 100%;
+    margin-top: 0px;
+  }
+  .item-container {
+    height: 150px;
+    margin-top: 0 !important;
+  }
+
   .empty-plot {
     margin-top: 60px;
   }

@@ -48,7 +48,7 @@ const GlobalProvider = ({ value = [], ...props }) => {
     gameVariables: defaultGameVariables,
     trees: [{}],
     mashers: [{}],
-    juicers: [{}],
+    juicers: [],
     ovens: [{}],
     orchards: [
       {

@@ -23,6 +23,11 @@ export default function Marketplace({ showMarketplace, setShowMarketplace }) {
 
   // sell apples
   function handleSellApples(event) {
+
+    if (applesToSell > appleCount || appleCount < 0) {
+      return
+    }
+
     const payload = Math.max(applesToSell, 0);
     try {
       console.log("Update AppleCount Payload:", payload);

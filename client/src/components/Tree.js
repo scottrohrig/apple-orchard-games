@@ -26,6 +26,8 @@ export default function Tree() {
     dispatch({
       type: HARVEST_TREE,
     });
+    // TODO implement idbPromise
+
 
     // TODO: Need to update database: apples and start time have changed; need to acquire and pass tree's _id
     // dispatch({

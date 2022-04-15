@@ -1,25 +1,20 @@
-import { useMutation, useQuery } from '@apollo/client';
-import { useEffect, useState } from 'react';
-import { useGlobalContext } from '../../utils/GlobalState';
-import { ADD_JUICER, SET_JUICER } from '../../utils/mutations';
-import { BUY_JUICER, UPDATE_JUICERS } from '../../utils/actions';
-import { QUERY_ME } from '../../utils/queries';
-import Juicer from './Juicer';
-import BuyJuicer from './PlaceholderJuice';
+import { useMutation, useQuery } from "@apollo/client";
+import { useEffect, useState } from "react";
+import { useGlobalContext } from "../../utils/GlobalState";
+import { ADD_JUICER, SET_JUICER } from "../../utils/mutations";
+import { BUY_JUICER, UPDATE_JUICERS } from "../../utils/actions";
+import { QUERY_ME } from "../../utils/queries";
+import Juicer from "./Juicer";
+import BuyJuicer from "./PlaceholderJuice";
 
 export default function JuicersRow() {
-
   const { loading, data: itemData } = useQuery(QUERY_ME);
   const [addJuicer, { addJuicerError }] = useMutation(ADD_JUICER);
-  const [updateJuicer, {
-    data: updateData,
-    loading: updateLoading,
-    error: updateJuicerError
-  }] = useMutation(SET_JUICER, {
-    refetchQueries: [
-      QUERY_ME,
-      'Me'
-    ]
+  const [
+    updateJuicer,
+    { data: updateData, loading: updateLoading, error: updateJuicerError },
+  ] = useMutation(SET_JUICER, {
+    refetchQueries: [QUERY_ME, "Me"],
   });
 
   const [state, dispatch] = useGlobalContext();
@@ -32,24 +27,22 @@ export default function JuicersRow() {
       // itemData.me.juicers.map(j => console.log('SERVER _Id', j?._id));
       dispatch({
         type: UPDATE_JUICERS,
-        payload: itemData.me.juicers
+        payload: itemData.me.juicers,
       });
+      // TODO implement idbPromise
 
       // juicers.map(j => console.log('STATE _Id', j?._id));
-
     } else if (!loading) {
-
-      console.log('loading.');
+      console.log("loading.");
       dispatch({
         type: UPDATE_JUICERS,
-        payload: juicers
+        payload: juicers,
       });
+      // TODO implement idbPromise
     }
   }, [itemData, loading, dispatch]);
 
-
   const handleUpgradePurchased = async (event) => {
-
     // console.log('data: updateData', updateData);
     // validate enough money
     const money = state.money;
@@ -64,8 +57,8 @@ export default function JuicersRow() {
       // store returned data aliased as 'userData' from addJuicer mutation to server
       const { data: userData } = await addJuicer({
         variables: {
-          duration: state.gameVariables.makeJuiceTime
-        }
+          duration: state.gameVariables.makeJuiceTime,
+        },
       });
       const juicersArr = userData.addJuicer.juicers;
       // get id or newly created juicer obj from the server to store in the BUY_JUICER payload
@@ -80,18 +73,18 @@ export default function JuicersRow() {
         const payload = {
           _id: newJuicer._id,
           startedAtTime: newJuicer.startedAtTime,
-          duration: newJuicer.duration
+          duration: newJuicer.duration,
         };
-        console.log('PAYLOAD...', payload);
+        console.log("PAYLOAD...", payload);
         dispatch({
           type: BUY_JUICER,
           payload,
         });
+        // TODO implement idbPromise
       } catch (error) {
-        console.log('error');
+        console.log("error");
       }
     }
-
   };
 
   // console.log(juicers);
@@ -99,7 +92,8 @@ export default function JuicersRow() {
   return (
     <div className="item-row">
       <span className="item-label">Juice!</span>
-        {!loading && <div className="item-scroll">
+      {!loading && (
+        <div className="item-scroll">
           {
             // map thru juicer objects from GlobalState to add to row
             juicers.map((juicer, i) => {
@@ -110,10 +104,11 @@ export default function JuicersRow() {
               );
             })
           }
-          {(juicers.length < 5) &&
+          {juicers.length < 5 && (
             <BuyJuicer handleUpgradePurchased={handleUpgradePurchased} />
-          }
-        </div>}
+          )}
+        </div>
+      )}
     </div>
   );
 }

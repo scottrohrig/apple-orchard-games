@@ -1,13 +1,20 @@
-import '../item.css';
-import icon from '../../../assets/images/juicer.png';
-import juiceImg from '../../../assets/images/juice.png';
-import { useState } from 'react';
-import { getTimeRemaining, useInterval } from '../../../utils/helpers';
-import { UPDATE_JUICER, SELL_JUICE, APPLES_FOR_JUICE } from '../../../utils/actions';
+import "../item.css";
+import icon from "../../../assets/images/juicer.png";
+import juiceImg from "../../../assets/images/juice.png";
+import { useState } from "react";
+import {
+  getTimeRemaining,
+  idbPromise,
+  useInterval,
+} from "../../../utils/helpers";
+import {
+  UPDATE_JUICER,
+  SELL_JUICE,
+  APPLES_FOR_JUICE,
+} from "../../../utils/actions";
 
 // pass in juicer props from parent page / component
 const Juicer = ({ props }) => {
-
   const { juicer, dispatch, updateJuicer } = props;
 
   // deconstruct the juicer props passed in from parent
@@ -26,7 +33,6 @@ const Juicer = ({ props }) => {
   }, 1000);
 
   const handleUseBtnPressed = async (event) => {
-
     // validate user appleCount > juicerAppleCost
     // dispatch update juicer with a new startedAtTime
     const now = new Date();
@@ -35,24 +41,32 @@ const Juicer = ({ props }) => {
 
     dispatch({
       type: UPDATE_JUICER,
-      payload:
-        { _id: juicerId, startedAtTime: now, duration }
+      payload: { _id: juicerId, startedAtTime: now, duration },
+    });
+    // idbPromise
+    idbPromise("juicers", "put", {
+      _id: juicerId,
+      startedAtTime: now,
+      duration,
     });
 
     dispatch({
-      type: SELL_JUICE
+      type: SELL_JUICE,
     });
+    // TODO implement idbPromise
+    idbPromise("juicers", "delete");
 
     dispatch({
-      type: APPLES_FOR_JUICE
+      type: APPLES_FOR_JUICE,
     });
+    // TODO implement idbPromise
 
     const { data: jData } = await updateJuicer({
       variables: {
-            juicerId: juicerId,
-            startedAtTime: now,
-            duration
-          }
+        juicerId: juicerId,
+        startedAtTime: now,
+        duration,
+      },
     });
     // console.log('jData', jData);
     // console.log('UPDATED_USERS_JUICERS', jData.updateJuicer.juicers[0]._id, '\nJUICER_ID', juicerId);
@@ -62,24 +76,31 @@ const Juicer = ({ props }) => {
 
   return (
     <>
-      <div className='item-container'>
-        <div className='temp-img'>
-          {isReady
-            ? <img src={juiceImg} alt="juicer" />
-            : <img src={icon} alt="juicer" />}
+      <div className="item-container">
+        <div className="temp-img">
+          {isReady ? (
+            <img src={juiceImg} alt="juicer" />
+          ) : (
+            <img src={icon} alt="juicer" />
+          )}
         </div>
 
-        <div className='item-btn-wrapper'>
+        <div className="item-btn-wrapper">
           <div className="item-btn-flex">
-            {isReady
-              ? <button
+            {isReady ? (
+              <button
                 className="btn btn-harvest"
                 onClick={() => {
                   handleUseBtnPressed();
-                }}>
+                }}
+              >
                 sell
               </button>
-              : <button className="btn btn-timer" disabled>{timeRemaining}s</button>}
+            ) : (
+              <button className="btn btn-timer" disabled>
+                {timeRemaining}s
+              </button>
+            )}
           </div>
         </div>
       </div>

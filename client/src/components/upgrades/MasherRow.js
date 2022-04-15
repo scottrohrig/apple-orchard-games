@@ -1,10 +1,10 @@
-import { useMutation, useQuery } from '@apollo/client';
-import { useEffect } from 'react';
-import { useGlobalContext } from '../../utils/GlobalState';
-import { ADD_MASHER } from '../../utils/mutations';
-import { BUY_MASHER, APPLES_FOR_SAUCE } from '../../utils/actions';
-import Masher from './Masher';
-import BuyMasher from './PlaceholderMasher';
+import { useMutation, useQuery } from "@apollo/client";
+import { useEffect } from "react";
+import { useGlobalContext } from "../../utils/GlobalState";
+import { ADD_MASHER } from "../../utils/mutations";
+import { BUY_MASHER, APPLES_FOR_SAUCE } from "../../utils/actions";
+import Masher from "./Masher";
+import BuyMasher from "./PlaceholderMasher";
 
 export default function MashersRow() {
   const [state, dispatch] = useGlobalContext();
@@ -23,13 +23,12 @@ export default function MashersRow() {
     // dispatch item data if it exists with UPDATE_ITEMS action
     // put item data in indexedDB cache
     // if not loading, get cache and dispatch
-  }, ['itemData', 'loading', dispatch]);
+  }, ["itemData", "loading", dispatch]);
 
   const handlePurchase = async (event) => {
-
     // validate enough money
-    if (state.money < state.gameVariables.masherCost){
-      return
+    if (state.money < state.gameVariables.masherCost) {
+      return;
     }
 
     // dispatch ADD_MASHER
@@ -39,7 +38,7 @@ export default function MashersRow() {
       console.error(e);
     }
 
-    console.log('dispatching to GameState');
+    console.log("dispatching to GameState");
     try {
       const payload = {
         _id: mashers.length + 1,
@@ -50,8 +49,9 @@ export default function MashersRow() {
         type: BUY_MASHER,
         payload,
       });
+      // TODO implement idbPromise
     } catch (error) {
-      console.log('error');
+      console.log("error");
     }
   };
 

@@ -105,7 +105,7 @@ export default function JuicersRow() {
             juicers.map((juicer, i) => {
               return (
                 <div key={i} className="item-box">
-                  <Juicer props={{ juicer, dispatch, updateJuicer }} />
+                  <Juicer props={{ juicer, dispatch, updateJuicer, appleCount: state.appleCount, makeJuiceApplesUsed: state.gameVariables.makeJuiceApplesUsed }} />
                 </div>
               );
             })

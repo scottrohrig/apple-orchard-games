@@ -8,7 +8,7 @@ const defaultGameVariables = {
   initialAppleInventory: 5,
   // for Tree
   applesForNewTree: 3,
-  appleGrowTime: 30,
+  appleGrowTime: 10,
   applesGrown: 5,
   appleSaleRevenue: 1,
   // for Juncer
@@ -40,10 +40,10 @@ const GlobalProvider = ({ value = [], ...props }) => {
     username: "Happiest Harvester",
     email: "happy@harvester.com",
     password: "password",
-    money: 100,
+    money: 0,
 
-    appleCount: 500,
-    gemCount: 20,
+    appleCount: 5,
+    gemCount: 0,
 
     gameVariables: defaultGameVariables,
     trees: [{}],

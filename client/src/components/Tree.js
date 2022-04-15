@@ -1,28 +1,28 @@
 import React, { useEffect, useState } from "react";
 import treeImage from "../assets/images/tree.png";
 import { useGlobalContext } from "../utils/GlobalState";
-import { HARVEST_TREE } from "../utils/actions";
+import { HARVEST_TREE, UPDATE_TREE_TIMER } from "../utils/actions";
 import { UPDATE_USER } from "../utils/mutations";
+import { getTimeRemaining, useInterval } from '../utils/helpers';
 
 import treeBare from "../assets/images/tree-short.svg";
 import treeApples from "../assets/images/tree-with-apples-short.svg";
 
-export default function Tree() {
+export default function Tree({ tree, _id, dispatchParent }) {
   const [state, dispatch] = useGlobalContext();
-  const { trees, money, appleCount, gameVariables } = state;
+  const { trees, gameVariables } = state;
   const resetTreeTimerSeconds = gameVariables.appleGrowTime;
 
-  const [secondsLeft, setSecondsLeft] = useState(resetTreeTimerSeconds);
-  let isReady = secondsLeft <= 0;
+  const [timeRemaining, setTime] = useState(10);
+
+  let isReady = timeRemaining <= 0;
+
 
   // reset countdown when button clicked
   function handleTreeClick(evt) {
-    evt.preventDefault();
-    setSecondsLeft(resetTreeTimerSeconds);
 
-    let startedAtTime = new Date();
-    console.log("new time", startedAtTime);
-
+    console.log('treeId', timeRemaining);
+    const now = new Date();
     dispatch({
       type: HARVEST_TREE,
     });
@@ -31,17 +31,23 @@ export default function Tree() {
     // dispatch({
     //   type: UPDATE_USER
     // });
+    dispatchParent({
+      type: UPDATE_TREE_TIMER,
+      payload: {
+        _id,
+        startedAtTime: now,
+        duration: tree.duration
+      }
+    });
+    setTime(tree.duration);
   }
 
-  useEffect(() => {
+  useInterval(() => {
     if (isReady) {
       return;
     }
-    const updateSecondsLeft = setTimeout(() => {
-      setSecondsLeft((prev) => prev - 1);
-    }, 1000);
-    return () => clearTimeout(updateSecondsLeft);
-  }, [secondsLeft]);
+    setTime(getTimeRemaining(tree.startedAtTime, tree.duration));
+  }, 1000);
 
   return (
     <>
@@ -59,7 +65,7 @@ export default function Tree() {
           <img src={treeBare} alt=""></img>
           <div className="">
             <button className="btn btn-timer" disabled>
-              {secondsLeft}s
+              {timeRemaining}s
             </button>
           </div>
         </div>

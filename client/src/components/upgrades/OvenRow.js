@@ -69,7 +69,11 @@ export default function OvensRow() {
                   {
                     // if object in map does not have `_id` show placeholder.
                     oven._id ? (
-                      <Oven props={{ oven, dispatch }} />
+                      <Oven props={{
+                        oven, dispatch,
+                        applesUsed: state.applesUsed,
+                        makePieApplesUsed: state.gameVariables.makePieApplesUsed
+                       }} />
                     ) : (
                       // Placeholder
                       <BuyOven handlePurchase={handlePurchase} />

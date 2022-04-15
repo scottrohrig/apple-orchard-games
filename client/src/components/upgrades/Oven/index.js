@@ -9,7 +9,7 @@ import { UPDATE_OVENS, SELL_PIE, APPLES_FOR_PIE } from '../../../utils/actions';
 // pass in oven props from parent page / component
 const Oven = ({ props }) => {
 
-  const { oven, dispatch } = props
+  const { oven, dispatch, appleCount, makePieApplesUsed } = props
   // deconstruct the oven props passed in from parent
   // const [{ _id, startedAtTime, duration }, setState] = useState(mock) // oven
 
@@ -29,6 +29,11 @@ const Oven = ({ props }) => {
   const handleUseBtnPressed = (event) => {
     // dispatch update oven with a new startedAtTime
     // setState({_id, startedAtTime: new Date(), duration})
+
+    if (appleCount < makePieApplesUsed) {
+      return
+    }
+
     const now = new Date()
     console.log('new time', now)
     dispatch({

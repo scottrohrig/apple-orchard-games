@@ -9,6 +9,8 @@ export const UPDATE_USER = "UPDATE_USER";
 // update orchards
 
 // update trees
+export const UPDATE_TREE_TIMER = "UPDATE_TREE_TIMER";
+
 // update mashers
 // update juicers
 export const UPDATE_JUICER = "UPDATE_JUICER";

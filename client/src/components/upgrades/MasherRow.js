@@ -12,8 +12,9 @@ export default function MashersRow() {
   // console.log(state);
 
   // destructure the items list from the global state object
-  const { mashers } = state;
+  const { mashers, appleCount } = state;
   // console.log('state', state, 'mashers', mashers);
+  const makeSauceApplesUsed = state.gameVariables.makeSauceApplesUsed
 
   // get items data from db
   // const { loading, data: itemData } = useQuery(QUERY_ITEMS);
@@ -69,7 +70,7 @@ export default function MashersRow() {
                   {
                     // if object in map does not have `_id` show placeholder.
                     masher._id ? (
-                      <Masher props={{ masher, dispatch }} />
+                      <Masher props={{ masher, dispatch, makeSauceApplesUsed: state.gameVariables.makeSauceApplesUsed, appleCount: state.appleCount }} />
                     ) : (
                       // Placeholder
                       <BuyMasher handlePurchase={handlePurchase} />

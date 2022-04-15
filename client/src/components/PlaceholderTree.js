@@ -19,6 +19,11 @@ export default function PlaceholderTree() {
 
 
   const handlePurchaseTreeClick = async (evt) => {
+
+    console.log('appleCount',state.appleCount);
+    if (state.appleCount < state.gameVariables.applesForNewTree){
+      return
+    }
     console.log("in handlePurchaseTreeClick");
 
     try {

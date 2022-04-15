@@ -31,7 +31,7 @@ const Signup = ({ showSignup, setShowSignup, setShowLogin, setShowStartButton })
 
   // redirect the user to /home if user is logged in
   if (Auth.loggedIn()) {
-    return <Navigate to="/home" replace={true} />;
+    return <Navigate to="/" replace={true} />;
   };
 
   // form submit handler function
@@ -96,7 +96,7 @@ const Signup = ({ showSignup, setShowSignup, setShowLogin, setShowStartButton })
           </button>
         </div>
       </form>
-      
+
       <button className="btn toggle-login" onClick={() => {
         setShowSignup(false);
         setShowLogin(true);

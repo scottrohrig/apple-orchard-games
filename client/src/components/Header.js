@@ -62,7 +62,7 @@ function Header(props) {
       </header>
 
       <div className="nav-buttons">
-        <Link to="/home" className="btn btn-nav">
+        <Link to="/" className="btn btn-nav">
           <i className="fa-solid fa-house-chimney-window"></i>
           <span>Dashboard</span>
         </Link>

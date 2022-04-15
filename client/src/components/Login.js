@@ -20,7 +20,7 @@ const Login = ({ showLogin, setShowLogin, setShowSignup, setShowStartButton }) =
 
   // redirect the user to /home if user is logged in
   if (Auth.loggedIn()) {
-    return <Navigate to="/home" replace={true} />;
+    return <Navigate to="/" replace={true} />;
   };
 
   // define the login function to handle the LOGIN mutation

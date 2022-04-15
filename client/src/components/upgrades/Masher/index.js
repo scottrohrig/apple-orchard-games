@@ -9,7 +9,7 @@ import { UPDATE_MASHERS, SELL_SAUCE, APPLES_FOR_SAUCE } from '../../../utils/act
 // pass in masher props from parent page / component
 const Masher = ({ props }) => {
 
-  const { masher, dispatch } = props
+  const { masher, dispatch, appleCount, makeSauceApplesUsed } = props
   // deconstruct the masher props passed in from parent
   // const [{ _id, startedAtTime, duration }, setState] = useState(mock) // masher
 
@@ -29,6 +29,11 @@ const Masher = ({ props }) => {
   const handleUseBtnPressed = (event) => {
     // dispatch update masher with a new startedAtTime
     // setState({_id, startedAtTime: new Date(), duration})
+
+    if (appleCount < makeSauceApplesUsed) {
+      return
+    }
+
     const now = new Date()
     console.log('new time', now)
     dispatch({

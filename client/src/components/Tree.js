@@ -13,7 +13,7 @@ export default function Tree({ tree, _id, dispatchParent }) {
   const { trees, gameVariables } = state;
   const resetTreeTimerSeconds = gameVariables.appleGrowTime;
 
-  const [timeRemaining, setTime] = useState(30);
+  const [timeRemaining, setTime] = useState(10);
 
   let isReady = timeRemaining <= 0;
 

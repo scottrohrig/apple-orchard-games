@@ -8,7 +8,7 @@ import { UPDATE_JUICER, SELL_JUICE, APPLES_FOR_JUICE } from '../../../utils/acti
 // pass in juicer props from parent page / component
 const Juicer = ({ props }) => {
 
-  const { juicer, dispatch, updateJuicer, appleCount, juicerAppleCost } = props;
+  const { juicer, dispatch, updateJuicer, appleCount, makeJuiceApplesUsed } = props;
 
   // deconstruct the juicer props passed in from parent
   const { _id: juicerId, startedAtTime, duration } = juicer;
@@ -28,7 +28,7 @@ const Juicer = ({ props }) => {
   const handleUseBtnPressed = async (event) => {
 
     // validate user appleCount > juicerAppleCost
-    if (appleCount > juicerAppleCost) {
+    if (appleCount > makeJuiceApplesUsed) {
       return
     }
     // dispatch update juicer with a new startedAtTime

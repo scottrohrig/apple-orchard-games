@@ -42,7 +42,7 @@ const GlobalProvider = ({ value = [], ...props }) => {
     password: "password",
     money: 0,
 
-    appleCount: 500,
+    appleCount: 5,
     gemCount: 0,
 
     gameVariables: defaultGameVariables,

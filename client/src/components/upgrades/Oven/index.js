@@ -1,7 +1,7 @@
 import '../item.css';
+import { useState, useEffect } from 'react';
 import icon from '../../../assets/images/oven.png';
 import pieImg from '../../../assets/images/pie.png';
-import { useState } from 'react';
 import { formatTime, getTimeRemaining, useInterval } from '../../../utils/helpers';
 import { UPDATE_OVENS, SELL_PIE, APPLES_FOR_PIE } from '../../../utils/actions';
 
@@ -9,7 +9,7 @@ import { UPDATE_OVENS, SELL_PIE, APPLES_FOR_PIE } from '../../../utils/actions';
 // pass in oven props from parent page / component
 const Oven = ({ props }) => {
 
-  const { oven, dispatch, appleCount, makePieApplesUsed } = props
+  const { oven, dispatch, appleCount, makePieApplesUsed, useIsMount, updateUser, money } = props
   // deconstruct the oven props passed in from parent
   // const [{ _id, startedAtTime, duration }, setState] = useState(mock) // oven
 
@@ -25,6 +25,18 @@ const Oven = ({ props }) => {
     }
     setTime(getTimeRemaining(startedAtTime, duration));
   }, 1000);
+
+  // To update the user
+  const isMount = useIsMount();
+  const [success, setSuccess] = useState(false);
+  useEffect(async () => {
+    if (!isMount) {
+      const { data: uData } = await updateUser({
+        variables: { money: money, appleCount },
+      });
+      console.log('uData', uData);
+    }
+  }, [success]);
 
   const handleUseBtnPressed = (event) => {
     // dispatch update oven with a new startedAtTime
@@ -55,6 +67,7 @@ const Oven = ({ props }) => {
     console.log('dispatching startedAtTime', startedAtTime)
 
     setTime(duration);
+    setSuccess(!success);
   };
 
   return (

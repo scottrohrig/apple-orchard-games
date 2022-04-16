@@ -28,6 +28,8 @@ export default function Marketplace({ showMarketplace, setShowMarketplace }) {
       return
     }
 
+    setApplesToSell(0);
+
     const payload = Math.max(applesToSell, 0);
     try {
       console.log("Update AppleCount Payload:", payload);

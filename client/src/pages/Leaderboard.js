@@ -30,7 +30,7 @@ export default function Leaderboard({
   showMarketplace, setShowMarketplace,
 }) {
   // const [getScores] = useQuery(GET_SCORES)
-  const { loading, data: highscoreData } = useQuery(GET_SCORES);
+  const { loading, data: highscoreData, error, refetch: refretchScores } = useQuery(GET_SCORES);
 
   useEffect(() => {
     if (highscoreData) {
@@ -42,7 +42,10 @@ export default function Leaderboard({
     }
   }, [loading, highscoreData]);
 
-  if (loading) return <div><h2>Loading...</h2></div>
+  if (loading) return <div><h2>Loading...</h2></div>;
+  if (!loading) {
+    refretchScores();
+  }
 
   return (
     <div>

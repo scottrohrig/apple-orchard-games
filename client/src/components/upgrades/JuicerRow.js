@@ -1,13 +1,16 @@
 import { useMutation, useQuery } from '@apollo/client';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useGlobalContext } from '../../utils/GlobalState';
-import { ADD_JUICER, SET_JUICER } from '../../utils/mutations';
+import { useIsMount } from "../../utils/helpers";
+import { ADD_JUICER, SET_JUICER, UPDATE_USER } from '../../utils/mutations';
 import { BUY_JUICER, UPDATE_JUICERS } from '../../utils/actions';
 import { QUERY_ME } from '../../utils/queries';
 import Juicer from './Juicer';
 import BuyJuicer from './PlaceholderJuice';
 
 export default function JuicersRow() {
+  const [state, dispatch] = useGlobalContext();
+  const [updateUser, { error }] = useMutation(UPDATE_USER);
 
   const { loading, data: itemData } = useQuery(QUERY_ME);
   const [addJuicer, { addJuicerError }] = useMutation(ADD_JUICER);
@@ -21,8 +24,6 @@ export default function JuicersRow() {
       'Me'
     ]
   });
-
-  const [state, dispatch] = useGlobalContext();
 
   // destructure the items list from the global state object
   const { juicers } = state;
@@ -47,7 +48,6 @@ export default function JuicersRow() {
       });
     }
   }, [itemData, loading, dispatch]);
-
 
   const handleUpgradePurchased = async (event) => {
 
@@ -92,7 +92,6 @@ export default function JuicersRow() {
         console.log('error');
       }
     }
-
   };
 
   // console.log(juicers);
@@ -106,7 +105,7 @@ export default function JuicersRow() {
             juicers.map((juicer, i) => {
               return (
                 <div key={i} className="item-box">
-                  <Juicer props={{ juicer, dispatch, updateJuicer, appleCount: state.appleCount, makeJuiceApplesUsed: state.gameVariables.makeJuiceApplesUsed }} />
+                  <Juicer props={{ juicer, dispatch, updateJuicer, appleCount: state.appleCount, makeJuiceApplesUsed: state.gameVariables.makeJuiceApplesUsed, useIsMount, updateUser, money: state.money }} />
                 </div>
               );
             })

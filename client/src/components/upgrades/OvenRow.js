@@ -1,13 +1,16 @@
 import { useMutation, useQuery } from '@apollo/client';
 import { useEffect } from 'react';
 import { useGlobalContext } from '../../utils/GlobalState';
-import { ADD_OVEN } from '../../utils/mutations';
+import { useIsMount } from "../../utils/helpers";
+import { ADD_OVEN, UPDATE_USER } from '../../utils/mutations';
 import { BUY_OVEN, APPLES_FOR_PIE } from '../../utils/actions';
 import Oven from './Oven';
 import BuyOven from './PlaceholderPie';
 
 export default function OvensRow() {
   const [state, dispatch] = useGlobalContext();
+  const [updateUser, { error }] = useMutation(UPDATE_USER);
+
   const [addOven] = useMutation(ADD_OVEN);
   // console.log(state);
 
@@ -72,7 +75,7 @@ export default function OvensRow() {
                       <Oven props={{
                         oven, dispatch,
                         applesUsed: state.applesUsed,
-                        makePieApplesUsed: state.gameVariables.makePieApplesUsed
+                        makePieApplesUsed: state.gameVariables.makePieApplesUsed, useIsMount, updateUser, money: state.money
                        }} />
                     ) : (
                       // Placeholder

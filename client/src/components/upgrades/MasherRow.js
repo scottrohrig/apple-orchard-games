@@ -1,13 +1,16 @@
 import { useMutation, useQuery } from '@apollo/client';
 import { useEffect } from 'react';
 import { useGlobalContext } from '../../utils/GlobalState';
-import { ADD_MASHER } from '../../utils/mutations';
+import { useIsMount } from "../../utils/helpers";
+import { ADD_MASHER, UPDATE_USER } from '../../utils/mutations';
 import { BUY_MASHER, APPLES_FOR_SAUCE } from '../../utils/actions';
 import Masher from './Masher';
 import BuyMasher from './PlaceholderMasher';
 
 export default function MashersRow() {
   const [state, dispatch] = useGlobalContext();
+  const [updateUser, { error }] = useMutation(UPDATE_USER);
+  
   const [addMasher] = useMutation(ADD_MASHER);
   // console.log(state);
 
@@ -70,7 +73,7 @@ export default function MashersRow() {
                   {
                     // if object in map does not have `_id` show placeholder.
                     masher._id ? (
-                      <Masher props={{ masher, dispatch, makeSauceApplesUsed: state.gameVariables.makeSauceApplesUsed, appleCount: state.appleCount }} />
+                      <Masher props={{ masher, dispatch, makeSauceApplesUsed: state.gameVariables.makeSauceApplesUsed, appleCount: state.appleCount, useIsMount, updateUser, money: state.money }} />
                     ) : (
                       // Placeholder
                       <BuyMasher handlePurchase={handlePurchase} />

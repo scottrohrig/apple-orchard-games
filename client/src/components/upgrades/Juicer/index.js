@@ -1,14 +1,14 @@
 import '../item.css';
+import { useState, useEffect } from 'react';
 import icon from '../../../assets/images/juicer.png';
 import juiceImg from '../../../assets/images/juice.png';
-import { useState } from 'react';
 import { getTimeRemaining, useInterval } from '../../../utils/helpers';
 import { UPDATE_JUICER, SELL_JUICE, APPLES_FOR_JUICE } from '../../../utils/actions';
 
 // pass in juicer props from parent page / component
 const Juicer = ({ props }) => {
 
-  const { juicer, dispatch, updateJuicer, appleCount, makeJuiceApplesUsed } = props;
+  const { juicer, dispatch, updateJuicer, appleCount, makeJuiceApplesUsed, useIsMount, updateUser, money } = props;
 
   // deconstruct the juicer props passed in from parent
   const { _id: juicerId, startedAtTime, duration } = juicer;
@@ -24,6 +24,18 @@ const Juicer = ({ props }) => {
     }
     setTime(getTimeRemaining(startedAtTime, duration));
   }, 1000);
+
+  // To update the user
+  const isMount = useIsMount();
+  const [success, setSuccess] = useState(false);
+  useEffect(async () => {
+    if (!isMount) {
+      const { data: uData } = await updateUser({
+        variables: { money: money, appleCount },
+      });
+      console.log('uData', uData);
+    }
+  }, [success]);
 
   const handleUseBtnPressed = async (event) => {
 
@@ -61,6 +73,7 @@ const Juicer = ({ props }) => {
     // console.log('UPDATED_USERS_JUICERS', jData.updateJuicer.juicers[0]._id, '\nJUICER_ID', juicerId);
 
     setTime(duration);
+    setSuccess(!success);
   };
 
   return (

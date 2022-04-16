@@ -1,7 +1,7 @@
 import '../item.css';
+import { useState, useEffect } from 'react';
 import icon from '../../../assets/images/masher.png';
 import sauceImg from '../../../assets/images/sauce.png';
-import { useState } from 'react';
 import { formatTime, getTimeRemaining, useInterval } from '../../../utils/helpers';
 import { UPDATE_MASHERS, SELL_SAUCE, APPLES_FOR_SAUCE } from '../../../utils/actions';
 
@@ -9,7 +9,7 @@ import { UPDATE_MASHERS, SELL_SAUCE, APPLES_FOR_SAUCE } from '../../../utils/act
 // pass in masher props from parent page / component
 const Masher = ({ props }) => {
 
-  const { masher, dispatch, appleCount, makeSauceApplesUsed } = props
+  const { masher, dispatch, appleCount, makeSauceApplesUsed, useIsMount, updateUser, money } = props
   // deconstruct the masher props passed in from parent
   // const [{ _id, startedAtTime, duration }, setState] = useState(mock) // masher
 
@@ -25,6 +25,18 @@ const Masher = ({ props }) => {
     }
     setTime(getTimeRemaining(startedAtTime, duration));
   }, 1000);
+
+  // To update the user
+  const isMount = useIsMount();
+  const [success, setSuccess] = useState(false);
+  useEffect(async () => {
+    if (!isMount) {
+      const { data: uData } = await updateUser({
+        variables: { money: money, appleCount },
+      });
+      console.log('uData', uData);
+    }
+  }, [success]);
 
   const handleUseBtnPressed = (event) => {
     // dispatch update masher with a new startedAtTime
@@ -55,6 +67,7 @@ const Masher = ({ props }) => {
     console.log('dispatching startedAtTime', startedAtTime)
 
     setTime(duration);
+    setSuccess(!success);
   };
 
   return (

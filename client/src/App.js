@@ -1,38 +1,40 @@
-import { useState } from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { useState } from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import {
   ApolloProvider,
   ApolloClient,
   InMemoryCache,
   createHttpLink,
-} from '@apollo/client';
-import { setContext } from '@apollo/client/link/context';
+} from "@apollo/client";
+import { setContext } from "@apollo/client/link/context";
 
-import './App.css';
-import './StyleReference';
+import "./App.css";
+import "./StyleReference";
 
-import { GlobalProvider } from './utils/GlobalState';
-import Auth from './utils/auth';
+import { GlobalProvider } from "./utils/GlobalState";
+import Auth from "./utils/auth";
 
-import Splash from './pages/Splash';
-import Dashboard from './pages/Dashboard';
-import Leaderboard from './pages/Leaderboard';
-import Profile from './pages/Profile';
-import Orchard from './pages/Orchard';
-import Header from './components/Header';
-import Marketplace from './components/Marketplace';
-import NoMatch from './pages/NoMatch';
+import { stateToLocalStorage } from "./utils/helpers";
+
+import Splash from "./pages/Splash";
+import Dashboard from "./pages/Dashboard";
+import Leaderboard from "./pages/Leaderboard";
+import Profile from "./pages/Profile";
+import Orchard from "./pages/Orchard";
+import Header from "./components/Header";
+import Marketplace from "./components/Marketplace";
+import NoMatch from "./pages/NoMatch";
 
 const httpLink = createHttpLink({
-  uri: '/graphql',
+  uri: "/graphql",
 });
 
 const authLink = setContext((_, { headers }) => {
-  const token = localStorage.getItem('id_token');
+  const token = localStorage.getItem("id_token");
   return {
     headers: {
       ...headers,
-      authorization: token ? `Bearer ${token}` : '',
+      authorization: token ? `Bearer ${token}` : "",
     },
   };
 });
@@ -59,11 +61,12 @@ function App() {
               setShowProfile={setShowProfile}
               showMarketplace={showMarketplace}
               setShowMarketplace={setShowMarketplace}
+              stateToLocalStorage={stateToLocalStorage}
             />
           )}
           <div className="app app-content">
             {/* App Stuff */}
-            <div style={{ margin: '2rem auto' }}>
+            <div style={{ margin: "2rem auto" }}>
               <div className="container">
                 {/* Modals */}
                 <Leaderboard
@@ -91,7 +94,7 @@ function App() {
         </Router>
       </GlobalProvider>
 
-      {window.addEventListener('selectstart', function (e) {
+      {window.addEventListener("selectstart", function (e) {
         e.preventDefault();
       })}
       {/* {window.addEventListener('contextmenu', function(e) {

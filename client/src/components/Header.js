@@ -1,8 +1,8 @@
-import React from 'react';
-import gem from '../assets/images/gem.svg';
-import basket from '../assets/images/basket.svg';
-import { useGlobalContext } from '../utils/GlobalState';
-import { Link } from 'react-router-dom';
+import React from "react";
+import gem from "../assets/images/gem.svg";
+import basket from "../assets/images/basket.svg";
+import { useGlobalContext } from "../utils/GlobalState";
+import { Link } from "react-router-dom";
 
 function Header(props) {
   const {
@@ -12,6 +12,7 @@ function Header(props) {
     setShowProfile,
     showMarketplace,
     setShowMarketplace,
+    stateToLocalStorage,
   } = props;
 
   const [state, dispatch] = useGlobalContext();
@@ -32,6 +33,10 @@ function Header(props) {
           <div className="disp-currency disp-currency-img">
             <img src={basket} alt="basket of apples" />
             <span>{appleCount}</span>
+          </div>
+
+          <div className="disp-currency disp-currency-img">
+            <button onClick={stateToLocalStorage}>update json</button>
           </div>
 
           <div className="disp-currency disp-currency-money">

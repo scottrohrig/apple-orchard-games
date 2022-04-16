@@ -13,7 +13,7 @@ export default function Orchard() {
 
   const [state, dispatch] = useGlobalContext();
   const { trees } = state;
-  console.log('',trees[0]);
+  console.log("", trees[0]);
 
   return (
     <div className="orchard-wrapper">
@@ -33,9 +33,9 @@ export default function Orchard() {
                       // if object in map does not have `_id` show placeholder.
                       tree._id ? (
                         <Tree
-                        _id={tree._id}
-                        tree={tree}
-                        dispatchParent={dispatch}
+                          _id={tree._id}
+                          tree={tree}
+                          dispatchParent={dispatch}
                         />
                       ) : (
                         // Placeholder

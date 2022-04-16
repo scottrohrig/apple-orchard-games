@@ -14,7 +14,7 @@ import "./StyleReference";
 import { GlobalProvider } from "./utils/GlobalState";
 import Auth from "./utils/auth";
 
-import { stateToLocalStorage } from "./utils/helpers";
+import { useStateToLocalStorage } from "./utils/helpers";
 
 import Splash from "./pages/Splash";
 import Dashboard from "./pages/Dashboard";
@@ -61,7 +61,7 @@ function App() {
               setShowProfile={setShowProfile}
               showMarketplace={showMarketplace}
               setShowMarketplace={setShowMarketplace}
-              stateToLocalStorage={stateToLocalStorage}
+              useStateToLocalStorage={useStateToLocalStorage}
             />
           )}
           <div className="app app-content">

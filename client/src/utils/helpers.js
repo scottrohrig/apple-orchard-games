@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { useGlobalContext } from "./GlobalState";
 
 export function getTimeRemaining(startedAtTime, duration) {
   const now = new Date();
@@ -44,6 +45,17 @@ export function useInterval(callback, delay) {
   }, [delay]);
 }
 
-export function stateToLocalStorage() {
-  console.log("hello from stateToLocalStorage");
+export function useStateToLocalStorage() {
+  console.log("hello from useStateToLocalStorage");
+  localStorage.setItem("state", "changed");
+  const consoleLogState = function (arg) {
+    console.log(arg);
+  };
+
+  return (
+    <>
+      const [state, dispatch] = useGlobalContext(); consoleLogState("for
+      testing");
+    </>
+  );
 }

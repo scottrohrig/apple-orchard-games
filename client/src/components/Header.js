@@ -12,7 +12,7 @@ function Header(props) {
     setShowProfile,
     showMarketplace,
     setShowMarketplace,
-    stateToLocalStorage,
+    useStateToLocalStorage,
   } = props;
 
   const [state, dispatch] = useGlobalContext();
@@ -36,7 +36,9 @@ function Header(props) {
           </div>
 
           <div className="disp-currency disp-currency-img">
-            <button onClick={stateToLocalStorage}>update json</button>
+            <button onClick={useStateToLocalStorage}>
+              state to local storage
+            </button>
           </div>
 
           <div className="disp-currency disp-currency-money">

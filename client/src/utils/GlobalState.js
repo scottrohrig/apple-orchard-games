@@ -37,9 +37,9 @@ const GlobalProvider = ({ value = [], ...props }) => {
   const [state, dispatch] = useAppReducer({
 
     // TODO: username, email, and password should not be hard coded
-    username: "Happiest Harvester",
-    email: "happy@harvester.com",
-    password: "password",
+    username: "",
+    email: "",
+    password: "",
     money: 0,
 
     appleCount: 5,

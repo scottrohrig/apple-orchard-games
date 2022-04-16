@@ -22,7 +22,7 @@ const typeDefs = gql`
 
   scalar Date
 
-  
+
 
   type Tree {
     _id: ID
@@ -57,6 +57,7 @@ const typeDefs = gql`
     me: User
     users: [User]
     user(username: String!): User
+    trees: [Tree]
   }
 
   type Mutation {

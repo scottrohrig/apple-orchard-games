@@ -2,18 +2,44 @@
 import Tree from "../components/Tree";
 import PlaceholderTree from "../components/PlaceholderTree";
 
-import { useMutation, useQuery } from "@apollo/client";
+import { gql, useMutation, useQuery } from "@apollo/client";
 import { useEffect, useState } from "react";
 import { useGlobalContext } from "../utils/GlobalState";
 
 import barn from "../assets/images/barn.png";
 
+const QUERY_TREES = gql`
+query Trees {
+  trees {
+    _id
+    startedAtTime
+    duration
+  }
+}
+`;
+
 export default function Orchard() {
   // let disabled = true;
 
-  const [state, dispatch] = useGlobalContext();
-  const { trees } = state;
-  console.log('',trees[0]);
+  const {loading, data: treeData} = useQuery(QUERY_TREES)
+
+  const [, dispatch] = useGlobalContext();
+  // const { trees } = state;
+  let trees = [{}]
+
+  useEffect(()=>{
+    if (treeData) {
+      console.log(treeData);
+      dispatch({
+        type: '',
+        payload: '',
+      })
+    } else if (!loading) {
+      console.log('sdoif');
+    }
+  })
+
+  if (loading) <div>Loading...</div>
 
   return (
     <div className="orchard-wrapper">
@@ -49,20 +75,6 @@ export default function Orchard() {
           </div>
         </div>
       </div>
-      {/* <div
-        className="tree-container"
-        style={{
-          width: "90vw",
-          margin: "2rem auto",
-          display: "flex",
-          flexWrap: "wrap",
-          border: "1px solid var(--btn-harvest-main)",
-          borderRadius: ".5rem",
-        }}
-      >
-        <Tree />
-        <PlaceholderTree />
-      </div> */}
     </div>
   );
 }

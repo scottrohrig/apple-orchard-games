@@ -47,6 +47,8 @@ mutation addTree($duration: Int) {
     _id
     trees {
       _id
+      startedAtTime
+      duration
     }
   }
 }
@@ -121,9 +123,9 @@ export const UPDATE_USER = gql`
 export const SET_TREE = gql`
   mutation updateTree($treeId: ID!, $startedAtTime: Date!, $duration: Int) {
     updateTree(
-      treeId: $treeId
-      startedAtTime: $startedAtTime
-      duration: $duration
+      treeId: $treeId,
+      startedAtTime: $startedAtTime,
+      duration: $duration,
     ) {
       _id
       username

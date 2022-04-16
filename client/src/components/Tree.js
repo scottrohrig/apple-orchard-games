@@ -2,16 +2,20 @@ import React, { useEffect, useState } from "react";
 import treeImage from "../assets/images/tree.png";
 import { useGlobalContext } from "../utils/GlobalState";
 import { HARVEST_TREE, UPDATE_TREE_TIMER } from "../utils/actions";
-import { UPDATE_USER } from "../utils/mutations";
+import { SET_TREE } from "../utils/mutations";
 import { getTimeRemaining, useInterval } from '../utils/helpers';
 
 import treeBare from "../assets/images/tree-short.svg";
 import treeApples from "../assets/images/tree-with-apples-short.svg";
+import { useMutation } from '@apollo/client';
 
 export default function Tree({ tree, _id, dispatchParent }) {
   const [state, dispatch] = useGlobalContext();
-  const { trees, gameVariables } = state;
-  const resetTreeTimerSeconds = gameVariables.appleGrowTime;
+  const [updateTree, {error}] = useMutation(SET_TREE,{
+    update(cache, {data: {updateTree}}){
+      console.log('mutation SET_TREE', updateTree)
+    }
+  })
 
   const [timeRemaining, setTime] = useState(10);
 
@@ -19,27 +23,27 @@ export default function Tree({ tree, _id, dispatchParent }) {
 
 
   // reset countdown when button clicked
-  function handleTreeClick(evt) {
+  async function handleTreeClick(evt) {
 
-    console.log('treeId', timeRemaining);
     const now = new Date();
     dispatch({
       type: HARVEST_TREE,
     });
 
-    // TODO: Need to update database: apples and start time have changed; need to acquire and pass tree's _id
-    // dispatch({
-    //   type: UPDATE_USER
-    // });
+    const payload = {
+      _id,
+      startedAtTime: now,
+      duration: tree.duration
+    }
+
     dispatchParent({
       type: UPDATE_TREE_TIMER,
-      payload: {
-        _id,
-        startedAtTime: now,
-        duration: tree.duration
-      }
+      payload,
     });
+
     setTime(tree.duration);
+
+    await updateTree({variables: {treeId: payload._id, startedAtTime: now, duration: tree.duration}})
   }
 
   useInterval(() => {

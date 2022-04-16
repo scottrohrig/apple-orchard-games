@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import gem from '../assets/images/gem.svg';
 import basket from '../assets/images/basket.svg';
 import { useGlobalContext } from '../utils/GlobalState';
 import { Link } from 'react-router-dom';
+import { useQuery } from '@apollo/client';
+import { QUERY_ME } from '../utils/queries';
+import { UPDATE_STATE } from '../utils/actions';
 
 function Header(props) {
   const {
@@ -14,11 +17,22 @@ function Header(props) {
     setShowMarketplace,
   } = props;
 
+  const { loading, data } = useQuery(QUERY_ME)
+
   const [state, dispatch] = useGlobalContext();
-  // const money = state.money
-  const { money, gemCount, appleCount } = state;
-  // const gemCount = state.gemCount
-  // const appleCount = state.appleCount
+  const money = state?.money || 0;
+  const gemCount = state?.gemCount || 0;
+  const appleCount = state?.appleCount || 0;
+
+  useEffect(()=> {
+    if (data) {
+
+      dispatch({
+        type: UPDATE_STATE,
+        payload: {...data, appleCount: data.appleCount}
+      })
+    }
+  }, [loading, state, dispatch])
 
   return (
     <div className="page-links">

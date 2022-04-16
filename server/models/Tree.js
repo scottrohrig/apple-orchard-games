@@ -5,6 +5,7 @@ const Item = require('./Item');
 const treeSchema = new Schema({
   startedAtTime: {
     type: Date,
+    default: new Date()
   },
   duration: {
     type: Number,

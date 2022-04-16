@@ -15,16 +15,18 @@ export default function PlaceholderTree() {
   const [state, dispatch] = useGlobalContext();
   // define [addTree, { error }] = useMutation(ADD_TREE)
   const [addTree, { error }] = useMutation(ADD_TREE);
-  const { trees } = state;
+  const trees = state?.trees || [];
+
+  console.log(trees);
 
 
   const handlePurchaseTreeClick = async (evt) => {
 
-    console.log('appleCount',state.appleCount);
+    // console.log('appleCount',state.appleCount);
     if (state.appleCount < state.gameVariables.applesForNewTree){
       return
     }
-    console.log("in handlePurchaseTreeClick");
+    // console.log("in handlePurchaseTreeClick");
 
     try {
       await addTree();
@@ -32,10 +34,9 @@ export default function PlaceholderTree() {
       console.error(err);
     }
 
-    console.log("dispatching to GameState");
+    // console.log("dispatching to GameState");
     try {
       const payload = {
-        _id: trees.length + 1,
         startedAtTime: new Date(),
         duration: state.gameVariables.appleGrowTime,
       };

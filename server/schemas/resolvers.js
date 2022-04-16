@@ -1,7 +1,5 @@
 // require apollo server
 const { AuthenticationError } = require('apollo-server-express');
-const { coerceInputValue } = require('graphql');
-const { Schema } = require('mongoose');
 // require necessary models
 const { User } = require('../models');
 // require auth
@@ -24,6 +22,13 @@ const resolvers = {
 
       throw new AuthenticationError('Not logged in');
     },
+    trees: async (parent, args, context) => {
+      if (context.user) {
+        const userData = await User.findOne({_id: context.user._id})
+          console.log('TREES userData:',userData);
+          return userData?.trees || [{_id: '', startedAtTime: new Date(), duration: 10}]
+      }
+    }
 
   },
 
@@ -173,27 +178,26 @@ const resolvers = {
       throw new AuthenticationError('You need to be logged in!');
     },
 
-    // updateTree: async (parent, args, context) => {
-    //   if (context.user) {
-    //     const orchard = await Orchard.findOneAndUpdate(
-    //       { _id: args.orchardId },
-    //       {
-    //         $set: {
-    //           trees: {
-    //             treeId: args.treeId,
-    //             startedAtTime: args.startedAtTime,
-    //             duration: args.duration,
-    //           },
-    //         },
-    //       },
-    //       { new: true }
-    //     );
+    // attempt to update the tree.
+    updateTree: async (parent, args, context) => {
+      console.log('n\n\UPDATE TREE>>>', args);
+      if (context.user) {
+        const user = await User.findOneAndUpdate(
+          { _id: context.user._id, trees: {$elemMatch: {treeId: args.treeId}} },
+          {
+            $set: {
+              'trees.$[].startedAtTime': args.startedAtTime,
+              'trees.$[].duration': args.duration,
+            },
+          },
+          { new: true }
+        );
 
-    //     return orchard;
-    //   }
+        return user;
+      }
 
-    //   throw new AuthenticationError('You need to be logged in!');
-    // },
+      throw new AuthenticationError('You need to be logged in!');
+    },
 
     // updateUser
     // find user by id

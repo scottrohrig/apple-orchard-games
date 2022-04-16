@@ -13,9 +13,26 @@ import { useIsMount } from "../utils/helpers";
 export default function Marketplace({ showMarketplace, setShowMarketplace }) {
   const isMount = useIsMount();
   const [state, dispatch] = useGlobalContext();
-  const { appleCount, gameVariables } = state;
+  const appleCount= state?.appleCount || 0;
 
-  const [updateUser, { error }] = useMutation(UPDATE_USER);
+  const [updateUser, { error }] = useMutation(UPDATE_USER, {
+    update(cache, { data: { updateUser } }) {
+      console.log(updateUser);
+      try {
+        const { me } = cache.readQuery({ query: QUERY_ME });
+        let newMe = { me: {...me, ...updateUser, money: 500}}
+        console.log('testing cache newMe', newMe);
+        cache.writeQuery({
+          query: QUERY_ME,
+          data: {me:{  ...me, ...updateUser }}
+        });
+        console.log('SUCCESS cache.writeQuery');
+
+      } catch (error) {
+        console.error(error);
+      }
+    }
+  });
 
   // for input field in apples to sell form
   const [applesToSell, setApplesToSell] = useState(0);
@@ -25,7 +42,7 @@ export default function Marketplace({ showMarketplace, setShowMarketplace }) {
   function handleSellApples(event) {
 
     if (applesToSell > appleCount || appleCount < 0) {
-      return
+      return;
     }
 
     const payload = Math.max(applesToSell, 0);
@@ -62,9 +79,8 @@ export default function Marketplace({ showMarketplace, setShowMarketplace }) {
   return (
     <div>
       <div
-        className={`modal-background ${
-          showMarketplace && "modal-background-active"
-        }`}
+        className={`modal-background ${showMarketplace && "modal-background-active"
+          }`}
         onClick={() => setShowMarketplace(!showMarketplace)}
       ></div>
       <div className={`leaderboard shop modal ${showMarketplace && "modal-active"}`}>

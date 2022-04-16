@@ -14,16 +14,7 @@ export default function JuicersRow() {
 
   const { loading, data: itemData } = useQuery(QUERY_ME);
   const [addJuicer, { addJuicerError }] = useMutation(ADD_JUICER);
-  const [updateJuicer, {
-    data: updateData,
-    loading: updateLoading,
-    error: updateJuicerError
-  }] = useMutation(SET_JUICER, {
-    refetchQueries: [
-      QUERY_ME,
-      'Me'
-    ]
-  });
+  const [updateJuicer, {error: setJuicerError}] = useMutation(SET_JUICER);
 
   // destructure the items list from the global state object
   const { juicers } = state;
@@ -31,7 +22,7 @@ export default function JuicersRow() {
   useEffect(() => {
     if (itemData) {
       // itemData.me.juicers.map(j => console.log('SERVER _Id', j?._id));
-      console.log(itemData);
+      // console.log(itemData);
       dispatch({
         type: UPDATE_JUICERS,
         payload: itemData.me.juicers
@@ -105,7 +96,18 @@ export default function JuicersRow() {
             juicers.map((juicer, i) => {
               return (
                 <div key={i} className="item-box">
-                  <Juicer props={{ juicer, dispatch, updateJuicer, appleCount: state.appleCount, makeJuiceApplesUsed: state.gameVariables.makeJuiceApplesUsed, useIsMount, updateUser, money: state.money }} />
+
+                  <Juicer props={{
+                    juicer,
+                    dispatch,
+                    updateJuicer,
+                    appleCount: state.appleCount,
+                    makeJuiceApplesUsed: state.gameVariables.makeJuiceApplesUsed,
+                    useIsMount,
+                    updateUser,
+                    money: state.money
+                    }} />
+
                 </div>
               );
             })

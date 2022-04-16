@@ -28,16 +28,15 @@ const Juicer = ({ props }) => {
   // To update the user
   const isMount = useIsMount();
   const [success, setSuccess] = useState(false);
-  useEffect(async () => {
+  useEffect( () => {
     if (!isMount) {
-      const { data: uData } = await updateUser({
+      updateUser({
         variables: { money: money, appleCount },
       });
-      console.log('uData', uData);
     }
   }, [success]);
 
-  const handleUseBtnPressed = async (event) => {
+  const handleUseBtnPressed = (event) => {
 
     // validate user appleCount > juicerAppleCost
     if (appleCount < makeJuiceApplesUsed) {
@@ -62,15 +61,13 @@ const Juicer = ({ props }) => {
       type: APPLES_FOR_JUICE
     });
 
-    const { data: jData } = await updateJuicer({
+    updateJuicer({
       variables: {
             juicerId: juicerId,
             startedAtTime: now,
             duration
           }
     });
-    // console.log('jData', jData);
-    // console.log('UPDATED_USERS_JUICERS', jData.updateJuicer.juicers[0]._id, '\nJUICER_ID', juicerId);
 
     setTime(duration);
     setSuccess(!success);

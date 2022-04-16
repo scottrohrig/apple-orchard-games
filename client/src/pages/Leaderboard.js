@@ -17,7 +17,6 @@ export default function Leaderboard({ showLeaderboard, setShowLeaderboard }) {
   const { loading, data: highscoreData, error, refetch: refetchScores } = useQuery(GET_SCORES);
 
   if (!loading) {
-    console.log('refetchingScores');
     refetchScores();
   }
 

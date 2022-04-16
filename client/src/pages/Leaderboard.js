@@ -27,7 +27,7 @@ query Users {
 
 export default function Leaderboard({ showLeaderboard, setShowLeaderboard }) {
   // const [getScores] = useQuery(GET_SCORES)
-  const { loading, data: highscoreData, error, refetch: refretchScores } = useQuery(GET_SCORES);
+  const { loading, data: highscoreData, error, refetch: refetchScores } = useQuery(GET_SCORES);
 
   useEffect(() => {
     if (highscoreData) {
@@ -41,7 +41,7 @@ export default function Leaderboard({ showLeaderboard, setShowLeaderboard }) {
 
   if (loading) return <div><h2>Loading...</h2></div>;
   if (!loading) {
-    refretchScores();
+    refetchScores();
   }
 
   return (

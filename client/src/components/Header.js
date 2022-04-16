@@ -44,6 +44,7 @@ function Header(props) {
               onClick={() => {
                 setShowLeaderboard(!showLeaderboard);
                 setShowMarketplace(false);
+                setShowProfile(false);
               }}
             >
               <i className="fa-solid fa-trophy"></i>
@@ -53,6 +54,7 @@ function Header(props) {
               onClick={() => {
                 setShowProfile(!showProfile);
                 setShowMarketplace(false);
+                setShowLeaderboard(false);
               }}
             >
               <i className="fa-solid fa-circle-user"></i>
@@ -71,6 +73,7 @@ function Header(props) {
           onClick={() => {
             setShowMarketplace(!showMarketplace);
             setShowLeaderboard(false);
+            setShowProfile(false);
           }}
         >
           <i className="fa-solid fa-cart-shopping"></i>

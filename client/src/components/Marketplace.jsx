@@ -67,7 +67,10 @@ export default function Marketplace({ showMarketplace, setShowMarketplace }) {
         className={`modal-background ${
           showMarketplace && "modal-background-active"
         }`}
-        onClick={() => setShowMarketplace(!showMarketplace)}
+        onClick={() => {
+          if (showMarketplace) { 
+            setShowMarketplace(!showMarketplace);
+          }}}
       ></div>
       <div className={`leaderboard shop modal ${showMarketplace && "modal-active"}`}>
         <button

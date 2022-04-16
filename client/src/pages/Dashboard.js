@@ -93,7 +93,7 @@ function Dashboard() {
           <img src={treeBare} alt='' className='dash-tree tree-left' />
           <img src={treeBare} alt='' className='dash-tree tree-right' />
           <img src={treeApples} alt='' className='dash-tree tree-middle' />
-          <h2 className='page-title'><p className='display-banner'>Go To My Orchard</p></h2>
+          <h2 className='page-title'><p className='btn btn-shop btn-to-orchard'>Go To My Orchard</p></h2>
           <img src={barn} alt='' className='dash-barn' />
         </div>
       </Link>

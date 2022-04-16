@@ -60,14 +60,16 @@ nav .a {
   scrollbar-width: none;
   display: flex;
   overflow: auto;
+  justify-content: center;
 }
 .item-scroll::-webkit-scrollbar {
   display: none;
 }
 
 .item-box {
-  margin: 4px;
-  height: 128px;
+  margin: 4px 0 0;
+  /* height: 128px; */
+  max-width: 20%;
 }
 
 .item-box img {
@@ -75,9 +77,9 @@ nav .a {
   height: 100%;
 }
 .item-label {
-  font-size: x-large;
-  font-weight: 500;
-  text-align: start;
+  font-size: 1.5em;
+  font-weight: 400;
+  text-align: left;
   color: var(--form-background);
 }
 

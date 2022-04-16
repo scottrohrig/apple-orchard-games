@@ -25,10 +25,7 @@ query Users {
 }
 `;
 
-export default function Leaderboard({
-  showLeaderboard, setShowLeaderboard,
-  showMarketplace, setShowMarketplace,
-}) {
+export default function Leaderboard({ showLeaderboard, setShowLeaderboard }) {
   // const [getScores] = useQuery(GET_SCORES)
   const { loading, data: highscoreData, error, refetch: refretchScores } = useQuery(GET_SCORES);
 
@@ -50,7 +47,10 @@ export default function Leaderboard({
   return (
     <div>
       <div className={`modal-background ${showLeaderboard && 'modal-background-active'}`}
-        onClick={() => setShowLeaderboard(!showLeaderboard)}></div>
+        onClick={() => {
+          if (showLeaderboard) {
+            setShowLeaderboard(!showLeaderboard);
+          }}}></div>
 
       <div className={`leaderboard modal ${showLeaderboard && 'modal-active'}`}>
 

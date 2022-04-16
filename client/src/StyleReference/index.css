@@ -624,9 +624,10 @@ header.component-header {
   justify-content: center;
   height: 20vw;
 }
-.dash-orchard h2 .display-banner {
+.dash-orchard h2 .btn-to-orchard {
   margin: 15px 0 0;
-  transform: scale(1.5);
+  position: relative;
+  z-index: 10;
 }
 .dash-orchard:hover {
   cursor: pointer;
@@ -872,6 +873,9 @@ header.component-header {
     margin-top: 60px;
   }
 
+  .dash-orchard{
+    margin-top: 58px;
+  }
   .dash-orchard h2 {
     height: 25vw;
   }
@@ -879,9 +883,8 @@ header.component-header {
     height: 27px;
     margin-top: -25px;
   }
-  .dash-orchard h2 .display-banner {
+  .dash-orchard h2 .btn-to-orchard {
     margin: 0;
-    transform: scale(.9);
   }
   .dash-tree {
     width: 20vw;
@@ -896,5 +899,12 @@ header.component-header {
   .dash-barn {
     width: 25vw;
     right: 10px;
+  }
+}
+
+/* 380 */
+@media screen and (max-width: 380px) {
+  .container {
+    margin-bottom: 80px;
   }
 }

@@ -1,17 +1,31 @@
 .sub-title {
   text-align: center;
-  margin: 5px .5rem 0.5rem;
+  margin: 5px .5rem 15px;
   text-transform: uppercase;
   font-size: .95em;
   color: var(--btn-shop-main);
 }
 
-.sell-apples {
-  margin: 0 auto;
+.shop .item-label {
+  margin: 10px 0 0;
   text-align: center;
-  background-color: var(--sky-main);
+  color: var(--form-background);
+  font-weight: 600;
+  font-size: 1.1em;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  background-color: var(--main-darker);
+  text-shadow: 1px 1px var(--main-darkest);
+  padding: 6px;
+  border-radius: 10px 10px 0 0;
+}
+
+.sell-apples {
+  margin: 0 auto 5px;
+  text-align: center;
+  background-image: linear-gradient(to bottom, var(--sky-main), var(--sky-dark) );
   padding: 12px;
-  border-radius: 10px;
+  border-radius: 0 0 10px 10px;
 }
 .sell-apples .btn-timer:hover {
   cursor: pointer;
@@ -66,9 +80,6 @@
 }
 .btn-buy:hover {
   animation: pulse 2s infinite linear;
-}
-
-.marketplace .item-label {
 }
 
 .apple-increment {

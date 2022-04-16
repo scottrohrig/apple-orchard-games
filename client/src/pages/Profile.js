@@ -4,12 +4,7 @@ import Auth from '../utils/auth';
 import { QUERY_ME } from '../utils/queries';
 import { UPDATE_USER } from '../utils/mutations';
 
-export default function Profile({
-  showProfile,
-  setShowProfile,
-  showMarketplace,
-  setShowMarketplace,
-}) {
+export default function Profile({ showProfile, setShowProfile }) {
   const logout = (event) => {
     event.preventDefault();
     Auth.logout();
@@ -32,7 +27,9 @@ export default function Profile({
       <div className={`leaderboard profile modal ${showProfile && 'modal-active'}`}>
         <button
           className="btn btn-modal"
-          onClick={() => setShowProfile(!showProfile)}
+          onClick={() => {if(showProfile) {
+            setShowProfile(!showProfile);
+          }}}
         >
           <i className="fa-solid fa-xmark"></i>
         </button>

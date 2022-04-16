@@ -31,6 +31,11 @@ const QUERY_START_DATA = gql`
      appleCount
      money
      gemCount
+     juicers {
+       _id
+       startedAtTime
+       duration
+     }
     }
   }
 `;
@@ -47,13 +52,14 @@ function App() {
   useEffect(()=>{
     if (data) {
       console.log('me', data?.me || {money: 0, appleCount: 0});
-      dispatch({
-        type: UPDATE_ALL_DATA,
-        payload: {...data.me},
-      })
-    }
-    if (!loading) {
+      if (!loading) {
+        dispatch({
+          type: UPDATE_ALL_DATA,
+          payload: {...data.me, loading},
+        })
+        console.log('refetching', loading);
       refetchData()
+    }
     }
   },[loading, data])
 

@@ -1,7 +1,6 @@
 import React from 'react';
 import gem from '../assets/images/gem.svg';
 import basket from '../assets/images/basket.svg';
-import { useGlobalContext } from '../utils/GlobalState';
 import { Link } from 'react-router-dom';
 
 function Header(props) {
@@ -12,13 +11,8 @@ function Header(props) {
     setShowProfile,
     showMarketplace,
     setShowMarketplace,
+    state: { money, gemCount, appleCount }
   } = props;
-
-  const [state, dispatch] = useGlobalContext();
-  // const money = state.money
-  const { money, gemCount, appleCount } = state;
-  // const gemCount = state.gemCount
-  // const appleCount = state.appleCount
 
   return (
     <div className="page-links">

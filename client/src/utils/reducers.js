@@ -1,6 +1,7 @@
 import { useReducer } from "react";
 import {
   UPDATE_USER,
+  UPDATE_ALL_DATA,
   UPDATE_TREE_TIMER,
   UPDATE_JUICER,
   UPDATE_JUICERS,
@@ -23,6 +24,9 @@ import {
 export const reducer = (state = [], action) => {
   switch (action.type) {
     // case update user
+    case UPDATE_ALL_DATA:
+      console.log({...state, ...action.payload});
+      return {...state, ...action.payload}
 
     // case update orchards
 

@@ -1,17 +1,10 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import {
-  ApolloProvider,
-  ApolloClient,
-  InMemoryCache,
-  createHttpLink,
-} from '@apollo/client';
-import { setContext } from '@apollo/client/link/context';
+
 
 import './App.css';
 import './StyleReference';
 
-import { GlobalProvider } from './utils/GlobalState';
 import Auth from './utils/auth';
 
 import Splash from './pages/Splash';
@@ -23,81 +16,96 @@ import Header from './components/Header';
 import Marketplace from './components/Marketplace';
 import NoMatch from './pages/NoMatch';
 
-const httpLink = createHttpLink({
-  uri: '/graphql',
-});
+import { useGlobalContext } from './utils/GlobalState';
+import { gql, useQuery } from '@apollo/client';
+import { UPDATE_ALL_DATA } from './utils/actions'
 
-const authLink = setContext((_, { headers }) => {
-  const token = localStorage.getItem('id_token');
-  return {
-    headers: {
-      ...headers,
-      authorization: token ? `Bearer ${token}` : '',
-    },
-  };
-});
+// query all data on app start or refresh
+const QUERY_START_DATA = gql`
+ query Me {
 
-const client = new ApolloClient({
-  link: authLink.concat(httpLink),
-  cache: new InMemoryCache(),
-});
+   me {
+     username
+     email
+     _id
+     appleCount
+     money
+     gemCount
+    }
+  }
+`;
 
 function App() {
   const [showLeaderboard, setShowLeaderboard] = useState(false);
   const [showProfile, setShowProfile] = useState(false);
   const [showMarketplace, setShowMarketplace] = useState(false);
 
+  const {data, loading, refetch: refetchData} = useQuery(QUERY_START_DATA)
+
+  const [state, dispatch] = useGlobalContext()
+
+  useEffect(()=>{
+    if (data) {
+      console.log('me', data?.me || {money: 0, appleCount: 0});
+      dispatch({
+        type: UPDATE_ALL_DATA,
+        payload: {...data.me},
+      })
+    }
+    if (!loading) {
+      refetchData()
+    }
+  },[loading, data])
+
+
+
   return (
-    <ApolloProvider client={client}>
-      <GlobalProvider>
-        <Router>
-          {Auth.loggedIn() && (
-            <Header
+    <Router>
+      {Auth.loggedIn() && (
+        <Header
+          showLeaderboard={showLeaderboard}
+          setShowLeaderboard={setShowLeaderboard}
+          showProfile={showProfile}
+          setShowProfile={setShowProfile}
+          showMarketplace={showMarketplace}
+          setShowMarketplace={setShowMarketplace}
+          state={state}
+        />
+      )}
+      <div className="app app-content">
+        {/* App Stuff */}
+        <div style={{ margin: '2rem auto' }}>
+          <div className="container">
+            {/* Modals */}
+            <Leaderboard
               showLeaderboard={showLeaderboard}
               setShowLeaderboard={setShowLeaderboard}
+            />
+            <Profile
               showProfile={showProfile}
               setShowProfile={setShowProfile}
+            />
+            <Marketplace
               showMarketplace={showMarketplace}
               setShowMarketplace={setShowMarketplace}
             />
-          )}
-          <div className="app app-content">
-            {/* App Stuff */}
-            <div style={{ margin: '2rem auto' }}>
-              <div className="container">
-                {/* Modals */}
-                <Leaderboard
-                  showLeaderboard={showLeaderboard}
-                  setShowLeaderboard={setShowLeaderboard}
-                />
-                <Profile
-                  showProfile={showProfile}
-                  setShowProfile={setShowProfile}
-                />
-                <Marketplace
-                  showMarketplace={showMarketplace}
-                  setShowMarketplace={setShowMarketplace}
-                />
 
-                <Routes>
-                  <Route path="/" element={<Dashboard />} />
-                  <Route path="/login" element={<Splash />} />
-                  <Route path="/orchard/:id" element={<Orchard />} />
-                  <Route element={<NoMatch />} />
-                </Routes>
-              </div>
-            </div>
+            <Routes>
+              <Route path="/" element={<Dashboard />} />
+              <Route path="/login" element={<Splash />} />
+              <Route path="/orchard/:id" element={<Orchard />} />
+              <Route element={<NoMatch />} />
+            </Routes>
           </div>
-        </Router>
-      </GlobalProvider>
-
-      {window.addEventListener('selectstart', function (e) {
-        e.preventDefault();
-      })}
-      {/* {window.addEventListener('contextmenu', function(e) {
+        </div>
+        {window.addEventListener('selectstart', function (e) {
+          e.preventDefault();
+        })}
+        {/* {window.addEventListener('contextmenu', function(e) {
         e.preventDefault();
       })} */}
-    </ApolloProvider>
+      </div>
+    </Router>
   );
 }
 

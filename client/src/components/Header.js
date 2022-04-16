@@ -68,6 +68,9 @@ function Header(props) {
           <i className="fa-solid fa-house-chimney-window"></i>
           <span>Dashboard</span>
         </Link>
+        <Link to="/orchard/1" className="btn btn-nav orchard-link">
+          <i className="fa-solid fa-apple-whole"></i>
+        </Link>
         <button
           className="btn btn-nav"
           onClick={() => {

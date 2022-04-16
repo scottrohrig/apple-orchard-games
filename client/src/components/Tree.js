@@ -52,7 +52,7 @@ export default function Tree({ tree, _id, dispatchParent }) {
   return (
     <>
       {isReady ? (
-        <div className="item-box relative tree-item">
+        <div className="orchard-item-box relative tree-item">
           <img src={treeApples} alt=""></img>
           <div className="">
             <button className=" btn btn-harvest" onClick={handleTreeClick}>
@@ -61,7 +61,7 @@ export default function Tree({ tree, _id, dispatchParent }) {
           </div>
         </div>
       ) : (
-        <div className="item-box relative tree-item">
+        <div className="orchard-item-box relative tree-item">
           <img src={treeBare} alt=""></img>
           <div className="">
             <button className="btn btn-timer" disabled>

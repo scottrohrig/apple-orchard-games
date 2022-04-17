@@ -45,21 +45,22 @@ export function useInterval(callback, delay) {
   }, [delay]);
 }
 
-export function useStateToLocalStorage() {
-  console.log("hello from useStateToLocalStorage");
-  console.log();
-  localStorage.setItem("state", " 7");
+export function stateToLocalStorage(state) {
+  console.log("hello from stateToLocalStorage");
+  console.log("next line is state: ");
+  console.log(state);
+  localStorage.setItem("state", JSON.stringify(state));
   // const [state, dispatch] = useGlobalContext();
 
   // const consoleLogState = function (arg) {
   //   console.log(arg);
   // };
 
-  return (
-    // <>const [state, dispatch] = useGlobalContext(); consoleLogState("test");</>
-    <>
-      {/* const [state, dispatch] = useGlobalContext(); console.log("test inside return"); */}
-    </>
-    // <></>
-  );
+  // return (
+  //   // <>const [state, dispatch] = useGlobalContext(); consoleLogState("test");</>
+  //   <>
+  //     {/* const [state, dispatch] = useGlobalContext(); console.log("test inside return"); */}
+  //   </>
+  //   // <></>
+  // );
 }

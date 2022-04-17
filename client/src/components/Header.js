@@ -12,9 +12,9 @@ function Header(props) {
     setShowProfile,
     showMarketplace,
     setShowMarketplace,
-    useStateToLocalStorage,
+    stateToLocalStorage,
     state: { money, gemCount, appleCount },
-    // state,
+    state,
   } = props;
 
   return (
@@ -32,7 +32,7 @@ function Header(props) {
           </div>
 
           <div className="disp-currency disp-currency-img">
-            <button onClick={useStateToLocalStorage}>
+            <button onClick={() => stateToLocalStorage(state)}>
               state to local storage
             </button>
           </div>

@@ -6,7 +6,7 @@ import "./StyleReference";
 
 import Auth from "./utils/auth";
 
-import { useStateToLocalStorage } from "./utils/helpers";
+import { stateToLocalStorage } from "./utils/helpers";
 
 import Splash from "./pages/Splash";
 import Dashboard from "./pages/Dashboard";
@@ -73,7 +73,7 @@ function App() {
           setShowProfile={setShowProfile}
           showMarketplace={showMarketplace}
           setShowMarketplace={setShowMarketplace}
-          useStateToLocalStorage={useStateToLocalStorage}
+          stateToLocalStorage={stateToLocalStorage}
           state={state}
         />
       )}

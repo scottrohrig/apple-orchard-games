@@ -4,6 +4,7 @@ import { useGlobalContext } from "../utils/GlobalState";
 import "./shop.css";
 
 import apple from "../assets/images/apple.svg";
+import gem from "../assets/images/gem.svg";
 import { useQuery, useMutation } from "@apollo/client";
 import { UPDATE_USER } from "../utils/mutations";
 import { QUERY_ME } from "../utils/queries";
@@ -23,9 +24,8 @@ export default function Marketplace({ showMarketplace, setShowMarketplace }) {
 
   // sell apples
   function handleSellApples(event) {
-
     if (applesToSell > appleCount || appleCount < 0) {
-      return
+      return;
     }
 
     setApplesToSell(0);
@@ -68,11 +68,16 @@ export default function Marketplace({ showMarketplace, setShowMarketplace }) {
           showMarketplace && "modal-background-active"
         }`}
         onClick={() => {
-          if (showMarketplace) { 
+          if (showMarketplace) {
             setShowMarketplace(!showMarketplace);
-          }}}
+          }
+        }}
       ></div>
-      <div className={`leaderboard shop modal ${showMarketplace && "modal-active"}`}>
+      <div
+        className={`leaderboard shop modal ${
+          showMarketplace && "modal-active"
+        }`}
+      >
         <button
           className="btn btn-modal"
           onClick={() => setShowMarketplace(!showMarketplace)}
@@ -89,7 +94,6 @@ export default function Marketplace({ showMarketplace, setShowMarketplace }) {
           {/* SELL APPLES FOR CURRENCY */}
           <div className="item-label">Sell Apples</div>
           <div className="sell-apples">
-            <div className="card-label">Apples to Sell:</div>
             <div className="apple-increment">
               <span
                 className="increment-btn by-25 decrement"
@@ -131,19 +135,23 @@ export default function Marketplace({ showMarketplace, setShowMarketplace }) {
                   handleSellApples();
                 }}
               >
-                Sell <span className="apple-amount">{applesToSell}</span> Apples!
+                Sell <span className="apple-amount">{applesToSell}</span>{" "}
+                Apples!
               </button>
             </p>
           </div>
 
           {/* $USD PURCHASES FOR GEMS */}
-          <div className="item-row">
-            <div className="item-label">Buy Gems</div>
-            <div className="item-scroll">
-              <div className="item-box">
-                <div className="card usd" style={{ width: "250px" }}>
-                  <div className="card-label usd-label">5 gem deal</div>
-                  <div className="card-body">
+          <div className="item-label">Buy Gems</div>
+          <div className="shop-item-row">
+            <div className="shop-box">
+              <div className="card usd">
+                <div className="shop-card">
+                  <div className="shop-img">
+                    <img src={gem} alt="gem" className="buy-gem" />
+                  </div>
+                  <div className="shop-buy-label">
+                    <div className="card-label usd-label">5 gem deal</div>
                     <p>buy 5 gems for $5</p>
                     <button
                       className="btn btn-buy"
@@ -156,11 +164,17 @@ export default function Marketplace({ showMarketplace, setShowMarketplace }) {
                   </div>
                 </div>
               </div>
-              <div className="item-box">
-                <div className="card usd" style={{ width: "250px" }}>
-                  <div className="card-label usd-label">textLabel</div>
-                  <div className="card-body">
-                    <p>body</p>
+            </div>
+            <div className="shop-box">
+              <div className="card usd">
+                <div className="shop-card">
+                  <div className="shop-img">
+                    <img src={gem} alt="gem" className="many-gem-1" />
+                    <img src={gem} alt="gem" className="many-gem-2" />
+                  </div>
+                  <div className="shop-buy-label">
+                    <div className="card-label usd-label">25 gem deal</div>
+                    <p>buy 25 gems for $20</p>
                     <button className="btn btn-buy">Buy</button>
                   </div>
                 </div>
@@ -168,29 +182,43 @@ export default function Marketplace({ showMarketplace, setShowMarketplace }) {
             </div>
           </div>
 
-          <div className="item-row">
-            <div className="item-label">Purchase Upgrades!</div>
-            <div className="item-scroll">
-              <div className="item-box">
-                <div className="card" style={{ width: "250px" }}>
-                  <div className="card-label">textLabel</div>
-                  <div className="card-body">
-                    <p>body</p>
-                    <button className="btn btn-shop">Buy</button>
+          <div className="item-label">Purchase Upgrades!</div>
+          <div className="shop-item-row">
+            <div className="shop-box">
+              <div className="card">
+                <div className="shop-card">
+                  <div className="shop-img">
+                    <i className="fa-solid fa-stopwatch"></i>
                   </div>
-                </div>
-              </div>
-              <div className="item-box">
-                <div className="card" style={{ width: "250px" }}>
-                  <div className="card-label">textLabel</div>
-                  <div className="card-body">
-                    <p>body</p>
-
-                    <button className="btn btn-shop">Buy</button>
+                  <div className="shop-buy-label">
+                    <div className="card-label">Harvest Now</div>
+                    <p>Coming soon!</p>
+                    <button className="btn btn-shop" disabled>
+                      Buy
+                    </button>
                   </div>
                 </div>
               </div>
             </div>
+            <div className="shop-box">
+              <div className="card">
+                <div className="shop-card">
+                  <div className="shop-img">
+                    <i className="fa-solid fa-rotate"></i>
+                  </div>
+                  <div className="shop-buy-label">
+                    <div className="card-label">Auto Harvest</div>
+                    <p>Coming soon!</p>
+                    <button className="btn btn-shop" disabled>
+                      Buy
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="coming-soon-shop">
+            Coming soon!
           </div>
         </div>
       </div>

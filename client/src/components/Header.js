@@ -13,13 +13,8 @@ function Header(props) {
     showMarketplace,
     setShowMarketplace,
     useStateToLocalStorage,
+    state: { money, gemCount, appleCount },
   } = props;
-
-  const [state, dispatch] = useGlobalContext();
-  // const money = state.money
-  const { money, gemCount, appleCount } = state;
-  // const gemCount = state.gemCount
-  // const appleCount = state.appleCount
 
   return (
     <div className="page-links">
@@ -74,6 +69,9 @@ function Header(props) {
         <Link to="/" className="btn btn-nav">
           <i className="fa-solid fa-house-chimney-window"></i>
           <span>Dashboard</span>
+        </Link>
+        <Link to="/orchard/1" className="btn btn-nav orchard-link">
+          <i className="fa-solid fa-apple-whole"></i>
         </Link>
         <button
           className="btn btn-nav"

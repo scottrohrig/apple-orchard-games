@@ -3,19 +3,6 @@ import React, { useEffect } from "react";
 import { useGlobalContext } from '../utils/GlobalState';
 import "./Leaderboard.css";
 
-const exampleLeaderboardArray = [
-  { displayName: "albert", score: 99 },
-  { displayName: "betty", score: 98 },
-  { displayName: "calvin", score: 97 },
-  { displayName: "denice", score: 96 },
-  { displayName: "edgar", score: 95 },
-  { displayName: "freddie", score: 94 },
-  { displayName: "grace", score: 93 },
-  { displayName: "holly", score: 92 },
-  { displayName: "ignacio", score: 91 },
-  { displayName: "joy", score: 90 },
-];
-
 const GET_SCORES = gql`
 query Users {
   users {
@@ -29,17 +16,6 @@ export default function Leaderboard({ showLeaderboard, setShowLeaderboard }) {
   // const [getScores] = useQuery(GET_SCORES)
   const { loading, data: highscoreData, error, refetch: refetchScores } = useQuery(GET_SCORES);
 
-  useEffect(() => {
-    if (highscoreData) {
-
-      // console.log(highscoreData.users);
-      highscoreData.users.map(u=> console.log(u.username, u.money))
-    } else if (!loading) {
-      highscoreData = exampleLeaderboardArray
-    }
-  }, [loading, highscoreData]);
-
-  if (loading) return <div><h2>Loading...</h2></div>;
   if (!loading) {
     refetchScores();
   }

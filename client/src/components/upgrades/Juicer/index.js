@@ -1,14 +1,19 @@
 import '../item.css';
 import { useState, useEffect } from 'react';
+import { useMutation } from '@apollo/client';
 import icon from '../../../assets/images/juicer.png';
 import juiceImg from '../../../assets/images/juice.png';
+
 import { getTimeRemaining, useInterval } from '../../../utils/helpers';
 import { UPDATE_JUICER, SELL_JUICE, APPLES_FOR_JUICE } from '../../../utils/actions';
+import { UPDATE_USER } from '../../../utils/mutations';
 
 // pass in juicer props from parent page / component
 const Juicer = ({ props }) => {
 
-  const { juicer, dispatch, updateJuicer, appleCount, makeJuiceApplesUsed, useIsMount, updateUser, money } = props;
+  const { juicer, dispatch, updateJuicer, appleCount, makeJuiceApplesUsed, useIsMount, money } = props;
+
+  const [updateUser, { error }] = useMutation(UPDATE_USER);
 
   // deconstruct the juicer props passed in from parent
   const { _id: juicerId, startedAtTime, duration } = juicer;
@@ -28,16 +33,15 @@ const Juicer = ({ props }) => {
   // To update the user
   const isMount = useIsMount();
   const [success, setSuccess] = useState(false);
-  useEffect(async () => {
+  useEffect( () => {
     if (!isMount) {
-      const { data: uData } = await updateUser({
+      updateUser({
         variables: { money: money, appleCount },
       });
-      console.log('uData', uData);
     }
   }, [success]);
 
-  const handleUseBtnPressed = async (event) => {
+  const handleUseBtnPressed = (event) => {
 
     // validate user appleCount > juicerAppleCost
     if (appleCount < makeJuiceApplesUsed) {
@@ -62,15 +66,13 @@ const Juicer = ({ props }) => {
       type: APPLES_FOR_JUICE
     });
 
-    const { data: jData } = await updateJuicer({
+    updateJuicer({
       variables: {
             juicerId: juicerId,
             startedAtTime: now,
             duration
           }
     });
-    // console.log('jData', jData);
-    // console.log('UPDATED_USERS_JUICERS', jData.updateJuicer.juicers[0]._id, '\nJUICER_ID', juicerId);
 
     setTime(duration);
     setSuccess(!success);

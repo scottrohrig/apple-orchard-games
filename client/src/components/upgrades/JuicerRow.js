@@ -1,53 +1,45 @@
-import { useMutation, useQuery } from '@apollo/client';
 import { useEffect } from 'react';
+import { useMutation } from '@apollo/client';
 import { useGlobalContext } from '../../utils/GlobalState';
+
 import { useIsMount } from "../../utils/helpers";
-import { ADD_JUICER, SET_JUICER, UPDATE_USER } from '../../utils/mutations';
+import { ADD_JUICER, SET_JUICER } from '../../utils/mutations';
 import { BUY_JUICER, UPDATE_JUICERS } from '../../utils/actions';
-import { QUERY_ME } from '../../utils/queries';
+
 import Juicer from './Juicer';
 import BuyJuicer from './PlaceholderJuice';
 
 export default function JuicersRow() {
   const [state, dispatch] = useGlobalContext();
-  const [updateUser, { error }] = useMutation(UPDATE_USER);
 
-  const { loading, data: itemData } = useQuery(QUERY_ME);
   const [addJuicer, { addJuicerError }] = useMutation(ADD_JUICER);
-  const [updateJuicer, {
-    data: updateData,
-    loading: updateLoading,
-    error: updateJuicerError
-  }] = useMutation(SET_JUICER, {
-    refetchQueries: [
-      QUERY_ME,
-      'Me'
-    ]
-  });
+  const [updateJuicer, {error: setJuicerError}] = useMutation(SET_JUICER);
 
   // destructure the items list from the global state object
-  const { juicers } = state;
+  const loading = state?.loading;
 
-  useEffect(() => {
-    if (itemData) {
-      // itemData.me.juicers.map(j => console.log('SERVER _Id', j?._id));
-      console.log(itemData);
-      dispatch({
-        type: UPDATE_JUICERS,
-        payload: itemData.me.juicers
-      });
+  const juicers = state?.juicers || [];
+  console.log('state',state);
+  console.log('done loading', loading);
+  // useEffect(() => {
+  //   if (itemData) {
 
-      // juicers.map(j => console.log('STATE _Id', j?._id));
+  //     dispatch({
+  //       type: UPDATE_JUICERS,
+  //       payload: itemData.me.juicers
+  //     });
 
-    } else if (!loading) {
+  //   } else if (!loading) {
 
-      console.log('loading.');
-      dispatch({
-        type: UPDATE_JUICERS,
-        payload: juicers
-      });
-    }
-  }, [itemData, loading, dispatch]);
+  //     console.log('loading.');
+  //     dispatch({
+  //       type: UPDATE_JUICERS,
+  //       payload: juicers
+  //     });
+  //   }
+  // }, [itemData, loading, dispatch]);
+
+  if (loading) return <div><h1>LOADING....</h1></div>
 
   const handleUpgradePurchased = async (event) => {
 
@@ -105,7 +97,17 @@ export default function JuicersRow() {
             juicers.map((juicer, i) => {
               return (
                 <div key={i} className="item-box">
-                  <Juicer props={{ juicer, dispatch, updateJuicer, appleCount: state.appleCount, makeJuiceApplesUsed: state.gameVariables.makeJuiceApplesUsed, useIsMount, updateUser, money: state.money }} />
+
+                  <Juicer props={{
+                    juicer,
+                    dispatch,
+                    updateJuicer,
+                    appleCount: state.appleCount,
+                    makeJuiceApplesUsed: state.gameVariables.makeJuiceApplesUsed,
+                    useIsMount,
+                    money: state.money
+                    }} />
+
                 </div>
               );
             })

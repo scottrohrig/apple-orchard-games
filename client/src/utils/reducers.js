@@ -19,14 +19,15 @@ import {
   BUY_OVEN,
   APPLES_FOR_PIE,
   APPLES_FOR_MONEY,
+  RESET_USER_STATS,
 } from "./actions";
 
 export const reducer = (state = [], action) => {
   switch (action.type) {
     // case update user
     case UPDATE_ALL_DATA:
-      console.log({...state, ...action.payload});
-      return {...state, ...action.payload}
+      console.log({ ...state, ...action.payload });
+      return { ...state, ...action.payload }
 
     // case update orchards
 
@@ -78,7 +79,7 @@ export const reducer = (state = [], action) => {
       };
 
     case PURCHASE_A_TREE:
-      let newTreeArray = [...state.trees, {...action.payload}];
+      let newTreeArray = [...state.trees, { ...action.payload }];
       let newId = state.trees.length;
 
       return {
@@ -132,12 +133,12 @@ export const reducer = (state = [], action) => {
         appleCount: state.appleCount - state.gameVariables.makeSauceApplesUsed
       };
 
-      case HARVEST_TREE:
-        return {
-          ...state,
-          appleCount: state.appleCount + state.gameVariables.applesGrown
+    case HARVEST_TREE:
+      return {
+        ...state,
+        appleCount: state.appleCount + state.gameVariables.applesGrown
 
-        };
+      };
 
 
     case SELL_SAUCE:
@@ -192,6 +193,13 @@ export const reducer = (state = [], action) => {
         ...state,
         appleCount: remainingApples,
         money: newBalance
+      };
+
+    case RESET_USER_STATS:
+      return {
+        ...state,
+        appleCount: 5,
+        money: 0
       }
   }
 };

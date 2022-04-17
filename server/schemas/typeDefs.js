@@ -72,6 +72,7 @@ const typeDefs = gql`
     updateOven(ovenId: ID!, startedAtTime: Date!, duration: Int): User
     updateJuicer(juicerId: ID!, startedAtTime: Date!, duration: Int): User
     removeUser: User
+    resetUserStats(money: Int, appleCount: Int): User
   }
 `;
 

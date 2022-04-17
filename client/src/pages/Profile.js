@@ -23,8 +23,24 @@ export default function Profile({
   const user = data?.me || data?.user || {};
 
   // define the mutation function and set it equal to useMutation(RESET_USER_STATS)
-  const [resetStats, { data: resetData, loading: resetLoading, error: resetError }] = useMutation(RESET_USER_STATS);
 
+  const [resetStats, { error: resetError }] = useMutation(RESET_USER_STATS);
+  const handleReset = async (event) => {
+    event.preventDefault();
+    try {
+      const { data: resetData } = await resetStats({
+        variables: {
+          money: 0,
+          appleCount: 5
+        }
+      })
+    }
+
+    catch (error) {
+      console.error(error)
+    }
+
+  }
 
 
   // define the event handler

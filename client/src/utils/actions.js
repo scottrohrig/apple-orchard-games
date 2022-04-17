@@ -46,3 +46,5 @@ export const APPLES_FOR_PIE = "APPLES_FOR_PIE";
 export const SELL_SAUCE = "SELL_SAUCE";
 export const APPLES_FOR_SAUCE = "APPLES_FOR_SAUCE";
 export const APPLES_FOR_MONEY = "APPLES_FOR_MONEY";
+
+export const RESET_USER_STATS = "RESET_USER_STATS";

@@ -210,7 +210,6 @@ mutation ResetUserStats($money: Int, $appleCount: Int) {
     username
     money
     appleCount
-    gemCount
     trees {
       _id
       startedAtTime

@@ -18,7 +18,8 @@ import NoMatch from './pages/NoMatch';
 
 import { useGlobalContext } from './utils/GlobalState';
 import { gql, useQuery } from '@apollo/client';
-import { UPDATE_ALL_DATA } from './utils/actions'
+import { UPDATE_ALL_DATA } from './utils/actions';
+import { QUERY_ME } from './utils/queries';
 
 // query all data on app start or refresh
 const QUERY_START_DATA = gql`
@@ -36,6 +37,21 @@ const QUERY_START_DATA = gql`
        startedAtTime
        duration
      }
+     trees {
+       _id
+       startedAtTime
+       duration
+     }
+     mashers {
+       _id
+       startedAtTime
+       duration
+     }
+     ovens {
+       _id
+       startedAtTime
+       duration
+     }
     }
   }
 `;
@@ -45,13 +61,13 @@ function App() {
   const [showProfile, setShowProfile] = useState(false);
   const [showMarketplace, setShowMarketplace] = useState(false);
 
-  const {data, loading, refetch: refetchData} = useQuery(QUERY_START_DATA)
+  const {data, loading, refetch: refetchData} = useQuery(QUERY_ME)
 
   const [state, dispatch] = useGlobalContext()
 
   useEffect(()=>{
     if (data) {
-      console.log('me', data?.me || {money: 0, appleCount: 0});
+      console.log('me', data?.me || {money: 0, appleCount: 5});
       if (!loading) {
         dispatch({
           type: UPDATE_ALL_DATA,

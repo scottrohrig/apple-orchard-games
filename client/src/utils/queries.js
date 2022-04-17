@@ -12,6 +12,7 @@ export const QUERY_ME = gql`
       gemCount
       trees {
         _id
+        startedAtTime
         duration
       }
       juicers {
@@ -21,12 +22,15 @@ export const QUERY_ME = gql`
       }
       mashers {
         _id
+        startedAtTime
         duration
       }
       ovens {
         _id
+        startedAtTime
         duration
       }
+      treeCount
       ovenCount
       masherCount
       juicerCount

@@ -14,39 +14,50 @@ export default function PlaceholderTree() {
 
   const [state, dispatch] = useGlobalContext();
   // define [addTree, { error }] = useMutation(ADD_TREE)
-  const [addTree, { error }] = useMutation(ADD_TREE);
+  const [addTree, { addTreeError }] = useMutation(ADD_TREE);
   const { trees } = state;
 
 
   const handlePurchaseTreeClick = async (evt) => {
 
-    console.log('appleCount',state.appleCount);
+    console.log(`appleCount ${state.appleCount} in handlePurchaseTreeClick`);
     if (state.appleCount < state.gameVariables.applesForNewTree){
       return
     }
-    console.log("in handlePurchaseTreeClick");
-
+    console.log('appleGrowTime: ',state.gameVariables.appleGrowTime);
+    const now = new Date();
+    let newTree; 
     try {
-      await addTree();
+      const { data: userData } = await addTree({
+        variables: {
+          duration: state.gameVariables.appleGrowTime
+        }
+      });
+      const treesArr = userData.addTree.trees;
+      newTree = treesArr[treesArr.length - 1];
+      console.log(newTree);
     } catch (err) {
       console.error(err);
     }
 
-    console.log("dispatching to GameState");
-    try {
-      const payload = {
-        _id: trees.length + 1,
-        startedAtTime: new Date(),
-        duration: state.gameVariables.appleGrowTime,
-      };
-      dispatch({
-        type: PURCHASE_A_TREE,
-        payload,
-      });
-    } catch (error) {
-      console.log("error");
+    if(newTree){
+      try {
+        const payload = {
+          _id: newTree._id,
+          startedAtTime: now,
+          duration: newTree.duration,
+        };
+        console.log('newTree PAYLOAD...', payload);
+        dispatch({
+          type: PURCHASE_A_TREE,
+          payload,
+        });
+      } catch (error) {
+        console.log("error");
+        console.log(addTreeError);
+      }
     }
-  };
+    };
 
   return (
     <>

@@ -13,7 +13,7 @@ export default function Orchard() {
 
   const [state, dispatch] = useGlobalContext();
   const { trees } = state;
-  console.log('',trees[0]);
+  console.log('trees from state', trees);
 
   return (
     <div className="orchard-wrapper">

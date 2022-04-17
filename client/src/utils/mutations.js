@@ -47,6 +47,8 @@ mutation addTree($duration: Int) {
     _id
     trees {
       _id
+      startedAtTime
+      duration
     }
   }
 }
@@ -59,6 +61,8 @@ export const ADD_MASHER = gql`
     addMasher {
       mashers {
         _id
+        startedAtTime
+        duration
       }
     }
   }
@@ -83,6 +87,8 @@ export const ADD_OVEN = gql`
     addOven {
       ovens {
         _id
+        startedAtTime
+        duration
       }
     }
   }

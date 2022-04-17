@@ -78,13 +78,12 @@ export const reducer = (state = [], action) => {
       };
 
     case PURCHASE_A_TREE:
-      let newTreeArray = [...state.trees, {...action.payload}];
-      let newId = state.trees.length;
+      const plantedTrees = [...state.trees, action.payload];
 
       return {
         ...state,
+        trees: plantedTrees,
         appleCount: state.appleCount - state.gameVariables.applesForNewTree,
-        trees: newTreeArray,
       };
 
     case BUY_JUICER:

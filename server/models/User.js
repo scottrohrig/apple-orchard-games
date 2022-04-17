@@ -36,7 +36,8 @@ const userSchema = new Schema({
   },
   appleCount: {
     type: Number,
-    default: 0,
+    // start new user off with 5 apples
+    default: 5,
     min: 0,
   },
   gemCount: {
@@ -72,6 +73,10 @@ userSchema.methods.isCorrectPassword = async function (password) {
 };
 
 // schema virtuals
+userSchema.virtual('treeCount').get(function() {
+  return this.trees.length;
+});
+
 userSchema.virtual('juicerCount').get(function() {
   return this.juicers.length;
 });

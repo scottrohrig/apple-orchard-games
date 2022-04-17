@@ -21,7 +21,7 @@ export default function Tree({ tree, _id, dispatchParent }) {
   // reset countdown when button clicked
   function handleTreeClick(evt) {
 
-    console.log('treeId', timeRemaining);
+    console.log('treeId: ', _id);
     const now = new Date();
     dispatch({
       type: HARVEST_TREE,

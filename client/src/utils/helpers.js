@@ -53,9 +53,6 @@ export function useStateToLocalStorage() {
   };
 
   return (
-    <>
-      const [state, dispatch] = useGlobalContext(); consoleLogState("for
-      testing");
-    </>
+    <>const [state, dispatch] = useGlobalContext(); consoleLogState("test");</>
   );
 }

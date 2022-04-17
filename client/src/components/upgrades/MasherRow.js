@@ -1,89 +1,121 @@
-import { useMutation, useQuery } from '@apollo/client';
+import { useMutation } from '@apollo/client';
 import { useEffect } from 'react';
 import { useGlobalContext } from '../../utils/GlobalState';
+
 import { useIsMount } from "../../utils/helpers";
-import { ADD_MASHER, UPDATE_USER } from '../../utils/mutations';
+import { ADD_MASHER, SET_MASHER, UPDATE_USER } from '../../utils/mutations';
 import { BUY_MASHER, APPLES_FOR_SAUCE } from '../../utils/actions';
+
 import Masher from './Masher';
 import BuyMasher from './PlaceholderMasher';
 
 export default function MashersRow() {
   const [state, dispatch] = useGlobalContext();
-  const [updateUser, { error }] = useMutation(UPDATE_USER);
-  
-  const [addMasher] = useMutation(ADD_MASHER);
-  // console.log(state);
+
+  const [addMasher, { addMasherError }] = useMutation(ADD_MASHER);
+  const [updateMasher, { error: setMasherError }] = useMutation(SET_MASHER);
 
   // destructure the items list from the global state object
-  const { mashers, appleCount } = state;
-  // console.log('state', state, 'mashers', mashers);
-  const makeSauceApplesUsed = state.gameVariables.makeSauceApplesUsed
+  const loading = state?.loading;
 
-  // get items data from db
-  // const { loading, data: itemData } = useQuery(QUERY_ITEMS);
+  const mashers = state?.MashersRow || [];
+  console.log('state', state);
+  console.log('done loading', loading);
+  //  useEffect(() => {
+  // check for item data changes
+  // dispatch item data if it exists with UPDATE_ITEMS action
+  // put item data in indexedDB cache
+  // if not loading, get cache and dispatch
+  // }, ['itemData', 'loading', dispatch]);
 
-  useEffect(() => {
-    // check for item data changes
-    // dispatch item data if it exists with UPDATE_ITEMS action
-    // put item data in indexedDB cache
-    // if not loading, get cache and dispatch
-  }, ['itemData', 'loading', dispatch]);
+  // const handlePurchase = async (event) => {
 
-  const handlePurchase = async (event) => {
+  //   // validate enough money
+  //   if (state.money < state.gameVariables.masherCost) {
+  //     return
+  //   }
 
+  //   // dispatch ADD_MASHER
+  //   try {
+  //     addMasher();
+
+  if (loading) return <div><h1>LOADING....</h1></div>
+
+  const handleUpgradePurchased = async (event) => {
+
+    // console.log('data: updateData', updateData);
     // validate enough money
-    if (state.money < state.gameVariables.masherCost){
-      return
+    const money = state.money;
+    const masherCost = state.gameVariables.masherCost;
+    if (money < masherCost) {
+      return;
     }
 
+    let newMasher;
     // dispatch ADD_MASHER
     try {
-      addMasher();
+      // store returned data aliased as 'userData' from addMasher mutation to server
+      const { data: userData } = await addMasher({
+        variables: {
+          duration: state.gameVariables.makeSauceTime
+        }
+      });
+      const mashersArr = userData.addMasher.mashers;
+      // get id or newly created masher obj from the server to store in the BUY_JUICER payload
+      newMasher = mashersArr[mashersArr.length - 1];
     } catch (e) {
       console.error(e);
+      console.error(addMasherError);
     }
 
-    console.log('dispatching to GameState');
-    try {
-      const payload = {
-        _id: mashers.length + 1,
-        startedAtTime: new Date(),
-        duration: state.gameVariables.makeSauceTime,
-      };
-      dispatch({
-        type: BUY_MASHER,
-        payload,
-      });
-    } catch (error) {
-      console.log('error');
+    if (newMasher) {
+      try {
+        const payload = {
+          _id: newMasher._id,
+          startedAtTime: newMasher.startedAtTime,
+          duration: newMasher.duration
+        };
+        console.log('PAYLOAD...', payload);
+        dispatch({
+          type: BUY_MASHER,
+          payload,
+        });
+      } catch (error) {
+        console.log('error');
+      }
     }
   };
 
-  //
   // should the responsibility be in the row or the item
+
   return (
     <div>
       <div className="item-row">
-        <div className="item-scroll">
+        {!loading && <div className="item-scroll">
           {
-            // map thru juicer objects from GlobalState to add to row
+            // map thru masher objects from GlobalState to add to row
             mashers.map((masher, i) => {
               return (
                 <div key={i} className="item-box">
-                  {
-                    // if object in map does not have `_id` show placeholder.
-                    masher._id ? (
-                      <Masher props={{ masher, dispatch, makeSauceApplesUsed: state.gameVariables.makeSauceApplesUsed, appleCount: state.appleCount, useIsMount, updateUser, money: state.money }} />
-                    ) : (
-                      // Placeholder
-                      <BuyMasher handlePurchase={handlePurchase} />
-                    )
-                  }
+
+                  <Masher props={{
+                    masher,
+                    dispatch,
+                    updateMasher,
+                    appleCount: state.appleCount,
+                    makeSauceApplesUsed: state.gameVariables.makeSauceApplesUsed,
+                    useIsMount,
+                    money: state.money
+                  }} />
+
                 </div>
               );
             })
           }
-        </div>
+          {(mashers.length < 5) &&
+            <BuyMasher handleUpgradePurchased={handleUpgradePurchased} />
+          }
+        </div>}
       </div>
       <div className='dash-label'>
         <span className="item-label">Applesauce</span>

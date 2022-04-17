@@ -73,6 +73,7 @@ function App() {
           setShowProfile={setShowProfile}
           showMarketplace={showMarketplace}
           setShowMarketplace={setShowMarketplace}
+          useStateToLocalStorage={useStateToLocalStorage}
           state={state}
         />
       )}
@@ -92,7 +93,6 @@ function App() {
             <Marketplace
               showMarketplace={showMarketplace}
               setShowMarketplace={setShowMarketplace}
-              useStateToLocalStorage={useStateToLocalStorage}
             />
 
             <Routes>

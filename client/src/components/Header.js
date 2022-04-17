@@ -1,7 +1,7 @@
 import React from "react";
 import gem from "../assets/images/gem.svg";
 import basket from "../assets/images/basket.svg";
-import { useGlobalContext } from "../utils/GlobalState";
+// import { useGlobalContext } from "../utils/GlobalState";
 import { Link } from "react-router-dom";
 
 function Header(props) {
@@ -14,6 +14,7 @@ function Header(props) {
     setShowMarketplace,
     useStateToLocalStorage,
     state: { money, gemCount, appleCount },
+    // state,
   } = props;
 
   return (

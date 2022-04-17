@@ -47,12 +47,19 @@ export function useInterval(callback, delay) {
 
 export function useStateToLocalStorage() {
   console.log("hello from useStateToLocalStorage");
-  localStorage.setItem("state", "changed");
-  const consoleLogState = function (arg) {
-    console.log(arg);
-  };
+  console.log();
+  localStorage.setItem("state", " 7");
+  // const [state, dispatch] = useGlobalContext();
+
+  // const consoleLogState = function (arg) {
+  //   console.log(arg);
+  // };
 
   return (
-    <>const [state, dispatch] = useGlobalContext(); consoleLogState("test");</>
+    // <>const [state, dispatch] = useGlobalContext(); consoleLogState("test");</>
+    <>
+      {/* const [state, dispatch] = useGlobalContext(); console.log("test inside return"); */}
+    </>
+    // <></>
   );
 }

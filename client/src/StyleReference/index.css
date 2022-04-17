@@ -13,6 +13,7 @@
     --btn-shop-dark: #840A01;
     --display-money-main: #1C8B0A;
     --display-money-light: #4FB430;
+    --display-money-medium: #198008;
     --display-money-dark: #09371C;
     --display-banner-main: #C29964;
     --display-banner-dark: #AA7F48;
@@ -762,6 +763,8 @@ header.component-header {
   left: 0; right: 0; top: 70px;
   z-index: 99;
   transform: scale(0);
+  max-height: calc(100vh - 160px);
+  overflow-y: scroll;
 }
 .modal-active {
   transform: scale(1);

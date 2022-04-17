@@ -1,8 +1,8 @@
 .sub-title {
   text-align: center;
-  margin: 5px .5rem 15px;
+  margin: 5px 0.5rem 15px;
   text-transform: uppercase;
-  font-size: .95em;
+  font-size: 0.95em;
   color: var(--btn-shop-main);
 }
 
@@ -20,11 +20,16 @@
   border-radius: 10px 10px 0 0;
 }
 
-.sell-apples {
+.sell-apples,
+.shop-item-row {
   margin: 0 auto 5px;
   text-align: center;
-  background-image: linear-gradient(to bottom, var(--sky-main), var(--sky-dark) );
-  padding: 12px;
+  background-image: linear-gradient(
+    to bottom,
+    var(--sky-main),
+    var(--sky-dark)
+  );
+  padding: 6px;
   border-radius: 0 0 10px 10px;
 }
 .sell-apples .btn-timer:hover {
@@ -38,7 +43,7 @@
   height: 90%;
   border-radius: 0.5rem;
   background-color: var(--display-money-main);
-  box-shadow: inset -2px -2px var(--display-money-dark),
+  box-shadow: inset -2px -2px var(--display-money-medium),
     inset 2px 2px var(--display-money-light);
 }
 
@@ -48,38 +53,127 @@
     inset 2px 2px var(--btn-harvest-light);
 }
 
-.card-label {
-  font-size: x-large;
-  color: var(--btn-shop-main);
-  font-weight: 600;
+.shop-img {
+  width: 70px;
+  height: 70px;
+  margin: 0 10px 0 0;
+  align-self: center;
+  position: relative;
+}
+.buy-gem {
+  width: 100%;
+}
+
+.many-gem-1, .many-gem-2 {
+  position: absolute;
+}
+.many-gem-1 {
+  width: 75%;
+  top: 0; left: 0;
+}
+.many-gem-2 {
+  width: 55%;
+  transform: rotateY(-180deg);
+  top: 25px;
+}
+
+.shop-img i {
+  color: var(--btn-shop-light);
+  font-size: 64px;
+}
+.shop i.fa-stopwatch:hover {
+  animation: harvest-now-pulse 1.4s infinite linear;
+}
+@keyframes harvest-now-pulse {
+  0% { transform: scale(1); }
+  25% { transform: scale(1.05); }
+  50% { transform: scale(1); }
+  75% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+.shop i.fa-rotate:hover {
+  animation: auto-harvest-rotate 1s infinite linear;
+}
+@keyframes auto-harvest-rotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(180deg); }
+}
+
+.coming-soon-shop {
+  background-color: var(--display-banner-main);
+  width: 80%;
+  transform: rotate(-4deg);
   font-size: 1.8em;
-  text-shadow:
-    -1px -1px var(--form-background),
-     1px -1px var(--form-background),
-    -1px 1px var(--form-background),
-     1px 1px var(--form-background);
+  text-align: center;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: #FFF;
+  text-shadow: var(--display-banner-dark);
+  padding: 12px;
+  outline: 2px dashed var(--display-banner-dark);
+  outline-offset: -6px;
+  margin: -96px auto 36px;
 }
 
-.usd-label {
-  color: var(--display-money-main);
+.shop-item-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.shop-box {
+  width: calc(50% - 4px);
+  margin: 2px;
+}
+.shop-box .card {
+  width: 100%;
+  height: auto;
+}
+.shop-buy-label {
+  text-align: left;
+}
+.shop-buy-label p {
+  margin: 0 0 3px;
+  text-transform: uppercase;
+  font-size: 0.85em;
 }
 
-.card-body {
+.shop-card {
   padding: 0.25rem;
   background-color: var(--form-background);
   border-radius: 0.3rem;
   color: var(--display-banner-main);
+  display: flex;
+  justify-content: center;
 }
 
 .btn-buy {
   background-color: var(--display-money-main);
-  text-shadow: 1px 1px var(--display-money-dark);
-  box-shadow:
-    inset -2px -2px var(--display-money-dark),
+  text-shadow: 1px 1px var(--display-money-medium);
+  box-shadow: inset -2px -2px var(--display-money-medium),
     inset 2px 2px var(--display-money-light);
 }
 .btn-buy:hover {
   animation: pulse 2s infinite linear;
+}
+
+.shop-box button:disabled {
+  opacity: .7;
+}
+.shop-box button:disabled:hover {
+  cursor: default;
+  animation: none;
+  filter: brightness(100%);
+}
+
+.shop-card .card-label {
+  color: var(--btn-shop-main);
+  font-size: 2em;
+  font-family: "Smythe", cursive;
+  text-transform: capitalize;
+}
+
+.shop-card .usd-label {
+  color: var(--display-money-main);
 }
 
 .apple-increment {
@@ -97,7 +191,7 @@
 .increment-btn:hover,
 .increment-btn i:hover {
   cursor: pointer;
-  text-shadow: 0 0 3px #FFF;
+  text-shadow: 0 0 3px #fff;
 }
 .increment {
   color: var(--display-money-main);
@@ -111,4 +205,28 @@
 }
 .apple-amount {
   font-size: 1.1em;
+}
+
+/* 400 */
+@media screen and (max-width: 400px) {
+  .shop-card {
+    flex-direction: column;
+  }
+  .shop-buy-label {
+    text-align: center;
+  }
+  .shop-card .card-label {
+    font-size: 1.8em;
+  }
+  .coming-soon-shop {
+    margin: -130px auto 70px;
+  }
+}
+
+/* 380 */
+@media screen and (max-width: 380px) {
+  .shop .display-banner {
+    transform: scale(.9);
+    font-size: 1.4em;
+  }
 }

@@ -21,7 +21,6 @@ export default function Tree({
   let isReady = timeRemaining <= 0;
 
   if (isReady) {
-    console.log("let Orchard know " + _id);
     setCheckOrchardReadyToHarvest(true);
   }
 
@@ -46,7 +45,7 @@ export default function Tree({
   useInterval(() => {
     if (isReady) {
       // console.log("tree id " + _id + " is ready");
-      return;
+      // return;
     }
     setTime(getTimeRemaining(tree.startedAtTime, tree.duration));
   }, 1000);

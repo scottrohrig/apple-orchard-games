@@ -4,9 +4,14 @@ import PlaceholderTree from "../components/PlaceholderTree";
 
 import { useMutation, useQuery } from "@apollo/client";
 import { useEffect, useState } from "react";
+
 import { useGlobalContext } from "../utils/GlobalState";
+import { getTimeRemaining } from "../utils/helpers";
+import { HARVEST_TREE, UPDATE_TREE_TIMER } from "../utils/actions";
 
 import barn from "../assets/images/barn.png";
+
+let showHarvestOrchardButton = false;
 
 export default function Orchard() {
   const [state, dispatch] = useGlobalContext();
@@ -14,13 +19,55 @@ export default function Orchard() {
 
   const [checkOrchardReadyToHarvest, setCheckOrchardReadyToHarvest] =
     useState(false);
-  console.log("running Orchard");
-  console.log("checkOrchardReadyToHarvest is " + checkOrchardReadyToHarvest);
 
+  // this useEffect controls whether the Harvest Orchard button is displayed
   useEffect(() => {
-    console.log("inside useeffect");
     setCheckOrchardReadyToHarvest(false);
+    showHarvestOrchardButton = trees.every((tree) => {
+      if (tree.startedAtTime == undefined) {
+        return true;
+      } else {
+        let tr = getTimeRemaining(tree.startedAtTime, tree.duration);
+        if (tr <= 0) {
+          return true;
+        } else {
+          return false;
+        }
+      }
+    });
   }, [checkOrchardReadyToHarvest]);
+
+  const handleHarvestOrchard = function () {
+    console.log("handleHarvestOrchard");
+    const now = new Date();
+    trees.forEach((tree) => {
+      console.log("tree id is " + tree._id);
+      if (tree.startedAtTime == undefined) {
+        return;
+      } else {
+        dispatch({
+          type: HARVEST_TREE,
+        });
+
+        dispatch({
+          type: UPDATE_TREE_TIMER,
+          payload: {
+            _id: tree._id,
+            startedAtTime: now,
+            duration: tree.duration,
+          },
+        });
+      }
+      //   let tr = getTimeRemaining(tree.startedAtTime, tree.duration);
+      //   if (tr <= 0) {
+      //     console.log("tr is: " + tr + "id is " + tree._id);
+      //     return true;
+      //   } else {
+      //     return false;
+      //   }
+      // }
+    });
+  };
 
   return (
     <div className="orchard-wrapper">
@@ -58,7 +105,11 @@ export default function Orchard() {
             }
           </div>
         </div>
-        <button className="btn btn-nav">Harvest Orchard</button>
+        {showHarvestOrchardButton && (
+          <button className="btn btn-nav" onClick={handleHarvestOrchard}>
+            Harvest Orchard
+          </button>
+        )}
       </div>
     </div>
   );

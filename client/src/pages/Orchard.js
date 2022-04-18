@@ -109,7 +109,7 @@ export default function Orchard() {
           </div>
         </div>
         {showHarvestOrchardButton && (
-          <button className="btn btn-nav" onClick={handleHarvestOrchard}>
+          <button className="btn btn-harvest" onClick={handleHarvestOrchard}>
             Harvest Orchard
           </button>
         )}

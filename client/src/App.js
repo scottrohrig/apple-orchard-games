@@ -31,7 +31,25 @@ const QUERY_START_DATA = gql`
       appleCount
       money
       gemCount
+      trees {
+        _id
+        startedAtTime
+        duration
+      }
+      juicerCount
       juicers {
+        _id
+        startedAtTime
+        duration
+      }
+      masherCount
+      mashers {
+        _id
+        startedAtTime
+        duration
+      }
+      ovenCount
+      ovens {
         _id
         startedAtTime
         duration
@@ -51,13 +69,13 @@ function App() {
 
   useEffect(() => {
     if (data) {
-      console.log("me", data?.me || { money: 0, appleCount: 0 });
+      // console.log("me", data?.me || { money: 0, appleCount: 0 });
       if (!loading) {
         dispatch({
           type: UPDATE_ALL_DATA,
           payload: { ...data.me, loading },
         });
-        console.log("refetching", loading);
+        // console.log("refetching", loading);
         refetchData();
       }
     }

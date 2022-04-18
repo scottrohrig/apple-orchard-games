@@ -47,6 +47,8 @@ mutation addTree($duration: Int) {
     _id
     trees {
       _id
+      startedAtTime
+      duration
     }
   }
 }
@@ -56,9 +58,11 @@ mutation addTree($duration: Int) {
 // add masher
 export const ADD_MASHER = gql`
   mutation addMasher($duration: Int) {
-    addMasher {
+    addMasher(duration: $duration) {
       mashers {
         _id
+        startedAtTime
+        duration
       }
     }
   }
@@ -80,9 +84,11 @@ export const ADD_JUICER = gql`
 // add oven
 export const ADD_OVEN = gql`
   mutation addOven($duration: Int) {
-    addOven {
+    addOven(duration: $duration) {
       ovens {
         _id
+        startedAtTime
+        duration
       }
     }
   }
@@ -136,25 +142,6 @@ export const SET_TREE = gql`
   }
 `;
 
-// update masher
-export const SET_MASHER = gql`
-  mutation updateMasher($masherId: ID!, $startedAtTime: Date!, $duration: Int) {
-    updatemasher(
-      masherId: $masherId
-      startedAtTime: $startedAtTime
-      duration: $duration
-    ) {
-      _id
-      username
-      mashers {
-        _id
-        startedAtTime
-        duration
-      }
-    }
-  }
-`;
-
 // update juicer (started at time and duration variables)
 
 export const SET_JUICER = gql`
@@ -179,6 +166,31 @@ mutation updateJuicer(
   }
 }
 `;
+
+// update masher
+export const SET_MASHER = gql`
+mutation updateMasher(
+  $masherId: ID!,
+  $startedAtTime: Date!,
+  $duration: Int
+  ){
+  updateMasher(
+    masherId: $masherId,
+    startedAtTime: $startedAtTime,
+    duration: $duration
+    ) {
+    _id
+    username
+    masherCount
+    mashers {
+      _id
+      startedAtTime
+      duration
+    }
+  }
+}
+`;
+
 
 // update oven
 export const SET_OVEN = gql`
@@ -215,7 +227,7 @@ mutation ResetUserStats($money: Int, $appleCount: Int) {
       startedAtTime
       duration
     }
-    
+
   }
 }
 

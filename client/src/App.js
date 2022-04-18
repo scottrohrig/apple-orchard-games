@@ -7,6 +7,8 @@ import './style/mobile.css';
 
 import Auth from "./utils/auth";
 
+import { stateToLocalStorage } from "./utils/helpers";
+
 import Splash from "./pages/Splash";
 import Dashboard from "./pages/Dashboard";
 import Leaderboard from "./pages/Leaderboard";
@@ -73,11 +75,16 @@ function App() {
           setShowProfile={setShowProfile}
           showMarketplace={showMarketplace}
           setShowMarketplace={setShowMarketplace}
+          stateToLocalStorage={stateToLocalStorage}
           state={state}
         />
       )}
       {/* App Stuff */}
       <div className="app app-content">
+<<<<<<< HEAD
+=======
+        {/* App Stuff */}
+>>>>>>> develop
         <div style={{ margin: "2rem auto" }}>
           <div className="container">
             {/* Modals */}
@@ -103,7 +110,10 @@ function App() {
             </Routes>
           </div>
         </div>
+<<<<<<< HEAD
         {/* Disable highlighting and right click */}
+=======
+>>>>>>> develop
         {window.addEventListener("selectstart", function (e) {
           e.preventDefault();
         })}

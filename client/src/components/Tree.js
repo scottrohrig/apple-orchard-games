@@ -20,9 +20,11 @@ export default function Tree({
   const [timeRemaining, setTime] = useState(resetTreeTimerSeconds);
   let isReady = timeRemaining <= 0;
 
-  if (isReady) {
-    setCheckOrchardReadyToHarvest(true);
-  }
+  useEffect(() => {
+    if (isReady) {
+      setCheckOrchardReadyToHarvest(true);
+    }
+  }, []);
 
   // reset countdown when button clicked
   function handleTreeClick(evt) {

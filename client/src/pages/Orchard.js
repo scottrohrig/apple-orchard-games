@@ -81,6 +81,11 @@ export default function Orchard() {
         <div className="display-banner text-center">My Orchard</div>
       </h2>
       <div className="orchard">
+        {showHarvestOrchardButton && (
+          <button className="btn btn-orchard-harvest" onClick={handleHarvestOrchard}>
+            Harvest<br />Orchard
+          </button>
+        )}
         <div className="orchard-row">
           <div className="tree-container">
             {
@@ -110,11 +115,6 @@ export default function Orchard() {
             }
           </div>
         </div>
-        {showHarvestOrchardButton && (
-          <button className="btn btn-harvest" onClick={handleHarvestOrchard}>
-            Harvest Orchard
-          </button>
-        )}
       </div>
     </div>
   );

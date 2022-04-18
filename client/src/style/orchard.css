@@ -76,7 +76,6 @@
   width: 120px;
   top: 25px;
   right: 20px;
-  z-index: 10;
 }
 .empty-plot {
   height: 40px !important;
@@ -84,9 +83,16 @@
 }
 
 .btn-orchard-harvest {
-  position: absolute;
-  top: 90px;
+  position: fixed;
   border-radius: 0 10px 10px 0;
+  max-width: calc(20vw - 20px);
+  margin: 25px 0 0 -2px;
+  z-index: 1000;
+  background-color: var(--btn-harvest-main);
+  box-shadow: 2px 5px var(--main-darker);
+}
+.btn-orchard-harvest:hover {
+  box-shadow: 2px 5px var(--main-darkest);
 }
 
 
@@ -113,5 +119,19 @@
   .item-container {
     height: 150px;
     margin-top: 0 !important;
+  }
+  .btn-orchard-harvest {
+    font-size: 1.1em;
+    max-width: calc(40vw - 20px);
+  }
+}
+
+/* 400 */
+@media screen and (max-width: 400px) {
+  .orchard-wrapper h2 {
+    margin: 40px 12vw 10px;
+  }
+  h2.page-title {
+    text-align: left;
   }
 }

@@ -61,7 +61,7 @@ function App() {
   const [showProfile, setShowProfile] = useState(false);
   const [showMarketplace, setShowMarketplace] = useState(false);
 
-  const {data, loading, refetch: refetchData} = useQuery(QUERY_ME)
+  const {data, loading, refetch: refetchData} = useQuery(QUERY_START_DATA)
 
   const [state, dispatch] = useGlobalContext()
 

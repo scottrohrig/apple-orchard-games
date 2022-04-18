@@ -173,27 +173,32 @@ const resolvers = {
       throw new AuthenticationError('You need to be logged in!');
     },
 
-    // updateTree: async (parent, args, context) => {
-    //   if (context.user) {
-    //     const orchard = await Orchard.findOneAndUpdate(
-    //       { _id: args.orchardId },
-    //       {
-    //         $set: {
-    //           trees: {
-    //             treeId: args.treeId,
-    //             startedAtTime: args.startedAtTime,
-    //             duration: args.duration,
-    //           },
-    //         },
-    //       },
-    //       { new: true }
-    //     );
+    updateTree: async (parent, args, context) => {
+      if (context.user) {
+        const user = await User.findOneAndUpdate(
+          { _id: context.user._id, trees: {$elemMatch: {treeId: args.treeId}} },
+          {
+            $set: {
+              'trees.$[].startedAtTime': args.startedAtTime,
+              'trees.$[].duration': args.duration,
+            },
 
-    //     return orchard;
-    //   }
+            // trees: {
+              //   $set: {
+              //   treeId: args.treeId,
+              //   startedAtTime: args.startedAtTime,
+              //   duration: args.duration,
+              // },
+            // },
+          },
+          { new: true }
+        );
+          console.log('\n\nUSER >>> ',user);
+        return user;
+      }
 
-    //   throw new AuthenticationError('You need to be logged in!');
-    // },
+      throw new AuthenticationError('You need to be logged in!');
+    },
 
     // updateUser
     // find user by id

@@ -1,29 +1,24 @@
-import React, { useEffect, useState } from "react";
-import treeImage from "../assets/images/tree.png";
-import { useGlobalContext } from "../utils/GlobalState";
+import React, { useState } from "react";
 import { HARVEST_TREE, UPDATE_TREE_TIMER } from "../utils/actions";
-import { UPDATE_USER } from "../utils/mutations";
+import { SET_TREE } from "../utils/mutations";
 import { getTimeRemaining, useInterval } from '../utils/helpers';
 
 import treeBare from "../assets/images/tree-short.svg";
 import treeApples from "../assets/images/tree-with-apples-short.svg";
+import { useMutation } from '@apollo/client';
 
 export default function Tree({ tree, _id, dispatchParent }) {
-  const [state, dispatch] = useGlobalContext();
-  const { trees, gameVariables } = state;
-  const resetTreeTimerSeconds = gameVariables.appleGrowTime;
+  const [setTreeTime] = useMutation(SET_TREE)
 
   const [timeRemaining, setTime] = useState(10);
 
   let isReady = timeRemaining <= 0;
 
-
   // reset countdown when button clicked
   function handleTreeClick(evt) {
 
-    console.log('treeId: ', _id);
     const now = new Date();
-    dispatch({
+    dispatchParent({
       type: HARVEST_TREE,
     });
 
@@ -40,6 +35,11 @@ export default function Tree({ tree, _id, dispatchParent }) {
       }
     });
     setTime(tree.duration);
+    setTreeTime({variables: {
+      treeId: _id,
+      startedAtTime: now,
+      duration: tree.duration
+    }})
   }
 
   useInterval(() => {

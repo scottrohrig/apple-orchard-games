@@ -2,8 +2,6 @@
 import Tree from "../components/Tree";
 import PlaceholderTree from "../components/PlaceholderTree";
 
-import { useMutation, useQuery } from "@apollo/client";
-import { useEffect, useState } from "react";
 import { useGlobalContext } from "../utils/GlobalState";
 
 import barn from "../assets/images/barn.png";
@@ -12,8 +10,11 @@ export default function Orchard() {
   // let disabled = true;
 
   const [state, dispatch] = useGlobalContext();
-  const { trees } = state;
-  console.log('trees from state', trees);
+
+  const loading = state?.loading;
+
+  const trees = state?.trees || [];
+  if (loading) return <div><h1>LOADING....</h1></div>;
 
   return (
     <div className="orchard-wrapper">
@@ -24,24 +25,17 @@ export default function Orchard() {
       <div className="orchard">
         <div className="orchard-row">
           <div className="tree-container">
+            <PlaceholderTree />
             {
-              // map thru juicer objects from GlobalState to add to row
               trees.map((tree, i) => {
                 return (
                   <div key={i} className="orchard-box">
-                    {
-                      // if object in map does not have `_id` show placeholder.
-                      tree._id ? (
-                        <Tree
-                        _id={tree._id}
-                        tree={tree}
-                        dispatchParent={dispatch}
-                        />
-                      ) : (
-                        // Placeholder
-                        <PlaceholderTree />
-                      )
-                    }
+                    <Tree
+                      _id={tree._id}
+                      tree={tree}
+                      dispatchParent={dispatch}
+                    />
+
                   </div>
                 );
               })
@@ -49,20 +43,6 @@ export default function Orchard() {
           </div>
         </div>
       </div>
-      {/* <div
-        className="tree-container"
-        style={{
-          width: "90vw",
-          margin: "2rem auto",
-          display: "flex",
-          flexWrap: "wrap",
-          border: "1px solid var(--btn-harvest-main)",
-          borderRadius: ".5rem",
-        }}
-      >
-        <Tree />
-        <PlaceholderTree />
-      </div> */}
     </div>
   );
 }

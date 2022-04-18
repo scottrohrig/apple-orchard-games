@@ -31,12 +31,25 @@ const QUERY_START_DATA = gql`
       appleCount
       money
       gemCount
+      trees {
+        _id
+        startedAtTime
+        duration
+      }
+      juicerCount
       juicers {
         _id
         startedAtTime
         duration
       }
+      masherCount
       mashers {
+        _id
+        startedAtTime
+        duration
+      }
+      ovenCount
+      ovens {
         _id
         startedAtTime
         duration

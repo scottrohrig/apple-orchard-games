@@ -200,3 +200,23 @@ export const SET_OVEN = gql`
 `;
 
 // update timer
+
+// resetStats
+export const RESET_USER_STATS = gql`
+
+mutation ResetUserStats($money: Int, $appleCount: Int) {
+  resetUserStats(money: $money, appleCount: $appleCount) {
+    _id
+    username
+    money
+    appleCount
+    trees {
+      _id
+      startedAtTime
+      duration
+    }
+    
+  }
+}
+
+`;

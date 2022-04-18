@@ -3,8 +3,15 @@ import React, { useEffect } from 'react';
 import Auth from '../utils/auth';
 import { QUERY_ME } from '../utils/queries';
 import { UPDATE_USER } from '../utils/mutations';
+import { RESET_USER_STATS } from '../utils/mutations';
 
-export default function Profile({ showProfile, setShowProfile }) {
+
+export default function Profile({
+  showProfile,
+  setShowProfile,
+  showMarketplace,
+  setShowMarketplace,
+}) {
   const logout = (event) => {
     event.preventDefault();
     Auth.logout();
@@ -15,21 +22,46 @@ export default function Profile({ showProfile, setShowProfile }) {
 
   const user = data?.me || data?.user || {};
 
+  // define the mutation function and set it equal to useMutation(RESET_USER_STATS)
+
+  const [resetStats, { error: resetError }] = useMutation(RESET_USER_STATS);
+  const handleReset = async (event) => {
+    event.preventDefault();
+    try {
+      const { data: resetData } = await resetStats({
+        variables: {
+          money: 0,
+          appleCount: 5
+        }
+      })
+    }
+
+    catch (error) {
+      console.error(error)
+    }
+
+  }
+
+
+  // define the event handler
+
+
   return (
     <div>
       <div
-        className={`modal-background ${
-          showProfile && 'modal-background-active'
-        }`}
+        className={`modal-background ${showProfile && 'modal-background-active'
+          }`}
         onClick={() => setShowProfile(!showProfile)}
       ></div>
 
       <div className={`leaderboard profile modal ${showProfile && 'modal-active'}`}>
         <button
           className="btn btn-modal"
-          onClick={() => {if(showProfile) {
-            setShowProfile(!showProfile);
-          }}}
+          onClick={() => {
+            if (showProfile) {
+              setShowProfile(!showProfile);
+            }
+          }}
         >
           <i className="fa-solid fa-xmark"></i>
         </button>
@@ -53,6 +85,9 @@ export default function Profile({ showProfile, setShowProfile }) {
         <div className='stats'>
           <h3>Stats</h3>
           <p>User stats are coming soon!</p>
+          <button className='btn btn-shop' type="resetStats" onClick={handleReset}>
+            Reset Stats
+          </button>
         </div>
         <div className='logout'>
           <button className='btn btn-logout' type="logout" onClick={logout}>

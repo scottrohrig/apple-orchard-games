@@ -36,6 +36,11 @@ const QUERY_START_DATA = gql`
         startedAtTime
         duration
       }
+      mashers {
+        _id
+        startedAtTime
+        duration
+      }
     }
   }
 `;

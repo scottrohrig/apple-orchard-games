@@ -59,8 +59,8 @@ export default function MashersRow() {
     if (state.appleCount < state.gameVariables.makeSauceApplesUsed) {
       return;
     }
-
     const now = new Date();
+    console.log(_id,now,duration);
     try {
       dispatch({
         type: UPDATE_MASHER,

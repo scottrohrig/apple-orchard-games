@@ -1,19 +1,19 @@
-import { useEffect, useRef, useState } from 'react';
-
+import { useEffect, useRef, useState } from "react";
+import { useGlobalContext } from "./GlobalState";
 
 export function getTimeRemaining(startedAtTime, duration) {
-  const now = new Date()
-  const then = new Date(startedAtTime)
-  const tr = Math.max(duration - Math.floor((now - then) / 1000),0)
-  return tr
+  const now = new Date();
+  const then = new Date(startedAtTime);
+  const tr = Math.max(duration - Math.floor((now - then) / 1000), 0);
+  return tr;
 }
 
 export function formatTime(rawTime) {
-  var minutes = rawTime.getMinutes()
-  var seconds = rawTime.getSeconds()
-  var strTime = `${seconds}`
+  var minutes = rawTime.getMinutes();
+  var seconds = rawTime.getSeconds();
+  var strTime = `${seconds}`;
 
-  return strTime
+  return strTime;
 }
 
 export const useIsMount = () => {
@@ -43,4 +43,10 @@ export function useInterval(callback, delay) {
       return () => clearInterval(id);
     }
   }, [delay]);
+}
+
+export function stateToLocalStorage(state) {
+  console.log("courtesy of stateToLocalStorage, next line is state: ");
+  console.log(state);
+  localStorage.setItem("state", JSON.stringify(state));
 }

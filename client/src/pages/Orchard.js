@@ -4,16 +4,70 @@ import PlaceholderTree from "../components/PlaceholderTree";
 
 import { useMutation, useQuery } from "@apollo/client";
 import { useEffect, useState } from "react";
+
 import { useGlobalContext } from "../utils/GlobalState";
+import { getTimeRemaining } from "../utils/helpers";
+import { HARVEST_TREE, UPDATE_TREE_TIMER } from "../utils/actions";
 
 import barn from "../assets/images/barn.png";
 
-export default function Orchard() {
-  // let disabled = true;
+let showHarvestOrchardButton = false;
 
+export default function Orchard() {
   const [state, dispatch] = useGlobalContext();
   const { trees } = state;
-  console.log('',trees[0]);
+
+  const [checkOrchardReadyToHarvest, setCheckOrchardReadyToHarvest] =
+    useState(false);
+
+  // this useEffect controls whether the Harvest Orchard button is displayed
+  useEffect(() => {
+    setCheckOrchardReadyToHarvest(false);
+    showHarvestOrchardButton = trees.every((tree) => {
+      if (tree.startedAtTime == undefined) {
+        return true;
+      } else {
+        let tr = getTimeRemaining(tree.startedAtTime, tree.duration);
+        if (tr <= 0) {
+          return true;
+        } else {
+          return false;
+        }
+      }
+    });
+  }, [checkOrchardReadyToHarvest]);
+
+  const handleHarvestOrchard = function () {
+    console.log("handleHarvestOrchard");
+    const now = new Date();
+    trees.forEach((tree) => {
+      console.log("tree id is " + tree._id);
+      if (tree.startedAtTime == undefined) {
+        return;
+      } else {
+        dispatch({
+          type: HARVEST_TREE,
+        });
+
+        dispatch({
+          type: UPDATE_TREE_TIMER,
+          payload: {
+            _id: tree._id,
+            startedAtTime: now,
+            duration: tree.duration,
+          },
+        });
+      }
+      //   let tr = getTimeRemaining(tree.startedAtTime, tree.duration);
+      //   if (tr <= 0) {
+      //     console.log("tr is: " + tr + "id is " + tree._id);
+      //     return true;
+      //   } else {
+      //     return false;
+      //   }
+      // }
+    });
+  };
 
   return (
     <div className="orchard-wrapper">
@@ -33,9 +87,12 @@ export default function Orchard() {
                       // if object in map does not have `_id` show placeholder.
                       tree._id ? (
                         <Tree
-                        _id={tree._id}
-                        tree={tree}
-                        dispatchParent={dispatch}
+                          _id={tree._id}
+                          tree={tree}
+                          dispatchParent={dispatch}
+                          setCheckOrchardReadyToHarvest={
+                            setCheckOrchardReadyToHarvest
+                          }
                         />
                       ) : (
                         // Placeholder
@@ -48,21 +105,12 @@ export default function Orchard() {
             }
           </div>
         </div>
+        {showHarvestOrchardButton && (
+          <button className="btn btn-nav" onClick={handleHarvestOrchard}>
+            Harvest Orchard
+          </button>
+        )}
       </div>
-      {/* <div
-        className="tree-container"
-        style={{
-          width: "90vw",
-          margin: "2rem auto",
-          display: "flex",
-          flexWrap: "wrap",
-          border: "1px solid var(--btn-harvest-main)",
-          borderRadius: ".5rem",
-        }}
-      >
-        <Tree />
-        <PlaceholderTree />
-      </div> */}
     </div>
   );
 }

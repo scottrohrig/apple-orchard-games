@@ -47,6 +47,8 @@ mutation addTree($duration: Int) {
     _id
     trees {
       _id
+      startedAtTime
+      duration
     }
   }
 }
@@ -56,9 +58,11 @@ mutation addTree($duration: Int) {
 // add masher
 export const ADD_MASHER = gql`
   mutation addMasher($duration: Int) {
-    addMasher {
+    addMasher(duration: $duration) {
       mashers {
         _id
+        startedAtTime
+        duration
       }
     }
   }
@@ -80,9 +84,11 @@ export const ADD_JUICER = gql`
 // add oven
 export const ADD_OVEN = gql`
   mutation addOven($duration: Int) {
-    addOven {
+    addOven(duration: $duration) {
       ovens {
         _id
+        startedAtTime
+        duration
       }
     }
   }
@@ -215,7 +221,7 @@ mutation ResetUserStats($money: Int, $appleCount: Int) {
       startedAtTime
       duration
     }
-    
+
   }
 }
 

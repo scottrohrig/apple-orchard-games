@@ -6,7 +6,9 @@ import {
   UPDATE_JUICER,
   UPDATE_JUICERS,
   PURCHASE_A_TREE,
+  UPDATE_MASHER,
   UPDATE_MASHERS,
+  UPDATE_OVEN,
   UPDATE_OVENS,
   SELL_JUICE,
   BUY_JUICER,
@@ -35,7 +37,6 @@ export const reducer = (state = [], action) => {
       let updatedTrees = state.trees.map((tree) =>
         tree._id === action.payload._id ? action.payload : tree
       );
-      console.log(updatedTrees);
       return {
         ...state,
         trees: updatedTrees,
@@ -59,6 +60,11 @@ export const reducer = (state = [], action) => {
 
     // case update mashers
     case UPDATE_MASHERS:
+      return {
+        ...state,
+        mashers: [...action.payload],
+      };
+    case UPDATE_MASHER:
       let updatedMashers = state.mashers.map((masher) =>
         masher._id === action.payload._id ? action.payload : masher
       );
@@ -68,7 +74,12 @@ export const reducer = (state = [], action) => {
       };
 
     // case update ovens
-    case UPDATE_OVENS:
+    case UPDATE_OVEN:
+      return {
+        ...state,
+        ovens: [...action.payload],
+      };
+    case UPDATE_OVEN:
       let updatedOvens = state.ovens.map((oven) =>
         oven._id === action.payload._id ? action.payload : oven
       );

@@ -23,7 +23,7 @@ export default function Tree({
   useEffect(() => {
     if (isReady) {
       setCheckOrchardReadyToHarvest(true);
-      console.log("useEffect check orchard");
+      // console.log("useEffect check orchard");
     }
   });
 

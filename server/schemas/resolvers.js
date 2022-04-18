@@ -1,7 +1,5 @@
 // require apollo server
 const { AuthenticationError } = require('apollo-server-express');
-const { coerceInputValue } = require('graphql');
-const { Schema } = require('mongoose');
 // require necessary models
 const { User } = require('../models');
 // require auth
@@ -36,7 +34,7 @@ const resolvers = {
       return { token, user };
     },
 
-    login: async (parent, { email, password }) => {
+    login: async (_, { email, password }) => {
       const user = await User.findOne({ email });
 
       if (!user) {
@@ -53,7 +51,7 @@ const resolvers = {
       return { token, user };
     },
 
-    addJuicer: async (parent, args, context) => {
+    addJuicer: async (_, args, context) => {
       if (context.user) {
         const user = await User.findByIdAndUpdate(
           { _id: context.user._id },
@@ -67,7 +65,8 @@ const resolvers = {
       throw new AuthenticationError('You need to be logged in!');
     },
 
-    addMasher: async (parent, args, context) => {
+    addMasher: async (_, args, context) => {
+      console.log('\n\n add masher', args);
       if (context.user) {
         const user = await User.findByIdAndUpdate(
           { _id: context.user._id },
@@ -81,7 +80,7 @@ const resolvers = {
       throw new AuthenticationError('You need to be logged in!');
     },
 
-    addOven: async (parent, args, context) => {
+    addOven: async (_, args, context) => {
       if (context.user) {
         const user = await User.findByIdAndUpdate(
           { _id: context.user._id },
@@ -95,7 +94,7 @@ const resolvers = {
       throw new AuthenticationError('You need to be logged in!');
     },
 
-    addTree: async (parent, args, context) => {
+    addTree: async (_, args, context) => {
       if (context.user) {
         const user = await User.findByIdAndUpdate(
           { _id: context.user._id },
@@ -109,13 +108,6 @@ const resolvers = {
       throw new AuthenticationError('You need to be logged in!');
     },
 
-
-
-
-    // updateJuicer
-    // need user ID and juicer ID
-    // update startedAtTime
-    // update duration with upgrades
     updateJuicer: async (_, args, context) => {
       if (context.user) {
 

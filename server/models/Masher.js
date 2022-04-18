@@ -1,18 +1,25 @@
 const { Schema } = require('mongoose');
-// require Item schema as base
-const Item = require('./Item');
 
-const masherSchema = new Schema({
-  startedAtTime: {
-    type: Date,
+const masherSchema = new Schema(
+  {
+    startedAtTime: {
+      type: Date,
+      default: new Date()
+    },
+    duration: {
+      type: Number,
+      min: 0,
+    },
+    isReady: {
+      type: Boolean,
+      default: false,
+    },
   },
-  duration: {
-    type: Number,
-    min: 0,
-  },
-  isReady: {
-    type: Boolean,
-  },
-});
+  {
+    toJSON: {
+      getters: true,
+      virtuals: true,
+    },
+  });
 
 module.exports = masherSchema;

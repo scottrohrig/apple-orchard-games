@@ -16,7 +16,9 @@ export const UPDATE_TREE_TIMER = "UPDATE_TREE_TIMER";
 // update juicers
 export const UPDATE_JUICER = "UPDATE_JUICER";
 export const UPDATE_JUICERS = "UPDATE_JUICERS";
+export const UPDATE_MASHER = "UPDATE_MASHER";
 export const UPDATE_MASHERS = "UPDATE_MASHERS";
+export const UPDATE_OVEN = "UPDATE_OVEN";
 export const UPDATE_OVENS = "UPDATE_OVENS";
 // update ovens
 

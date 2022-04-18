@@ -110,10 +110,7 @@ function App() {
             </Routes>
           </div>
         </div>
-<<<<<<< HEAD
         {/* Disable highlighting and right click */}
-=======
->>>>>>> develop
         {window.addEventListener("selectstart", function (e) {
           e.preventDefault();
         })}

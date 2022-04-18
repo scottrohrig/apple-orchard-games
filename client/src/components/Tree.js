@@ -23,8 +23,9 @@ export default function Tree({
   useEffect(() => {
     if (isReady) {
       setCheckOrchardReadyToHarvest(true);
+      console.log("useEffect check orchard");
     }
-  }, []);
+  });
 
   // reset countdown when button clicked
   function handleTreeClick(evt) {

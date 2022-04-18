@@ -19,8 +19,7 @@ export default function JuicersRow() {
   const loading = state?.loading;
 
   const juicers = state?.juicers || [];
-  console.log('state',state);
-  console.log('done loading', loading);
+
   // useEffect(() => {
   //   if (itemData) {
 

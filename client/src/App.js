@@ -51,13 +51,13 @@ function App() {
 
   useEffect(() => {
     if (data) {
-      console.log("me", data?.me || { money: 0, appleCount: 0 });
+      // console.log("me", data?.me || { money: 0, appleCount: 0 });
       if (!loading) {
         dispatch({
           type: UPDATE_ALL_DATA,
           payload: { ...data.me, loading },
         });
-        console.log("refetching", loading);
+        // console.log("refetching", loading);
         refetchData();
       }
     }

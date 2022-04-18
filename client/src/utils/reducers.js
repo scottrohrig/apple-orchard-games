@@ -26,7 +26,6 @@ export const reducer = (state = [], action) => {
   switch (action.type) {
     // case update user
     case UPDATE_ALL_DATA:
-      console.log({ ...state, ...action.payload });
       return { ...state, ...action.payload };
 
     // case update orchards

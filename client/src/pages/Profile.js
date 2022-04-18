@@ -85,7 +85,7 @@ export default function Profile({
         <div className='stats'>
           <h3>Stats</h3>
           <p>User stats are coming soon!</p>
-          <button className='btn btn-shop' type="resetStats" onClick={resetStats}>
+          <button className='btn btn-shop' type="resetStats" onClick={handleReset}>
             Reset Stats
           </button>
         </div>

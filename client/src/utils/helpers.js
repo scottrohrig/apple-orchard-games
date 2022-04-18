@@ -46,7 +46,7 @@ export function useInterval(callback, delay) {
 }
 
 export function stateToLocalStorage(state) {
-  console.log("next line is state: ");
+  console.log("courtesy of stateToLocalStorage, next line is state: ");
   console.log(state);
   localStorage.setItem("state", JSON.stringify(state));
 }

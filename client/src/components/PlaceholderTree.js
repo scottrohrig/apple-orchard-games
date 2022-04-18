@@ -1,11 +1,11 @@
-import { useMutation, useQuery } from '@apollo/client';
+import { useMutation, useQuery } from "@apollo/client";
 import React, { useEffect, useState } from "react";
 import placeholderTreeImage from "../assets/images/placeholder-tree.png";
 import { useGlobalContext } from "../utils/GlobalState";
 import { PURCHASE_A_TREE } from "../utils/actions";
 import { ADD_TREE } from "../utils/mutations";
 
-import emptyPlot from '../assets/images/empty-plot-with-leaf.svg';
+import emptyPlot from "../assets/images/empty-plot-with-leaf.svg";
 
 // import { ADD_TREE } from '../utils/mutations'
 
@@ -17,12 +17,10 @@ export default function PlaceholderTree() {
   const [addTree, { error }] = useMutation(ADD_TREE);
   const { trees } = state;
 
-
   const handlePurchaseTreeClick = async (evt) => {
-
-    console.log('appleCount',state.appleCount);
-    if (state.appleCount < state.gameVariables.applesForNewTree){
-      return
+    console.log("appleCount", state.appleCount);
+    if (state.appleCount < state.gameVariables.applesForNewTree) {
+      return;
     }
     console.log("in handlePurchaseTreeClick");
 
@@ -53,10 +51,7 @@ export default function PlaceholderTree() {
       <div className="item-box relative tree-item">
         <img src={emptyPlot} className="empty-plot" alt=""></img>
         <div className="">
-          <button
-            className="btn btn-harvest"
-            onClick={handlePurchaseTreeClick}
-          >
+          <button className="btn btn-harvest" onClick={handlePurchaseTreeClick}>
             Plant
           </button>
         </div>

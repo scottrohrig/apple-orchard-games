@@ -9,11 +9,18 @@ import { useGlobalContext } from "../utils/GlobalState";
 import barn from "../assets/images/barn.png";
 
 export default function Orchard() {
-  // let disabled = true;
-
   const [state, dispatch] = useGlobalContext();
   const { trees } = state;
-  console.log("", trees[0]);
+
+  const [checkOrchardReadyToHarvest, setCheckOrchardReadyToHarvest] =
+    useState(false);
+  console.log("running Orchard");
+  console.log("checkOrchardReadyToHarvest is " + checkOrchardReadyToHarvest);
+
+  useEffect(() => {
+    console.log("inside useeffect");
+    setCheckOrchardReadyToHarvest(false);
+  }, [checkOrchardReadyToHarvest]);
 
   return (
     <div className="orchard-wrapper">
@@ -36,6 +43,9 @@ export default function Orchard() {
                           _id={tree._id}
                           tree={tree}
                           dispatchParent={dispatch}
+                          setCheckOrchardReadyToHarvest={
+                            setCheckOrchardReadyToHarvest
+                          }
                         />
                       ) : (
                         // Placeholder
@@ -48,21 +58,8 @@ export default function Orchard() {
             }
           </div>
         </div>
+        <button className="btn btn-nav">Harvest Orchard</button>
       </div>
-      {/* <div
-        className="tree-container"
-        style={{
-          width: "90vw",
-          margin: "2rem auto",
-          display: "flex",
-          flexWrap: "wrap",
-          border: "1px solid var(--btn-harvest-main)",
-          borderRadius: ".5rem",
-        }}
-      >
-        <Tree />
-        <PlaceholderTree />
-      </div> */}
     </div>
   );
 }

@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 import './style/index.css';
 import './style/modal.css';
-import './style/mobile.css';
 
 import Auth from "./utils/auth";
 

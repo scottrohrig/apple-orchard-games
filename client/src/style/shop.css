@@ -221,3 +221,28 @@
   outline-offset: -6px;
   margin: -96px auto 36px;
 }
+
+
+/* 400 */
+@media screen and (max-width: 400px) {
+  .shop-card {
+    flex-direction: column;
+  }
+  .shop-buy-label {
+    text-align: center;
+  }
+  .shop-card .card-label {
+    font-size: 1.8em;
+  }
+  .coming-soon-shop {
+    margin: -130px auto 70px;
+  }
+}
+
+/* 380 */
+@media screen and (max-width: 380px) {
+  .shop .display-banner {
+    transform: scale(0.9);
+    font-size: 1.4em;
+  }
+}

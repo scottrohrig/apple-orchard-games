@@ -82,3 +82,39 @@
   height: 40px !important;
   margin-top: 88px;
 }
+
+.btn-orchard-harvest {
+  position: absolute;
+  top: 90px;
+  border-radius: 0 10px 10px 0;
+}
+
+
+/* 600 */
+@media screen and (max-width: 600px) {
+  .orchard-wrapper {
+    margin-top: -6px;
+    height: calc(100vh - 26px);
+  }
+  .tree-container {
+    margin-bottom: 70px;
+    justify-content: space-evenly;
+  }
+  .item-row {
+    padding-top: 0;
+  }
+  .item-scroll {
+    height: 125px;
+  }
+  .item-box {
+    height: 100%;
+    margin-top: 0px;
+  }
+  .item-container {
+    height: 150px;
+    margin-top: 0 !important;
+  }
+  .empty-plot {
+    margin-top: 60px;
+  }
+}

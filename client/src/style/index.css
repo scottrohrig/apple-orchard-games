@@ -289,3 +289,11 @@ button:hover {
   border: 2px solid transparent;
   background-clip: padding-box;
 }
+
+
+/* 380 */
+@media screen and (max-width: 380px) {
+  .container {
+    margin-bottom: 80px;
+  }
+}

@@ -215,6 +215,30 @@ const resolvers = {
     // removeUser
     // find by userId and remove
     // log user out after removing
+
+    // resetUserStats:
+    resetUserStats: async (parent, args, context) => {
+      if (context.user._id) {
+        const user = await User.findOneAndUpdate(
+          { _id: context.user._id },
+          { $set: args },
+          // {
+          //   $pullAll: {
+          //     trees: { _id: { $gte: 0 } }
+          //   }
+          // },
+          { new: true }
+        );
+
+
+
+        return user;
+      }
+
+      throw new AuthenticationError('You need to be logged in!');
+    },
+
+
   },
 };
 

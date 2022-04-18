@@ -19,6 +19,7 @@ import {
   BUY_OVEN,
   APPLES_FOR_PIE,
   APPLES_FOR_MONEY,
+  RESET_USER_STATS,
 } from "./actions";
 
 export const reducer = (state = [], action) => {
@@ -190,8 +191,15 @@ export const reducer = (state = [], action) => {
       return {
         ...state,
         appleCount: remainingApples,
-        money: newBalance,
+        money: newBalance
       };
+
+    case RESET_USER_STATS:
+      return {
+        ...state,
+        appleCount: 5,
+        money: 0
+      }
   }
 };
 

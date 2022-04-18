@@ -1,5 +1,5 @@
-import { useMutation } from '@apollo/client';
 import { useEffect } from 'react';
+import { useMutation } from '@apollo/client';
 import { useGlobalContext } from '../../utils/GlobalState';
 
 import { useIsMount } from "../../utils/helpers";
@@ -22,22 +22,22 @@ export default function OvensRow() {
   console.log('state', state);
   console.log('done loading', loading);
   // useEffect(() => {
-  // check for item data changes
-  // dispatch item data if it exists with UPDATE_ITEMS action
-  // put item data in indexedDB cache
-  // if not loading, get cache and dispatch
-  // }, ['itemData', 'loading', dispatch]);
+  //   if (itemData) {
 
-  // const handlePurchase = async (event) => {
+  //     dispatch({
+  //       type: UPDATE_OVENS,
+  //       payload: itemData.me.ovens
+  //     });
 
-  //   // validate money
-  //   if (state.money < state.gameVariables.ovenCost) {
-  //     return
+  //   } else if (!loading) {
+
+  //     console.log('loading.');
+  //     dispatch({
+  //       type: UPDATE_OVENS,
+  //       payload: ovens
+  //     });
   //   }
-
-  //   try {
-  //     addOven();
-  //   } catch (e) {
+  // }, [itemData, loading, dispatch]);
 
   if (loading) return <div><h1>LOADING....</h1></div>
 
@@ -61,7 +61,7 @@ export default function OvensRow() {
         }
       });
       const ovensArr = userData.addOven.ovens;
-      // get id or newly created oven obj from the server to store in the BUY_JUICER payload
+      // get id or newly created oven obj from the server to store in the BUY_OVEN payload
       newOven = ovensArr[ovensArr.length - 1];
     } catch (e) {
       console.error(e);
@@ -86,14 +86,14 @@ export default function OvensRow() {
     }
   };
 
-  // should the responsibility be in the row or the item
+  // console.log(ovens);
 
   return (
     <div>
       <div className="item-row">
         {!loading && <div className="item-scroll">
           {
-            // map thru oven objects from GlobalState to add to row
+            // map thru juicer objects from GlobalState to add to row
             ovens.map((oven, i) => {
               return (
                 <div key={i} className="item-box">
@@ -120,8 +120,8 @@ export default function OvensRow() {
       <div className='dash-label'>
         <span className="item-label">Pie</span>
         <div className='item-price'>
-          <p className='item-price-buy'>Buy New: <span className='item-amount'>30</span></p>
-          <p className='item-price-apples'>Uses: <span className='item-amount'>8</span></p>
+          <p className='item-price-buy'>Buy New: <span className='item-amount'>10</span></p>
+          <p className='item-price-apples'>Uses: <span className='item-amount'>2</span></p>
         </div>
       </div>
     </div>

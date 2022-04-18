@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { useGlobalContext } from '../../utils/GlobalState';
 
 import { useIsMount } from "../../utils/helpers";
-import { ADD_MASHER, SET_MASHER, UPDATE_USER } from '../../utils/mutations';
+import { ADD_MASHER, SET_MASHER } from '../../utils/mutations';
 import { BUY_MASHER, APPLES_FOR_SAUCE } from '../../utils/actions';
 
 import Masher from './Masher';
@@ -18,7 +18,7 @@ export default function MashersRow() {
   // destructure the items list from the global state object
   const loading = state?.loading;
 
-  const mashers = state?.MashersRow || [];
+  const mashers = state?.mashers || [];
   console.log('state', state);
   console.log('done loading', loading);
   //  useEffect(() => {

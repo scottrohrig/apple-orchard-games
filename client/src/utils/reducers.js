@@ -6,7 +6,9 @@ import {
   UPDATE_JUICER,
   UPDATE_JUICERS,
   PURCHASE_A_TREE,
+  UPDATE_MASHER,
   UPDATE_MASHERS,
+  UPDATE_OVEN,
   UPDATE_OVENS,
   SELL_JUICE,
   BUY_JUICER,
@@ -25,8 +27,8 @@ export const reducer = (state = [], action) => {
   switch (action.type) {
     // case update user
     case UPDATE_ALL_DATA:
-      console.log({...state, ...action.payload});
-      return {...state, ...action.payload}
+      console.log({ ...state, ...action.payload });
+      return { ...state, ...action.payload }
 
     // case update orchards
 
@@ -59,6 +61,12 @@ export const reducer = (state = [], action) => {
 
     // case update mashers
     case UPDATE_MASHERS:
+
+      return {
+        ...state, mashers: [...action.payload]
+      }
+
+    case UPDATE_MASHER:
       let updatedMashers = state.mashers.map((masher) =>
         masher._id === action.payload._id ? action.payload : masher
       );
@@ -69,6 +77,12 @@ export const reducer = (state = [], action) => {
 
     // case update ovens
     case UPDATE_OVENS:
+
+      return {
+        ...state, ovens: [...action.payload]
+      }
+
+    case UPDATE_OVEN:
       let updatedOvens = state.ovens.map((oven) =>
         oven._id === action.payload._id ? action.payload : oven
       );
@@ -77,8 +91,9 @@ export const reducer = (state = [], action) => {
         ovens: updatedOvens,
       };
 
+
     case PURCHASE_A_TREE:
-      let newTreeArray = [...state.trees, {...action.payload}];
+      let newTreeArray = [...state.trees, { ...action.payload }];
       let newId = state.trees.length;
 
       return {
@@ -132,12 +147,12 @@ export const reducer = (state = [], action) => {
         appleCount: state.appleCount - state.gameVariables.makeSauceApplesUsed
       };
 
-      case HARVEST_TREE:
-        return {
-          ...state,
-          appleCount: state.appleCount + state.gameVariables.applesGrown
+    case HARVEST_TREE:
+      return {
+        ...state,
+        appleCount: state.appleCount + state.gameVariables.applesGrown
 
-        };
+      };
 
 
     case SELL_SAUCE:

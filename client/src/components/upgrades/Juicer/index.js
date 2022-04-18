@@ -33,7 +33,7 @@ const Juicer = ({ props }) => {
   // To update the user
   const isMount = useIsMount();
   const [success, setSuccess] = useState(false);
-  useEffect( () => {
+  useEffect(() => {
     if (!isMount) {
       updateUser({
         variables: { money: money, appleCount },
@@ -68,10 +68,10 @@ const Juicer = ({ props }) => {
 
     updateJuicer({
       variables: {
-            juicerId: juicerId,
-            startedAtTime: now,
-            duration
-          }
+        juicerId: juicerId,
+        startedAtTime: now,
+        duration
+      }
     });
 
     setTime(duration);

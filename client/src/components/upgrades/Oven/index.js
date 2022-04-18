@@ -1,22 +1,26 @@
 import '../item.css';
 import { useState, useEffect } from 'react';
+import { useMutation } from '@apollo/client';
 import icon from '../../../assets/images/oven.png';
 import pieImg from '../../../assets/images/pie.png';
-import { formatTime, getTimeRemaining, useInterval } from '../../../utils/helpers';
-import { UPDATE_OVENS, SELL_PIE, APPLES_FOR_PIE } from '../../../utils/actions';
 
+import { getTimeRemaining, useInterval } from '../../../utils/helpers';
+import { UPDATE_OVEN, SELL_PIE, APPLES_FOR_PIE } from '../../../utils/actions';
+import { UPDATE_USER } from '../../../utils/mutations';
 
-// pass in oven props from parent page / component
+// pass in juicer props from parent page / component
 const Oven = ({ props }) => {
 
-  const { oven, dispatch, appleCount, makePieApplesUsed, useIsMount, updateUser, money } = props
-  // deconstruct the oven props passed in from parent
-  // const [{ _id, startedAtTime, duration }, setState] = useState(mock) // oven
+  const { oven, dispatch, updateOven, appleCount, makePieApplesUsed, useIsMount, money } = props;
 
-  const { _id, startedAtTime, duration } = oven;
+  const [updateUser, { error }] = useMutation(UPDATE_USER);
 
+  // deconstruct the juicer props passed in from parent
+  const { _id: ovenId, startedAtTime, duration } = oven;
+
+  // only thing I don't like is this duration displays on mount
   const [timeRemaining, setTime] = useState(duration);
-  const isReady = timeRemaining <= 0
+  let isReady = timeRemaining <= 0;
 
   // custom Hook to handle intervals across item types
   useInterval(() => {
@@ -29,79 +33,74 @@ const Oven = ({ props }) => {
   // To update the user
   const isMount = useIsMount();
   const [success, setSuccess] = useState(false);
-  useEffect(async () => {
+  useEffect(() => {
     if (!isMount) {
-      const { data: uData } = await updateUser({
+      updateUser({
         variables: { money: money, appleCount },
       });
-      console.log('uData', uData);
     }
   }, [success]);
 
   const handleUseBtnPressed = (event) => {
-    // dispatch update oven with a new startedAtTime
-    // setState({_id, startedAtTime: new Date(), duration})
 
+    // validate user appleCount > ovenAppleCost
     if (appleCount < makePieApplesUsed) {
       return
     }
+    // dispatch update oven with a new startedAtTime
+    const now = new Date();
 
-    const now = new Date()
-    console.log('new time', now)
+    // console.log('sellPieBtn press', ovenId);
+
     dispatch({
-      type: UPDATE_OVENS,
+      type: UPDATE_OVEN,
       payload:
-        { ...oven, startedAtTime: now, duration }
-    }
-    );
+        { _id: ovenId, startedAtTime: now, duration }
+    });
 
     dispatch({
       type: SELL_PIE
-    })
-
+    });
 
     dispatch({
       type: APPLES_FOR_PIE
     });
 
-    console.log('dispatching startedAtTime', startedAtTime)
+    updateOven({
+      variables: {
+        ovenId: ovenId,
+        startedAtTime: now,
+        duration
+      }
+    });
 
     setTime(duration);
     setSuccess(!success);
   };
 
   return (
-    <>{isReady ?
-      (
-        <div className='item-container'>
-          <div className='temp-img'>
-            <img src={pieImg} alt="juicer" />
-          </div>
-          <div className='item-btn-wrapper'>
+    <>
+      <div className='item-container'>
+        <div className='temp-img'>
+          {isReady
+            ? <img src={pieImg} alt="oven" />
+            : <img src={icon} alt="oven" />}
+        </div>
 
-            <div className="item-btn-flex">
-
-              <button className="btn btn-harvest" onClick={() => { handleUseBtnPressed(); }}>sell</button>
-
-            </div>
+        <div className='item-btn-wrapper'>
+          <div className="item-btn-flex">
+            {isReady
+              ? <button
+                className="btn btn-harvest"
+                onClick={() => {
+                  handleUseBtnPressed();
+                }}>
+                sell
+              </button>
+              : <button className="btn btn-timer" disabled>{timeRemaining}s</button>}
           </div>
         </div>
-      )
-      : (
-        <div className='item-container'>
-          <div className='temp-img'>
-            <img src={icon} alt="juicer" />
-          </div>
-          <div className='item-btn-wrapper'>
-
-            <div className="item-btn-flex">
-
-              <button className="btn btn-timer" disabled>{timeRemaining}s</button>
-
-            </div>
-          </div>
-        </div>
-      )}
+      </div>
     </>
   );
 };

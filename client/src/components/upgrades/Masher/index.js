@@ -1,19 +1,23 @@
 import '../item.css';
 import { useState, useEffect } from 'react';
+import { useMutation } from '@apollo/client';
 import icon from '../../../assets/images/masher.png';
 import sauceImg from '../../../assets/images/sauce.png';
-import { formatTime, getTimeRemaining, useInterval } from '../../../utils/helpers';
-import { UPDATE_MASHERS, SELL_SAUCE, APPLES_FOR_SAUCE } from '../../../utils/actions';
 
+import { getTimeRemaining, useInterval } from '../../../utils/helpers';
+import { UPDATE_MASHER, SELL_SAUCE, APPLES_FOR_SAUCE } from '../../../utils/actions';
+import { UPDATE_USER } from '../../../utils/mutations';
 
 // pass in masher props from parent page / component
 const Masher = ({ props }) => {
 
-  const { masher, dispatch, appleCount, makeSauceApplesUsed, useIsMount, updateUser, money } = props
-  // deconstruct the masher props passed in from parent
-  // const [{ _id, startedAtTime, duration }, setState] = useState(mock) // masher
+  const { masher, dispatch, updateMasher, appleCount, makeSauceApplesUsed, useIsMount, money } = props;
 
-  const { _id, startedAtTime, duration } = masher
+  const [updateUser, { error }] = useMutation(UPDATE_USER);
+
+  // deconstruct the masher props passed in from parent
+  const { _id: masherId, startedAtTime, duration } = masher;
+
 
   const [timeRemaining, setTime] = useState(duration);
   const isReady = timeRemaining <= 0
@@ -29,79 +33,74 @@ const Masher = ({ props }) => {
   // To update the user
   const isMount = useIsMount();
   const [success, setSuccess] = useState(false);
-  useEffect(async () => {
+  useEffect(() => {
     if (!isMount) {
-      const { data: uData } = await updateUser({
+      updateUser({
         variables: { money: money, appleCount },
       });
-      console.log('uData', uData);
     }
   }, [success]);
 
   const handleUseBtnPressed = (event) => {
-    // dispatch update masher with a new startedAtTime
-    // setState({_id, startedAtTime: new Date(), duration})
 
+    // validate user appleCount > masherAppleCost
     if (appleCount < makeSauceApplesUsed) {
       return
     }
+    // dispatch update juicer with a new startedAtTime
+    const now = new Date();
 
-    const now = new Date()
-    console.log('new time', now)
+    // console.log('new time', now)
+
     dispatch({
-      type: UPDATE_MASHERS,
+      type: UPDATE_MASHER,
       payload:
-        { ...masher, startedAtTime: now, duration }
-    }
-    );
+        { _id: masherId, startedAtTime: now, duration }
+    });
 
     dispatch({
       type: SELL_SAUCE
-    })
-
+    });
 
     dispatch({
       type: APPLES_FOR_SAUCE
     });
 
-    console.log('dispatching startedAtTime', startedAtTime)
+    updateMasher({
+      variables: {
+        masherId: masherId,
+        startedAtTime: now,
+        duration
+      }
+    });
 
     setTime(duration);
     setSuccess(!success);
   };
 
   return (
-    <>{isReady ?
-      (
-        <div className='item-container'>
-          <div className='temp-img'>
-            <img src={sauceImg} alt="juicer" />
-          </div>
-          <div className='item-btn-wrapper'>
+    <>
+      <div className='item-container'>
+        <div className='temp-img'>
+          {isReady
+            ? <img src={sauceImg} alt="masher" />
+            : <img src={icon} alt="masher" />}
+        </div>
 
-            <div className="item-btn-flex">
-
-              <button className="btn btn-harvest" onClick={() => { handleUseBtnPressed(); }}>sell</button>
-
-            </div>
+        <div className='item-btn-wrapper'>
+          <div className="item-btn-flex">
+            {isReady
+              ? <button
+                className="btn btn-harvest"
+                onClick={() => {
+                  handleUseBtnPressed();
+                }}>
+                sell
+              </button>
+              : <button className="btn btn-timer" disabled>{timeRemaining}s</button>}
           </div>
         </div>
-      )
-      : (
-        <div className='item-container'>
-          <div className='temp-img'>
-            <img src={icon} alt="juicer" />
-          </div>
-          <div className='item-btn-wrapper'>
-
-            <div className="item-btn-flex">
-
-              <button className="btn btn-timer" disabled>{timeRemaining}s</button>
-
-            </div>
-          </div>
-        </div>
-      )}
+      </div>
     </>
   );
 };

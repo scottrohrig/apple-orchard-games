@@ -2,6 +2,8 @@
 import Tree from "../components/Tree";
 import PlaceholderTree from "../components/PlaceholderTree";
 
+import '../style/orchard.css';
+
 import { useMutation, useQuery } from "@apollo/client";
 import { useEffect, useState } from "react";
 import { useGlobalContext } from "../utils/GlobalState";

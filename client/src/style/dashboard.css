@@ -1,0 +1,192 @@
+/* Dashboard */
+.item-row, .dash-orchard {
+  padding: 0.25rem 0.5rem;
+  background-color: var(--sky-main);
+  background-image: linear-gradient(
+    to bottom,
+    var(--sky-dark),
+    var(--sky-main),
+    var(--sky-light)
+  );
+  border-radius: 0.25rem;
+  margin: 0 5px 5px;
+}
+.dash-orchard {
+  position: relative;
+  margin-top: 65px;
+  text-align: right;
+}
+
+.item-row::after {
+  content: "";
+  width: calc(100% + 1rem);
+  background: var(--wood-medium);
+  height: 32px;
+  display: block;
+  margin: -30px -0.5rem -0.5rem;
+  border-radius: 0 0 0.25rem 0.25rem;
+  border-bottom: 6px solid var(--wood-dark);
+}
+
+.item-scroll {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  display: flex;
+  justify-content: center;
+}
+.item-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.item-box {
+  margin: 4px 0 0;
+  max-width: 20%;
+}
+.item-box img {
+  height: 100%;
+}
+.item-label {
+  font-size: 1.5em;
+  font-weight: 400;
+  text-align: left;
+  color: var(--form-background);
+}
+
+.dash-orchard h2 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 20vw;
+}
+.dash-orchard h2 .btn-to-orchard {
+  margin: 15px 0 0;
+  position: relative;
+  z-index: 10;
+}
+.dash-orchard:hover,
+.dash-orchard img:hover,
+.dash-orchard h2:hover,
+.dash-orchard p:hover {
+  cursor: pointer;
+  filter: brightness(105%) contrast(105%);
+}
+.dash-orchard::after {
+  content: "";
+  width: calc(100% + 1rem);
+  background: var(--main-darker);
+  height: 52px;
+  display: block;
+  margin: -50px -0.5rem -0.5rem;
+  border-radius: 0 0 0.25rem 0.25rem;
+}
+.dash-tree,
+.dash-barn {
+  position: absolute;
+}
+.dash-tree {
+  width: 15vw;
+  top: 2.2vw;
+}
+.dash-orchard .tree-left {
+  left: 30px;
+}
+.dash-orchard .tree-middle {
+  left: calc(8vw + 10px);
+  top: 2.22vw;
+  transform: scale(1.1);
+}
+.dash-orchard .tree-right {
+  left: calc(16vw + 20px);
+}
+.dash-barn {
+  width: 20vw;
+  right: 30px;
+  top: 4px;
+}
+
+.dash-label {
+  display: flex;
+  margin: 0 5px 12px;
+  color: var(--wood-medium);
+}
+.dash-label .item-label {
+  font-size: 1.1em;
+  flex: 1;
+  font-weight: 600;
+  text-transform: uppercase;
+  text-shadow: 1px 1px var(--main-darker);
+}
+.item-price {
+  display: flex;
+}
+.item-price-buy .item-amount {
+  margin: 0 15px 0 0;
+  font-weight: 600;
+  color: var(--display-money-dark);
+}
+.item-price-buy .item-amount::before {
+  content: "$";
+}
+.item-price-apples .item-amount {
+  font-weight: 600;
+  color: var(--btn-shop-dark);
+}
+.item-price-apples .item-amount::before {
+  content: "";
+  background-image: url("../assets/images/apple.svg");
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 14px;
+  height: 14px;
+  display: inline-block;
+  margin: 0 2px 0 0;
+}
+
+.item-container {
+  position: relative;
+  margin: 4px;
+  height: 128px;
+  border-radius: 0.5rem;
+  width: 128px;
+}
+
+.item-container img {
+  width: 100%;
+}
+.no-upgrade {
+  opacity: 0.8;
+}
+.temp-img {
+  position: absolute;
+  border-radius: 0.35rem;
+  width: 100px;
+  height: 100px;
+  left: 50%;
+  top: 50%;
+  bottom: 0;
+  transform: translate(-50%, -50%);
+}
+.temp-img::after {
+  content: "";
+  width: 100%;
+  background: var(--wood-dark);
+  height: 12%;
+  display: block;
+  margin: -15px auto -0.5rem;
+  border-radius: 50%;
+}
+
+.item-btn-wrapper {
+  position: relative;
+  width: 100%;
+  padding-top: calc(100% - 0.25rem);
+}
+.item-btn-flex {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  bottom: 0;
+}

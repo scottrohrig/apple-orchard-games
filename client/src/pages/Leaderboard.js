@@ -1,7 +1,7 @@
 import { gql, useQuery } from '@apollo/client';
 import React, { useEffect } from "react";
 import { useGlobalContext } from '../utils/GlobalState';
-import "./Leaderboard.css";
+import "../style/leaderboard.css";
 
 const GET_SCORES = gql`
 query Users {

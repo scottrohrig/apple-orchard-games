@@ -1,4 +1,5 @@
 import React from 'react';
+import '../style/header.css';
 import gem from '../assets/images/gem.svg';
 import basket from '../assets/images/basket.svg';
 import { Link } from 'react-router-dom';

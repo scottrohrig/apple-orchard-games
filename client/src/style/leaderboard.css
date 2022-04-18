@@ -1,0 +1,29 @@
+/* Leaderboard */.lb-grid {
+  display: grid;
+  grid-template-columns: 33.33% 33.33% 33.33%;
+  font-family: "Fredoka", cursive;
+}
+.lb-grid:first-of-type {
+  margin-top: 30px;
+}
+.lb-grid-item {
+  text-align: center;
+  padding: 10px;
+  margin: 1px;
+  font-size: 1.3em;
+  background-color: var(--sky-main);
+  color: var(--btn-timer-dark);
+  text-shadow: 0 0 2px var(--sky-light);
+}
+.lb-title {
+  background-color: var(--btn-timer-light);
+  text-shadow: 1px 1px var(--btn-timer-main);
+  color: #fff;
+  font-weight: 600;
+}
+
+.leaderboard {
+  background-color: var(--sky-dark);
+  outline: 2px dashed var(--sky-main);
+  outline-offset: -8px;
+}

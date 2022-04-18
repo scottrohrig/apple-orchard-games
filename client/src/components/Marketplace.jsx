@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { APPLES_FOR_MONEY } from "../utils/actions";
 import { useGlobalContext } from "../utils/GlobalState";
-import "./shop.css";
+import "../style/shop.css";
 
 import apple from "../assets/images/apple.svg";
 import gem from "../assets/images/gem.svg";

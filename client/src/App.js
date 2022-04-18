@@ -1,41 +1,40 @@
-import { useEffect, useState } from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { useEffect, useState } from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
+import './style/index.css';
+import './style/modal.css';
+import './style/mobile.css';
 
-import './App.css';
-import './StyleReference';
+import Auth from "./utils/auth";
 
-import Auth from './utils/auth';
+import Splash from "./pages/Splash";
+import Dashboard from "./pages/Dashboard";
+import Leaderboard from "./pages/Leaderboard";
+import Profile from "./pages/Profile";
+import Orchard from "./pages/Orchard";
+import Header from "./components/Header";
+import Marketplace from "./components/Marketplace";
+import NoMatch from "./pages/NoMatch";
 
-import Splash from './pages/Splash';
-import Dashboard from './pages/Dashboard';
-import Leaderboard from './pages/Leaderboard';
-import Profile from './pages/Profile';
-import Orchard from './pages/Orchard';
-import Header from './components/Header';
-import Marketplace from './components/Marketplace';
-import NoMatch from './pages/NoMatch';
-
-import { useGlobalContext } from './utils/GlobalState';
-import { gql, useQuery } from '@apollo/client';
-import { UPDATE_ALL_DATA } from './utils/actions'
+import { useGlobalContext } from "./utils/GlobalState";
+import { gql, useQuery } from "@apollo/client";
+import { UPDATE_ALL_DATA } from "./utils/actions";
 
 // query all data on app start or refresh
 const QUERY_START_DATA = gql`
- query Me {
-
-   me {
-     username
-     email
-     _id
-     appleCount
-     money
-     gemCount
-     juicers {
-       _id
-       startedAtTime
-       duration
-     }
+  query Me {
+    me {
+      username
+      email
+      _id
+      appleCount
+      money
+      gemCount
+      juicers {
+        _id
+        startedAtTime
+        duration
+      }
     }
   }
 `;
@@ -45,28 +44,27 @@ function App() {
   const [showProfile, setShowProfile] = useState(false);
   const [showMarketplace, setShowMarketplace] = useState(false);
 
-  const {data, loading, refetch: refetchData} = useQuery(QUERY_START_DATA)
+  const { data, loading, refetch: refetchData } = useQuery(QUERY_START_DATA);
 
-  const [state, dispatch] = useGlobalContext()
+  const [state, dispatch] = useGlobalContext();
 
-  useEffect(()=>{
+  useEffect(() => {
     if (data) {
-      console.log('me', data?.me || {money: 0, appleCount: 0});
+      console.log("me", data?.me || { money: 0, appleCount: 0 });
       if (!loading) {
         dispatch({
           type: UPDATE_ALL_DATA,
-          payload: {...data.me, loading},
-        })
-        console.log('refetching', loading);
-      refetchData()
+          payload: { ...data.me, loading },
+        });
+        console.log("refetching", loading);
+        refetchData();
+      }
     }
-    }
-  },[loading, data])
-
-
+  }, [loading, data]);
 
   return (
     <Router>
+      {/* Header */}
       {Auth.loggedIn() && (
         <Header
           showLeaderboard={showLeaderboard}
@@ -78,9 +76,9 @@ function App() {
           state={state}
         />
       )}
+      {/* App Stuff */}
       <div className="app app-content">
-        {/* App Stuff */}
-        <div style={{ margin: '2rem auto' }}>
+        <div style={{ margin: "2rem auto" }}>
           <div className="container">
             {/* Modals */}
             <Leaderboard
@@ -96,6 +94,7 @@ function App() {
               setShowMarketplace={setShowMarketplace}
             />
 
+            {/* Routes */}
             <Routes>
               <Route path="/" element={<Dashboard />} />
               <Route path="/login" element={<Splash />} />
@@ -104,7 +103,8 @@ function App() {
             </Routes>
           </div>
         </div>
-        {window.addEventListener('selectstart', function (e) {
+        {/* Disable highlighting and right click */}
+        {window.addEventListener("selectstart", function (e) {
           e.preventDefault();
         })}
         {/* {window.addEventListener('contextmenu', function(e) {

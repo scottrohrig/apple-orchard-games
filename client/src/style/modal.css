@@ -1,0 +1,54 @@
+/* Modal */
+.modal,
+.modal-background {
+  transition: all 0.5s ease-in-out;
+}
+.modal {
+  width: 800px;
+  max-width: calc(100% - 40px);
+  margin: 0 auto;
+  border-radius: 20px;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 70px;
+  z-index: 99;
+  transform: scale(0);
+  max-height: calc(100vh - 160px);
+  overflow-y: scroll;
+}
+.modal-active {
+  transform: scale(1);
+}
+.modal-background {
+  position: fixed;
+  z-index: -1;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.6);
+  opacity: 0;
+}
+.modal-background-active {
+  opacity: 1;
+  z-index: 99;
+}
+.btn-modal {
+  background-color: transparent;
+  padding: 0;
+  position: absolute;
+  right: 24px;
+  transform: scale(1.5);
+  text-shadow: 1px 1px #64b5d7;
+  z-index: 1000;
+}
+.btn-modal:hover {
+  transform: scale(1.5) rotate(180deg);
+}
+.btn-modal:hover,
+.btn-modal i:hover {
+  filter: brightness(100%);
+}

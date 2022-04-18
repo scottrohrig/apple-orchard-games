@@ -1,7 +1,8 @@
-import React from 'react';
-import gem from '../assets/images/gem.svg';
-import basket from '../assets/images/basket.svg';
-import { Link } from 'react-router-dom';
+import React from "react";
+import gem from "../assets/images/gem.svg";
+import basket from "../assets/images/basket.svg";
+// import { useGlobalContext } from "../utils/GlobalState";
+import { Link } from "react-router-dom";
 
 function Header(props) {
   const {
@@ -11,7 +12,9 @@ function Header(props) {
     setShowProfile,
     showMarketplace,
     setShowMarketplace,
-    state: { money, gemCount, appleCount }
+    stateToLocalStorage,
+    state: { money, gemCount, appleCount },
+    state,
   } = props;
 
   return (
@@ -27,6 +30,13 @@ function Header(props) {
             <img src={basket} alt="basket of apples" />
             <span>{appleCount}</span>
           </div>
+
+          {/* uncomment the code below if you want to use the state to local storage button for development */}
+          {/* <div className="disp-currency disp-currency-img">
+            <button onClick={() => stateToLocalStorage(state)}>
+              state to local storage
+            </button>
+          </div> */}
 
           <div className="disp-currency disp-currency-money">
             <p className="display-money">{money}</p>

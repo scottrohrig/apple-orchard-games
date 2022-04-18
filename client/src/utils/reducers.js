@@ -27,7 +27,7 @@ export const reducer = (state = [], action) => {
     // case update user
     case UPDATE_ALL_DATA:
       console.log({ ...state, ...action.payload });
-      return { ...state, ...action.payload }
+      return { ...state, ...action.payload };
 
     // case update orchards
 
@@ -44,10 +44,10 @@ export const reducer = (state = [], action) => {
 
     // case update juicers
     case UPDATE_JUICERS:
-
       return {
-        ...state, juicers: [...action.payload]
-      }
+        ...state,
+        juicers: [...action.payload],
+      };
 
     case UPDATE_JUICER:
       let updatedJuicers = state.juicers.map((juicer) =>
@@ -89,14 +89,14 @@ export const reducer = (state = [], action) => {
       };
 
     case BUY_JUICER:
-      const boughtJuicers = [...state.juicers, action.payload]
+      const boughtJuicers = [...state.juicers, action.payload];
 
       return {
         ...state,
         juicers: boughtJuicers,
         // money: state.money - 10
         money: state.money - state.gameVariables.juicerCost,
-        appleCount: state.appleCount - state.gameVariables.makeJuiceApplesUsed
+        appleCount: state.appleCount - state.gameVariables.makeJuiceApplesUsed,
       };
 
     case SELL_JUICE:
@@ -130,16 +130,14 @@ export const reducer = (state = [], action) => {
         mashers: boughtMashers,
         // money: state.money - 14
         money: state.money - state.gameVariables.masherCost,
-        appleCount: state.appleCount - state.gameVariables.makeSauceApplesUsed
+        appleCount: state.appleCount - state.gameVariables.makeSauceApplesUsed,
       };
 
     case HARVEST_TREE:
       return {
         ...state,
-        appleCount: state.appleCount + state.gameVariables.applesGrown
-
+        appleCount: state.appleCount + state.gameVariables.applesGrown,
       };
-
 
     case SELL_SAUCE:
       return {
@@ -171,7 +169,7 @@ export const reducer = (state = [], action) => {
 
         money: state.money - state.gameVariables.ovenCost,
         //appleCount: state.appleCount - 40
-        appleCount: state.appleCount - state.gameVariables.makePieApplesUsed
+        appleCount: state.appleCount - state.gameVariables.makePieApplesUsed,
       };
 
     case SELL_PIE:
@@ -187,8 +185,9 @@ export const reducer = (state = [], action) => {
       };
 
     case APPLES_FOR_MONEY:
-      const newBalance = state.money + (action.payload * state.gameVariables.appleSaleRevenue)
-      const remainingApples = Math.max(state.appleCount - action.payload, 0)
+      const newBalance =
+        state.money + action.payload * state.gameVariables.appleSaleRevenue;
+      const remainingApples = Math.max(state.appleCount - action.payload, 0);
       return {
         ...state,
         appleCount: remainingApples,

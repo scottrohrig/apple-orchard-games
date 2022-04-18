@@ -81,10 +81,6 @@ function App() {
       )}
       {/* App Stuff */}
       <div className="app app-content">
-<<<<<<< HEAD
-=======
-        {/* App Stuff */}
->>>>>>> develop
         <div style={{ margin: "2rem auto" }}>
           <div className="container">
             {/* Modals */}

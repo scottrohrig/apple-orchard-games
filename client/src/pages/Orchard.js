@@ -23,6 +23,9 @@ export default function Orchard() {
   // this useEffect controls whether the Harvest Orchard button is displayed
   useEffect(() => {
     setCheckOrchardReadyToHarvest(false);
+    if (trees.length <= 2) {
+      return;
+    }
     showHarvestOrchardButton = trees.every((tree) => {
       if (tree.startedAtTime == undefined) {
         return true;

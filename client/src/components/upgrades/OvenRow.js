@@ -11,11 +11,13 @@ export default function OvensRow() {
   const [state, dispatch] = useGlobalContext();
   const [updateUser, { error }] = useMutation(UPDATE_USER);
 
+  const loading = state?.loading;
+  const ovens = state?.ovens || []
   const [addOven] = useMutation(ADD_OVEN);
   // console.log(state);
 
   // destructure the items list from the global state object
-  const { ovens } = state;
+
   // console.log('state', state, 'ovens', ovens);
 
   // get items data from db
@@ -63,30 +65,27 @@ export default function OvensRow() {
   return (
     <div>
       <div className="item-row">
-        <div className="item-scroll">
-          {
-            // map thru juicer objects from GlobalState to add to row
+        {!loading && <div className="item-scroll">
+          { // map thru juicer objects from GlobalState to add to row
             ovens.map((oven, i) => {
               return (
                 <div key={i} className="item-box">
-                  {
-                    // if object in map does not have `_id` show placeholder.
-                    oven._id ? (
-                      <Oven props={{
-                        oven, dispatch,
-                        applesUsed: state.applesUsed,
-                        makePieApplesUsed: state.gameVariables.makePieApplesUsed, useIsMount, updateUser, money: state.money
-                       }} />
-                    ) : (
-                      // Placeholder
-                      <BuyOven handlePurchase={handlePurchase} />
-                    )
-                  }
+                  <Oven props={{
+                    oven, dispatch,
+                    applesUsed: state.applesUsed,
+                    makePieApplesUsed: state.gameVariables.makePieApplesUsed, useIsMount, updateUser, money: state.money
+                  }} />
                 </div>
-              );
-            })
+              )
+            })}
+          {(ovens.length < 5) &&
+            <BuyOven 
+              handlePurchase={handlePurchase} 
+            />
+
           }
         </div>
+        }
       </div>
       <div className='dash-label'>
         <span className="item-label">Pie</span>

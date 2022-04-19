@@ -84,6 +84,7 @@
 
 .btn-orchard-harvest {
   position: fixed;
+  top: 45%;
   border-radius: 0 10px 10px 0;
   max-width: calc(20vw - 20px);
   margin: 25px 0 0 -2px;

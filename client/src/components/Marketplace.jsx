@@ -28,7 +28,7 @@ export default function Marketplace({ showMarketplace, setShowMarketplace }) {
       return;
     }
 
-    setApplesToSell(0);
+    // setApplesToSell(0);
 
     const payload = Math.max(applesToSell, 0);
     try {

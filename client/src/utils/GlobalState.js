@@ -47,7 +47,7 @@ const GlobalProvider = ({ value = [], ...props }) => {
     trees: [{}],
     mashers: [],
     juicers: [],
-    ovens: [],
+    ovens: [{}],
     orchards: [
       {
         _id: 1,

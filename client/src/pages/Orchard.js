@@ -13,7 +13,7 @@ import { HARVEST_TREE, UPDATE_TREE_TIMER } from "../utils/actions";
 
 import barn from "../assets/images/barn.png";
 
-let showHarvestOrchardButton = false;
+let showHarvestOrchardButton = true;
 
 export default function Orchard() {
   const [state, dispatch] = useGlobalContext();
@@ -26,6 +26,7 @@ export default function Orchard() {
 
   // this useEffect controls whether the Harvest Orchard button is displayed
   useEffect(() => {
+    return
     setCheckOrchardReadyToHarvest(false);
     if (trees.length <= 2) {
       return;
@@ -84,9 +85,18 @@ export default function Orchard() {
       </h2>
       <div className="orchard">
         {showHarvestOrchardButton && (
-          <button className="btn btn-orchard-harvest" onClick={handleHarvestOrchard}>
+          <>
+          <button className="btn btn-orchard-harvest" disabled
+          // onClick={handleHarvestOrchard}
+          >
             Harvest<br />Orchard
+          <div className="coming-soon-shop" style={{margin: '0 auto 5px'}}>
+            <p style={{fontSize:12}}>
+              Coming soon!
+            </p>
+          </div>
           </button>
+          </>
         )}
         <div className="orchard-row">
           <div className="tree-container">

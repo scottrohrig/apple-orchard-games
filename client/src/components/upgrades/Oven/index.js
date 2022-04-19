@@ -80,7 +80,13 @@ const Oven = ({ props }) => {
 
             <div className="item-btn-flex">
 
-              <button className="btn btn-harvest" onClick={() => { handleUseBtnPressed(); }}>sell</button>
+              <button
+                className="btn btn-harvest"
+                disabled style={{padding:'2px 3px'}}
+                onClick={() => { handleUseBtnPressed(); }}
+              >
+                coming soon!
+              </button>
 
             </div>
           </div>

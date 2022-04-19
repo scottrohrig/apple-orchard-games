@@ -111,9 +111,9 @@ const resolvers = {
     updateJuicer: async (_, args, context) => {
       if (context.user) {
 
-        const query={_id: context.user._id, 'juicers._id': args.juicerId}
-        const updateDocument = {'juicers.$.startedAtTime': args.startedAtTime, 'juicers.$.duration': args.duration}
-        const options = {arrayFilters: [{'juicers.$': 0}]}
+        const query = { _id: context.user._id, 'juicers._id': args.juicerId }
+        const updateDocument = { 'juicers.$.startedAtTime': args.startedAtTime, 'juicers.$.duration': args.duration }
+        const options = { arrayFilters: [{ 'juicers.$': 0 }] }
         const user = await User.updateOne(query, updateDocument, options)
 
         return user;
@@ -125,9 +125,9 @@ const resolvers = {
     updateMasher: async (_, args, context) => {
       if (context.user) {
 
-        const query={_id: context.user._id, 'mashers._id': args.masherId}
-        const updateDocument = {'mashers.$.startedAtTime': args.startedAtTime, 'mashers.$.duration': args.duration}
-        const options = {arrayFilters: [{'mashers.$': 0}]}
+        const query = { _id: context.user._id, 'mashers._id': args.masherId }
+        const updateDocument = { 'mashers.$.startedAtTime': args.startedAtTime, 'mashers.$.duration': args.duration }
+        const options = { arrayFilters: [{ 'mashers.$': 0 }] }
         const user = await User.updateOne(query, updateDocument, options)
 
         return user;
@@ -138,16 +138,11 @@ const resolvers = {
 
     updateOven: async (_, args, context) => {
       if (context.user) {
-        const user = await User.findByIdAndUpdate(
-          { _id: context.user._id, ovens: { $elemMatch: { ovenId: args.ovenId } } },
-          {
-            $set: {
-              'ovens.$[].startedAtTime': args.startedAtTime,
-              'ovens.$[].duration': args.duration,
-            },
-          },
-          { new: true }
-        );
+
+        const query = { _id: context.user._id, 'ovens._id': args.ovenId }
+        const updateDocument = { 'ovens.$.startedAtTime': args.startedAtTime, 'ovens.$.duration': args.duration }
+        const options = { arrayFilters: [{ 'ovens.$': 0 }] }
+        const user = await User.updateOne(query, updateDocument, options)
 
         return user;
       }
@@ -158,9 +153,9 @@ const resolvers = {
     updateTree: async (_, args, context) => {
       if (context.user) {
 
-        const query={_id: context.user._id, 'trees._id': args.treeId}
-        const updateDocument = {'trees.$.startedAtTime': args.startedAtTime, 'trees.$.duration': args.duration}
-        const options = {arrayFilters: [{'trees.$': 0}]}
+        const query = { _id: context.user._id, 'trees._id': args.treeId }
+        const updateDocument = { 'trees.$.startedAtTime': args.startedAtTime, 'trees.$.duration': args.duration }
+        const options = { arrayFilters: [{ 'trees.$': 0 }] }
         const user = await User.updateOne(query, updateDocument, options)
 
         return user;

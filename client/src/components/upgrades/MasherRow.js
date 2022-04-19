@@ -8,7 +8,7 @@ import { BUY_MASHER, APPLES_FOR_SAUCE, SELL_SAUCE, UPDATE_MASHER } from '../../u
 
 import Masher from './Masher';
 import BuyMasher from './PlaceholderMasher';
-import OvensRow from './OvenRow';
+
 
 export default function MashersRow() {
   const [state, dispatch] = useGlobalContext();
@@ -60,7 +60,7 @@ export default function MashersRow() {
       return;
     }
     const now = new Date();
-    console.log(_id,now,duration);
+    console.log(_id, now, duration);
     try {
       dispatch({
         type: UPDATE_MASHER,

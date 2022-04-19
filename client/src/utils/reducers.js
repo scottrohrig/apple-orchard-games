@@ -74,7 +74,7 @@ export const reducer = (state = [], action) => {
       };
 
     // case update ovens
-    case UPDATE_OVEN:
+    case UPDATE_OVENS:
       return {
         ...state,
         ovens: [...action.payload],
@@ -158,7 +158,6 @@ export const reducer = (state = [], action) => {
       return {
         ...state,
         ovens: boughtOvens,
-
         money: state.money - state.gameVariables.ovenCost,
         appleCount: state.appleCount - state.gameVariables.makePieApplesUsed,
       };

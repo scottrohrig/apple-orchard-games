@@ -1,92 +1,118 @@
-import { useMutation, useQuery } from '@apollo/client';
 import { useEffect } from 'react';
+import { useMutation } from '@apollo/client';
 import { useGlobalContext } from '../../utils/GlobalState';
+
 import { useIsMount } from "../../utils/helpers";
-import { ADD_OVEN, UPDATE_USER } from '../../utils/mutations';
-import { BUY_OVEN, APPLES_FOR_PIE } from '../../utils/actions';
+import { ADD_OVEN, SET_OVEN } from '../../utils/mutations';
+import { APPLES_FOR_PIE, BUY_OVEN, SELL_PIE, UPDATE_OVEN } from '../../utils/actions';
+
 import Oven from './Oven';
 import BuyOven from './PlaceholderPie';
 
 export default function OvensRow() {
   const [state, dispatch] = useGlobalContext();
-  const [updateUser, { error }] = useMutation(UPDATE_USER);
 
-  const [addOven] = useMutation(ADD_OVEN);
-  // console.log(state);
+  const [addOven, { addOvenError }] = useMutation(ADD_OVEN);
+  const [updateOven, { error: setOvenError }] = useMutation(SET_OVEN)
 
   // destructure the items list from the global state object
-  const { ovens } = state;
-  // console.log('state', state, 'ovens', ovens);
+  const loading = state?.loading;
 
-  // get items data from db
-  // const { loading, data: itemData } = useQuery(QUERY_ITEMS);
+  const ovens = state?.ovens || [];
 
-  useEffect(() => {
-    // check for item data changes
-    // dispatch item data if it exists with UPDATE_ITEMS action
-    // put item data in indexedDB cache
-    // if not loading, get cache and dispatch
-  }, ['itemData', 'loading', dispatch]);
+  if (loading) return <div><h1>LOADING....</h1></div>;
 
-  const handlePurchase = async (event) => {
-
-    // validate money
+  const handleUpgradePurchased = async (event) => {
+    // validate enough money
     if (state.money < state.gameVariables.ovenCost) {
-      return
+      return;
     }
 
+    let newOven;
+    // dispatch ADD_OVEN
     try {
-      addOven();
+      // store returned data aliased as 'userData' from addOven mutation to server
+      const { data: userData } = await addOven({
+        variables: {
+          duration: state.gameVariables.makePieTime
+        }
+      });
+      const ovensArr = userData.addOven.ovens;
+      // get id or newly created juicer obj from the server to store in the BUY_JUICER payload
+      newOven = ovensArr[ovensArr.length - 1];
     } catch (e) {
       console.error(e);
+      console.error(addOvenError);
     }
 
-    console.log('dispatching to GameState');
-
-    try {
-      const payload = {
-        _id: ovens.length + 1,
-        startedAtTime: new Date(),
-        duration: state.gameVariables.makePieTime,
-      };
+    if (newOven) {
       dispatch({
         type: BUY_OVEN,
-        payload,
+        payload: {
+          _id: newOven._id,
+          startedAtTime: newOven.startedAtTime,
+          duration: newOven.duration
+        }
       });
-    } catch (error) {
-      console.log('error');
     }
   };
 
   //
-  // should the responsibility be in the row or the item
+  const handleOvenSellBtnPressed = ({ _id, duration }) => {
+    if (state.appleCount < state.gameVariables.makePieApplesUsed) {
+      return;
+    }
+
+    const now = new Date();
+    try {
+      dispatch({
+        type: UPDATE_OVEN,
+        payload: { _id, now, duration }
+      });
+      dispatch({
+        type: SELL_PIE
+      });
+      dispatch({
+        type: APPLES_FOR_PIE
+      });
+      updateOven({
+        variables: {
+          ovenId: _id,
+          startedAtTime: now,
+          duration
+        }
+      });
+    } catch (error) {
+      console.error(setOvenError);
+    }
+  };
+
   return (
     <div>
       <div className="item-row">
-        <div className="item-scroll">
+        {!loading && <div className="item-scroll">
           {
-            // map thru juicer objects from GlobalState to add to row
+            // map thru oven objects from GlobalState to add to row
             ovens.map((oven, i) => {
               return (
                 <div key={i} className="item-box">
-                  {
-                    // if object in map does not have `_id` show placeholder.
-                    oven._id ? (
-                      <Oven props={{
-                        oven, dispatch,
-                        applesUsed: state.applesUsed,
-                        makePieApplesUsed: state.gameVariables.makePieApplesUsed, useIsMount, updateUser, money: state.money
-                       }} />
-                    ) : (
-                      // Placeholder
-                      <BuyOven handlePurchase={handlePurchase} />
-                    )
-                  }
+
+                  <Oven
+                    handleOvenSellBtnPressed={handleOvenSellBtnPressed}
+                    oven={oven}
+                    appleCount={state.appleCount}
+                    useIsMount={useIsMount}
+                    money={state.money}
+                  />
+
                 </div>
               );
             })
           }
-        </div>
+          {(ovens.length < 5) &&
+            <BuyOven handleUpgradePurchased={handleUpgradePurchased} />
+          }
+        </div>}
       </div>
       <div className='dash-label'>
         <span className="item-label">Pie</span>

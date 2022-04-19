@@ -194,14 +194,19 @@ mutation updateMasher(
 
 // update oven
 export const SET_OVEN = gql`
-  mutation updateOven($ovenId: ID!, $startedAtTime: Date!, $duration: Int) {
+  mutation updateOven(
+    $ovenId: ID!,
+    $startedAtTime: Date!,
+    $duration: Int
+    ){
     updateOven(
-      ovenId: $ovenId
-      startedAtTime: $startedAtTime
+      ovenId: $ovenId,
+      startedAtTime: $startedAtTime,
       duration: $duration
-    ) {
+      ) {
       _id
       username
+      ovenCount
       ovens {
         _id
         startedAtTime
@@ -209,7 +214,7 @@ export const SET_OVEN = gql`
       }
     }
   }
-`;
+  `;
 
 // update timer
 

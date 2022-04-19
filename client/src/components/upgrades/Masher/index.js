@@ -14,6 +14,7 @@ const Masher = ({ masher, appleCount, money, useIsMount, handleMasherSellBtnPres
 
   const { _id: masherId, startedAtTime, duration } = masher;
 
+
   const [timeRemaining, setTime] = useState(duration);
   let isReady = timeRemaining <= 0;
 

@@ -22,7 +22,7 @@ const typeDefs = gql`
 
   scalar Date
 
-  
+
 
   type Tree {
     _id: ID
@@ -62,15 +62,15 @@ const typeDefs = gql`
   type Mutation {
     login(email: String!, password: String!): Auth
     addUser(username: String!, email: String!, password: String!): Auth
-    addTree(duration: Int): User
-    addMasher(duration: Int): User
-    addOven(duration: Int): User
+    addTree(  duration: Int): User
     addJuicer(duration: Int): User
+    addMasher(duration: Int): User
+    addOven(  duration: Int): User
     updateUser(username: String, email: String, password: String, gemCount: Int, appleCount: Int, money: Int): User
-    updateTree(treeId: ID!, startedAtTime: Date!, duration: Int): User
-    updateMasher(masherId: ID!, startedAtTime: Date!, duration: Int): User
-    updateOven(ovenId: ID!, startedAtTime: Date!, duration: Int): User
+    updateTree(    treeId: ID!, startedAtTime: Date!, duration: Int): User
     updateJuicer(juicerId: ID!, startedAtTime: Date!, duration: Int): User
+    updateMasher(masherId: ID!, startedAtTime: Date!, duration: Int): User
+    updateOven(    ovenId: ID!, startedAtTime: Date!, duration: Int): User
     removeUser: User
     resetUserStats(money: Int, appleCount: Int): User
   }

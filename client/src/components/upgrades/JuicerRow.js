@@ -4,7 +4,7 @@ import { useGlobalContext } from '../../utils/GlobalState';
 
 import { useIsMount } from "../../utils/helpers";
 import { ADD_JUICER, SET_JUICER } from '../../utils/mutations';
-import { BUY_JUICER, UPDATE_JUICERS } from '../../utils/actions';
+import { APPLES_FOR_JUICE, BUY_JUICER, SELL_JUICE, UPDATE_JUICER } from '../../utils/actions';
 
 import Juicer from './Juicer';
 import BuyJuicer from './PlaceholderJuice';
@@ -13,41 +13,18 @@ export default function JuicersRow() {
   const [state, dispatch] = useGlobalContext();
 
   const [addJuicer, { addJuicerError }] = useMutation(ADD_JUICER);
-  const [updateJuicer, {error: setJuicerError}] = useMutation(SET_JUICER);
+  const [updateJuicer, { error: setJuicerError }] = useMutation(SET_JUICER);
 
   // destructure the items list from the global state object
   const loading = state?.loading;
 
   const juicers = state?.juicers || [];
-  console.log('state',state);
-  console.log('done loading', loading);
-  // useEffect(() => {
-  //   if (itemData) {
 
-  //     dispatch({
-  //       type: UPDATE_JUICERS,
-  //       payload: itemData.me.juicers
-  //     });
-
-  //   } else if (!loading) {
-
-  //     console.log('loading.');
-  //     dispatch({
-  //       type: UPDATE_JUICERS,
-  //       payload: juicers
-  //     });
-  //   }
-  // }, [itemData, loading, dispatch]);
-
-  if (loading) return <div><h1>LOADING....</h1></div>
+  if (loading) return <div><h1>LOADING....</h1></div>;
 
   const handleUpgradePurchased = async (event) => {
-
-    // console.log('data: updateData', updateData);
     // validate enough money
-    const money = state.money;
-    const juicerCost = state.gameVariables.juicerCost;
-    if (money < juicerCost) {
+    if (state.money < state.gameVariables.juicerCost) {
       return;
     }
 
@@ -69,28 +46,50 @@ export default function JuicersRow() {
     }
 
     if (newJuicer) {
-      try {
-        const payload = {
+      dispatch({
+        type: BUY_JUICER,
+        payload: {
           _id: newJuicer._id,
           startedAtTime: newJuicer.startedAtTime,
           duration: newJuicer.duration
-        };
-        console.log('PAYLOAD...', payload);
-        dispatch({
-          type: BUY_JUICER,
-          payload,
-        });
-      } catch (error) {
-        console.log('error');
-      }
+        }
+      });
     }
   };
 
-  // console.log(juicers);
+  //
+  const handleJuicerSellBtnPressed = ({ _id, duration }) => {
+    if (state.appleCount < state.gameVariables.makeJuiceApplesUsed) {
+      return;
+    }
+
+    const now = new Date();
+    try {
+      dispatch({
+        type: UPDATE_JUICER,
+        payload: { _id, now, duration }
+      });
+      dispatch({
+        type: SELL_JUICE
+      });
+      dispatch({
+        type: APPLES_FOR_JUICE
+      });
+      updateJuicer({
+        variables: {
+          juicerId: _id,
+          startedAtTime: now,
+          duration
+        }
+      });
+    } catch (error) {
+      console.error(setJuicerError);
+    }
+  };
 
   return (
     <div>
-    <div className="item-row">
+      <div className="item-row">
         {!loading && <div className="item-scroll">
           {
             // map thru juicer objects from GlobalState to add to row
@@ -98,15 +97,13 @@ export default function JuicersRow() {
               return (
                 <div key={i} className="item-box">
 
-                  <Juicer props={{
-                    juicer,
-                    dispatch,
-                    updateJuicer,
-                    appleCount: state.appleCount,
-                    makeJuiceApplesUsed: state.gameVariables.makeJuiceApplesUsed,
-                    useIsMount,
-                    money: state.money
-                    }} />
+                  <Juicer
+                    handleJuicerSellBtnPressed={handleJuicerSellBtnPressed}
+                    juicer={juicer}
+                    appleCount={state.appleCount}
+                    useIsMount={useIsMount}
+                    money={state.money}
+                  />
 
                 </div>
               );
@@ -116,14 +113,14 @@ export default function JuicersRow() {
             <BuyJuicer handleUpgradePurchased={handleUpgradePurchased} />
           }
         </div>}
-    </div>
-    <div className='dash-label'>
-      <span className="item-label">Juice</span>
-      <div className='item-price'>
-        <p className='item-price-buy'>Buy New: <span className='item-amount'>10</span></p>
-        <p className='item-price-apples'>Uses: <span className='item-amount'>2</span></p>
       </div>
-    </div>
+      <div className='dash-label'>
+        <span className="item-label">Juice</span>
+        <div className='item-price'>
+          <p className='item-price-buy'>Buy New: <span className='item-amount'>10</span></p>
+          <p className='item-price-apples'>Uses: <span className='item-amount'>2</span></p>
+        </div>
+      </div>
     </div>
   );
 }

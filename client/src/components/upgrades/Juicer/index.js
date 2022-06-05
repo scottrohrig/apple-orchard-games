@@ -4,13 +4,10 @@ import icon from '../../../assets/images/juicer.png';
 import juiceImg from '../../../assets/images/juice.png';
 
 import { getTimeRemaining, useInterval } from '../../../utils/helpers';
-import { UPDATE_JUICER, SELL_JUICE, APPLES_FOR_JUICE } from '../../../utils/actions';
 import { UPDATE_USER } from '../../../utils/mutations';
 
 // pass in juicer props from parent page / component
-const Juicer = ({ props }) => {
-
-  const { juicer, dispatch, updateJuicer, appleCount, makeJuiceApplesUsed, useIsMount, money } = props;
+const Juicer = ({ juicer, appleCount, money, useIsMount, handleJuicerSellBtnPressed }) => {
 
   const [updateUser, { error }] = useMutation(UPDATE_USER);
 
@@ -42,36 +39,7 @@ const Juicer = ({ props }) => {
 
   const handleUseBtnPressed = (event) => {
 
-    // validate user appleCount > juicerAppleCost
-    if (appleCount < makeJuiceApplesUsed) {
-      return
-    }
-    // dispatch update juicer with a new startedAtTime
-    const now = new Date();
-
-    // console.log('sellJuiceBtn press', juicerId);
-
-    dispatch({
-      type: UPDATE_JUICER,
-      payload:
-        { _id: juicerId, startedAtTime: now, duration }
-    });
-
-    dispatch({
-      type: SELL_JUICE
-    });
-
-    dispatch({
-      type: APPLES_FOR_JUICE
-    });
-
-    updateJuicer({
-      variables: {
-            juicerId: juicerId,
-            startedAtTime: now,
-            duration
-          }
-    });
+    handleJuicerSellBtnPressed(juicer)
 
     setTime(duration);
     setSuccess(!success);
@@ -96,7 +64,7 @@ const Juicer = ({ props }) => {
                 }}>
                 sell
               </button>
-              : <button className="btn btn-timer" disabled>{timeRemaining}s</button>}
+              : <button className="btn btn-timer" disabled>{timeRemaining ? timeRemaining : duration}s</button>}
           </div>
         </div>
       </div>

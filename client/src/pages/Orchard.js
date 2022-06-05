@@ -17,7 +17,9 @@ let showHarvestOrchardButton = false;
 
 export default function Orchard() {
   const [state, dispatch] = useGlobalContext();
-  const { trees } = state;
+
+  const loading = state?.loading;
+  const trees = state?.trees || [];
 
   const [checkOrchardReadyToHarvest, setCheckOrchardReadyToHarvest] =
     useState(false);
@@ -46,7 +48,7 @@ export default function Orchard() {
     console.log("handleHarvestOrchard");
     const now = new Date();
     trees.forEach((tree) => {
-      console.log("tree id is " + tree._id);
+      // console.log("tree id is " + tree._id);
       if (tree.startedAtTime == undefined) {
         return;
       } else {
@@ -88,26 +90,21 @@ export default function Orchard() {
         )}
         <div className="orchard-row">
           <div className="tree-container">
+            <PlaceholderTree />
             {
               // map thru juicer objects from GlobalState to add to row
               trees.map((tree, i) => {
                 return (
                   <div key={i} className="orchard-box">
                     {
-                      // if object in map does not have `_id` show placeholder.
-                      tree._id ? (
-                        <Tree
-                          _id={tree._id}
-                          tree={tree}
-                          dispatchParent={dispatch}
-                          setCheckOrchardReadyToHarvest={
-                            setCheckOrchardReadyToHarvest
-                          }
-                        />
-                      ) : (
-                        // Placeholder
-                        <PlaceholderTree />
-                      )
+                      <Tree
+                        _id={tree._id}
+                        tree={tree}
+                        dispatchParent={dispatch}
+                        setCheckOrchardReadyToHarvest={
+                          setCheckOrchardReadyToHarvest
+                        }
+                      />
                     }
                   </div>
                 );

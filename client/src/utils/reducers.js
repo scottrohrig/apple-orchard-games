@@ -6,7 +6,9 @@ import {
   UPDATE_JUICER,
   UPDATE_JUICERS,
   PURCHASE_A_TREE,
+  UPDATE_MASHER,
   UPDATE_MASHERS,
+  UPDATE_OVEN,
   UPDATE_OVENS,
   SELL_JUICE,
   BUY_JUICER,
@@ -26,7 +28,6 @@ export const reducer = (state = [], action) => {
   switch (action.type) {
     // case update user
     case UPDATE_ALL_DATA:
-      console.log({ ...state, ...action.payload });
       return { ...state, ...action.payload };
 
     // case update orchards
@@ -36,7 +37,6 @@ export const reducer = (state = [], action) => {
       let updatedTrees = state.trees.map((tree) =>
         tree._id === action.payload._id ? action.payload : tree
       );
-      console.log(updatedTrees);
       return {
         ...state,
         trees: updatedTrees,
@@ -60,6 +60,11 @@ export const reducer = (state = [], action) => {
 
     // case update mashers
     case UPDATE_MASHERS:
+      return {
+        ...state,
+        mashers: [...action.payload],
+      };
+    case UPDATE_MASHER:
       let updatedMashers = state.mashers.map((masher) =>
         masher._id === action.payload._id ? action.payload : masher
       );
@@ -70,6 +75,11 @@ export const reducer = (state = [], action) => {
 
     // case update ovens
     case UPDATE_OVENS:
+      return {
+        ...state,
+        ovens: [...action.payload],
+      };
+    case UPDATE_OVEN:
       let updatedOvens = state.ovens.map((oven) =>
         oven._id === action.payload._id ? action.payload : oven
       );
@@ -94,7 +104,6 @@ export const reducer = (state = [], action) => {
       return {
         ...state,
         juicers: boughtJuicers,
-        // money: state.money - 10
         money: state.money - state.gameVariables.juicerCost,
         appleCount: state.appleCount - state.gameVariables.makeJuiceApplesUsed,
       };
@@ -115,20 +124,11 @@ export const reducer = (state = [], action) => {
 
     // buy mashers
     case BUY_MASHER:
-      const boughtMashers = state.mashers;
+      const boughtMashers = [...state.mashers, action.payload];
 
-      // insert MASHER to placeholder space
-      boughtMashers.splice(boughtMashers.length - 2, 0, action.payload);
-
-      if (boughtMashers.length > 5) {
-        boughtMashers.pop();
-        return { ...state, mashers: boughtMashers };
-      }
-      console.log(boughtMashers);
       return {
         ...state,
         mashers: boughtMashers,
-        // money: state.money - 14
         money: state.money - state.gameVariables.masherCost,
         appleCount: state.appleCount - state.gameVariables.makeSauceApplesUsed,
       };
@@ -153,22 +153,12 @@ export const reducer = (state = [], action) => {
 
     // buy ovens
     case BUY_OVEN:
-      const boughtOvens = state.ovens;
+      const boughtOvens = [...state.ovens, action.payload];
 
-      // insert OVEN to placeholder space
-      boughtOvens.splice(boughtOvens.length - 2, 0, action.payload);
-
-      if (boughtOvens.length > 5) {
-        boughtOvens.pop();
-        return { ...state, ovens: boughtOvens };
-      }
-      console.log("in buy ovens" + boughtOvens);
       return {
         ...state,
         ovens: boughtOvens,
-
         money: state.money - state.gameVariables.ovenCost,
-        //appleCount: state.appleCount - 40
         appleCount: state.appleCount - state.gameVariables.makePieApplesUsed,
       };
 

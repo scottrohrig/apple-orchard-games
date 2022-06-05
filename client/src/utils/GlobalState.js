@@ -31,8 +31,6 @@ const defaultGameVariables = {
   gemsFromPurchase: 5,
 };
 
-const defaultStartTime = new Date();
-
 const GlobalProvider = ({ value = [], ...props }) => {
   const [state, dispatch] = useAppReducer({
 
@@ -47,9 +45,9 @@ const GlobalProvider = ({ value = [], ...props }) => {
 
     gameVariables: defaultGameVariables,
     trees: [{}],
-    mashers: [{}],
+    mashers: [],
     juicers: [],
-    ovens: [{}],
+    ovens: [],
     orchards: [
       {
         _id: 1,

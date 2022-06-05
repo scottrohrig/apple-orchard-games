@@ -1,0 +1,26 @@
+/* Profile */
+.profile h3 {
+  text-transform: uppercase;
+  font-size: 1.2em;
+  color: var(--display-money-main);
+  margin: 25px 0 5px;
+}
+.update-profile .form-label {
+  text-shadow: 1px 1px var(--btn-timer-light);
+  font-size: 1.3em;
+  margin-bottom: 2px;
+}
+.update-profile .form-control {
+  border: 1px solid var(--btn-timer-light);
+  margin-bottom: 6px;
+}
+.stats p {
+  color: var(--btn-timer-dark);
+  font-style: italic;
+}
+.logout {
+  text-align: right;
+}
+.btn-logout {
+  background-color: var(--btn-shop-light);
+}

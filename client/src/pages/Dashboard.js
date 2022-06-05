@@ -5,6 +5,8 @@ import { Navigate, Link } from 'react-router-dom';
 import { useMutation } from "@apollo/client";
 import { UPDATE_USER } from "../utils/mutations";
 
+import '../style/dashboard.css';
+
 import Auth from "../utils/auth";
 
 import JuicersRow from "../components/upgrades/JuicerRow";
@@ -14,8 +16,6 @@ import OvensRow from "../components/upgrades/OvenRow";
 import treeBare from "../assets/images/tree-short.svg";
 import treeApples from "../assets/images/tree-with-apples-short.svg";
 import barn from "../assets/images/barn.png";
-
-const woodSign = '../assets/images/wood_sign.png';
 
 function Dashboard() {
 

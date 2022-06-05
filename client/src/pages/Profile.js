@@ -5,6 +5,7 @@ import { QUERY_ME } from '../utils/queries';
 import { UPDATE_USER } from '../utils/mutations';
 import { RESET_USER_STATS } from '../utils/mutations';
 
+import '../style/profile.css';
 
 export default function Profile({
   showProfile,

@@ -1,4 +1,3 @@
-import '../item.css';
 import { useState, useEffect } from 'react';
 import icon from '../../../assets/images/oven.png';
 import pieImg from '../../../assets/images/pie.png';

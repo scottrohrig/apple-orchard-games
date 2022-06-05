@@ -1,4 +1,3 @@
-import '../item.css';
 import { useState, useEffect } from 'react';
 import { useMutation } from '@apollo/client';
 import icon from '../../../assets/images/juicer.png';

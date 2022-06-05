@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
-import "./App.css";
-import "./StyleReference";
+import './style/index.css';
+import './style/modal.css';
 
 import Auth from "./utils/auth";
 
@@ -65,6 +65,7 @@ function App() {
 
   return (
     <Router>
+      {/* Header */}
       {Auth.loggedIn() && (
         <Header
           showLeaderboard={showLeaderboard}
@@ -77,8 +78,8 @@ function App() {
           state={state}
         />
       )}
+      {/* App Stuff */}
       <div className="app app-content">
-        {/* App Stuff */}
         <div style={{ margin: "2rem auto" }}>
           <div className="container">
             {/* Modals */}
@@ -95,6 +96,7 @@ function App() {
               setShowMarketplace={setShowMarketplace}
             />
 
+            {/* Routes */}
             <Routes>
               <Route path="/" element={<Dashboard />} />
               <Route path="/login" element={<Splash />} />
@@ -103,6 +105,7 @@ function App() {
             </Routes>
           </div>
         </div>
+        {/* Disable highlighting and right click */}
         {window.addEventListener("selectstart", function (e) {
           e.preventDefault();
         })}

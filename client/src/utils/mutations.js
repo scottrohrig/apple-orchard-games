@@ -1,4 +1,4 @@
-import { gql } from '@apollo/client';
+import { gql } from "@apollo/client";
 
 export const LOGIN_USER = gql`
   mutation login($email: String!, $password: String!) {
@@ -42,18 +42,30 @@ export const ADD_ORCHARD = gql`
 
 // add tree (// update orchard => adding new tree)
 export const ADD_TREE = gql`
-mutation addTree($duration: Int) {
-  addTree(duration: $duration) {
-    _id
-    trees {
+  mutation addTree($duration: Int) {
+    addTree(duration: $duration) {
       _id
-      startedAtTime
-      duration
+      trees {
+        _id
+        startedAtTime
+        duration
+      }
     }
   }
-}
 `;
 
+export const ADD_TREE_ARRAY = gql`
+  mutation addTreeArray($duration: Int) {
+    addTree(duration: $duration) {
+      _id
+      trees {
+        _id
+        startedAtTime
+        duration
+      }
+    }
+  }
+`;
 
 // add masher
 export const ADD_MASHER = gql`
@@ -145,65 +157,52 @@ export const SET_TREE = gql`
 // update juicer (started at time and duration variables)
 
 export const SET_JUICER = gql`
-mutation updateJuicer(
-  $juicerId: ID!,
-  $startedAtTime: Date!,
-  $duration: Int
-  ){
-  updateJuicer(
-    juicerId: $juicerId,
-    startedAtTime: $startedAtTime,
-    duration: $duration
+  mutation updateJuicer($juicerId: ID!, $startedAtTime: Date!, $duration: Int) {
+    updateJuicer(
+      juicerId: $juicerId
+      startedAtTime: $startedAtTime
+      duration: $duration
     ) {
-    _id
-    username
-    juicerCount
-    juicers {
       _id
-      startedAtTime
-      duration
+      username
+      juicerCount
+      juicers {
+        _id
+        startedAtTime
+        duration
+      }
     }
   }
-}
 `;
 
 // update masher
 export const SET_MASHER = gql`
-mutation updateMasher(
-  $masherId: ID!,
-  $startedAtTime: Date!,
-  $duration: Int
-  ){
-  updateMasher(
-    masherId: $masherId,
-    startedAtTime: $startedAtTime,
-    duration: $duration
+  mutation updateMasher($masherId: ID!, $startedAtTime: Date!, $duration: Int) {
+    updateMasher(
+      masherId: $masherId
+      startedAtTime: $startedAtTime
+      duration: $duration
     ) {
-    _id
-    username
-    masherCount
-    mashers {
       _id
-      startedAtTime
-      duration
+      username
+      masherCount
+      mashers {
+        _id
+        startedAtTime
+        duration
+      }
     }
   }
-}
 `;
-
 
 // update oven
 export const SET_OVEN = gql`
-  mutation updateOven(
-    $ovenId: ID!,
-    $startedAtTime: Date!,
-    $duration: Int
-    ){
+  mutation updateOven($ovenId: ID!, $startedAtTime: Date!, $duration: Int) {
     updateOven(
-      ovenId: $ovenId,
-      startedAtTime: $startedAtTime,
+      ovenId: $ovenId
+      startedAtTime: $startedAtTime
       duration: $duration
-      ) {
+    ) {
       _id
       username
       ovenCount
@@ -214,26 +213,23 @@ export const SET_OVEN = gql`
       }
     }
   }
-  `;
+`;
 
 // update timer
 
 // resetStats
 export const RESET_USER_STATS = gql`
-
-mutation ResetUserStats($money: Int, $appleCount: Int) {
-  resetUserStats(money: $money, appleCount: $appleCount) {
-    _id
-    username
-    money
-    appleCount
-    trees {
+  mutation ResetUserStats($money: Int, $appleCount: Int) {
+    resetUserStats(money: $money, appleCount: $appleCount) {
       _id
-      startedAtTime
-      duration
+      username
+      money
+      appleCount
+      trees {
+        _id
+        startedAtTime
+        duration
+      }
     }
-
   }
-}
-
 `;

@@ -1,8 +1,9 @@
 // Orchard.js
 import Tree from "../components/Tree";
 import PlaceholderTree from "../components/PlaceholderTree";
+import PlaceholderDD from "../components/PlaceholderDD";
 
-import '../style/orchard.css';
+import "../style/orchard.css";
 
 import { useMutation, useQuery } from "@apollo/client";
 import { useEffect, useState } from "react";
@@ -84,13 +85,19 @@ export default function Orchard() {
       </h2>
       <div className="orchard">
         {showHarvestOrchardButton && (
-          <button className="btn btn-orchard-harvest" onClick={handleHarvestOrchard}>
-            Harvest<br />Orchard
+          <button
+            className="btn btn-orchard-harvest"
+            onClick={handleHarvestOrchard}
+          >
+            Harvest
+            <br />
+            Orchard
           </button>
         )}
         <div className="orchard-row">
           <div className="tree-container">
             <PlaceholderTree />
+            <PlaceholderDD />
             {
               // map thru juicer objects from GlobalState to add to row
               trees.map((tree, i) => {

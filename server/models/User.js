@@ -4,10 +4,10 @@ const { Schema, model } = require("mongoose");
 const treeSchema = require("./Tree");
 const masherSchema = require("./Masher");
 const ovenSchema = require("./Oven");
+const juicerSchema = require("./Juicer");
 
 // require bcrypt
 const bcrypt = require("bcrypt");
-const juicerSchema = require("./Juicer");
 
 // define schema
 const userSchema = new Schema(

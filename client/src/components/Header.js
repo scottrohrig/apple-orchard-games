@@ -1,8 +1,8 @@
-import React from 'react';
-import '../style/header.css';
-import gem from '../assets/images/gem.svg';
-import basket from '../assets/images/basket.svg';
-import { Link } from 'react-router-dom';
+import React from "react";
+import "../style/header.css";
+import gem from "../assets/images/gem.svg";
+import basket from "../assets/images/basket.svg";
+import { Link } from "react-router-dom";
 
 function Header(props) {
   const {
@@ -32,11 +32,11 @@ function Header(props) {
           </div>
 
           {/* uncomment the code below if you want to use the state to local storage button for development */}
-          {/* <div className="disp-currency disp-currency-img">
+          <div className="disp-currency disp-currency-img">
             <button onClick={() => stateToLocalStorage(state)}>
               state to local storage
             </button>
-          </div> */}
+          </div>
 
           <div className="disp-currency disp-currency-money">
             <p className="display-money">{money}</p>

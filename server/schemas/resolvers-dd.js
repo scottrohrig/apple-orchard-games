@@ -107,22 +107,27 @@ const resolvers = {
       throw new AuthenticationError("You need to be logged in!");
     },
 
+    // addTreeArray IS USED FOR TESTING
     addTreeArray: async (_, args, context) => {
-      if (context.user) {
-        const user = await User.findByIdAndUpdate(
-          { _id: context.user._id },
-          { $push: { trees: args } },
-          { new: true }
-        );
+      // if (context.user) {
+      console.log("************* addTreeArray - here is args:");
+      console.log(args);
+      const user = await User.findOneAndUpdate(
+        { _id: context.user._id },
+        { $push: { mashers: args }, $set: { tests: args.tests } },
 
-        console.log("Inside addTreeArray; server; resolvers; mutation");
-        return user;
-      }
+        { new: true }
+      );
 
-      throw new AuthenticationError("You need to be logged in!");
+      return user;
+      // }
+
+      // throw new AuthenticationError("You need to be logged in!");
     },
 
     updateJuicer: async (_, args, context) => {
+      console.log("update Juicer");
+      console.log(args);
       if (context.user) {
         const query = { _id: context.user._id, "juicers._id": args.juicerId };
         const updateDocument = {
@@ -190,6 +195,8 @@ const resolvers = {
     // find user by id
     // update either gemCount, appleCount, money OR user info like username or email
     updateUser: async (_, args, context) => {
+      console.log("update user");
+      console.log(args);
       if (context.user) {
         const user = await User.findByIdAndUpdate(
           { _id: context.user._id },

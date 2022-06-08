@@ -54,11 +54,12 @@ export const ADD_TREE = gql`
   }
 `;
 
+// THIS MUTATION IS FOR TESTING ONLY
 export const ADD_TREE_ARRAY = gql`
-  mutation addTreeArray($duration: Int) {
-    addTree(duration: $duration) {
+  mutation addTreeArray($duration: Int, $tests: String) {
+    addTreeArray(duration: $duration, tests: $tests) {
       _id
-      trees {
+      mashers {
         _id
         startedAtTime
         duration

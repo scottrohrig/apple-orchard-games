@@ -19,13 +19,11 @@ export default function PlaceholderDD() {
 
   const handleTreeArray = async (evt) => {
     console.log("appleCount", state.appleCount);
-    if (state.appleCount < state.gameVariables.applesForNewTree) {
-      return;
-    }
+
     console.log("in handleTreeArray");
 
     try {
-      await addTreeArray();
+      await addTreeArray({ variables: { duration: 5, tests: "hello" } });
     } catch (err) {
       console.error(err);
     }
@@ -35,7 +33,7 @@ export default function PlaceholderDD() {
       const payload = {
         _id: trees.length + 1,
         startedAtTime: new Date(),
-        duration: state.gameVariables.appleGrowTime,
+        duration: 88,
       };
       dispatch({
         type: PURCHASE_A_TREE,
@@ -49,11 +47,9 @@ export default function PlaceholderDD() {
   return (
     <>
       <div className="item-box relative tree-item">
-        <img src={emptyPlot} className="empty-plot" alt=""></img>
+        {/* <img src={emptyPlot} className="empty-plot" alt=""></img> */}
         <div className="">
-          <button className="btn btn-harvest" onClick={handleTreeArray}>
-            Tree Array
-          </button>
+          <button onClick={handleTreeArray}>Tree Array</button>
         </div>
       </div>
     </>

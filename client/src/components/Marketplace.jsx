@@ -45,6 +45,7 @@ export default function Marketplace({ showMarketplace, setShowMarketplace }) {
 
   useEffect(async () => {
     if (!isMount) {
+      console.log("I am calling update user next");
       // doesn't occur on page load
       // if (!loading) {
       // SERVER-SIDE update the user's money and appleCount
@@ -217,9 +218,7 @@ export default function Marketplace({ showMarketplace, setShowMarketplace }) {
               </div>
             </div>
           </div>
-          <div className="coming-soon-shop">
-            Coming soon!
-          </div>
+          <div className="coming-soon-shop">Coming soon!</div>
         </div>
       </div>
     </div>

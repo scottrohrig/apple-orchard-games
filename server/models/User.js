@@ -45,6 +45,11 @@ const userSchema = new Schema(
       default: 0,
       min: 0,
     },
+    tests: {
+      type: String,
+      required: true,
+      default: "test string",
+    },
     trees: [treeSchema],
     juicers: [juicerSchema],
     mashers: [masherSchema],

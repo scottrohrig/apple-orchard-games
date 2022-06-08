@@ -12,6 +12,7 @@ const typeDefs = gql`
     appleCount: Int
     gemCount: Int
     tests: String
+    inventoryJSON: String
     trees: [Tree]
     juicers: [Juicer]
     mashers: [Masher]
@@ -63,6 +64,9 @@ const typeDefs = gql`
     addUser(username: String!, email: String!, password: String!): Auth
     addTree(duration: Int): User
     addTreeArray(duration: Int, tests: String): User
+
+    updateInventoryAll(inventoryJSON: String): User
+
     addJuicer(duration: Int): User
     addMasher(duration: Int): User
     addOven(duration: Int): User

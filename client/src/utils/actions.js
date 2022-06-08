@@ -33,11 +33,13 @@ export const UPDATE_CATEGORIES = "UPDATE_CATEGORIES";
 
 export const UPDATE_TIMERS = "UPDATE_TIMERS";
 
+export const UPDATE_INVENTORY_ALL = "UPDATE_INVENTORY_ALL";
+
 export const BUY_JUICER = "BUY_JUICER";
 export const BUY_OVEN = "BUY_OVEN";
 export const BUY_MASHER = "BUY_MASHER";
 
-export const HARVEST_TREE = 'HARVEST_TREE';
+export const HARVEST_TREE = "HARVEST_TREE";
 
 export const SELL_JUICE = "SELL_JUICE";
 export const APPLES_FOR_JUICE = "APPLES_FOR_JUICE";

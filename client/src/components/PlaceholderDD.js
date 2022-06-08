@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import placeholderTreeImage from "../assets/images/placeholder-tree.png";
 import { useGlobalContext } from "../utils/GlobalState";
 import { PURCHASE_A_TREE } from "../utils/actions";
-import { ADD_TREE_ARRAY } from "../utils/mutations";
+import { ADD_TREE_ARRAY, UPDATE_INVENTORY_ALL } from "../utils/mutations";
 
 import emptyPlot from "../assets/images/empty-plot-with-leaf.svg";
 
@@ -14,7 +14,7 @@ export default function PlaceholderDD() {
 
   const [state, dispatch] = useGlobalContext();
   // define [addTree, { error }] = useMutation(ADD_TREE)
-  const [addTreeArray, { error }] = useMutation(ADD_TREE_ARRAY);
+  const [updateInventoryAll, { error }] = useMutation(UPDATE_INVENTORY_ALL);
   const { trees } = state;
 
   const handleTreeArray = async (evt) => {
@@ -23,7 +23,9 @@ export default function PlaceholderDD() {
     console.log("in handleTreeArray");
 
     try {
-      await addTreeArray({ variables: { duration: 5, tests: "hello" } });
+      await updateInventoryAll({
+        variables: { tests: "update inventory 7" },
+      });
     } catch (err) {
       console.error(err);
     }

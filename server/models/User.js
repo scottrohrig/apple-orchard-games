@@ -50,6 +50,11 @@ const userSchema = new Schema(
       required: true,
       default: "test string",
     },
+    inventoryJSON: {
+      type: String,
+      required: true,
+      default: "default",
+    },
     trees: [treeSchema],
     juicers: [juicerSchema],
     mashers: [masherSchema],

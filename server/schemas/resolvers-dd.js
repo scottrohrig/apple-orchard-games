@@ -125,6 +125,28 @@ const resolvers = {
       // throw new AuthenticationError("You need to be logged in!");
     },
 
+    // updateInventoryAll updates all the of the user's inventory
+    // TODO FIX CONTEXT.USER
+    updateInventoryAll: async (_, args, context) => {
+      // if (context.user) {
+      console.log("************* updateInventoryAll - here is args:");
+      console.log(args);
+      const user = await User.findOneAndUpdate(
+        { _id: context.user._id },
+        {
+          $push: { mashers: args },
+          $set: { inventoryJSON: args.inventoryJSON },
+        },
+
+        { new: true }
+      );
+
+      return user;
+      // }
+
+      // throw new AuthenticationError("You need to be logged in!");
+    },
+
     updateJuicer: async (_, args, context) => {
       console.log("update Juicer");
       console.log(args);

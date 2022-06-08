@@ -68,6 +68,16 @@ export const ADD_TREE_ARRAY = gql`
   }
 `;
 
+// Updates all of the user's inventory
+export const UPDATE_INVENTORY_ALL = gql`
+  mutation updateInventoryAll($tests: String) {
+    updateInventoryAll(inventoryJSON: $tests) {
+      _id
+      tests
+    }
+  }
+`;
+
 // add masher
 export const ADD_MASHER = gql`
   mutation addMasher($duration: Int) {

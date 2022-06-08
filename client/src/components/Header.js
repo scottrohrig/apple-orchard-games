@@ -3,6 +3,8 @@ import "../style/header.css";
 import gem from "../assets/images/gem.svg";
 import basket from "../assets/images/basket.svg";
 import { Link } from "react-router-dom";
+import { UPDATE_INVENTORY_ALL } from "../utils/mutations";
+import { useMutation, useQuery } from "@apollo/client";
 
 function Header(props) {
   const {
@@ -16,6 +18,19 @@ function Header(props) {
     state: { money, gemCount, appleCount },
     state,
   } = props;
+
+  const [updateInventoryAll, { error }] = useMutation(UPDATE_INVENTORY_ALL);
+
+  const sendInventoryToDB = async (state) => {
+    console.log("in sendInventoryToDB");
+    try {
+      await updateInventoryAll({
+        variables: { inventoryJSON: JSON.stringify(state) },
+      });
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
   return (
     <div className="page-links">
@@ -31,10 +46,15 @@ function Header(props) {
             <span>{appleCount}</span>
           </div>
 
-          {/* uncomment the code below if you want to use the state to local storage button for development */}
+          {/* comment out the code below if you don't want to use the state to storage button for development */}
           <div className="disp-currency disp-currency-img">
-            <button onClick={() => stateToLocalStorage(state)}>
-              state to local storage
+            <button
+              onClick={() => {
+                stateToLocalStorage(state);
+                sendInventoryToDB(state);
+              }}
+            >
+              state to mongodb and local storage
             </button>
           </div>
 

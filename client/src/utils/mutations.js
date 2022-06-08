@@ -70,8 +70,8 @@ export const ADD_TREE_ARRAY = gql`
 
 // Updates all of the user's inventory
 export const UPDATE_INVENTORY_ALL = gql`
-  mutation updateInventoryAll($tests: String) {
-    updateInventoryAll(inventoryJSON: $tests) {
+  mutation updateInventoryAll($inventoryJSON: String) {
+    updateInventoryAll(inventoryJSON: $inventoryJSON) {
       _id
       tests
     }

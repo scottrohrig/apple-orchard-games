@@ -17,32 +17,15 @@ export default function PlaceholderDD() {
   const [updateInventoryAll, { error }] = useMutation(UPDATE_INVENTORY_ALL);
   const { trees } = state;
 
-  const handleTreeArray = async (evt) => {
-    console.log("appleCount", state.appleCount);
-
+  const handleTreeArray = async () => {
     console.log("in handleTreeArray");
 
     try {
       await updateInventoryAll({
-        variables: { tests: "update inventory 7" },
+        variables: { tests: "update inventory 8" },
       });
     } catch (err) {
       console.error(err);
-    }
-
-    console.log("dispatching to GameState");
-    try {
-      const payload = {
-        _id: trees.length + 1,
-        startedAtTime: new Date(),
-        duration: 88,
-      };
-      dispatch({
-        type: PURCHASE_A_TREE,
-        payload,
-      });
-    } catch (error) {
-      console.log("error");
     }
   };
 

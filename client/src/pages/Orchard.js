@@ -97,7 +97,7 @@ export default function Orchard() {
         <div className="orchard-row">
           <div className="tree-container">
             <PlaceholderTree />
-            <PlaceholderDD />
+            {/* <PlaceholderDD /> */}
             {
               // map thru juicer objects from GlobalState to add to row
               trees.map((tree, i) => {

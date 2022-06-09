@@ -1,11 +1,11 @@
 // import
 import { useGlobalContext } from "../utils/GlobalState";
-import { Navigate, Link } from 'react-router-dom';
+import { Navigate, Link } from "react-router-dom";
 
 import { useMutation } from "@apollo/client";
 import { UPDATE_USER } from "../utils/mutations";
 
-import '../style/dashboard.css';
+import "../style/dashboard.css";
 
 import Auth from "../utils/auth";
 
@@ -18,14 +18,13 @@ import treeApples from "../assets/images/tree-with-apples-short.svg";
 import barn from "../assets/images/barn.png";
 
 function Dashboard() {
-
   const [state] = useGlobalContext();
   const [updateDB, { error }] = useMutation(UPDATE_USER);
 
   // redirect user to /login page if not logged in
   if (!Auth.loggedIn()) {
     return <Navigate to="/login" replace={true} />;
-  };
+  }
 
   const handleDBUpdateButton = async (evt) => {
     evt.preventDefault();
@@ -48,15 +47,15 @@ function Dashboard() {
         ovens
     );
 
-    try {
-      const { data } = await updateDB({
-        variables: { money: money },
-      });
+    // try {
+    //   const { data } = await updateDB({
+    //     variables: { money: money },
+    //   });
 
-      // Auth.login(data.login.token);
-    } catch (e) {
-      console.error(e);
-    }
+    //   // Auth.login(data.login.token);
+    // } catch (e) {
+    //   console.error(e);
+    // }
   };
 
   // consider moving 👇 to 'Upgrade' component script
@@ -85,31 +84,32 @@ function Dashboard() {
       </button> */}
 
       {/* <div className="form-label">Dashboard</div> */}
-      
+
       {/* It would be great to use a background image for this link -- there is a wood sign image available, and code below that doesn't seem to do the trick. */}
 
-      <Link to='/orchard/1'>
-        <div className='dash-orchard'>
-          <img src={treeBare} alt='' className='dash-tree tree-left' />
-          <img src={treeBare} alt='' className='dash-tree tree-right' />
-          <img src={treeApples} alt='' className='dash-tree tree-middle' />
-          <h2 className='page-title'><p className='btn btn-shop btn-to-orchard'>Go To My Orchard</p></h2>
-          <img src={barn} alt='' className='dash-barn' />
+      <Link to="/orchard/1">
+        <div className="dash-orchard">
+          <img src={treeBare} alt="" className="dash-tree tree-left" />
+          <img src={treeBare} alt="" className="dash-tree tree-right" />
+          <img src={treeApples} alt="" className="dash-tree tree-middle" />
+          <h2 className="page-title">
+            <p className="btn btn-shop btn-to-orchard">Go To My Orchard</p>
+          </h2>
+          <img src={barn} alt="" className="dash-barn" />
         </div>
       </Link>
-      <div className='dash-label'>
+      <div className="dash-label">
         <span className="item-label">Apples</span>
-        <div className='item-price'>
-          <p className='item-price-apples'>New Tree Cost: <span className='item-amount'>3</span></p>
+        <div className="item-price">
+          <p className="item-price-apples">
+            New Tree Cost: <span className="item-amount">3</span>
+          </p>
         </div>
       </div>
 
       {/* <Link style={{backgroundImage:`url$({woodSign}))`, backgroundRepeat:"no-repeat",backgroundSize:"contain", height: "100px"}} to='/orchard/1'>To Orchard</Link>
-        */}
-      
-      
+       */}
 
-      
       {/* <div className="container">
         Stats Container
         <div className="left"></div>

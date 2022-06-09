@@ -24,11 +24,11 @@ export default function PlaceholderTree() {
     }
     console.log("in handlePurchaseTreeClick");
 
-    try {
-      await addTree();
-    } catch (err) {
-      console.error(err);
-    }
+    // try {
+    //   await addTree();
+    // } catch (err) {
+    //   console.error(err);
+    // }
 
     console.log("dispatching to GameState");
     try {

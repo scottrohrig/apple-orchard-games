@@ -35,13 +35,13 @@ const Juicer = ({
   console.log("inside juicer index");
   const isMount = useIsMount();
   const [success, setSuccess] = useState(false);
-  useEffect(() => {
-    if (!isMount) {
-      updateUser({
-        variables: { money: money, appleCount },
-      });
-    }
-  }, [success]);
+  // useEffect(() => {
+  //   if (!isMount) {
+  //     updateUser({
+  //       variables: { money: money, appleCount },
+  //     });
+  //   }
+  // }, [success]);
 
   const handleUseBtnPressed = (event) => {
     handleJuicerSellBtnPressed(juicer);

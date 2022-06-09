@@ -32,7 +32,7 @@ export default function Marketplace({ showMarketplace, setShowMarketplace }) {
 
     const payload = Math.max(applesToSell, 0);
     try {
-      console.log("Update AppleCount Payload:", payload);
+      console.log("Update AppleCount Payload: ", payload);
       dispatch({
         type: APPLES_FOR_MONEY,
         payload,
@@ -43,19 +43,19 @@ export default function Marketplace({ showMarketplace, setShowMarketplace }) {
     }
   }
 
-  useEffect(async () => {
-    if (!isMount) {
-      console.log("I am calling update user next");
-      // doesn't occur on page load
-      // if (!loading) {
-      // SERVER-SIDE update the user's money and appleCount
-      const { data } = await updateUser({
-        variables: { money: state.money, appleCount },
-      });
-      console.log("SERVER updateUser called:", data.updateUser);
-      // }
-    }
-  }, [success]);
+  // useEffect(async () => {
+  //   if (!isMount) {
+  //     console.log("I am calling update user next");
+  //     // doesn't occur on page load
+  //     // if (!loading) {
+  //     // SERVER-SIDE update the user's money and appleCount
+  //     const { data } = await updateUser({
+  //       variables: { money: state.money, appleCount },
+  //     });
+  //     console.log("SERVER updateUser called:", data.updateUser);
+  //     // }
+  //   }
+  // }, [success]);
 
   // buy gems
   function handleBuyGems(event) {

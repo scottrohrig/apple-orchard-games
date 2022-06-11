@@ -1,25 +1,23 @@
-// Orchard.js
-import Tree from "../components/Tree";
-import PlaceholderTree from "../components/PlaceholderTree";
-import PlaceholderDD from "../components/PlaceholderDD";
-
-import "../style/orchard.css";
-
-import { useMutation, useQuery } from "@apollo/client";
+// import { useMutation, useQuery } from "@apollo/client";
 import { useEffect, useState } from "react";
 
 import { useGlobalContext } from "../utils/GlobalState";
+
 import { getTimeRemaining } from "../utils/helpers";
 import { HARVEST_TREE, UPDATE_TREE_TIMER } from "../utils/actions";
 
+import "../style/orchard.css";
 import barn from "../assets/images/barn.png";
+
+import Tree from "../components/Tree";
+import PlaceholderTree from "../components/PlaceholderTree";
 
 let showHarvestOrchardButton = false;
 
 export default function Orchard() {
   const [state, dispatch] = useGlobalContext();
 
-  const loading = state?.loading;
+  // const loading = state?.loading;
   const trees = state?.trees || [];
 
   const [checkOrchardReadyToHarvest, setCheckOrchardReadyToHarvest] =
@@ -28,7 +26,7 @@ export default function Orchard() {
   // this useEffect controls whether the Harvest Orchard button is displayed
   useEffect(() => {
     setCheckOrchardReadyToHarvest(false);
-    if (trees.length <= 2) {
+    if (trees.length <= 5) {
       return;
     }
     showHarvestOrchardButton = trees.every((tree) => {
@@ -97,10 +95,10 @@ export default function Orchard() {
         <div className="orchard-row">
           <div className="tree-container">
             <PlaceholderTree />
-            {/* <PlaceholderDD /> */}
             {
               // map thru juicer objects from GlobalState to add to row
               trees.map((tree, i) => {
+                console.log("mapping trees in orchard.js");
                 return (
                   <div key={i} className="orchard-box">
                     {

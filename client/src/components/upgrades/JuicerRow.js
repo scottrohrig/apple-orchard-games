@@ -1,9 +1,10 @@
 import { useEffect } from "react";
-import { useMutation } from "@apollo/client";
+// import { useMutation } from "@apollo/client";
 import { useGlobalContext } from "../../utils/GlobalState";
 
 import { useIsMount } from "../../utils/helpers";
-import { ADD_JUICER, SET_JUICER } from "../../utils/mutations";
+
+// import { ADD_JUICER, SET_JUICER } from "../../utils/mutations";
 import {
   APPLES_FOR_JUICE,
   BUY_JUICER,
@@ -17,8 +18,8 @@ import BuyJuicer from "./PlaceholderJuice";
 export default function JuicersRow() {
   const [state, dispatch] = useGlobalContext();
 
-  const [addJuicer, { addJuicerError }] = useMutation(ADD_JUICER);
-  const [updateJuicer, { error: setJuicerError }] = useMutation(SET_JUICER);
+  // const [addJuicer, { addJuicerError }] = useMutation(ADD_JUICER);
+  // const [updateJuicer, { error: setJuicerError }] = useMutation(SET_JUICER);
 
   // destructure the items list from the global state object
   const loading = state?.loading;

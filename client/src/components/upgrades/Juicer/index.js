@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
-import { useMutation } from "@apollo/client";
+// import { useMutation } from "@apollo/client";
 import icon from "../../../assets/images/juicer.png";
 import juiceImg from "../../../assets/images/juice.png";
 
 import { getTimeRemaining, useInterval } from "../../../utils/helpers";
-import { UPDATE_USER } from "../../../utils/mutations";
+// import { UPDATE_USER } from "../../../utils/mutations";
 
 // pass in juicer props from parent page / component
 const Juicer = ({
@@ -14,7 +14,7 @@ const Juicer = ({
   useIsMount,
   handleJuicerSellBtnPressed,
 }) => {
-  const [updateUser, { error }] = useMutation(UPDATE_USER);
+  // const [updateUser, { error }] = useMutation(UPDATE_USER);
 
   // deconstruct the juicer props passed in from parent
   const { _id: juicerId, startedAtTime, duration } = juicer;

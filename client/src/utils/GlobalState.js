@@ -8,22 +8,22 @@ const defaultGameVariables = {
   initialAppleInventory: 5,
   // for Tree
   applesForNewTree: 3,
-  appleGrowTime: 10,
+  appleGrowTime: 5,
   applesGrown: 5,
   appleSaleRevenue: 1,
   // for Juncer
   juicerCost: 10,
-  makeJuiceTime: 60,
+  makeJuiceTime: 5,
   makeJuiceApplesUsed: 2,
   juiceSaleRevenue: 4, // this is revenue from sale of each juice
   // for Masher
   masherCost: 14,
-  makeSauceTime: 120,
+  makeSauceTime: 5,
   makeSauceApplesUsed: 4,
   sauceSaleRevenue: 8,
   //for Oven
   ovenCost: 30,
-  makePieTime: 300,
+  makePieTime: 5,
   makePieApplesUsed: 8,
   pieSaleRevenue: 20,
   // for gems
@@ -33,14 +33,13 @@ const defaultGameVariables = {
 
 const GlobalProvider = ({ value = [], ...props }) => {
   const [state, dispatch] = useAppReducer({
-
     // TODO: username, email, and password should not be hard coded
     username: "",
     email: "",
     password: "",
-    money: 0,
+    money: 100,
 
-    appleCount: 5,
+    appleCount: 50,
     gemCount: 0,
 
     gameVariables: defaultGameVariables,

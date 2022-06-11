@@ -1,9 +1,9 @@
-import { useMutation, useQuery } from "@apollo/client";
-import React, { useEffect, useState } from "react";
-import placeholderTreeImage from "../assets/images/placeholder-tree.png";
+// import { useMutation, useQuery } from "@apollo/client";
+// import React, { useEffect, useState } from "react";
+// import placeholderTreeImage from "../assets/images/placeholder-tree.png";
 import { useGlobalContext } from "../utils/GlobalState";
 import { PURCHASE_A_TREE } from "../utils/actions";
-import { ADD_TREE } from "../utils/mutations";
+// import { ADD_TREE } from "../utils/mutations";
 
 import emptyPlot from "../assets/images/empty-plot-with-leaf.svg";
 
@@ -14,15 +14,15 @@ export default function PlaceholderTree() {
 
   const [state, dispatch] = useGlobalContext();
   // define [addTree, { error }] = useMutation(ADD_TREE)
-  const [addTree, { error }] = useMutation(ADD_TREE);
+  // const [addTree, { error }] = useMutation(ADD_TREE);
   const { trees } = state;
 
   const handlePurchaseTreeClick = async (evt) => {
-    console.log("appleCount", state.appleCount);
+    // console.log("appleCount", state.appleCount);
     if (state.appleCount < state.gameVariables.applesForNewTree) {
       return;
     }
-    console.log("in handlePurchaseTreeClick");
+    // console.log("in handlePurchaseTreeClick");
 
     // try {
     //   await addTree();
@@ -30,7 +30,7 @@ export default function PlaceholderTree() {
     //   console.error(err);
     // }
 
-    console.log("dispatching to GameState");
+    // console.log("dispatching to GameState");
     try {
       const payload = {
         _id: trees.length + 1,

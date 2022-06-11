@@ -33,6 +33,8 @@ export const reducer = (state = [], action) => {
     // case update orchards
 
     // case update trees
+
+    // TODO - the code below is called from the harvest orchard button which is a mapping function and this reducer maps again; this needs to be refactored
     case UPDATE_TREE_TIMER:
       let updatedTrees = state.trees.map((tree) =>
         tree._id === action.payload._id ? action.payload : tree
@@ -181,15 +183,15 @@ export const reducer = (state = [], action) => {
       return {
         ...state,
         appleCount: remainingApples,
-        money: newBalance
+        money: newBalance,
       };
 
     case RESET_USER_STATS:
       return {
         ...state,
         appleCount: 5,
-        money: 0
-      }
+        money: 0,
+      };
   }
 };
 

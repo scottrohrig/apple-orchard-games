@@ -21,6 +21,7 @@ import { useGlobalContext } from "./utils/GlobalState";
 import { gql, useQuery } from "@apollo/client";
 import { UPDATE_ALL_DATA } from "./utils/actions";
 
+// TODO - should this be with the other queries?
 // query all data on app start or refresh
 const QUERY_START_DATA = gql`
   query Me {
@@ -70,10 +71,7 @@ function AppDD() {
 
   useEffect(() => {
     if (data) {
-      // console.log("me", data?.me || { money: 0, appleCount: 0 });
-      // console.log("data follows");
-      console.log("data follows");
-      console.log(data);
+      console.log("Dispatching UPDATE_ALL_DATA");
       console.log(JSON.parse(data.me.inventoryJSON));
       if (!loading) {
         dispatch({
@@ -81,6 +79,7 @@ function AppDD() {
           payload: { ...JSON.parse(data.me.inventoryJSON), loading },
         });
         // console.log("refetching", loading);
+        // TODO should refetchData be part of an else?
         refetchData();
       }
     }

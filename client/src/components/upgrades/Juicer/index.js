@@ -9,9 +9,9 @@ import { getTimeRemaining, useInterval } from "../../../utils/helpers";
 // pass in juicer props from parent page / component
 const Juicer = ({
   juicer,
-  appleCount,
-  money,
-  useIsMount,
+  // appleCount,
+  // money,
+  // useIsMount,
   handleJuicerSellBtnPressed,
 }) => {
   // const [updateUser, { error }] = useMutation(UPDATE_USER);
@@ -33,7 +33,7 @@ const Juicer = ({
 
   // To update the user
   console.log("inside juicer index");
-  const isMount = useIsMount();
+  // const isMount = useIsMount();
   const [success, setSuccess] = useState(false);
   // useEffect(() => {
   //   if (!isMount) {

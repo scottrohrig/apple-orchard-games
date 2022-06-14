@@ -14,8 +14,12 @@ export default function Tree({
   setCheckOrchardReadyToHarvest,
 }) {
   const [state, dispatch] = useGlobalContext();
-  const { trees, gameVariables } = state;
-  const resetTreeTimerSeconds = gameVariables.appleGrowTime;
+  const {
+    // trees,
+    gameVariables,
+  } = state;
+  // const resetTreeTimerSeconds = gameVariables.appleGrowTime;
+  const resetTreeTimerSeconds = tree.duration;
 
   const [timeRemaining, setTime] = useState(resetTreeTimerSeconds);
   let isReady = timeRemaining <= 0;

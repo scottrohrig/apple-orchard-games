@@ -9,6 +9,7 @@ import "../style/dashboard.css";
 
 import Auth from "../utils/auth";
 
+import ItemsRow from "../components/ItemsRow";
 import JuicersRow from "../components/upgrades/JuicerRow";
 import MashersRow from "../components/upgrades/MasherRow";
 import OvensRow from "../components/upgrades/OvenRow";
@@ -16,6 +17,7 @@ import OvensRow from "../components/upgrades/OvenRow";
 import treeBare from "../assets/images/tree-short.svg";
 import treeApples from "../assets/images/tree-with-apples-short.svg";
 import barn from "../assets/images/barn.png";
+// import Item from "../../../server/models/Item";
 
 function Dashboard() {
   const [state] = useGlobalContext();
@@ -117,6 +119,7 @@ function Dashboard() {
       </div> */}
 
       {/* WIP juicers row */}
+      <ItemsRow />
       <JuicersRow />
       <MashersRow />
       <OvensRow />

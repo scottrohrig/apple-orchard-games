@@ -12,26 +12,26 @@ import {
   UPDATE_JUICER,
 } from "../utils/actions";
 
-import Juicer from "./upgrades/Juicer";
+import Item from "./Item";
 import BuyJuicer from "./upgrades/PlaceholderJuice";
 
-export default function JuicersRow() {
+export default function ItemsRow() {
   const [state, dispatch] = useGlobalContext();
 
   // const [addJuicer, { addJuicerError }] = useMutation(ADD_JUICER);
   // const [updateJuicer, { error: setJuicerError }] = useMutation(SET_JUICER);
 
   // destructure the items list from the global state object
-  const loading = state?.loading;
+  // const loading = state?.loading;
 
   const juicers = state?.juicers || [];
 
-  if (loading)
-    return (
-      <div>
-        <h1>LOADING....</h1>
-      </div>
-    );
+  // if (loading)
+  //   return (
+  //     <div>
+  //       <h1>LOADING....</h1>
+  //     </div>
+  //   );
 
   const handleUpgradePurchased = async (event) => {
     // validate enough money
@@ -101,14 +101,15 @@ export default function JuicersRow() {
   return (
     <div>
       <div className="item-row">
-        {!loading && (
+        {
+          // !loading && (
           <div className="item-scroll">
             {
               // map thru juicer objects from GlobalState to add to row
               juicers.map((juicer, i) => {
                 return (
                   <div key={i} className="item-box">
-                    <Juicer
+                    <Item
                       handleJuicerSellBtnPressed={handleJuicerSellBtnPressed}
                       juicer={juicer}
                       appleCount={state.appleCount}
@@ -123,7 +124,8 @@ export default function JuicersRow() {
               <BuyJuicer handleUpgradePurchased={handleUpgradePurchased} />
             )}
           </div>
-        )}
+          // )
+        }
       </div>
       <div className="dash-label">
         <span className="item-label">Item</span>

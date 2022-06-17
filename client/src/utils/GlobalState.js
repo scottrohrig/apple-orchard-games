@@ -3,6 +3,7 @@ import { useAppReducer } from "./reducers";
 
 const GlobalContext = createContext();
 const { Provider } = GlobalContext;
+let nowTime = Date.now();
 
 const defaultGameVariables = {
   initialAppleInventory: 5,
@@ -11,7 +12,12 @@ const defaultGameVariables = {
   appleGrowTime: 5,
   applesGrown: 5,
   appleSaleRevenue: 1,
-  // for Juncer
+  // for Item
+  itemCost: 1,
+  makeProductTime: 4,
+  makeProductApplesUsed: 1,
+  itemSaleRevenue: 1,
+  // for Juicer
   juicerCost: 10,
   makeJuiceTime: 5,
   makeJuiceApplesUsed: 2,
@@ -43,7 +49,9 @@ const GlobalProvider = ({ value = [], ...props }) => {
     gemCount: 0,
 
     gameVariables: defaultGameVariables,
-    trees: [{}],
+    lastUpdateTime: nowTime,
+    items: [],
+    trees: [],
     mashers: [],
     juicers: [],
     ovens: [],

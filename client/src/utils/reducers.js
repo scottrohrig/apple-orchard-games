@@ -1,5 +1,10 @@
 import { useReducer } from "react";
 import {
+  APPLES_USED_FOR_PRODUCT,
+  BUY_ITEM,
+  SELL_PRODUCT,
+  UPDATE_ITEM,
+  // ***
   UPDATE_USER,
   UPDATE_ALL_DATA,
   UPDATE_TREE_TIMER,
@@ -22,10 +27,25 @@ import {
   APPLES_FOR_PIE,
   APPLES_FOR_MONEY,
   RESET_USER_STATS,
+  UPDATE_LASTUPDATETIME,
 } from "./actions";
 
 export const reducer = (state = [], action) => {
   switch (action.type) {
+    case APPLES_USED_FOR_PRODUCT:
+      return {
+        ...state,
+        appleCount:
+          state.appleCount - state.gameVariables.makeProductApplesUsed,
+      };
+
+    case UPDATE_LASTUPDATETIME:
+      let nowTime = Date.now();
+      return {
+        ...state,
+        lastUpdateTime: nowTime,
+      };
+
     // case update user
     case UPDATE_ALL_DATA:
       return { ...state, ...action.payload };

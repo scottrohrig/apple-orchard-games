@@ -1,12 +1,11 @@
 import { useEffect } from "react";
-// import { useMutation } from "@apollo/client";
 import { useGlobalContext } from "../utils/GlobalState";
 
 import { useIsMount } from "../utils/helpers";
 
-// import { ADD_JUICER, SET_JUICER } from "../../utils/mutations";
 import {
   APPLES_FOR_JUICE,
+  APPLES_USED_FOR_PRODUCT,
   BUY_JUICER,
   SELL_JUICE,
   UPDATE_JUICER,
@@ -17,12 +16,6 @@ import BuyItem from "./BuyItem";
 
 export default function ItemsRow() {
   const [state, dispatch] = useGlobalContext();
-
-  // const [addJuicer, { addJuicerError }] = useMutation(ADD_JUICER);
-  // const [updateJuicer, { error: setJuicerError }] = useMutation(SET_JUICER);
-
-  // destructure the items list from the global state object
-  // const loading = state?.loading;
 
   const juicers = state?.juicers || [];
 
@@ -39,24 +32,6 @@ export default function ItemsRow() {
       return;
     }
 
-    // let newJuicer;
-    // // dispatch ADD_JUICER
-    // try {
-    //   // store returned data aliased as 'userData' from addJuicer mutation to server
-    //   const { data: userData } = await addJuicer({
-    //     variables: {
-    //       duration: state.gameVariables.makeJuiceTime
-    //     }
-    //   });
-    //   const juicersArr = userData.addJuicer.juicers;
-    //   // get id or newly created juicer obj from the server to store in the BUY_JUICER payload
-    //   newJuicer = juicersArr[juicersArr.length - 1];
-    // } catch (e) {
-    //   console.error(e);
-    //   console.error(addJuicerError);
-    // }
-
-    // if (newJuicer) {
     dispatch({
       type: BUY_JUICER,
       payload: {
@@ -65,10 +40,8 @@ export default function ItemsRow() {
         duration: state.gameVariables.makeJuiceTime,
       },
     });
-    // }
   };
 
-  //
   const handleJuicerSellBtnPressed = ({ _id, duration }) => {
     if (state.appleCount < state.gameVariables.makeJuiceApplesUsed) {
       return;
@@ -84,37 +57,27 @@ export default function ItemsRow() {
         type: SELL_JUICE,
       });
       dispatch({
-        type: APPLES_FOR_JUICE,
+        type: APPLES_USED_FOR_PRODUCT,
       });
-      // updateJuicer({
-      //   variables: {
-      //     juicerId: _id,
-      //     startedAtTime: now,
-      //     duration,
-      //   },
-      // });
-    } catch (error) {
-      // console.error(setJuicerError);
-    }
+    } catch (error) {}
   };
 
   return (
     <div>
       <div className="item-row">
         {
-          // !loading && (
           <div className="item-scroll">
             {
-              // map thru juicer objects from GlobalState to add to row
+              // map thru item objects from GlobalState to add to row
               juicers.map((juicer, i) => {
                 return (
                   <div key={i} className="item-box">
                     <Item
                       handleJuicerSellBtnPressed={handleJuicerSellBtnPressed}
                       juicer={juicer}
-                      appleCount={state.appleCount}
-                      useIsMount={useIsMount}
-                      money={state.money}
+                      // appleCount={state.appleCount}
+                      // useIsMount={useIsMount}
+                      // money={state.money}
                     />
                   </div>
                 );
@@ -124,7 +87,6 @@ export default function ItemsRow() {
               <BuyItem handleUpgradePurchased={handleUpgradePurchased} />
             )}
           </div>
-          // )
         }
       </div>
       <div className="dash-label">

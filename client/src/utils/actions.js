@@ -1,3 +1,12 @@
+export const APPLES_USED_FOR_PRODUCT = "APPLES_USED_FOR_PRODUCT";
+export const BUY_ITEM = "BUY_ITEM";
+export const SELL_PRODUCT = "SELL_PRODUCT";
+export const UPDATE_ITEM = "UPDATE_ITEM";
+
+export const UPDATE_LASTUPDATETIME = "UPDATE_LASTUPDATETIME";
+
+// export const UPDATE_INVENTORY_ALL = "UPDATE_INVENTORY_ALL";
+
 // Action to update all items (how to separate into rows?)
 export const UPDATE_ITEMS = "UPDATE_ITEMS";
 
@@ -32,8 +41,6 @@ export const UPDATE_UPGRADES = "UPDATE_UPGRADES";
 export const UPDATE_CATEGORIES = "UPDATE_CATEGORIES";
 
 export const UPDATE_TIMERS = "UPDATE_TIMERS";
-
-export const UPDATE_INVENTORY_ALL = "UPDATE_INVENTORY_ALL";
 
 export const BUY_JUICER = "BUY_JUICER";
 export const BUY_OVEN = "BUY_OVEN";

@@ -4,7 +4,9 @@ import gem from "../assets/images/gem.svg";
 import basket from "../assets/images/basket.svg";
 import { Link } from "react-router-dom";
 import { UPDATE_INVENTORY_ALL } from "../utils/mutations";
+import { UPDATE_LASTUPDATETIME } from "../utils/actions";
 import { useMutation, useQuery } from "@apollo/client";
+import { useGlobalContext } from "../utils/GlobalState";
 
 function Header(props) {
   const {
@@ -17,12 +19,16 @@ function Header(props) {
     stateToLocalStorage,
     state: { money, gemCount, appleCount },
     state,
+    dispatch,
   } = props;
 
   const [updateInventoryAll, { error }] = useMutation(UPDATE_INVENTORY_ALL);
 
   const sendInventoryToDB = async (state) => {
     console.log("in sendInventoryToDB");
+    dispatch({
+      type: UPDATE_LASTUPDATETIME,
+    });
     try {
       await updateInventoryAll({
         variables: { inventoryJSON: JSON.stringify(state) },
@@ -50,6 +56,7 @@ function Header(props) {
           <div className="disp-currency disp-currency-img">
             <button
               onClick={() => {
+                console.log(state.gameVariables);
                 stateToLocalStorage(state);
                 sendInventoryToDB(state);
               }}

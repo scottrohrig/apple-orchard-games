@@ -17,7 +17,7 @@ import Header from "./components/Header";
 import Marketplace from "./components/Marketplace";
 import NoMatch from "./pages/NoMatch";
 
-import { useGlobalContext } from "./utils/GlobalState";
+import { dispatch, useGlobalContext } from "./utils/GlobalState";
 import { gql, useQuery } from "@apollo/client";
 import { UPDATE_ALL_DATA } from "./utils/actions";
 
@@ -70,9 +70,14 @@ function AppDD() {
   const [state, dispatch] = useGlobalContext();
 
   useEffect(() => {
+    console.log(data);
     if (data) {
       console.log("Dispatching UPDATE_ALL_DATA");
       console.log(JSON.parse(data.me.inventoryJSON));
+      console.log(JSON.parse(data.me.inventoryJSON).lastUpdateTime);
+      // if (
+      //   JSON.parse(data.me.inventoryJSON).lastUpdateTime > state.lastUpdateTime
+      // ) {
       if (!loading) {
         dispatch({
           type: UPDATE_ALL_DATA,
@@ -82,8 +87,12 @@ function AppDD() {
         // TODO should refetchData be part of an else?
         refetchData();
       }
+      // }
     }
-  }, [loading, data]);
+  }, [
+    loading,
+    // , data
+  ]);
 
   return (
     <Router>
@@ -98,6 +107,7 @@ function AppDD() {
           setShowMarketplace={setShowMarketplace}
           stateToLocalStorage={stateToLocalStorage}
           state={state}
+          dispatch={dispatch}
         />
       )}
       {/* App Stuff */}

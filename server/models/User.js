@@ -50,11 +50,14 @@ const userSchema = new Schema(
       required: true,
       default: "default",
     },
+    lastUpdateTime: {
+      type: Date,
+    },
     inventoryJSON: {
       type: String,
-      required: true,
-      default:
-        '{"username":"","email":"","password":"","money":0,"appleCount":5,"gemCount":0,"gameVariables":{"initialAppleInventory":5,"applesForNewTree":3,"appleGrowTime":10,"applesGrown":5,"appleSaleRevenue":1,"juicerCost":10,"makeJuiceTime":60,"makeJuiceApplesUsed":2,"juiceSaleRevenue":4,"masherCost":14,"makeSauceTime":120,"makeSauceApplesUsed":4,"sauceSaleRevenue":8,"ovenCost":30,"makePieTime":300,"makePieApplesUsed":8,"pieSaleRevenue":20,"gemPurchaseCost":0.99,"gemsFromPurchase":5},"trees":[],"mashers":[],"juicers":[],"ovens":[],"orchards":[{"_id":1,"trees":[]}],"currentOrchard":[]}',
+      // required: true,
+      // default:
+      //   '{"username":"","email":"","password":"","money":0,"appleCount":5,"gemCount":0,"gameVariables":{"initialAppleInventory":5,"applesForNewTree":3,"appleGrowTime":10,"applesGrown":5,"appleSaleRevenue":1,"juicerCost":10,"makeJuiceTime":60,"makeJuiceApplesUsed":2,"juiceSaleRevenue":4,"masherCost":14,"makeSauceTime":120,"makeSauceApplesUsed":4,"sauceSaleRevenue":8,"ovenCost":30,"makePieTime":300,"makePieApplesUsed":8,"pieSaleRevenue":20,"gemPurchaseCost":0.99,"gemsFromPurchase":5},"trees":[],"mashers":[],"juicers":[],"ovens":[],"orchards":[{"_id":1,"trees":[]}],"currentOrchard":[]}',
     },
     trees: [treeSchema],
     juicers: [juicerSchema],

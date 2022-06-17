@@ -120,9 +120,9 @@ function Dashboard() {
 
       {/* WIP juicers row */}
       <ItemsRow />
-      <JuicersRow />
-      <MashersRow />
-      <OvensRow />
+      {/* <JuicersRow /> */}
+      {/* <MashersRow /> */}
+      {/* <OvensRow /> */}
     </div>
   );
 }

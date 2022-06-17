@@ -1,19 +1,19 @@
 import { useState, useEffect } from "react";
 // import { useMutation } from "@apollo/client";
-import icon from "../assets/images/item.png";
-import juiceImg from "../assets/images/juice.png";
+import iconSell from "../assets/images/item-sell.png";
+import iconMake from "../assets/images/item-make.png";
 
 import { getTimeRemaining, useInterval } from "../utils/helpers";
 // import { UPDATE_USER } from "../../../utils/mutations";
 
 // pass in juicer props from parent page / component
-const Juicer = ({
+export default function Item({
   juicer,
   // appleCount,
   // money,
   // useIsMount,
   handleJuicerSellBtnPressed,
-}) => {
+}) {
   // const [updateUser, { error }] = useMutation(UPDATE_USER);
 
   // deconstruct the juicer props passed in from parent
@@ -55,9 +55,9 @@ const Juicer = ({
       <div className="item-container">
         <div className="temp-img">
           {isReady ? (
-            <img src={juiceImg} alt="juicer" />
+            <img src={iconSell} alt="juicer" />
           ) : (
-            <img src={icon} alt="juicer" />
+            <img src={iconMake} alt="juicer" />
           )}
         </div>
 
@@ -82,6 +82,4 @@ const Juicer = ({
       </div>
     </>
   );
-};
-
-export default Juicer;
+}

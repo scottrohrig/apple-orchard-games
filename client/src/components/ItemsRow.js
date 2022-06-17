@@ -13,7 +13,7 @@ import {
 } from "../utils/actions";
 
 import Item from "./Item";
-import BuyJuicer from "./upgrades/PlaceholderJuice";
+import BuyItem from "./BuyItem";
 
 export default function ItemsRow() {
   const [state, dispatch] = useGlobalContext();
@@ -121,7 +121,7 @@ export default function ItemsRow() {
               })
             }
             {juicers.length < 5 && (
-              <BuyJuicer handleUpgradePurchased={handleUpgradePurchased} />
+              <BuyItem handleUpgradePurchased={handleUpgradePurchased} />
             )}
           </div>
           // )

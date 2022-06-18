@@ -74,17 +74,21 @@ function AppDD() {
     if (data) {
       console.log("Dispatching UPDATE_ALL_DATA");
       console.log(JSON.parse(data.me.inventoryJSON));
+      console.log("inventory then state");
       console.log(JSON.parse(data.me.inventoryJSON).lastUpdateTime);
+      console.log(state.lastUpdateTime);
       // if (
       //   JSON.parse(data.me.inventoryJSON).lastUpdateTime > state.lastUpdateTime
       // ) {
       if (!loading) {
+        console.log("not loading");
         dispatch({
           type: UPDATE_ALL_DATA,
           payload: { ...JSON.parse(data.me.inventoryJSON), loading },
         });
         // console.log("refetching", loading);
         // TODO should refetchData be part of an else?
+        console.log("refetcing");
         refetchData();
       }
       // }

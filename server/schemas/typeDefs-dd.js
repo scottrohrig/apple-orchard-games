@@ -12,7 +12,6 @@ const typeDefs = gql`
     appleCount: Int
     gemCount: Int
     tests: String
-    lastUpdateTime: Date
     inventoryJSON: String
     trees: [Tree]
     juicers: [Juicer]

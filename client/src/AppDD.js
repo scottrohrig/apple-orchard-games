@@ -74,8 +74,8 @@ function AppDD() {
     if (data) {
       console.log("Dispatching UPDATE_ALL_DATA");
       console.log(JSON.parse(data.me.inventoryJSON));
-      console.log("inventory then state");
-      console.log(JSON.parse(data.me.inventoryJSON).lastUpdateTime);
+      // console.log("inventory then state");
+      // console.log(JSON.parse(data.me.inventoryJSON).lastUpdateTime);
       console.log(state.lastUpdateTime);
       // if (
       //   JSON.parse(data.me.inventoryJSON).lastUpdateTime > state.lastUpdateTime

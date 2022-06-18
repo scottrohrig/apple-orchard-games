@@ -50,9 +50,9 @@ const userSchema = new Schema(
       required: true,
       default: "default",
     },
-    lastUpdateTime: {
-      type: Date,
-    },
+    // lastUpdateTime: {
+    //   type: Date,
+    // },
     inventoryJSON: {
       type: String,
       // required: true,

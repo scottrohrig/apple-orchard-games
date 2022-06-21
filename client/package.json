@@ -5,7 +5,6 @@
   "private": true,
   "dependencies": {
     "@apollo/client": "^3.5.10",
-    "@testing-library/jest-dom": "^5.16.3",
     "@testing-library/react": "^12.1.4",
     "@testing-library/user-event": "^13.5.0",
     "graphql": "^16.3.0",

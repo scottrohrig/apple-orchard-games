@@ -20,23 +20,24 @@ function Header(props) {
     state: { money, gemCount, appleCount },
     state,
     dispatch,
+    sendInventoryToDB,
   } = props;
 
-  const [updateInventoryAll, { error }] = useMutation(UPDATE_INVENTORY_ALL);
+  // const [updateInventoryAll, { error }] = useMutation(UPDATE_INVENTORY_ALL);
 
-  const sendInventoryToDB = async (state) => {
-    console.log("in sendInventoryToDB");
-    dispatch({
-      type: UPDATE_LASTUPDATETIME,
-    });
-    try {
-      await updateInventoryAll({
-        variables: { inventoryJSON: JSON.stringify(state) },
-      });
-    } catch (err) {
-      console.error(err);
-    }
-  };
+  // const sendInventoryToDB = async (state) => {
+  //   console.log("in sendInventoryToDB");
+  //   dispatch({
+  //     type: UPDATE_LASTUPDATETIME,
+  //   });
+  //   try {
+  //     await updateInventoryAll({
+  //       variables: { inventoryJSON: JSON.stringify(state) },
+  //     });
+  //   } catch (err) {
+  //     console.error(err);
+  //   }
+  // };
 
   return (
     <div className="page-links">

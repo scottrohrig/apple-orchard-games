@@ -11,7 +11,11 @@ import { QUERY_ME } from "../utils/queries";
 
 import { useIsMount } from "../utils/helpers";
 
-export default function Marketplace({ showMarketplace, setShowMarketplace }) {
+export default function Marketplace({
+  showMarketplace,
+  setShowMarketplace,
+  sendInventoryToDB,
+}) {
   const isMount = useIsMount();
   const [state, dispatch] = useGlobalContext();
   const { appleCount, gameVariables } = state;
@@ -41,6 +45,7 @@ export default function Marketplace({ showMarketplace, setShowMarketplace }) {
     } catch (error) {
       console.error(error);
     }
+    sendInventoryToDB(state);
   }
 
   // useEffect(async () => {
@@ -60,6 +65,7 @@ export default function Marketplace({ showMarketplace, setShowMarketplace }) {
   // buy gems
   function handleBuyGems(event) {
     console.log("TODO: handleBuyingGems");
+    sendInventoryToDB(state);
   }
 
   return (

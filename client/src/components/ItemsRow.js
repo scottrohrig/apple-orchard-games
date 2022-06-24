@@ -14,7 +14,9 @@ import {
 import Item from "./Item";
 import BuyItem from "./BuyItem";
 
-export default function ItemsRow() {
+export default function ItemsRow(props) {
+  const { sendInventoryToDB, testVar } = props;
+
   const [state, dispatch] = useGlobalContext();
 
   const juicers = state?.juicers || [];
@@ -40,6 +42,9 @@ export default function ItemsRow() {
         duration: state.gameVariables.makeJuiceTime,
       },
     });
+    sendInventoryToDB(state);
+    console.log("testVar is: ");
+    console.log(testVar);
   };
 
   // const handleJuicerSellBtnPressed = ({ _id, duration }) => {

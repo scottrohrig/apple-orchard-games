@@ -18,8 +18,9 @@ import Marketplace from "./components/Marketplace";
 import NoMatch from "./pages/NoMatch";
 
 import { dispatch, useGlobalContext } from "./utils/GlobalState";
-import { gql, useQuery } from "@apollo/client";
-import { UPDATE_ALL_DATA } from "./utils/actions";
+import { gql, useQuery, useMutation } from "@apollo/client";
+import { UPDATE_ALL_DATA, UPDATE_LASTUPDATETIME } from "./utils/actions";
+import { UPDATE_INVENTORY_ALL } from "./utils/mutations";
 
 // TODO - should this be with the other queries?
 // query all data on app start or refresh
@@ -68,6 +69,21 @@ function AppDD() {
   const { data, loading, refetch: refetchData } = useQuery(QUERY_START_DATA);
 
   const [state, dispatch] = useGlobalContext();
+  const [updateInventoryAll, { error }] = useMutation(UPDATE_INVENTORY_ALL);
+
+  const sendInventoryToDB = async (state) => {
+    console.log("in sendInventoryToDB");
+    dispatch({
+      type: UPDATE_LASTUPDATETIME,
+    });
+    try {
+      await updateInventoryAll({
+        variables: { inventoryJSON: JSON.stringify(state) },
+      });
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
   useEffect(() => {
     console.log(data);
@@ -112,6 +128,7 @@ function AppDD() {
           stateToLocalStorage={stateToLocalStorage}
           state={state}
           dispatch={dispatch}
+          sendInventoryToDB={sendInventoryToDB}
         />
       )}
       {/* App Stuff */}
@@ -130,11 +147,20 @@ function AppDD() {
             <Marketplace
               showMarketplace={showMarketplace}
               setShowMarketplace={setShowMarketplace}
+              sendInventoryToDB={sendInventoryToDB}
             />
 
             {/* Routes */}
             <Routes>
-              <Route path="/" element={<Dashboard />} />
+              <Route
+                path="/"
+                element={
+                  <Dashboard
+                    sendInventoryToDB={sendInventoryToDB}
+                    testVar="test123"
+                  />
+                }
+              />
               <Route path="/login" element={<Splash />} />
               <Route path="/orchard/:id" element={<Orchard />} />
               <Route element={<NoMatch />} />

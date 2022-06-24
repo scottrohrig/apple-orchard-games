@@ -19,7 +19,8 @@ import treeApples from "../assets/images/tree-with-apples-short.svg";
 import barn from "../assets/images/barn.png";
 // import Item from "../../../server/models/Item";
 
-function Dashboard() {
+function Dashboard(props) {
+  const { sendInventoryToDB, testVar } = props;
   const [state] = useGlobalContext();
   const [updateDB, { error }] = useMutation(UPDATE_USER);
 
@@ -119,7 +120,7 @@ function Dashboard() {
       </div> */}
 
       {/* WIP juicers row */}
-      <ItemsRow />
+      <ItemsRow sendInventoryToDB={sendInventoryToDB} testVar={testVar} />
       {/* <JuicersRow /> */}
       {/* <MashersRow /> */}
       {/* <OvensRow /> */}

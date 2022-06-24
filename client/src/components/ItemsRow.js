@@ -82,6 +82,7 @@ export default function ItemsRow(props) {
                       _id={juicer._id}
                       juicer={juicer}
                       dispatchParent={dispatch}
+                      sendInventoryToDB={sendInventoryToDB}
                       // appleCount={state.appleCount}
                       // useIsMount={useIsMount}
                       // money={state.money}

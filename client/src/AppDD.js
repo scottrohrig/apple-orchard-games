@@ -162,7 +162,10 @@ function AppDD() {
                 }
               />
               <Route path="/login" element={<Splash />} />
-              <Route path="/orchard/:id" element={<Orchard />} />
+              <Route
+                path="/orchard/:id"
+                element={<Orchard sendInventoryToDB={sendInventoryToDB} />}
+              />
               <Route element={<NoMatch />} />
             </Routes>
           </div>

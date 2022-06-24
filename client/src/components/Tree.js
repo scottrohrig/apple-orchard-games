@@ -12,6 +12,7 @@ export default function Tree({
   _id,
   dispatchParent,
   setCheckOrchardReadyToHarvest,
+  sendInventoryToDB,
 }) {
   const [state, dispatch] = useGlobalContext();
   const {
@@ -47,6 +48,7 @@ export default function Tree({
       },
     });
     setTime(tree.duration);
+    sendInventoryToDB(state);
   }
 
   useInterval(() => {

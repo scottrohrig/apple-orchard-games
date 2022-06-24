@@ -14,6 +14,7 @@ export default function Item({
   juicer,
   _id,
   dispatchParent,
+  sendInventoryToDB,
   // appleCount,
   // money,
   // useIsMount,
@@ -62,6 +63,7 @@ export default function Item({
 
     // setTime(duration);
     // setSuccess(!success);
+    sendInventoryToDB(state);
   }
 
   // custom Hook to handle intervals across item types

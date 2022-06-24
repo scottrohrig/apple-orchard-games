@@ -9,7 +9,9 @@ import emptyPlot from "../assets/images/empty-plot-with-leaf.svg";
 
 // import { ADD_TREE } from '../utils/mutations'
 
-export default function PlaceholderTree() {
+export default function PlaceholderTree(props) {
+  const { sendInventoryToDB } = props;
+
   // error checking: 1) this component shouldn't show if player has less than 3 apples, but I think this would happen at the parent component
 
   const [state, dispatch] = useGlobalContext();
@@ -44,6 +46,7 @@ export default function PlaceholderTree() {
     } catch (error) {
       console.log("error");
     }
+    sendInventoryToDB(state);
   };
 
   return (

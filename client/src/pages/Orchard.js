@@ -14,7 +14,9 @@ import PlaceholderTree from "../components/PlaceholderTree";
 
 let showHarvestOrchardButton = false;
 
-export default function Orchard() {
+export default function Orchard(props) {
+  const { sendInventoryToDB } = props;
+
   const [state, dispatch] = useGlobalContext();
 
   // const loading = state?.loading;
@@ -73,6 +75,7 @@ export default function Orchard() {
       //   }
       // }
     });
+    sendInventoryToDB(state);
   };
 
   return (
@@ -94,7 +97,7 @@ export default function Orchard() {
         )}
         <div className="orchard-row">
           <div className="tree-container">
-            <PlaceholderTree />
+            <PlaceholderTree sendInventoryToDB={sendInventoryToDB} />
             {
               // map thru juicer objects from GlobalState to add to row
               trees.map((tree, i) => {
@@ -109,6 +112,7 @@ export default function Orchard() {
                         setCheckOrchardReadyToHarvest={
                           setCheckOrchardReadyToHarvest
                         }
+                        sendInventoryToDB={sendInventoryToDB}
                       />
                     }
                   </div>

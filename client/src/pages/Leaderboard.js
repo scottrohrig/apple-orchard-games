@@ -26,6 +26,7 @@ export default function Leaderboard({ showLeaderboard, setShowLeaderboard }) {
   }
 
   console.log(highscoreData);
+  let users = [{ username: "JKL", inventoryJSON: '{"money":111}' }];
   // let users = [...highscoreData.users];
   // console.log(users);
   // users = users.sort(

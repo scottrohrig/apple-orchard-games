@@ -26,14 +26,13 @@ export default function Leaderboard({ showLeaderboard, setShowLeaderboard }) {
   }
 
   console.log(highscoreData);
-  let users = [...highscoreData.users];
-  console.log(users);
-  users = users.sort(
-    (a, b) =>
-      JSON.parse(b.inventoryJSON).money - JSON.parse(a.inventoryJSON).money
-    // a.money - b.money
-  );
-  console.log(users);
+  // let users = [...highscoreData.users];
+  // console.log(users);
+  // users = users.sort(
+  //   (a, b) =>
+  //     JSON.parse(b.inventoryJSON).money - JSON.parse(a.inventoryJSON).money
+  // );
+  // console.log(users);
 
   return (
     <div>

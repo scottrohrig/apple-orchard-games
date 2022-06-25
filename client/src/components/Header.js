@@ -3,10 +3,6 @@ import "../style/header.css";
 import gem from "../assets/images/gem.svg";
 import basket from "../assets/images/basket.svg";
 import { Link } from "react-router-dom";
-import { UPDATE_INVENTORY_ALL } from "../utils/mutations";
-import { UPDATE_LASTUPDATETIME } from "../utils/actions";
-import { useMutation, useQuery } from "@apollo/client";
-import { useGlobalContext } from "../utils/GlobalState";
 
 function Header(props) {
   const {
@@ -23,22 +19,6 @@ function Header(props) {
     sendInventoryToDB,
   } = props;
 
-  // const [updateInventoryAll, { error }] = useMutation(UPDATE_INVENTORY_ALL);
-
-  // const sendInventoryToDB = async (state) => {
-  //   console.log("in sendInventoryToDB");
-  //   dispatch({
-  //     type: UPDATE_LASTUPDATETIME,
-  //   });
-  //   try {
-  //     await updateInventoryAll({
-  //       variables: { inventoryJSON: JSON.stringify(state) },
-  //     });
-  //   } catch (err) {
-  //     console.error(err);
-  //   }
-  // };
-
   return (
     <div className="page-links">
       <header className="component-header">
@@ -54,7 +34,7 @@ function Header(props) {
           </div>
 
           {/* comment out the code below if you don't want to use the state to storage button for development */}
-          <div className="disp-currency disp-currency-img">
+          {/* <div className="disp-currency disp-currency-img">
             <button
               onClick={() => {
                 console.log(state.gameVariables);
@@ -64,7 +44,7 @@ function Header(props) {
             >
               state to mongodb and local storage
             </button>
-          </div>
+          </div> */}
 
           <div className="disp-currency disp-currency-money">
             <p className="display-money">{money}</p>

@@ -47,26 +47,6 @@ export default function ItemsRow(props) {
     console.log(testVar);
   };
 
-  // const handleJuicerSellBtnPressed = ({ _id, duration }) => {
-  //   if (state.appleCount < state.gameVariables.makeJuiceApplesUsed) {
-  //     return;
-  //   }
-
-  //   const now = new Date();
-  //   try {
-  //     dispatch({
-  //       type: UPDATE_JUICER,
-  //       payload: { _id, now, duration: 10 },
-  //     });
-  //     dispatch({
-  //       type: SELL_JUICE,
-  //     });
-  //     dispatch({
-  //       type: APPLES_USED_FOR_PRODUCT,
-  //     });
-  //   } catch (error) {}
-  // };
-
   return (
     <div>
       <div className="item-row">
@@ -78,14 +58,10 @@ export default function ItemsRow(props) {
                 return (
                   <div key={i} className="item-box">
                     <Item
-                      // handleJuicerSellBtnPressed={handleJuicerSellBtnPressed}
                       _id={juicer._id}
                       juicer={juicer}
                       dispatchParent={dispatch}
                       sendInventoryToDB={sendInventoryToDB}
-                      // appleCount={state.appleCount}
-                      // useIsMount={useIsMount}
-                      // money={state.money}
                     />
                   </div>
                 );

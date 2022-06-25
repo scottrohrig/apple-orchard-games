@@ -17,49 +17,15 @@ import OvensRow from "../components/upgrades/OvenRow";
 import treeBare from "../assets/images/tree-short.svg";
 import treeApples from "../assets/images/tree-with-apples-short.svg";
 import barn from "../assets/images/barn.png";
-// import Item from "../../../server/models/Item";
 
 function Dashboard(props) {
   const { sendInventoryToDB, testVar } = props;
   const [state] = useGlobalContext();
-  const [updateDB, { error }] = useMutation(UPDATE_USER);
 
   // redirect user to /login page if not logged in
   if (!Auth.loggedIn()) {
     return <Navigate to="/login" replace={true} />;
   }
-
-  const handleDBUpdateButton = async (evt) => {
-    evt.preventDefault();
-
-    const { money, appleCount, gemCount, trees, juicers, mashers, ovens } =
-      state;
-    console.log(
-      money +
-        " " +
-        appleCount +
-        " " +
-        gemCount +
-        " " +
-        trees +
-        " " +
-        juicers +
-        " " +
-        mashers +
-        " " +
-        ovens
-    );
-
-    // try {
-    //   const { data } = await updateDB({
-    //     variables: { money: money },
-    //   });
-
-    //   // Auth.login(data.login.token);
-    // } catch (e) {
-    //   console.error(e);
-    // }
-  };
 
   // consider moving 👇 to 'Upgrade' component script
   // need event handler for upgrades
@@ -69,27 +35,7 @@ function Dashboard(props) {
   };
 
   return (
-    // ideally we want the dashboard to simply look like this
-    /**
-    <div className='container'>
-      <Header /> // stat bar
-      <element for page title>
-      <OrchardRow />
-      <MashersRow />
-      <JuicerssRow />
-      <OvensRow />
-    </div>
-     */
-
     <div className="">
-      {/* <button onClick={handleDBUpdateButton}>
-        click here to send globalstate gameplay variables to server
-      </button> */}
-
-      {/* <div className="form-label">Dashboard</div> */}
-
-      {/* It would be great to use a background image for this link -- there is a wood sign image available, and code below that doesn't seem to do the trick. */}
-
       <Link to="/orchard/1">
         <div className="dash-orchard">
           <img src={treeBare} alt="" className="dash-tree tree-left" />
@@ -119,7 +65,6 @@ function Dashboard(props) {
         <div className="right"></div>
       </div> */}
 
-      {/* WIP juicers row */}
       <ItemsRow sendInventoryToDB={sendInventoryToDB} testVar={testVar} />
       {/* <JuicersRow /> */}
       {/* <MashersRow /> */}

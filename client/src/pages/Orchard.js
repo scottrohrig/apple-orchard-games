@@ -66,14 +66,6 @@ export default function Orchard(props) {
           },
         });
       }
-      //   let tr = getTimeRemaining(tree.startedAtTime, tree.duration);
-      //   if (tr <= 0) {
-      //     console.log("tr is: " + tr + "id is " + tree._id);
-      //     return true;
-      //   } else {
-      //     return false;
-      //   }
-      // }
     });
     sendInventoryToDB(state);
   };
@@ -99,7 +91,7 @@ export default function Orchard(props) {
           <div className="tree-container">
             <PlaceholderTree sendInventoryToDB={sendInventoryToDB} />
             {
-              // map thru juicer objects from GlobalState to add to row
+              // map thru trees from GlobalState to add to orchard
               trees.map((tree, i) => {
                 console.log("mapping trees in orchard.js");
                 return (

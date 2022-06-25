@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-// import { useMutation } from "@apollo/client";
 import { useGlobalContext } from "../utils/GlobalState";
 
 import iconSell from "../assets/images/item-sell.png";
@@ -7,7 +6,6 @@ import iconMake from "../assets/images/item-make.png";
 
 import { getTimeRemaining, useInterval } from "../utils/helpers";
 import { SELL_JUICE, UPDATE_JUICER } from "../utils/actions";
-// import { UPDATE_USER } from "../../../utils/mutations";
 
 // pass in juicer props from parent page / component
 export default function Item({
@@ -15,33 +13,12 @@ export default function Item({
   _id,
   dispatchParent,
   sendInventoryToDB,
-  // appleCount,
-  // money,
-  // useIsMount,
-  // handleJuicerSellBtnPressed,
 }) {
   const [state, dispatch] = useGlobalContext();
-
-  // const [updateUser, { error }] = useMutation(UPDATE_USER);
-
-  // deconstruct the juicer props passed in from parent
-  // const { _id: juicerId, startedAtTime, duration } = juicer;
 
   // only thing I don't like is this duration displays on mount
   const [timeRemaining, setTime] = useState(5);
   let isReady = timeRemaining <= 0;
-
-  // To update the user
-  console.log("inside juicer index");
-  // const isMount = useIsMount();
-  // const [success, setSuccess] = useState(false);
-  // useEffect(() => {
-  //   if (!isMount) {
-  //     updateUser({
-  //       variables: { money: money, appleCount },
-  //     });
-  //   }
-  // }, [success]);
 
   function handleUseBtnPressed(event) {
     const now = new Date();
@@ -58,11 +35,6 @@ export default function Item({
       },
     });
     setTime(juicer.duration);
-
-    // handleJuicerSellBtnPressed(juicer);
-
-    // setTime(duration);
-    // setSuccess(!success);
     sendInventoryToDB(state);
   }
 

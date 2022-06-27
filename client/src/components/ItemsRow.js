@@ -68,7 +68,10 @@ export default function ItemsRow(props) {
               })
             }
             {items.length < 5 && (
-              <BuyItem handleUpgradePurchased={handleUpgradePurchased} />
+              <BuyItem
+                handleUpgradePurchased={handleUpgradePurchased}
+                buyIcon={state.gameVariables[itemType].iconBuy}
+              />
             )}
           </div>
         }

@@ -1,6 +1,6 @@
-import buyIcon from "../assets/images/item.png";
+// import buyIcon from "../assets/images/item.png";
 
-export default function BuyItem({ handleUpgradePurchased }) {
+export default function BuyItem({ handleUpgradePurchased, buyIcon }) {
   return (
     <div className="item-box">
       <div className="item-container">

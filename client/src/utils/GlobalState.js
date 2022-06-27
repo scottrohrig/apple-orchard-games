@@ -3,10 +3,13 @@ import { useAppReducer } from "./reducers";
 
 import juiceMake from "../assets/images/juicer.png";
 import juiceSell from "../assets/images/juice.png";
+import juicerBuy from "../assets/images/empty_juice.png";
 import sauceMake from "../assets/images/masher.png";
 import sauceSell from "../assets/images/sauce.png";
+import masherBuy from "../assets/images/empty_sauce.png";
 import pieMake from "../assets/images/oven.png";
 import pieSell from "../assets/images/pie.png";
+import ovenBuy from "../assets/images/empty_pie.png";
 
 const GlobalContext = createContext();
 const { Provider } = GlobalContext;
@@ -20,6 +23,7 @@ const defaultGameVariables = {
     productSaleRevenue: 1,
     iconSell: juiceSell,
     iconMake: juiceMake,
+    iconBuy: juicerBuy,
   },
 
   mashers: {
@@ -29,6 +33,7 @@ const defaultGameVariables = {
     productSaleRevenue: 2,
     iconSell: sauceSell,
     iconMake: sauceMake,
+    iconBuy: masherBuy,
   },
 
   ovens: {
@@ -38,6 +43,7 @@ const defaultGameVariables = {
     productSaleRevenue: 3,
     iconSell: pieSell,
     iconMake: pieMake,
+    iconBuy: ovenBuy,
   },
 
   initialAppleInventory: 5,

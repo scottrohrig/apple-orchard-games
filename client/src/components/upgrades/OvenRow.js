@@ -3,7 +3,7 @@ import { useMutation } from "@apollo/client";
 import { useGlobalContext } from "../../utils/GlobalState";
 
 import { useIsMount } from "../../utils/helpers";
-import { ADD_OVEN, SET_OVEN } from "../../utils/mutations";
+// import { ADD_OVEN, SET_OVEN } from "../../utils/mutations";
 import {
   APPLES_FOR_PIE,
   BUY_OVEN,
@@ -17,8 +17,8 @@ import BuyOven from "./PlaceholderPie";
 export default function OvensRow() {
   const [state, dispatch] = useGlobalContext();
 
-  const [addOven, { addOvenError }] = useMutation(ADD_OVEN);
-  const [updateOven, { error: setOvenError }] = useMutation(SET_OVEN);
+  // const [addOven, { addOvenError }] = useMutation(ADD_OVEN);
+  // const [updateOven, { error: setOvenError }] = useMutation(SET_OVEN);
 
   // destructure the items list from the global state object
   const loading = state?.loading;

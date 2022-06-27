@@ -1,40 +1,45 @@
 import { useState, useEffect } from "react";
 import { useGlobalContext } from "../utils/GlobalState";
 
-import iconSell from "../assets/images/item-sell.png";
-import iconMake from "../assets/images/item-make.png";
+// import iconSell from "../assets/images/item-sell.png";
+// import iconMake from "../assets/images/item-make.png";
 
 import { getTimeRemaining, useInterval } from "../utils/helpers";
-import { SELL_JUICE, UPDATE_JUICER } from "../utils/actions";
+import { SELL_PRODUCT, UPDATE_ITEM } from "../utils/actions";
 
-// pass in juicer props from parent page / component
 export default function Item({
-  juicer,
+  item,
   _id,
+  itemType,
   dispatchParent,
   sendInventoryToDB,
 }) {
   const [state, dispatch] = useGlobalContext();
+  // const juiceMake = state.gameVariables[itemType].iconMake;
 
   // only thing I don't like is this duration displays on mount
   const [timeRemaining, setTime] = useState(5);
   let isReady = timeRemaining <= 0;
 
   function handleUseBtnPressed(event) {
-    const now = new Date();
+    // const now = new Date();
     dispatch({
-      type: SELL_JUICE,
-    });
-
-    dispatchParent({
-      type: UPDATE_JUICER,
+      type: SELL_PRODUCT,
       payload: {
-        _id,
-        startedAtTime: now,
-        duration: juicer.duration,
+        itemType: itemType,
       },
     });
-    setTime(juicer.duration);
+    // TODO is dispatchParent necessary?
+    dispatchParent({
+      type: UPDATE_ITEM,
+      payload: {
+        _id,
+        // startedAtTime: now,
+        // duration: item.duration,
+        itemType: itemType,
+      },
+    });
+    setTime(item.duration);
     sendInventoryToDB(state);
   }
 
@@ -43,7 +48,7 @@ export default function Item({
     if (isReady) {
       // return;
     }
-    setTime(getTimeRemaining(juicer.startedAtTime, juicer.duration));
+    setTime(getTimeRemaining(item.startedAtTime, item.duration));
   }, 1000);
 
   return (
@@ -52,7 +57,10 @@ export default function Item({
         {isReady ? (
           <div>
             <div className="temp-img">
-              <img src={iconSell} alt="juicer" />
+              <img
+                src={state.gameVariables[itemType].iconSell}
+                alt="item image"
+              />
             </div>
             <div className="item-btn-wrapper">
               <div className="item-btn-flex">
@@ -70,7 +78,10 @@ export default function Item({
         ) : (
           <div>
             <div className="temp-img">
-              <img src={iconMake} alt="juicer" />
+              <img
+                src={state.gameVariables[itemType].iconMake}
+                alt="item image"
+              />
             </div>
             <div className="item-btn-wrapper">
               <div className="item-btn-flex">

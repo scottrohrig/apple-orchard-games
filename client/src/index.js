@@ -1,7 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import AppDD from "./AppDD";
-// import App from "./App";
 import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
 import reportWebVitals from "./reportWebVitals";
 import {
@@ -36,7 +35,6 @@ ReactDOM.render(
   <React.StrictMode>
     <ApolloProvider client={client}>
       <GlobalProvider>
-        {/* <App /> */}
         <AppDD />
       </GlobalProvider>
     </ApolloProvider>

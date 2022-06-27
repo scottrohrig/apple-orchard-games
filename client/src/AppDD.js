@@ -31,32 +31,6 @@ const QUERY_START_DATA = gql`
       email
       _id
       inventoryJSON
-      appleCount
-      money
-      gemCount
-      trees {
-        _id
-        startedAtTime
-        duration
-      }
-      juicerCount
-      juicers {
-        _id
-        startedAtTime
-        duration
-      }
-      masherCount
-      mashers {
-        _id
-        startedAtTime
-        duration
-      }
-      ovenCount
-      ovens {
-        _id
-        startedAtTime
-        duration
-      }
     }
   }
 `;
@@ -154,12 +128,7 @@ function AppDD() {
             <Routes>
               <Route
                 path="/"
-                element={
-                  <Dashboard
-                    sendInventoryToDB={sendInventoryToDB}
-                    testVar="test123"
-                  />
-                }
+                element={<Dashboard sendInventoryToDB={sendInventoryToDB} />}
               />
               <Route path="/login" element={<Splash />} />
               <Route

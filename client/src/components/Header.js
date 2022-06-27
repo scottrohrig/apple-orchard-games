@@ -34,17 +34,18 @@ function Header(props) {
           </div>
 
           {/* comment out the code below if you don't want to use the state to storage button for development */}
-          {/* <div className="disp-currency disp-currency-img">
+          <div className="disp-currency disp-currency-img">
             <button
               onClick={() => {
                 console.log(state.gameVariables);
                 stateToLocalStorage(state);
-                sendInventoryToDB(state);
+                // sendInventoryToDB(state);
               }}
             >
-              state to mongodb and local storage
+              state to local storage
+              {/* state to mongodb and local storage */}
             </button>
-          </div> */}
+          </div>
 
           <div className="disp-currency disp-currency-money">
             <p className="display-money">{money}</p>

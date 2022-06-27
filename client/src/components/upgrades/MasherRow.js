@@ -3,7 +3,7 @@ import { useMutation } from "@apollo/client";
 import { useGlobalContext } from "../../utils/GlobalState";
 
 import { useIsMount } from "../../utils/helpers";
-import { ADD_MASHER, SET_MASHER } from "../../utils/mutations";
+// import { ADD_MASHER, SET_MASHER } from "../../utils/mutations";
 import {
   BUY_MASHER,
   APPLES_FOR_SAUCE,
@@ -17,8 +17,8 @@ import BuyMasher from "./PlaceholderMasher";
 export default function MashersRow() {
   const [state, dispatch] = useGlobalContext();
 
-  const [addMasher] = useMutation(ADD_MASHER);
-  const [updateMasher] = useMutation(SET_MASHER);
+  // const [addMasher] = useMutation(ADD_MASHER);
+  // const [updateMasher] = useMutation(SET_MASHER);
   // console.log(state);
 
   // destructure the items list from the global state object

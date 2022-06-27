@@ -1,11 +1,45 @@
 import React, { createContext, useContext } from "react";
 import { useAppReducer } from "./reducers";
 
+import juiceMake from "../assets/images/juicer.png";
+import juiceSell from "../assets/images/juice.png";
+import sauceMake from "../assets/images/masher.png";
+import sauceSell from "../assets/images/sauce.png";
+import pieMake from "../assets/images/oven.png";
+import pieSell from "../assets/images/pie.png";
+
 const GlobalContext = createContext();
 const { Provider } = GlobalContext;
 let nowTime = Date.now();
 
 const defaultGameVariables = {
+  juicers: {
+    itemCost: 1,
+    makeProductTime: 4,
+    makeProductApplesUsed: 1,
+    productSaleRevenue: 1,
+    iconSell: juiceSell,
+    iconMake: juiceMake,
+  },
+
+  mashers: {
+    itemCost: 2,
+    makeProductTime: 5,
+    makeProductApplesUsed: 2,
+    productSaleRevenue: 2,
+    iconSell: sauceSell,
+    iconMake: sauceMake,
+  },
+
+  ovens: {
+    itemCost: 3,
+    makeProductTime: 6,
+    makeProductApplesUsed: 3,
+    productSaleRevenue: 3,
+    iconSell: pieSell,
+    iconMake: pieMake,
+  },
+
   initialAppleInventory: 5,
   // for Tree
   applesForNewTree: 3,

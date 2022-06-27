@@ -13,27 +13,28 @@ const GET_SCORES = gql`
 `;
 
 export default function Leaderboard({ showLeaderboard, setShowLeaderboard }) {
-  // const [getScores] = useQuery(GET_SCORES)
-  const {
-    loading,
-    data: highscoreData,
-    error,
-    refetch: refetchScores,
-  } = useQuery(GET_SCORES);
+  // const {
+  //   loading,
+  //   data: highscoreData,
+  //   error,
+  //   refetch: refetchScores,
+  // } = useQuery(GET_SCORES);
 
-  if (!loading) {
-    refetchScores();
-  }
+  // if (!loading) {
+  //   refetchScores();
+  // }
 
-  console.log(highscoreData);
-  // let users = [{ username: "JKL", inventoryJSON: '{"money":111}' }];
-  let users = [...highscoreData.users];
-  console.log(users);
-  users = users.sort(
-    (a, b) =>
-      JSON.parse(b.inventoryJSON).money - JSON.parse(a.inventoryJSON).money
-  );
-  console.log(users);
+  // console.log(highscoreData);
+
+  let users = [{ username: "JKL", inventoryJSON: '{"money":111}' }];
+
+  // let users = [...highscoreData.users];
+  // console.log(users);
+  // users = users.sort(
+  //   (a, b) =>
+  //     JSON.parse(b.inventoryJSON).money - JSON.parse(a.inventoryJSON).money
+  // );
+  // console.log(users);
 
   return (
     <div>
@@ -65,16 +66,16 @@ export default function Leaderboard({ showLeaderboard, setShowLeaderboard }) {
           <div className="lb-grid-item lb-title">Name</div>
           <div className="lb-grid-item lb-title">Score</div>
         </div>
-        {!loading &&
-          users.map((user, index) => (
-            <div className="lb-grid" key={index}>
-              <div className="lb-grid-item">{index + 1}</div>
-              <div className="lb-grid-item">{user.username}</div>
-              <div className="lb-grid-item">
-                {JSON.parse(user.inventoryJSON).money}
-              </div>
+        {/* {!loading && */}
+        {users.map((user, index) => (
+          <div className="lb-grid" key={index}>
+            <div className="lb-grid-item">{index + 1}</div>
+            <div className="lb-grid-item">{user.username}</div>
+            <div className="lb-grid-item">
+              {JSON.parse(user.inventoryJSON).money}
             </div>
-          ))}
+          </div>
+        ))}
       </div>
     </div>
   );

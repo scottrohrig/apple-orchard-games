@@ -1,11 +1,11 @@
-import { useQuery, useMutation } from '@apollo/client';
-import React, { useEffect } from 'react';
-import Auth from '../utils/auth';
-import { QUERY_ME } from '../utils/queries';
-import { UPDATE_USER } from '../utils/mutations';
-import { RESET_USER_STATS } from '../utils/mutations';
+import { useQuery, useMutation } from "@apollo/client";
+import React, { useEffect } from "react";
+import Auth from "../utils/auth";
+import { QUERY_ME } from "../utils/queries";
+// import { UPDATE_USER } from '../utils/mutations';
+// import { RESET_USER_STATS } from '../utils/mutations';
 
-import '../style/profile.css';
+import "../style/profile.css";
 
 export default function Profile({
   showProfile,
@@ -19,43 +19,44 @@ export default function Profile({
   };
 
   const { loading, data } = useQuery(QUERY_ME);
-  const [updateDB, { error }] = useMutation(UPDATE_USER);
+  // const [updateDB, { error }] = useMutation(UPDATE_USER);
 
   const user = data?.me || data?.user || {};
 
   // define the mutation function and set it equal to useMutation(RESET_USER_STATS)
 
-  const [resetStats, { error: resetError }] = useMutation(RESET_USER_STATS);
+  // const [resetStats, { error: resetError }] = useMutation(RESET_USER_STATS);
   const handleReset = async (event) => {
     event.preventDefault();
-    try {
-      const { data: resetData } = await resetStats({
-        variables: {
-          money: 0,
-          appleCount: 5
-        }
-      })
-    }
+    console.log("reset button");
+    // try {
+    //   const { data: resetData } = await resetStats({
+    //     variables: {
+    //       money: 0,
+    //       appleCount: 5
+    //     }
+    //   })
+    // }
 
-    catch (error) {
-      console.error(error)
-    }
-
-  }
-
+    // catch (error) {
+    //   console.error(error)
+    // }
+  };
 
   // define the event handler
-
 
   return (
     <div>
       <div
-        className={`modal-background ${showProfile && 'modal-background-active'
-          }`}
+        className={`modal-background ${
+          showProfile && "modal-background-active"
+        }`}
         onClick={() => setShowProfile(!showProfile)}
       ></div>
 
-      <div className={`leaderboard profile modal ${showProfile && 'modal-active'}`}>
+      <div
+        className={`leaderboard profile modal ${showProfile && "modal-active"}`}
+      >
         <button
           className="btn btn-modal"
           onClick={() => {
@@ -73,25 +74,39 @@ export default function Profile({
 
         <form className="update-profile">
           <h3>Update Profile</h3>
-          <label className='form-label'>Username:</label>
-          <input type="text" id="username" className='form-control' defaultValue={user.username} />
-          <label className='form-label'>Email:</label>
-          <input type="text" id="email" className='form-control' defaultValue={user.email} />
-          <label className='form-label'>Password:</label>
-          <input type="password" className='form-control' id="password" />
-          <button className='btn btn-update' type="submit" disabled>
+          <label className="form-label">Username:</label>
+          <input
+            type="text"
+            id="username"
+            className="form-control"
+            defaultValue={user.username}
+          />
+          <label className="form-label">Email:</label>
+          <input
+            type="text"
+            id="email"
+            className="form-control"
+            defaultValue={user.email}
+          />
+          <label className="form-label">Password:</label>
+          <input type="password" className="form-control" id="password" />
+          <button className="btn btn-update" type="submit" disabled>
             Update
           </button>
         </form>
-        <div className='stats'>
+        <div className="stats">
           <h3>Stats</h3>
           <p>User stats are coming soon!</p>
-          <button className='btn btn-shop' type="resetStats" onClick={handleReset}>
+          <button
+            className="btn btn-shop"
+            type="resetStats"
+            onClick={handleReset}
+          >
             Reset Stats
           </button>
         </div>
-        <div className='logout'>
-          <button className='btn btn-logout' type="logout" onClick={logout}>
+        <div className="logout">
+          <button className="btn btn-logout" type="logout" onClick={logout}>
             Logout
           </button>
         </div>

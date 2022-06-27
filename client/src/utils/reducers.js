@@ -1,4 +1,5 @@
 import { useReducer } from "react";
+
 import {
   APPLES_USED_FOR_PRODUCT,
   BUY_ITEM,
@@ -32,6 +33,54 @@ import {
 
 export const reducer = (state = [], action) => {
   switch (action.type) {
+    case BUY_ITEM:
+      let itemType = action.payload.itemType;
+      console.log("from reducers.js BUY_ITEM, itemType is: " + itemType);
+      let boughtItem = {
+        _id: state[itemType].length + 1,
+        startedAtTime: new Date(),
+        duration: state.gameVariables[itemType].makeProductTime,
+      };
+      const arrayItems = [...state[itemType], boughtItem];
+
+      return {
+        ...state,
+        [itemType]: arrayItems,
+        money: state.money - state.gameVariables[itemType].itemCost,
+        appleCount:
+          state.appleCount -
+          state.gameVariables[itemType].makeProductApplesUsed,
+      };
+
+    case SELL_PRODUCT:
+      let itemTypeSP = action.payload.itemType;
+      console.log("from reducers.js SELL_PRODUCT, itemType is: " + itemTypeSP);
+
+      return {
+        ...state,
+        money: state.money + state.gameVariables[itemTypeSP].productSaleRevenue,
+      };
+
+    case UPDATE_ITEM:
+      let itemTypeUI = action.payload.itemType;
+      console.log("from reducers.js UPDATE_ITEM, itemType is: " + itemTypeUI);
+      let updatedItem = {
+        _id: action.payload._id,
+        startedAtTime: new Date(),
+        duration: state.gameVariables[itemTypeUI].makeProductTime,
+      };
+      // TODO is map the best method to use to create this array?
+      let updatedItemsArray = state[itemTypeUI].map((item) =>
+        item._id === action.payload._id ? updatedItem : item
+      );
+      return {
+        ...state,
+        [itemTypeUI]: updatedItemsArray,
+        appleCount:
+          state.appleCount -
+          state.gameVariables[itemTypeUI].makeProductApplesUsed,
+      };
+
     case APPLES_USED_FOR_PRODUCT:
       return {
         ...state,

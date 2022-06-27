@@ -50,80 +50,80 @@ const resolvers = {
       return { token, user };
     },
 
-    addJuicer: async (_, args, context) => {
-      if (context.user) {
-        const user = await User.findByIdAndUpdate(
-          { _id: context.user._id },
-          { $push: { juicers: args } },
-          { new: true }
-        );
+    // addJuicer: async (_, args, context) => {
+    //   if (context.user) {
+    //     const user = await User.findByIdAndUpdate(
+    //       { _id: context.user._id },
+    //       { $push: { juicers: args } },
+    //       { new: true }
+    //     );
 
-        return user;
-      }
+    //     return user;
+    //   }
 
-      throw new AuthenticationError("You need to be logged in!");
-    },
+    //   throw new AuthenticationError("You need to be logged in!");
+    // },
 
-    addMasher: async (_, args, context) => {
-      console.log("\n\n add masher", args);
-      if (context.user) {
-        const user = await User.findByIdAndUpdate(
-          { _id: context.user._id },
-          { $push: { mashers: args } },
-          { new: true }
-        );
+    // addMasher: async (_, args, context) => {
+    //   console.log("\n\n add masher", args);
+    //   if (context.user) {
+    //     const user = await User.findByIdAndUpdate(
+    //       { _id: context.user._id },
+    //       { $push: { mashers: args } },
+    //       { new: true }
+    //     );
 
-        return user;
-      }
+    //     return user;
+    //   }
 
-      throw new AuthenticationError("You need to be logged in!");
-    },
+    //   throw new AuthenticationError("You need to be logged in!");
+    // },
 
-    addOven: async (_, args, context) => {
-      if (context.user) {
-        const user = await User.findByIdAndUpdate(
-          { _id: context.user._id },
-          { $push: { ovens: args } },
-          { new: true }
-        );
+    // addOven: async (_, args, context) => {
+    //   if (context.user) {
+    //     const user = await User.findByIdAndUpdate(
+    //       { _id: context.user._id },
+    //       { $push: { ovens: args } },
+    //       { new: true }
+    //     );
 
-        return user;
-      }
+    //     return user;
+    //   }
 
-      throw new AuthenticationError("You need to be logged in!");
-    },
+    //   throw new AuthenticationError("You need to be logged in!");
+    // },
 
-    addTree: async (_, args, context) => {
-      if (context.user) {
-        const user = await User.findByIdAndUpdate(
-          { _id: context.user._id },
-          { $push: { trees: args } },
-          { new: true }
-        );
+    // addTree: async (_, args, context) => {
+    //   if (context.user) {
+    //     const user = await User.findByIdAndUpdate(
+    //       { _id: context.user._id },
+    //       { $push: { trees: args } },
+    //       { new: true }
+    //     );
 
-        return user;
-      }
+    //     return user;
+    //   }
 
-      throw new AuthenticationError("You need to be logged in!");
-    },
+    //   throw new AuthenticationError("You need to be logged in!");
+    // },
 
-    // addTreeArray IS USED FOR TESTING
-    addTreeArray: async (_, args, context) => {
-      // if (context.user) {
-      console.log("************* addTreeArray - here is args:");
-      console.log(args);
-      const user = await User.findOneAndUpdate(
-        { _id: context.user._id },
-        { $push: { mashers: args }, $set: { tests: args.tests } },
+    // // addTreeArray IS USED FOR TESTING
+    // addTreeArray: async (_, args, context) => {
+    //   // if (context.user) {
+    //   console.log("************* addTreeArray - here is args:");
+    //   console.log(args);
+    //   const user = await User.findOneAndUpdate(
+    //     { _id: context.user._id },
+    //     { $push: { mashers: args }, $set: { tests: args.tests } },
 
-        { new: true }
-      );
+    //     { new: true }
+    //   );
 
-      return user;
-      // }
+    //   return user;
+    //   // }
 
-      // throw new AuthenticationError("You need to be logged in!");
-    },
+    //   // throw new AuthenticationError("You need to be logged in!");
+    // },
 
     // updateInventoryAll updates all the of the user's inventory
     // TODO FIX CONTEXT.USER
@@ -147,71 +147,71 @@ const resolvers = {
       // throw new AuthenticationError("You need to be logged in!");
     },
 
-    updateJuicer: async (_, args, context) => {
-      console.log("update Juicer");
-      console.log(args);
-      if (context.user) {
-        const query = { _id: context.user._id, "juicers._id": args.juicerId };
-        const updateDocument = {
-          "juicers.$.startedAtTime": args.startedAtTime,
-          "juicers.$.duration": args.duration,
-        };
-        const options = { arrayFilters: [{ "juicers.$": 0 }] };
-        const user = await User.updateOne(query, updateDocument, options);
+    // updateJuicer: async (_, args, context) => {
+    //   console.log("update Juicer");
+    //   console.log(args);
+    //   if (context.user) {
+    //     const query = { _id: context.user._id, "juicers._id": args.juicerId };
+    //     const updateDocument = {
+    //       "juicers.$.startedAtTime": args.startedAtTime,
+    //       "juicers.$.duration": args.duration,
+    //     };
+    //     const options = { arrayFilters: [{ "juicers.$": 0 }] };
+    //     const user = await User.updateOne(query, updateDocument, options);
 
-        return user;
-      }
+    //     return user;
+    //   }
 
-      throw new AuthenticationError("You need to be logged in!");
-    },
+    //   throw new AuthenticationError("You need to be logged in!");
+    // },
 
-    updateMasher: async (_, args, context) => {
-      if (context.user) {
-        const query = { _id: context.user._id, "mashers._id": args.masherId };
-        const updateDocument = {
-          "mashers.$.startedAtTime": args.startedAtTime,
-          "mashers.$.duration": args.duration,
-        };
-        const options = { arrayFilters: [{ "mashers.$": 0 }] };
-        const user = await User.updateOne(query, updateDocument, options);
+    // updateMasher: async (_, args, context) => {
+    //   if (context.user) {
+    //     const query = { _id: context.user._id, "mashers._id": args.masherId };
+    //     const updateDocument = {
+    //       "mashers.$.startedAtTime": args.startedAtTime,
+    //       "mashers.$.duration": args.duration,
+    //     };
+    //     const options = { arrayFilters: [{ "mashers.$": 0 }] };
+    //     const user = await User.updateOne(query, updateDocument, options);
 
-        return user;
-      }
+    //     return user;
+    //   }
 
-      throw new AuthenticationError("You need to be logged in!");
-    },
+    //   throw new AuthenticationError("You need to be logged in!");
+    // },
 
-    updateOven: async (_, args, context) => {
-      if (context.user) {
-        const query = { _id: context.user._id, "ovens._id": args.ovenId };
-        const updateDocument = {
-          "ovens.$.startedAtTime": args.startedAtTime,
-          "ovens.$.duration": args.duration,
-        };
-        const options = { arrayFilters: [{ "ovens.$": 0 }] };
-        const user = await User.updateOne(query, updateDocument, options);
+    // updateOven: async (_, args, context) => {
+    //   if (context.user) {
+    //     const query = { _id: context.user._id, "ovens._id": args.ovenId };
+    //     const updateDocument = {
+    //       "ovens.$.startedAtTime": args.startedAtTime,
+    //       "ovens.$.duration": args.duration,
+    //     };
+    //     const options = { arrayFilters: [{ "ovens.$": 0 }] };
+    //     const user = await User.updateOne(query, updateDocument, options);
 
-        return user;
-      }
+    //     return user;
+    //   }
 
-      throw new AuthenticationError("You need to be logged in!");
-    },
+    //   throw new AuthenticationError("You need to be logged in!");
+    // },
 
-    updateTree: async (_, args, context) => {
-      if (context.user) {
-        const query = { _id: context.user._id, "trees._id": args.treeId };
-        const updateDocument = {
-          "trees.$.startedAtTime": args.startedAtTime,
-          "trees.$.duration": args.duration,
-        };
-        const options = { arrayFilters: [{ "trees.$": 0 }] };
-        const user = await User.updateOne(query, updateDocument, options);
+    // updateTree: async (_, args, context) => {
+    //   if (context.user) {
+    //     const query = { _id: context.user._id, "trees._id": args.treeId };
+    //     const updateDocument = {
+    //       "trees.$.startedAtTime": args.startedAtTime,
+    //       "trees.$.duration": args.duration,
+    //     };
+    //     const options = { arrayFilters: [{ "trees.$": 0 }] };
+    //     const user = await User.updateOne(query, updateDocument, options);
 
-        return user;
-      }
+    //     return user;
+    //   }
 
-      throw new AuthenticationError("You need to be logged in!");
-    },
+    //   throw new AuthenticationError("You need to be logged in!");
+    // },
 
     // updateUser
     // find user by id

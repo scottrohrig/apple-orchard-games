@@ -19,7 +19,7 @@ import treeApples from "../assets/images/tree-with-apples-short.svg";
 import barn from "../assets/images/barn.png";
 
 function Dashboard(props) {
-  const { sendInventoryToDB, testVar } = props;
+  const { sendInventoryToDB } = props;
   const [state] = useGlobalContext();
 
   // redirect user to /login page if not logged in
@@ -65,7 +65,9 @@ function Dashboard(props) {
         <div className="right"></div>
       </div> */}
 
-      <ItemsRow sendInventoryToDB={sendInventoryToDB} testVar={testVar} />
+      <ItemsRow sendInventoryToDB={sendInventoryToDB} itemType="juicers" />
+      <ItemsRow sendInventoryToDB={sendInventoryToDB} itemType="mashers" />
+      <ItemsRow sendInventoryToDB={sendInventoryToDB} itemType="ovens" />
       {/* <JuicersRow /> */}
       {/* <MashersRow /> */}
       {/* <OvensRow /> */}

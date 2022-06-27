@@ -6,7 +6,7 @@ import { useIsMount } from "../utils/helpers";
 import {
   APPLES_FOR_JUICE,
   APPLES_USED_FOR_PRODUCT,
-  BUY_JUICER,
+  BUY_ITEM,
   SELL_JUICE,
   UPDATE_JUICER,
 } from "../utils/actions";
@@ -15,11 +15,11 @@ import Item from "./Item";
 import BuyItem from "./BuyItem";
 
 export default function ItemsRow(props) {
-  const { sendInventoryToDB, testVar } = props;
+  const { sendInventoryToDB, itemType } = props;
 
   const [state, dispatch] = useGlobalContext();
 
-  const juicers = state?.juicers || [];
+  const items = state?.[itemType] || [];
 
   // if (loading)
   //   return (
@@ -30,21 +30,20 @@ export default function ItemsRow(props) {
 
   const handleUpgradePurchased = async (event) => {
     // validate enough money
-    if (state.money < state.gameVariables.juicerCost) {
+    if (state.money < state.gameVariables[itemType].itemCost) {
       return;
     }
 
     dispatch({
-      type: BUY_JUICER,
+      type: BUY_ITEM,
       payload: {
-        _id: state.juicers.length + 1,
-        startedAtTime: new Date(),
-        duration: state.gameVariables.makeJuiceTime,
+        // _id: state.items.length + 1,
+        // startedAtTime: new Date(),
+        // duration: state.gameVariables.makeJuiceTime,
+        itemType: itemType,
       },
     });
     sendInventoryToDB(state);
-    console.log("testVar is: ");
-    console.log(testVar);
   };
 
   return (
@@ -54,12 +53,13 @@ export default function ItemsRow(props) {
           <div className="item-scroll">
             {
               // map thru item objects from GlobalState to add to row
-              juicers.map((juicer, i) => {
+              items.map((item, i) => {
                 return (
                   <div key={i} className="item-box">
                     <Item
-                      _id={juicer._id}
-                      juicer={juicer}
+                      _id={item._id}
+                      item={item}
+                      itemType={itemType}
                       dispatchParent={dispatch}
                       sendInventoryToDB={sendInventoryToDB}
                     />
@@ -67,20 +67,26 @@ export default function ItemsRow(props) {
                 );
               })
             }
-            {juicers.length < 5 && (
+            {items.length < 5 && (
               <BuyItem handleUpgradePurchased={handleUpgradePurchased} />
             )}
           </div>
         }
       </div>
       <div className="dash-label">
-        <span className="item-label">Item</span>
+        <span className="item-label">{itemType}</span>
         <div className="item-price">
           <p className="item-price-buy">
-            Buy New: <span className="item-amount">10</span>
+            Buy New:{" "}
+            <span className="item-amount">
+              {state.gameVariables[itemType].itemCost}
+            </span>
           </p>
           <p className="item-price-apples">
-            Uses: <span className="item-amount">2</span>
+            Uses:{" "}
+            <span className="item-amount">
+              {state.gameVariables[itemType].makeProductApplesUsed}
+            </span>
           </p>
         </div>
       </div>

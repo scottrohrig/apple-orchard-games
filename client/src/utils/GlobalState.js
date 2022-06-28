@@ -48,30 +48,30 @@ const defaultGameVariables = {
 
   initialAppleInventory: 5,
   // for Tree
-  applesForNewTree: 3,
+  applesForNewTree: 1,
   appleGrowTime: 5,
   applesGrown: 5,
   appleSaleRevenue: 1,
-  // for Item
-  itemCost: 1,
-  makeProductTime: 4,
-  makeProductApplesUsed: 1,
-  itemSaleRevenue: 1,
-  // for Juicer
-  juicerCost: 10,
-  makeJuiceTime: 5,
-  makeJuiceApplesUsed: 2,
-  juiceSaleRevenue: 4, // this is revenue from sale of each juice
-  // for Masher
-  masherCost: 14,
-  makeSauceTime: 5,
-  makeSauceApplesUsed: 4,
-  sauceSaleRevenue: 8,
-  //for Oven
-  ovenCost: 30,
-  makePieTime: 5,
-  makePieApplesUsed: 8,
-  pieSaleRevenue: 20,
+  // // for Item
+  // itemCost: 1,
+  // makeProductTime: 4,
+  // makeProductApplesUsed: 1,
+  // itemSaleRevenue: 1,
+  // // for Juicer
+  // juicerCost: 10,
+  // makeJuiceTime: 5,
+  // makeJuiceApplesUsed: 2,
+  // juiceSaleRevenue: 4, // this is revenue from sale of each juice
+  // // for Masher
+  // masherCost: 14,
+  // makeSauceTime: 5,
+  // makeSauceApplesUsed: 4,
+  // sauceSaleRevenue: 8,
+  // //for Oven
+  // ovenCost: 30,
+  // makePieTime: 5,
+  // makePieApplesUsed: 8,
+  // pieSaleRevenue: 20,
   // for gems
   gemPurchaseCost: 0.99,
   gemsFromPurchase: 5,
@@ -83,14 +83,14 @@ const GlobalProvider = ({ value = [], ...props }) => {
     username: "",
     email: "",
     password: "",
-    money: 100,
+    money: 0,
 
-    appleCount: 50,
+    appleCount: 1,
     gemCount: 0,
 
     gameVariables: defaultGameVariables,
     lastUpdateTime: nowTime,
-    items: [],
+    // items: [],
     trees: [],
     mashers: [],
     juicers: [],

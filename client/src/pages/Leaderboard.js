@@ -6,7 +6,6 @@ const GET_SCORES = gql`
   query Users {
     users {
       username
-      money
       inventoryJSON
     }
   }

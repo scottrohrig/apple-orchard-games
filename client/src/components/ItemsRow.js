@@ -1,14 +1,14 @@
-import { useEffect } from "react";
+// import { useEffect } from "react";
 import { useGlobalContext } from "../utils/GlobalState";
 
-import { useIsMount } from "../utils/helpers";
+// import { useIsMount } from "../utils/helpers";
 
 import {
-  APPLES_FOR_JUICE,
-  APPLES_USED_FOR_PRODUCT,
+  // APPLES_FOR_JUICE,
+  // APPLES_USED_FOR_PRODUCT,
   BUY_ITEM,
-  SELL_JUICE,
-  UPDATE_JUICER,
+  // SELL_JUICE,
+  // UPDATE_JUICER,
 } from "../utils/actions";
 
 import Item from "./Item";

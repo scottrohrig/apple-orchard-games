@@ -81,12 +81,12 @@ export const reducer = (state = [], action) => {
           state.gameVariables[itemTypeUI].makeProductApplesUsed,
       };
 
-    case APPLES_USED_FOR_PRODUCT:
-      return {
-        ...state,
-        appleCount:
-          state.appleCount - state.gameVariables.makeProductApplesUsed,
-      };
+    // case APPLES_USED_FOR_PRODUCT:
+    //   return {
+    //     ...state,
+    //     appleCount:
+    //       state.appleCount - state.gameVariables.makeProductApplesUsed,
+    //   };
 
     case UPDATE_LASTUPDATETIME:
       let nowTime = Date.now();

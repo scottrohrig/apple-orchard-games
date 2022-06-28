@@ -17,7 +17,10 @@ import Header from "./components/Header";
 import Marketplace from "./components/Marketplace";
 import NoMatch from "./pages/NoMatch";
 
-import { dispatch, useGlobalContext } from "./utils/GlobalState";
+import {
+  // dispatch,
+  useGlobalContext,
+} from "./utils/GlobalState";
 import { gql, useQuery, useMutation } from "@apollo/client";
 import { UPDATE_ALL_DATA, UPDATE_LASTUPDATETIME } from "./utils/actions";
 import { UPDATE_INVENTORY_ALL } from "./utils/mutations";
@@ -50,9 +53,19 @@ function AppDD() {
     dispatch({
       type: UPDATE_LASTUPDATETIME,
     });
+    let stateInventory = {
+      money: state.money,
+      appleCount: state.appleCount,
+      gemCount: state.gemCount,
+      lastUpdateTime: state.lastUpdateTime,
+      trees: state.trees,
+      mashers: state.mashers,
+      juicers: state.juicers,
+      ovens: state.ovens,
+    };
     try {
       await updateInventoryAll({
-        variables: { inventoryJSON: JSON.stringify(state) },
+        variables: { inventoryJSON: JSON.stringify(stateInventory) },
       });
     } catch (err) {
       console.error(err);
@@ -83,10 +96,7 @@ function AppDD() {
       }
       // }
     }
-  }, [
-    loading,
-    // , data
-  ]);
+  }, [loading, data]);
 
   return (
     <Router>

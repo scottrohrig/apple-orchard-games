@@ -1,18 +1,12 @@
 // import
-import { useGlobalContext } from "../utils/GlobalState";
+// import { useGlobalContext } from "../utils/GlobalState";
 import { Navigate, Link } from "react-router-dom";
-
-import { useMutation } from "@apollo/client";
-import { UPDATE_USER } from "../utils/mutations";
 
 import "../style/dashboard.css";
 
 import Auth from "../utils/auth";
 
 import ItemsRow from "../components/ItemsRow";
-import JuicersRow from "../components/upgrades/JuicerRow";
-import MashersRow from "../components/upgrades/MasherRow";
-import OvensRow from "../components/upgrades/OvenRow";
 
 import treeBare from "../assets/images/tree-short.svg";
 import treeApples from "../assets/images/tree-with-apples-short.svg";
@@ -20,7 +14,7 @@ import barn from "../assets/images/barn.png";
 
 function Dashboard(props) {
   const { sendInventoryToDB } = props;
-  const [state] = useGlobalContext();
+  // const [state] = useGlobalContext();
 
   // redirect user to /login page if not logged in
   if (!Auth.loggedIn()) {
@@ -29,10 +23,10 @@ function Dashboard(props) {
 
   // consider moving 👇 to 'Upgrade' component script
   // need event handler for upgrades
-  const handleUpgradePurchase = (event) => {
-    // upgrade spot empty? allow purchase if funds, else 'oops you need more 🍎 💸'
-    // upgrade is timer ready? allow start countdown
-  };
+  // const handleUpgradePurchase = (event) => {
+  //   // upgrade spot empty? allow purchase if funds, else 'oops you need more 🍎 💸'
+  //   // upgrade is timer ready? allow start countdown
+  // };
 
   return (
     <div className="">
@@ -68,9 +62,6 @@ function Dashboard(props) {
       <ItemsRow sendInventoryToDB={sendInventoryToDB} itemType="juicers" />
       <ItemsRow sendInventoryToDB={sendInventoryToDB} itemType="mashers" />
       <ItemsRow sendInventoryToDB={sendInventoryToDB} itemType="ovens" />
-      {/* <JuicersRow /> */}
-      {/* <MashersRow /> */}
-      {/* <OvensRow /> */}
     </div>
   );
 }

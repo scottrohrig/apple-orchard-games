@@ -73,7 +73,6 @@ export const UPDATE_INVENTORY_ALL = gql`
   mutation updateInventoryAll($inventoryJSON: String) {
     updateInventoryAll(inventoryJSON: $inventoryJSON) {
       _id
-      tests
     }
   }
 `;

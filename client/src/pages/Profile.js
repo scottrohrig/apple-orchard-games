@@ -22,6 +22,7 @@ export default function Profile({
   // const [updateDB, { error }] = useMutation(UPDATE_USER);
 
   const user = data?.me || data?.user || {};
+  // const user = { username: "example", email: "e@e.com" };
 
   // define the mutation function and set it equal to useMutation(RESET_USER_STATS)
 

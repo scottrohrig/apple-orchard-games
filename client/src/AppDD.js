@@ -78,7 +78,7 @@ function AppDD() {
         });
         // console.log("refetching", loading);
         // TODO should refetchData be part of an else?
-        console.log("refetcing");
+        console.log("refetching");
         refetchData();
       }
       // }

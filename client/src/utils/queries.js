@@ -1,4 +1,4 @@
-import { gql } from '@apollo/client';
+import { gql } from "@apollo/client";
 
 export const QUERY_ME = gql`
   query Me {
@@ -7,32 +7,43 @@ export const QUERY_ME = gql`
       username
       email
       password
-      money
-      appleCount
-      gemCount
-      trees {
-        _id
-        duration
-      }
-      juicers {
-        _id
-        startedAtTime
-        duration
-      }
-      mashers {
-        _id
-        duration
-      }
-      ovens {
-        _id
-        duration
-      }
-      ovenCount
-      masherCount
-      juicerCount
     }
   }
 `;
+
+// export const QUERY_ME = gql`
+//   query Me {
+//     me {
+//       _id
+//       username
+//       email
+//       password
+//       money
+//       appleCount
+//       gemCount
+//       trees {
+//         _id
+//         duration
+//       }
+//       juicers {
+//         _id
+//         startedAtTime
+//         duration
+//       }
+//       mashers {
+//         _id
+//         duration
+//       }
+//       ovens {
+//         _id
+//         duration
+//       }
+//       ovenCount
+//       masherCount
+//       juicerCount
+//     }
+//   }
+// `;
 
 export const QUERY_USERS = gql`
   query Users {
@@ -44,7 +55,7 @@ export const QUERY_USERS = gql`
 `;
 
 export const QUERY_ORCHARD = gql`
-  query orchard ($id: ID!) {
+  query orchard($id: ID!) {
     orchard(_id: $id) {
       _id
       orchard_name

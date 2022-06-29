@@ -19,6 +19,8 @@ function Header(props) {
     sendInventoryToDB,
   } = props;
 
+  let roundedMoney = money.toFixed(2);
+
   return (
     <div className="page-links">
       <header className="component-header">
@@ -48,7 +50,7 @@ function Header(props) {
           </div>
 
           <div className="disp-currency disp-currency-money">
-            <p className="display-money">{money}</p>
+            <p className="display-money">{roundedMoney}</p>
           </div>
 
           <div className="disp-user">

@@ -17,9 +17,9 @@ let nowTime = Date.now();
 
 const defaultGameVariables = {
   juicers: {
-    itemCost: 1,
-    makeProductTime: 4,
-    makeProductApplesUsed: 1,
+    itemCost: 15,
+    makeProductTime: 10,
+    makeProductApplesUsed: 2,
     productSaleRevenue: 1,
     iconSell: juiceSell,
     iconMake: juiceMake,
@@ -28,30 +28,30 @@ const defaultGameVariables = {
 
   mashers: {
     itemCost: 2,
-    makeProductTime: 5,
-    makeProductApplesUsed: 2,
-    productSaleRevenue: 2,
+    makeProductTime: 15,
+    makeProductApplesUsed: 6,
+    productSaleRevenue: 3.5,
     iconSell: sauceSell,
     iconMake: sauceMake,
     iconBuy: masherBuy,
   },
 
   ovens: {
-    itemCost: 3,
-    makeProductTime: 6,
+    itemCost: 25,
+    makeProductTime: 20,
     makeProductApplesUsed: 3,
-    productSaleRevenue: 3,
+    productSaleRevenue: 15,
     iconSell: pieSell,
     iconMake: pieMake,
     iconBuy: ovenBuy,
   },
 
-  initialAppleInventory: 5,
+  initialAppleInventory: 1,
   // for Tree
   applesForNewTree: 1,
   appleGrowTime: 5,
   applesGrown: 5,
-  appleSaleRevenue: 1,
+  appleSaleRevenue: 0.1,
   // // for Item
   // itemCost: 1,
   // makeProductTime: 4,
